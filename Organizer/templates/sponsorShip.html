@@ -1,0 +1,137 @@
+{% extends 'navbar.html' %}
+
+{%block content %}
+
+
+{%load staticfiles %}
+
+<div class=" container">
+<div class="row">
+	<br><br><br><br><br><br><br><br><br><br><br><br>
+
+	<div class="col-md-6">
+	<br><br><br><br><br><br><br><br><br>
+
+      <h3 class="text-center">Offered Sponsor Resources</h3>
+    <hr class="bg-info col-md-8">
+
+        {% if error %}
+        <div class="alert alert-info alert-dismissible fade show" role="alert">
+          <strong> {{error}}</strong> 
+          <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+            <span aria-hidden="true">&times;</span>
+          </button>
+        </div>
+		 {%endif%}
+
+       
+
+      <!-- Alerts -->
+
+     
+
+      <form action=" {% url 'sponsorShipDetails' %}" method="POST" >
+      
+      {% csrf_token %}
+
+
+
+        <div class="form-group">  
+		    <label for="firstname">Select Event &ast;</label>
+		 	
+			
+
+		    <select  class="form-control   border border-info" name="event_title">
+		    	<option class="form-control border border-info"> Select your Event </option>
+		    	{% for eve in event.all %}
+
+				<option  class="form-control   border border-info" > {{ eve.event_title }} 
+					
+				</option>
+
+			{% endfor %}
+
+			</select>
+			  
+     	</div>
+ 
+
+		<div class="form-group">
+		    <label for="Person Name">Platinum Sponsor &ast; </label>
+		    <select name="platinum_sponsor"  class="form-control   border border-info">
+			<option class="form-control border border-info" > Select Sponsor  </option>
+			<option class="form-control border border-info" >Platinum Sponsor </option>
+			
+		</select>
+		   
+	 	 </div>
+
+	  <div class="form-group">
+		    <label for="city">Facilities for Platinum &ast;  </label>
+		  <textarea   class="form-control border border-info" placeholder="Description"  name="f_platinum"></textarea>
+	  </div>
+	   
+	  <div class="form-group">
+	    <label for="mobile no"> Expected Amount from platinum &ast; </label>
+	    <input type="text" class="form-control border border-info"  name="ex_platinum" id="password"  placeholder="Mobile No">
+	  
+	  </div>
+        <div class="form-group">
+		    <label for="firstname">Gold Sponsor &ast;</label>
+		  <select name="gold_sponsor"  class="form-control   border border-info">
+			<option class="form-control border border-info" > Select Sponsor  </option>
+			<option class="form-control border border-info" >Gold Sponsor </option>
+			
+		</select>
+	 	</div>
+	
+	   <div class="form-group" id="froala-editor">
+
+	    <label for="Person Name">Facilities for Gold&ast; </label>
+	    <textarea   class="form-control border border-info" placeholder="Description"  name="f_gold"></textarea>
+		</div>
+
+		 <div class="form-group">
+	    <label for="mobile no"> Gold Sponsor Expected Amount &ast; </label>
+	    <input type="text" class="form-control border border-info"  name="ex_gold" id="password"  placeholder="Mobile No">
+	  
+	  </div>
+
+	    <div class="form-group">
+		    <label for="Person Name">Silver Sponsor &ast; </label>
+		    <select name="silver_sponsor"  class="form-control   border border-info">
+			<option class="form-control border border-info" > Select Sponsor  </option>
+			<option class="form-control border border-info" >Sliver Sponsor </option>
+			
+		</select>
+		   
+	 	 </div>
+
+	  <div class="form-group">
+		    <label for="city">Facilities for Silver &ast;  </label>
+		  <textarea   class="form-control border border-info" placeholder="Description"  name="f_silver"></textarea>
+	  </div>
+	   
+	  <div class="form-group">
+	    <label for="mobile no"> Expected Amount from Silver &ast; </label>
+	    <input type="text" class="form-control border border-info"  name="ex_silver" id="password"  placeholder="Mobile No">
+	  
+	  </div>
+
+	  <div class="form-group">
+	    
+	    <input type="submit" class="btn btn-outline-info bg-dark"  id="password" aria-describedby="emailHelp" value="Submit" >
+	  
+	  </div>
+
+</form>
+
+</div>
+</div>
+</div>
+
+
+
+
+
+{% endblock %}

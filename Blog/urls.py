@@ -5,8 +5,8 @@ from django.urls import path
 from Blog import views 
 
 urlpatterns = [
-	path('',views.addSlider,name='Blog'),
-
+	path('',views.blogs,name='Blog'),
+	path('/<int:id>',views.blogDetail,name='blogdetails')
 
 
 

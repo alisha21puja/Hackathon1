@@ -1,0 +1,67 @@
+{% extends 'base.html' %}
+
+{%block content %}
+
+
+{%load staticfiles %}
+
+
+
+<div class="container">
+	  <br><br>  <br><br>
+	   <h3 class="text-center"> Blogs</h3>
+    
+<hr class="bg-info col-md-10">
+    <div class="row col-md-12 shadow p-3 mb-5 bg-white rounded">
+    
+{% for bl in blog.all %}
+
+  
+    <div class="col-md-4">
+    	  
+      <div class="card col-md-12 border-info mb-3" style="width: 18rem;">
+        
+          <img src="{{ bl.imageFirst.url }}"   class="card-img-top rounded-circle"  alt="...">
+            <h5 class="card-title text-info text-center">{{ bl.title }}</h5>
+
+			
+ 
+          <div class="card-body text-info">
+            <h5 class="card-title">Info card title</h5>
+            <p class="card-text"> {{ bl.summary}} 
+
+
+
+
+              <a class=" bg-dark  btn-outline-info" href=" {% url 'blogdetails' bl.id %}">
+        Read More
+  </a>
+
+
+
+
+
+     </p>
+     <p> Published:{{ bl.pubDateTime }}<br> Author:{{ bl.authorName }} <br>Category: {{ bl.blogCategory}}</p>
+            
+     
+        
+             
+          </div>
+        </div>
+    </div>
+    {% endfor %}
+    </div>
+
+
+</div>
+
+
+
+
+
+
+
+
+{% endblock %}
+

@@ -1,0 +1,105 @@
+{% extends 'navbar.html' %}
+
+{%block content %}
+
+
+{%load staticfiles %}
+
+<div class=" container">
+<div class="row">
+	<br><br><br><br><br><br><br><br><br><br><br><br>
+
+	<div class="col-md-6">
+	<br><br><br><br><br><br><br><br><br>
+
+      <h3 class="text-center">Add  Resource of Event/ Prerequisite</h3>
+    <hr class="bg-info col-md-8">
+
+        {% if error %}
+        <div class="alert alert-info alert-dismissible fade show" role="alert">
+          <strong> {{error}}</strong> 
+          <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+            <span aria-hidden="true">&times;</span>
+          </button>
+        </div>
+		 {%endif%}
+
+       
+
+      <!-- Alerts -->
+
+     
+
+      <form action=" {% url 'Resource' %}" method="POST" >
+      
+      {% csrf_token %}
+
+        <div class="form-group">
+      
+    <label for="firstname">Event Title &ast;</label>
+<select  class="form-control   border border-info" name="event_name">
+		    	<option class="form-control border border-info"> Select your Event </option>
+		    	{% for eve in event.all %}
+
+				<option  class="form-control border border-info"  value="{{ eve.event_title }}" > {{ eve.event_title }} 
+					
+				</option>
+
+			{% endfor %}
+		</select>
+
+ 	 </div>
+	<div class="form-group">
+    <label for="Person Name"> Subject&ast; </label>
+    <input type="text" class="form-control border border-info"   name="subject" id="person_name" placeholder="Person Name ">
+	  
+	  </div>
+	   <div class="form-group" id="froala-editor">
+	   	<div class="summernote">summernote 1
+	    <label for="Person Name">Description&ast; </label>
+	    <textarea  id="froala-editor"  class="form-control border border-info"  name="description"></textarea>
+	   </div>
+	  
+	  </div>
+	    <div class="form-group">
+	    <label for="Person Name">Published Date &ast; </label>
+	    <input type="Date" class="form-control border border-info"  name="published_date" id="event_startdate" placeholder="Event Poster ">
+	  
+	  </div>
+	  <div class="form-group">
+	    <label for="city">Add Github/Docs/Drive Resource Link &ast;  </label>
+	  <input type="text" class="form-control border border-info"  name="addlinks"  id="org_by" aria-describedby="emailHelp" placeholder="Organaization Name/College Name ">
+	  </div>
+	    <div class="form-group">
+	    <label for="email"> Document File &ast; </label>
+	    <input type="file" class="form-control border border-info"   name="document_file" id="email" aria-describedby="emailHelp" placeholder="Email">
+	  
+	  </div>
+	  <div class="form-group">
+	    <label for="mobile no">Published By  &ast; </label>
+	    <input type="text" class="form-control border border-info"  name="published_by" id="password"  placeholder="Mobile No">
+	  
+	  </div>
+	 
+	   <div class="form-group">
+	    <label for="Person Name">Share Image &ast; </label>
+	    <input type="file" class="form-control border border-info"   name="share_image" id="person_name" placeholder="Event Poster ">
+	  
+	  </div>
+	  <div class="form-group">
+	    
+	    <input type="submit" class="btn btn-outline-info bg-dark"  id="password" aria-describedby="emailHelp" value="Submit" >
+	  
+	  </div>
+
+</form>
+
+</div>
+</div>
+</div>
+
+
+
+
+
+{% endblock %}

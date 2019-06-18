@@ -1,0 +1,56 @@
+{% extends 'base.html' %}
+
+{%block content %}
+
+
+{%load staticfiles %}
+
+
+
+
+
+<br><br>  <br><br>  
+<div class="container">
+<div class="row col-md-12 shadow p-3 mb-5 bg-white rounded">
+ 
+<hr class="bg-info col-md-10">
+
+<div class="card col-md-10 mb-3">
+  <br><br>
+ <div id="carouselExampleIndicators" class="carousel slide" data-ride="carousel">
+  <ol class="carousel-indicators">
+    <li data-target="#carouselExampleIndicators" data-slide-to="0" class="active"></li>
+    <li data-target="#carouselExampleIndicators" data-slide-to="1"></li>
+    <li data-target="#carouselExampleIndicators" data-slide-to="2"></li>
+  </ol>
+  <div class="carousel-inner">
+    <div class="carousel-item active" data-interval="1000">
+      <img src="{{ blog.imageFirst.url }}" height="600" class="d-block w-100" alt="slider data not  uploaded" >
+    </div>
+    <div class="carousel-item" data-interval="1000">
+      <img src="{{ blog.imageSecond.url}}" height="600" class="d-block w-100" alt="slider data not  uploaded">
+    </div>
+    
+  </div>
+  <div class="card-body">
+    <h3 class="card-title text-center">{{ blog.title }} <hr class="bg-info col-md-10"></h3>
+    
+
+    
+
+
+    <p class="card-text justify-content-start justify-content-end">{{ blog.description }}</p>
+    <p class="card-text"><small class="text-muted"> <hr class="bg-info col-md-10"> Author Name: {{blog.authorName }} <span>|</span> Category: {{blog.blogCategory}} <span>|</span>
+       Published on: {{ blog.pubDateTime }} <span>|</span>  {{ blog.UserType }}
+
+      <hr class="bg-info col-md-10">  </small></p>
+      <div>  
+          <h5>Refrence Links </h5>
+          <a href="{{refrenceLinks}}"> {{ blog.refrenceLinks }} </a>
+        </div>
+  </div>
+</div>
+</div>
+</div>
+
+{% endblock %}

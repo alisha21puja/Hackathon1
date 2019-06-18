@@ -1,10 +1,27 @@
 from django.db import models
 
 # Create your models here.
+from django.utils.timezone import now
 
-class Slider(models.Model):
 
-	slide1=models.ImageField(upload_to='images/')
-	slide2=models.ImageField(upload_to='images/')
-	slide3=models.ImageField(upload_to='images/')
+
+
+
+
+
+class BlogsInfo(models.Model):
+	title = models.CharField(max_length=50)
+	pubDateTime = models.DateTimeField(default=now)
+	description = models.CharField(max_length=1000)
+	imageSecond = models.ImageField(upload_to='images/blogsImages')
+	imageFirst = models.ImageField(upload_to='images/blogsImages')
+	UserType = models.CharField(max_length=30)
+	authorName = models.CharField(max_length=30)
+	blogCategory =models.CharField(max_length=30)
+	refrenceLinks = models.CharField(max_length=30)
 	
+	def __str__(self):
+		return self.title
+
+	def summary(self):
+		return self.description[:175]

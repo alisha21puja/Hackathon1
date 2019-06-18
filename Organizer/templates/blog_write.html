@@ -1,0 +1,84 @@
+{% extends 'navbar.html' %}
+
+{%block content %}
+
+
+{%load staticfiles %}
+
+<div class=" container">
+<div class="row">
+	<br><br><br><br><br><br><br><br><br><br><br><br>
+
+	<div class="col-md-6">
+	<br><br><br><br><br><br><br><br><br>
+
+      <h3 class="text-center">Write Blogs</h3>
+    <hr class="bg-info col-md-8">
+
+        {% if error %}
+        <div class="alert alert-info alert-dismissible fade show" role="alert">
+          <strong> {{error}}</strong> 
+          <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+            <span aria-hidden="true">&times;</span>
+          </button>
+        </div>
+		 {%endif%}
+
+       
+
+      <!-- Alerts -->
+
+     
+
+      <form action=" {% url 'WriteBlog' %}" method="POST" >
+      
+      {% csrf_token %}
+
+        <div class="form-group">
+		    <label for="firstname"> Title &ast;</label>
+		    <input type="text" class="form-control border border-info"   name="blog_title" id="person_name" placeholder="Blog Title">
+	 	</div>
+	
+	   <div class="form-group" id="froala-editor">
+
+	    <label for="Person Name">Description&ast; </label>
+	    <textarea   class="form-control border border-info" placeholder="Description"  name="description"></textarea>
+		</div>
+	    <div class="form-group">
+		    <label for="Person Name">Image First &ast; </label>
+		    <input type="file" class="form-control border border-info"  name="image_first" id="event_startdate" placeholder="First Image ">
+		  
+	 	 </div>
+	  <div class="form-group">
+		    <label for="city">Second Image &ast;  </label>
+		  <input type="file" class="form-control border border-info"  name="image_second"  id="org_by" aria-describedby="emailHelp" placeholder="Second Image ">
+	  </div>
+	   
+	  <div class="form-group">
+	    <label for="mobile no">Blog Category &ast; </label>
+	    <input type="text" class="form-control border border-info"  name="blog_category" id="password"  placeholder="Mobile No">
+	  
+	  </div>
+	 
+	   <div class="form-group">
+	    <label for="Person Name">Refrence Link &ast; </label>
+	    <input type="text" class="form-control border border-info"   name="refrence_link" id="person_name" placeholder="Refrence Links ">
+	  
+	  </div>
+	  <div class="form-group">
+	    
+	    <input type="submit" class="btn btn-outline-info bg-dark"  id="password" aria-describedby="emailHelp" value="Submit" >
+	  
+	  </div>
+
+</form>
+
+</div>
+</div>
+</div>
+
+
+
+
+
+{% endblock %}

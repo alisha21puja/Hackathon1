@@ -1,0 +1,123 @@
+{% extends 'navbar.html' %}
+
+{%block content %}
+
+
+{%load staticfiles %}
+
+
+
+
+<div class="container">
+	<br><br><br>
+		<br><br>		<br><br>		<br><br>
+<div class="row">
+
+	<div class="col-md-5">
+
+
+
+
+      <h3 class="text-center">Register an Event</h3>
+    <hr class="bg-info col-md-8">
+
+        {% if error %}
+        <div class="alert alert-info alert-dismissible fade show" role="alert">
+          <strong> {{error}}</strong> 
+          <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+            <span aria-hidden="true">&times;</span>
+          </button>
+        </div>
+		 {%endif%}
+
+       
+
+      <!-- Alerts -->
+
+     
+
+      <form action=" {% url 'organiseEventFormData' %}" method="POST" >
+      
+      {% csrf_token %}
+
+        <div class="form-group">
+      
+    <label for="firstname">Event Title &ast;</label>
+    <input type="text" class="form-control border border-info"  name="event_title" id="event_titile" aria-describedby="emailHelp" placeholder="Event Name">
+  
+ 	 </div>
+	<div class="form-group">
+	    <label for="lastname">Event Category &ast;</label>
+		<select name="event_category"  class="form-control   border border-info">
+			<option class="form-control border border-info" > Select Event Type </option>
+			<option class="form-control border border-info" >hackathons </option>
+			<option class="form-control border border-info" >Tech Fest </option>
+			<option class="form-control border border-info" > Gaming Event</option>
+			<option class="form-control border border-info"> Workshop </option>
+			<option class="form-control border border-info"> IT Fest </option>
+		</select>
+	  </div>
+	  <div class="form-group">
+	    <label for="city">Organized by Org/College &ast;  </label>
+	  <input type="text" class="form-control border border-info"  name="org_by"  id="org_by" aria-describedby="emailHelp" placeholder="Organaization Name/College Name ">
+	  </div>
+	    <div class="form-group">
+	    <label for="email">Organiser Email &ast; </label>
+	    <input type="email" class="form-control border border-info"   name="org_email" id="email" aria-describedby="emailHelp" placeholder="Email">
+	  
+	  </div>
+	  <div class="form-group">
+	    <label for="mobile no">Mobile No &ast; </label>
+	    <input type="text" class="form-control border border-info"  name="mobile" id="password"  placeholder="Mobile No">
+	  
+	  </div>
+	  <div class="form-group">
+	    <label for="Person Name"> Contact Person Name &ast; </label>
+	    <input type="text" class="form-control border border-info"   name="person_name" id="person_name" placeholder="Person Name ">
+	  
+	  </div>
+	   <div class="form-group">
+	    <label for="Person Name">Event Poster &ast; </label>
+	    <input type="file" class="form-control border border-info"  required name="event_poster" id="person_name" placeholder="Event Poster ">
+	  
+	  </div>
+	    <div class="form-group">
+	    <label for="Person Name">Event starts Date &ast; </label>
+	    <input type="Date" class="form-control border border-info"  name="event_startdate" id="event_startdate" placeholder="Event Poster ">
+	  
+	  </div>
+
+	    <div class="form-group">
+	    <label for="Person Name">Event End Date &ast; </label>
+	    <input type="Date" class="form-control border border-info"  name="event_enddate" id="event_startdate" placeholder="Event Poster ">
+	  
+	  </div>
+	  <div class="form-group">
+	    
+	    <input type="submit" class="btn btn-outline-info bg-dark"  id="password" aria-describedby="emailHelp" value="Submit" >
+	  
+	  </div>
+	      </form>
+
+
+
+		
+
+
+
+
+	</div>
+
+
+<div class="col-md-7">
+			</div>
+
+</div>
+
+
+
+</div>
+
+
+
+{% endblock %}

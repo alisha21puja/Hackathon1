@@ -1,0 +1,25 @@
+
+
+
+
+{% extends 'navbar.html' %}
+
+{%block content %}
+
+
+{%load staticfiles %}
+
+<div class="container">
+
+	<form method="post">
+		<br><br><br><br><br>
+	{{form.as_p}}
+	{% csrf_token %}
+	<input type="submit" name="" class="btn bn-info" value="submit">
+	</form>
+
+
+
+</div>
+
+{% endblock %}

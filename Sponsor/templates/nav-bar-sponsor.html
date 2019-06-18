@@ -1,0 +1,122 @@
+<html>
+<head>
+  {% if user.is_authenticated %}
+  <title></title>
+
+  <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.2.1/css/bootstrap.min.css" integrity="sha384-GJzZqFGwb1QTTN6wy59ffF1BuGJpLSa9DkKMp0DgiMDm4iYMj70gZWKYbI706tWS" crossorigin="anonymous">
+  <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.6/umd/popper.min.js" integrity="sha384-wHAiFfRlMFy6i5SRaxvfOCifBUQy1xHdJ/yoi7FRNXMRBu5WHdZYu1hA6ZOblgut" crossorigin="anonymous"></script>
+<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.2.1/js/bootstrap.min.js" integrity="sha384-B0UglyR+jN6CkvvICOB2joaf5I4l3gm9GU6Hc1og6Ls7i6U/mkkaduKaBhlAXv9k" crossorigin="anonymous"></script>
+</head>
+
+<nav class="navbar fixed-top navbar-expand-lg navbar-dark bg-dark">
+  <a class="navbar-brand " href="{% url 'sponsorIndex' %}"><button type="button" class="btn btn-outline-info">Hackathon</button></a>
+  <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarText" aria-controls="navbarText" aria-expanded="false" aria-label="Toggle navigation">
+    <span class="navbar-toggler-icon"></span>
+  </button>
+  <div class="collapse navbar-collapse mr-auto"  id="navbarText">
+    <ul class="navbar-nav ml-auto">
+      <li class="nav-item active">
+        <a class="nav-link" href="{% url 'sponsorIndex' %}"><button type="button" class="btn btn-outline-info">Sponsor </button><span class="sr-only">(current)</span></a>
+      </li>
+      <li class="nav-item  fg-white">
+      <a class="nav-link btn btn-outline-dark text-white " href="{% url 'sponsoredEvent' %}"><button type="button" class="btn btn-outline-info">Sponsor Event</button></a>
+      </li>
+       <li class="nav-item  ">
+        <a class="nav-link text-white " href="{% url 'enquire'  %}"><button type="button" class="btn btn-outline-info">Enquire </button></a>
+      </li>
+
+        <li class="nav-item  ">
+        <a class="nav-link text-white " href="{% url 'blog_sponsor'  %}"><button type="button" class="btn btn-outline-info">Blogs </button></a>
+      </li>
+
+      
+     <li class="nav-item  fg-white">
+        <a class="nav-link text-white " href="{% url 'sponsoredEvent' %}"><button type="button" class="btn btn-outline-info">Welcome {{ user.first_name }}! </button></a>
+      </li>
+       <li class="nav-item  ">
+        <a class="nav-link text-white " href="javascript:{document.getElementById('logout').submit()}">
+          <button type="button" class="btn btn-outline-info">LogOut</button></a>
+          <form action="{% url 'logout' %}" method="POST" id="logout">
+            {% csrf_token %}
+            <input type="hidden" name="">
+          </form>
+      </li>
+
+   
+    
+     
+
+    </ul>
+
+   
+  </div>
+</nav>
+
+
+
+  <header>
+
+</header>
+ 
+
+
+   
+
+<body>
+
+{% block content%}
+
+
+{% endblock %}
+
+</body>
+
+
+<footer class="footer bg-dark navbar-fixed-bottom"  >
+  
+<div class="container pull-center bg-dark">
+
+  <div class="row pull-center ">
+    <div class="col-md-7">
+<div class="row text-center">
+  <div>
+<h6 class="text-white text-center"> Know more about us <a class="  btn-outline-info" href="{% url 'aboutus' %}">
+     here  </a>    </h6></div>
+
+    <div class="ml-4">    <h6  class="text-white text-center">&copy;Reserved to Hackathon 20{% now "y" %}  </h6></div>
+  </div>
+</div>
+<div class="col-md-5">
+    <a class="btn btn-twitter" href="https://twitter.com/">
+      <button type="button" class=" fa fa-twitter btn btn-outline-info">
+        
+      </button>
+    <span class="fa fa-twitter"></span> 
+  </a>
+  <a class="btn-outline-info  btn btn-linkedin" href="https://www.linkedin.com">
+  
+    <span class="fa fa-linkedin"></span> 
+  </a>
+  <a class="btn btn-google" href="https://www.google.com/">
+     <button type="button" class="btn btn-outline-info"></button>
+    <span class="fa fa-google"></span> 
+  </a>
+  <a class="btn btn-facebook" href="https://www.google.com/">
+    <span class="fa fa-facebook"></span> 
+  </a>
+</div>
+
+</div>
+</div>
+
+</footer>
+
+</html>
+{% else %}
+
+
+{% include 'index.html' %}
+
+ {% endif %}
+
