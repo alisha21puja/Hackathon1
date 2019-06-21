@@ -10,23 +10,14 @@ from django.utils import timezone
 
 
 def editSponsorShip(request):
-	sponsorShip=SponsorShipDetails.objects
+	sponsorShip=SponsorShip.objects
 	return render(request,'edit_sponsorship.html',{'sponsorShip':sponsorShip})
 
+def updateSponsorInfo(request,id):
 
-
-def sponsorShip(request):
-	event = OrganiseEvent.objects
-	return render(request,'sponsorShip.html',{'event':event})
-
-def sponsorShipDetails(request):
-	if request.method =='POST':
-		eventDetail =EventDetails()
-		event=request.POST['event_title']
-		if EventDetails.objects.filter(pk=id,event=request.POST['event_title']).exists():
-			if event!="":
-				eventid  = EventDetails.get_object_or_404(pk=id)
-		print(eventDetail.id)
+	submitbutton = request.POST.get('Submit')
+	if submitbutton :
+		sponsor=SponsorShip.objects.get(pk=id)
 		event_title = request.POST['event_title']
 		platinum_sponsor = request.POST['platinum_sponsor']
 		f_platinum = request.POST['f_platinum']
@@ -36,7 +27,71 @@ def sponsorShipDetails(request):
 		ex_gold = request.POST['ex_gold']
 		silver_sponsor = request.POST['silver_sponsor']
 		f_silver = request.POST['f_silver'] 
-		ex_silver = request.POST['ex_silver']		
+		ex_silver = request.POST['ex_silver']	
+
+		sponsor_ship= SponsorShip(id=id,event_title=event_title,platinum_sponsor=platinum_sponsor,f_platinum=f_platinum,ex_platinum=ex_platinum,gold_sponsor=gold_sponsor,
+		f_gold=f_gold,ex_gold=ex_gold,silver_sponsor=silver_sponsor,f_silver=f_silver,ex_silver=ex_silver)
+		sponsor_ship.save()
+		sponsorShip=SponsorShip.objects
+		return render(request,'edit_sponsorship.html',{'sponsorShip':sponsorShip})
+	else:
+		if platinum_sponsor=='':
+			return render(request,'edit_sponsorship.html', {'error':"Title is not given"})	
+		else:
+			platinum_sponsor = request.POST['platinum_sponsor']		
+		if f_platinum=='':
+			return render(request,'edit_sponsorship.html', {'error':"Title is not given"})	
+		else:
+			f_platinum == request.POST['f_platinum']		
+		if ex_platinum=='':
+			return render(request,'edit_sponsorship.html', {'error':"Title is not given"})	
+		else:
+			ex_platinum = request.POST['ex_platinum']		
+		if gold_sponsor=='':
+			return render(request,'edit_sponsorship.html', {'error':"Title is not given"})	
+		else:
+			gold_sponsor = request.POST['gold_sponsor']		
+		if f_gold=='':
+			return render(request,'edit_sponsorship.html', {'error':"Title is not given"})	
+		else:
+			f_gold = request.POST['f_gold']		
+		if ex_gold=='':
+			return render(request,'edit_sponsorship.html', {'error':"Title is not given"})	
+		else:
+			ex_gold = request.POST['ex_gold']		
+		if silver_sponsor=='':
+			return render(request,'edit_sponsorship.html', {'error':"Title is not given"})	
+		else:
+			silver_sponsor = request.POST['silver_sponsor']		
+		if f_silver=='':			
+			return render(request,'edit_sponsorship.html', {'error':"Title is not given"})	
+		else:
+			f_silver = request.POST['f_silver'] 		
+		if ex_silver=='':
+			return render(request,'edit_sponsorship.html', {'error':"Title is not given"})	
+		else:
+			ex_silver = request.POST['ex_silver']
+		
+
+def sponsorShip(request):
+	event = OrganiseEvent.objects
+	return render(request,'sponsorShip.html',{'event':event})
+
+def sponsorShipDetails(request): 
+	if request.method =='POST':
+		eventDetail =EventDetails.objects
+		event=request.POST['event_title']
+		event_title = request.POST['event_title']
+		platinum_sponsor = request.POST['platinum_sponsor']
+		f_platinum = request.POST['f_platinum']
+		ex_platinum = request.POST['ex_platinum']
+		gold_sponsor = request.POST['gold_sponsor']
+		f_gold = request.POST['f_gold']
+		ex_gold = request.POST['ex_gold']
+		silver_sponsor = request.POST['silver_sponsor']
+		f_silver = request.POST['f_silver'] 
+		ex_silver = request.POST['ex_silver']	
+
 		if platinum_sponsor=='':
 			return render(request,'shareresource.html', {'error':"Title is not given"})	
 		else:
@@ -73,7 +128,7 @@ def sponsorShipDetails(request):
 			return render(request,'shareresource.html', {'error':"Title is not given"})	
 		else:
 			ex_silver = request.POST['ex_silver']
-		sponsor_ship=SponsorShipDetails(event_id=eventid,event_title=event_title,platinum_sponsor=platinum_sponsor,f_platinum=f_platinum,ex_platinum=ex_platinum,gold_sponsor=gold_sponsor,
+		sponsor_ship= SponsorShip(event_title=event,platinum_sponsor=platinum_sponsor,f_platinum=f_platinum,ex_platinum=ex_platinum,gold_sponsor=gold_sponsor,
 			f_gold=f_gold,ex_gold=ex_gold,silver_sponsor=silver_sponsor,f_silver=f_silver,ex_silver=ex_silver)
 		sponsor_ship.save()
 		return render(request,'sponsorShip.html')
@@ -153,7 +208,7 @@ def updateShareResources(request,id):
 				documentFile=share_resource.documentFile
 			else:
 				documentFile =  request.POST['document_file']				
-			share_resource=ShareResource(event_title=event_title,subject=subject,description=description,publishedDate=publishedDate,resourceLink=resourceLink,documentFile=documentFile,publisedBy=publisedBy,resourceImage=resourceImage)
+			share_resource=ShareResource(id=id,event_title=event_title,subject=subject,description=description,publishedDate=publishedDate,resourceLink=resourceLink,documentFile=documentFile,publisedBy=publisedBy,resourceImage=resourceImage)
 			share_resource.save()
 			share_resource.refresh_from_db()		
 			share_resource=ShareResource.objects

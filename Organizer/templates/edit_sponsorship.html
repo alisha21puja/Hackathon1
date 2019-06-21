@@ -7,34 +7,28 @@
 
 
 
-
-
-
-<br><br><br><br><br><br>
-<div class="container">
-	
-	<div class="row">
-		<br><br><br>
-	<div class="col-md-12">
-
+<br><br><br>
+<div class="container"><div class="row">
+	<div class="col-xl-12">
 <table class="table table-bordered  table-info table-hover ">
 				<thead  class="thead-dark text-info">
 					
 				<tr class="text-info">
-					<th class="text-info text-center"> Event Title </th>
-					<th class="text-info text-center">Platinum Sponsor</th>
+					<th class="text-info "> Event Title </th>
+					<th class="text-info ">Platinum Sponsor</th>
 					
-					<th  class="text-info text-center" >Platinum Facilities </th>
-					<th class="text-info text-center"> Platinum Exptectation </th>
+					<th  class="text-info " >Platinum Facilities </th>
+					<th class="text-info "> Platinum Exptectation </th>
 					
-					<th class="text-info text-center">Gold Sponsor </th>
-					<th class="text-info text-center">Gold  Facilities </th>
-			<!--		<th class="text-info text-center">Published By</th>-->
-					<th class="text-info text-center">Gold Expectation</th>
-					<<th class="text-info text-center">Silver Sponsor</th>
-					<th class="text-info text-center">Silver Facilities</th>
-					<th class="text-info text-center">Silver Expectation </th>
-					
+					<th class="text-info ">Gold Sponsor </th>
+					<th class="text-info ">Gold  Facilities </th>
+			<!--		<th class="text-info ">Published By</th>-->
+					<th class="text-info ">Gold Expectation</th>
+					<<th class="text-info ">Silver Sponsor</th>
+					<th class="text-info ">Silver Facilities</th>
+					<th class="text-info ">Silver Expectation </th>
+          <th class="text-info ">Edit Details</th>
+          <th class="text-info ">Delete Details</th>					
 					
 					
 				</tr>
@@ -43,44 +37,20 @@
 			{% for sponsor in sponsorShip.all %}
 		
 
-
 				<tr> 
 	
-					<td class="text-dark text-center">{{ sponsor.event_title}} </td>
-					<td class="text-dark text-center">{{ sponsor.platinum_sponsor}} </td>
-					<td width="70%" class="text-dark text-center"> {{ sponsor.f_platinum }}</td>
-		<!--			<td class="text-dark text-center">{{sponsor.publishedDate}}</td>
-		-->		
-					<td class="text-dark text-center">{{sponsor.ex_platinum}} </td>
-
-              <td class="text-dark text-center"> 
-
-          {{ sponsor.gold_sponsor }}
-              </td>		
-           
-			
-			<td class="text-dark text-center"> 
-              	
-              {{ sponsor.f_gold }}
-
-
-              </td>		
-              <td class="text-dark text-center"> 
-              	<img src="{{sponsor.ex_gold}}" height="50" width="50">
-              	</td>		
-              	<td class="text-dark text-center"> 
-              	
-               <a href="#"  class="btn btn-dark btn-outline-info" data-toggle="modal" data-target="#edit{{sponsor.id}}">
- Edit Resources</a>
-
-
-              </td>	
-              	<td class="text-dark text-center"> 
-               <a href=""  class="btn btn-dark btn-outline-info" data-toggle="modal" data-target="#delete{{sponsor.id}}">
- Delete Resources</a>
-
-              </td>	
-				
+					<td class="text-dark ">{{ sponsor.event_title}} </td>
+					<td class="text-dark ">{{ sponsor.platinum_sponsor}} </td>
+					<td  class="text-dark "> {{ sponsor.f_platinum }}</td>	
+					<td class="text-dark ">{{sponsor.ex_platinum}} </td>
+          <td class="text-dark ">  {{ sponsor.gold_sponsor }}</td>		
+          <td class="text-dark ">  	{{ sponsor.f_gold }}  </td>		
+          <td class="text-dark "> {{ sponsor.ex_gold }}		</td>		
+          <td class="text-dark "> {{ sponsor.silver_sponsor}} </td>	
+        	<td class="text-dark ">  {{ sponsor.f_silver }}</td>	
+          <td class="text-dark ">  {{ sponsor.ex_silver }} </td>
+          <td class="text-dark ">  <a href="#"  class="" data-toggle="modal" data-target="#edit{{sponsor.id}}"> Edit Resources</a></td>
+          <td class="text-dark "> <a href=""  class="" data-toggle="modal" data-target="#delete{{sponsor.id}}"> Delete Resources</a></td>
 				</tr>
 
 
@@ -103,36 +73,54 @@
 
 <center>
 
-<form action="" method="POST">
+<form action="{% url 'updateSponsorInfo' sponsor.id %}" method="POST">
   {% csrf_token %}
   <div class="form-group">
     <label for="exampleFormControlInput1">Event Title</label>
-    <input type="text" class="form-control"  name="event_name" value="{{ sponsor.f_silver }}" placeholder="Event Title">
+    <input type="text" class="form-control"  name="event_title" value="{{ sponsor.event_title}}" placeholder="Event Title">
   </div>
   <div class="form-group">
-    <label for="exampleFormControlInput1">Subject</label>
-    <input type="text" class="form-control" name="subject" value="{{ sponsor.ex_silver }}" placeholder="Event Title">
+    <label for="exampleFormControlInput1">Platinum Sponsor</label>
+    <input type="text" class="form-control" name="platinum_sponsor" value="{{ sponsor.platinum_sponsor}}" placeholder="Event Title">
   </div>
   <div class="form-group">
-    <label for="exampleFormControlInput1">Description</label>
-    <textarea class="form-control" name="description"> </textarea>
+    <label for="exampleFormControlInput1">Facilities for Platinum</label>
+    <textarea class="form-control" name="f_platinum">{{ sponsor.f_platinum }} </textarea>
   </div>
   <div class="form-group">
-    <label for="exampleFormControlSelect2">Resource Link/Github/Drive/Dropbox</label>
-    <input type="text" class="form-control" value="" name="addlinks">
+    <label for="exampleFormControlSelect2">Platinum Expectation</label>
+    <input type="text" class="form-control" value="{{sponsor.ex_platinum}}" name="ex_platinum">
   </div>
   <div class="form-group">
-    <label for="exampleFormControlTextarea1">Published By</label>
-   <input type="text" class="form-control" id="exampleFormControlInput1" name="published_by" value="" placeholder="Organisation Emial">
+
+    <label for="exampleFormControlTextarea1">Gold Sponsor</label>
+
+   <input type="text" class="form-control" id="exampleFormControlInput1" name="gold_sponsor" value="{{ sponsor.gold_sponsor }}" placeholder="Organisation Emial">
   </div>
     <div class="form-group">
-    <label for="exampleFormControlTextarea1">Resource Image/Poster</label>
-   <input type="file" class="form-control" id="exampleFormControlInput1" name="sponsor_image" value="" placeholder="Organisation Emial">
-  </div>
+    <label for="exampleFormControlTextarea1">Gold Facility</label>
+        <textarea class="form-control" name="f_gold">{{ sponsor.f_gold }} </textarea>
+    </div>
+<div class="form-group">
+    <label for="exampleFormControlTextarea1">Gold Expectation</label>
+        <textarea class="form-control" name="ex_gold">{{ sponsor.ex_gold }} </textarea>
+    </div>
+
   <div class="form-group">
-    <label for="exampleFormControlInput1"> Document File</label>
-    <input type="file" class="form-control" id="exampleFormControlInput1" name="document_file" value="" placeholder="Contact Person Name">
+    <label for="exampleFormControlInput1"> Silver Sponsor</label>
+    <input type="text" class="form-control" id="exampleFormControlInput1" name="silver_sponsor" value="{{ sponsor.silver_sponsor}}" placeholder="Contact Person Name">
   </div> 
+
+ <div class="form-group">
+    <label for="exampleFormControlInput1"> Silver Facilities</label>
+        <textarea class="form-control" name="f_silver">{{ sponsor.f_silver }} </textarea>
+  </div>
+    <div class="form-group">
+    <label for="exampleFormControlInput1"> Silver Expectation</label>
+    <input type="text" class="form-control" id="exampleFormControlInput1" name="ex_silver" value="{{ sponsor.ex_silver }}" placeholder="Contact Person Name">
+  </div> 
+
+
   <div class="form-group">
       
       <input type="submit" class="btn btn-outline-info bg-dark"  name="Submit" id="password" aria-describedby="emailHelp" value="Submit" >
@@ -155,10 +143,13 @@
 
 
 {% endfor %}
-			</table>
-
+		
+</table>
 		</div>
 	</div>
+</div>
+
+</div>
 
 
 {% endblock %}
