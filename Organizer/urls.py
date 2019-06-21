@@ -14,16 +14,18 @@ urlpatterns = [
 	path('/eventUpdate/<int:id>',views.eventUpdate,name='eventupdate'),
 	path('/addEventDetails',views.addrubrics,name='addEventDetails'),
 	path('/editRubrics/<int:id',views.returnEditRubrics,name='editRubrics'),
-	
 	path('/evenDetailsUpdate/<int:id>',views.evenDetailsUpdate,name='evenDetailsUpdate'),
 	path('/addEvent',views.eventDetails,name='eventdetails'),
 	path('/shareResourcese',views.shareResource,name='shareResource'),
-	path('/Resource',views.resource,name='Resource'),
+	path('shareResource',views.resource,name='Resource'),
+	path('/edit_resource',views.editResource,name='editResource'),
+	path('/updateShareResources/<int:id>',views.updateShareResources,name='update_shareResources'),
 	path('/blog',views.blog,name='blog'),
+	path('/blogsDetail',views.blogsDetails,name='blogsDetails'),
 	path('/WriteBlog',views.writeBlogs,name='WriteBlog'),
 	path('/sponsorShip',views.sponsorShip,name='sponsorShip'),
 	path('/sponsorShipDetails',views.sponsorShipDetails,name='sponsorShipDetails'),
-	
+	path('/editSponsorShip',views.editSponsorShip,name='editSponsorShip'),
 
 			
 

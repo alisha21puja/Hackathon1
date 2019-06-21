@@ -7,8 +7,6 @@ from django.utils.timezone import now
 
 
 
-
-
 class BlogsInfo(models.Model):
 	title = models.CharField(max_length=50)
 	pubDateTime = models.DateTimeField(default=now)

@@ -30,41 +30,41 @@ class EventDetails(models.Model):
 	facility = models.CharField(max_length=100)
 	event_detail_docs = models.FileField(upload_to='images/event_details_docs')
 
-
 class ShareResource(models.Model):
 	event_title = models.CharField(max_length=100)
 	subject = models.CharField(max_length=100)
 	description = models.TextField(max_length=1500)
 	publishedDate = models.DateTimeField(default=now)
 	resourceLink = models.CharField(max_length=100)
-	documentFile = models.FileField(upload_to='shared_resources_docs')
-	publisedBy =  FroalaField(plugins=('font_size', 'font_family'))
-	resourceImage = models.ImageField(upload_to='shared_resources')
+	documentFile = models.FileField(upload_to='images/shared_resources_docs')
+	publisedBy =  models.CharField(max_length=100)
+	resourceImage = models.ImageField(upload_to='images/shared_resources')
 
 class SponsorShip(models.Model):
 	event_title = models.CharField(max_length=100,default=True)
 	platinum_sponsor =models.CharField(max_length=100)
 	f_platinum = models.TextField(max_length=1500)
-	ex_platinum=models.IntegerField()
+	ex_platinum =models.IntegerField()
 	gold_sponsor =models.CharField(max_length=100)
 	f_gold =models.TextField(max_length=1500)
 	ex_gold = models.IntegerField()
-	silver_sponsor= models.CharField(max_length=100)
+	silver_sponsor = models.CharField(max_length=100)
 	f_silver=models.TextField(max_length=1500)
 	ex_silver = models.IntegerField()
 
 
+
 class SponsorShipDetails(models.Model):
 
-	event_id =models.OneToOneField(EventDetails,on_delete=models.CASCADE,primary_key=True)
+	event_id = models.OneToOneField(EventDetails,on_delete=models.CASCADE,primary_key=True)
 	event_title = models.CharField(max_length=100,default=True)
-	platinum_sponsor =models.CharField(max_length=100)
+	platinum_sponsor = models.CharField(max_length=100)
 	f_platinum = models.TextField(max_length=1500)
-	ex_platinum=models.IntegerField()
-	gold_sponsor =models.CharField(max_length=100)
+	ex_platinum = models.IntegerField()
+	gold_sponsor = models.CharField(max_length=100)
 	f_gold =models.TextField(max_length=1500)
 	ex_gold = models.IntegerField()
 	silver_sponsor= models.CharField(max_length=100)
-	f_silver=models.TextField(max_length=1500)
+	f_silver = models.TextField(max_length=1500)
 	ex_silver = models.IntegerField()
 

@@ -5,9 +5,20 @@ from .models import OrganiseEvent,EventDetails,ShareResource,SponsorShip,Sponsor
 from django.contrib.auth.models import User
 from Blog.models import BlogsInfo
 from django.utils import timezone
+
+
+
+
+def editSponsorShip(request):
+	sponsorShip=SponsorShipDetails.objects
+	return render(request,'edit_sponsorship.html',{'sponsorShip':sponsorShip})
+
+
+
 def sponsorShip(request):
 	event = OrganiseEvent.objects
 	return render(request,'sponsorShip.html',{'event':event})
+
 def sponsorShipDetails(request):
 	if request.method =='POST':
 		eventDetail =EventDetails()
@@ -15,7 +26,6 @@ def sponsorShipDetails(request):
 		if EventDetails.objects.filter(pk=id,event=request.POST['event_title']).exists():
 			if event!="":
 				eventid  = EventDetails.get_object_or_404(pk=id)
-		#eventDetail=EventDetails.objects.get(event=request.POST['event_title']);
 		print(eventDetail.id)
 		event_title = request.POST['event_title']
 		platinum_sponsor = request.POST['platinum_sponsor']
@@ -26,11 +36,7 @@ def sponsorShipDetails(request):
 		ex_gold = request.POST['ex_gold']
 		silver_sponsor = request.POST['silver_sponsor']
 		f_silver = request.POST['f_silver'] 
-		ex_silver = request.POST['ex_silver']
-		#if event_title=='':
-		#	return render(request,'shareresource.html', {'error':"Title is not selected"})	
-		#else:
-		#	event_title = request.POST['event_title']		
+		ex_silver = request.POST['ex_silver']		
 		if platinum_sponsor=='':
 			return render(request,'shareresource.html', {'error':"Title is not given"})	
 		else:
@@ -71,8 +77,12 @@ def sponsorShipDetails(request):
 			f_gold=f_gold,ex_gold=ex_gold,silver_sponsor=silver_sponsor,f_silver=f_silver,ex_silver=ex_silver)
 		sponsor_ship.save()
 		return render(request,'sponsorShip.html')
+def blogsDetails(request):
+	blogsInfo=BlogsInfo.objects
+	return render(request,'blog_edit.html',{'blogsInfo':blogsInfo})
 def blog(request):
-	 return render(request,'blog_write.html')
+	blogsInfo=BlogsInfo.objects
+	return render(request,'blog_write.html',{'blogsInfo':blogsInfo})
 def writeBlogs(request):
 	if request.method =='POST':	
 		title = request.POST['blog_title']
@@ -119,9 +129,40 @@ def writeBlogs(request):
 def shareResource(request):
 	event = OrganiseEvent.objects
 	return render(request,'shareresource.html',{'event':event})
+def editResource(request):
+	share_resource=ShareResource.objects	
+	return render(request,'edit_shareresource.html',{'share_resource':share_resource})
+def updateShareResources(request,id):
+	if request.method=='POST':	
+		submitbutton = request.POST.get('Submit')
+		if submitbutton :
+			share_resource=ShareResource.objects.get(pk=id)
+			event_title = request.POST['event_name']	
+			subject =  request.POST['subject']
+			description =  request.POST['description']
+			publishedDate= timezone.now()
+			resourceLink =  request.POST['addlinks']
+			documentFile =  request.POST['document_file']
+			publisedBy = request.POST['published_by']
+			resourceImage =  request.POST['share_image']
+			if documentFile=='':
+				resourceImage = share_resource.resourceImage
+			else:
+				resourceImage =  request.POST['share_image']
+			if resourceImage=='':
+				documentFile=share_resource.documentFile
+			else:
+				documentFile =  request.POST['document_file']				
+			share_resource=ShareResource(event_title=event_title,subject=subject,description=description,publishedDate=publishedDate,resourceLink=resourceLink,documentFile=documentFile,publisedBy=publisedBy,resourceImage=resourceImage)
+			share_resource.save()
+			share_resource.refresh_from_db()		
+			share_resource=ShareResource.objects
+			return render(request,'edit_shareresource.html',{'share_resource':share_resource})
+
+
 def resource(request):
 	if request.method=='POST':
-		event_title = 1
+		event_title = request.POST['event_name']	
 		subject =  request.POST['subject']
 		description =  request.POST['description']
 		publishedDate= request.POST['published_date']
@@ -174,7 +215,6 @@ def resource(request):
 def evenDetailsUpdate(request,id):
 	if request.method=='POST':
 		events=EventDetails.objects.get(pk=id)
-
 		event = request.POST['event_title']
 		no_participant = request.POST['no_participant']
 		expected_participant = request.POST['expected_participant']
@@ -185,13 +225,11 @@ def evenDetailsUpdate(request,id):
 		event_detail_docs = request.POST['event_detail_docs']
 		submitbutton = request.POST.get('Submit')
 		if submitbutton :
-
 			if event_detail_docs=='':
 				event_detail_docs  = events.event_detail_docs
 				eventInstance = EventDetails(id=id,event=event,no_participant=no_participant,expected_participant=expected_participant,event_level=event_level,eligibility=eligibility,prerequisite=prerequisite,facility=facility,event_detail_docs=event_detail_docs)
 				eventInstance.save()
-				
-			
+				return render(request,'addrubrics.html',{'registered':'Event Successfully Registered!'})
 		else:
 
 			if event =='':
@@ -228,40 +266,11 @@ def evenDetailsUpdate(request,id):
 				return render(request,'update_rubrics.html',{'registered':'Event Successfully Registered!'})
 			else:
 				event_detail_docs=request.POST['event_detail_docs']
-
-
-
-
-	
-
-
-		return render(request,'addrubrics.html',{'registered':'Event Successfully Registered!'})
-	
-
-
-
-
-
-
 def returnEditRubrics(request):
 	events=EventDetails.objects
-
-
 	return render(request,'update_rubrics.html',{'events':events})
-
-
-
-
-	
-				
-
-
-
 def eventUpdate(request,id):
 	if request.method=='POST':
-		
-
-		
 		if submitbutton :
 			eventid=OrganiseEvent.objects.get(pk=id)
 			event_title = request.POST['event_title']
@@ -274,22 +283,13 @@ def eventUpdate(request,id):
 			event_startdate = request.POST['event_startdate']
 			event_enddate = request.POST['event_enddate']
 			submitbutton= request.POST.get('Submit')
-
 			if event_startdate=='':
-				event_startdate= eventid.event_startdate;
-
-				
-				
-
-			
-				
+				event_startdate= eventid.event_startdate;	
 			else:
 				event_startdate = request.POST['event_startdate']
 			if event_enddate=='':
 				event_enddate = eventid.event_enddate;
-
-				return render(request,'registered_event.html', {'error':"Please Select End Date !"})
-				
+				return render(request,'registered_event.html', {'error':"Please Select End Date !"})				
 			else:
 				event_enddate = request.POST['event_enddate']
 			eve = OrganiseEvent(id=id,event_title = event_title,event_category=event_category,org_name=org_name,
@@ -297,73 +297,43 @@ def eventUpdate(request,id):
 										event_poster=event_poster,event_startdate=event_startdate,event_enddate = event_enddate) 	
 			eve.save()
 			return render(request,'registered_event.html')
-		
-
-		else:
-			
+		else:			
 			if event_title=='':
 				return render(request,'registered_event.html', {'error':"Please Enter Event Title!"})	
 			else :
 				event_title = request.POST['event_title']
-
 			if event_category=='':	
-				return render(request,'registered_event.html', {'error':"Please Select Event Category!"})
-			
+				return render(request,'registered_event.html', {'error':"Please Select Event Category!"})			
 			else: 
 				event_category = request.POST['event_category']
-
 			if org_name=='':
-				return render(request,'registered_event.html', {'error':"Please Enter Org Name!"})
-				
+				return render(request,'registered_event.html', {'error':"Please Enter Org Name!"})				
 			else:
 				org_name = request.POST['org_by']
-
 			if org_email=='':
-				return render(request,'registered_event.html', {'error':"Please Enter Org Email!"})
-				
+				return render(request,'registered_event.html', {'error':"Please Enter Org Email!"})				
 			else:
 				org_email = request.POST['org_email']
-
 			if org_mobile=='':
 				return render(request,'registered_event.html', {'error':"Please Enter Org Mobile!"})
-				
 			else :
 				org_mobile = request.POST['mobile']
-
 			if org_contact_person=='':
-				return render(request,'registered_event.html', {'error':"Please Enter Contact Person Name!"})
-					
+				return render(request,'registered_event.html', {'error':"Please Enter Contact Person Name!"})					
 			else:
 				org_contact_person = request.POST['person_name']
 			if event_poster=='':
-				return render(request,'registered_event.html', {'error':"Please Select Event Poster!"})
-				
+				return render(request,'registered_event.html', {'error':"Please Select Event Poster!"})				
 			else:
-				event_poster = request.POST['event_poster']
-			
-			
+				event_poster = request.POST['event_poster']				
 			if event_startdate=='':
-
-				
-
-				return render(request,'registered_event.html', {'error':"Please  Select Start Date!"})
-				
+				return render(request,'registered_event.html', {'error':"Please  Select Start Date!"})				
 			else:
 				event_startdate = request.POST['event_startdate']
 			if event_enddate=='':
-				return render(request,'registered_event.html', {'error':"Please Select End Date !"})
-				
+				return render(request,'registered_event.html', {'error':"Please Select End Date !"})				
 			else:
 				event_enddate = request.POST['event_enddate']
- 
-
-
-
-
-	
-	
-
-
 
 def eventDetails(request):
 	#print("Dude ints nnot working")
@@ -380,38 +350,26 @@ def eventDetails(request):
 			return render(request,'addrubrics.html', {'error':"Event is not selected"})	
 		else:
 			event = request.POST['event_name']
-
 		if no_participant=='':
 			return render(request,'addrubrics.html', {'error':"No Participant not filled!"})	
 		else:
-			no_participant= request.POST['no_participant']
-		
+			no_participant= request.POST['no_participant']	
 		if expected_participant=='':
 			return render(request,'addrubrics.html', {'error':"No Participant not filled!"})	
 		else:
-			expected_participant =request.POST['expected_participant']			
-
-			
+			expected_participant =request.POST['expected_participant']						
 		if event_level=='':
 			return render(request,'addrubrics.html', {'error':"Event level field not selected"})	
-
 		else:
-			event_level= request.POST['event_level']
-	
-			
+			event_level= request.POST['event_level']			
 		if eligibility=='':
 			return render(request,'addrubrics.html', {'error':"Eligibility  field not selected"})	
-
 		else:
-			eligibility= request.POST['eligibility']
-		
-			
+			eligibility= request.POST['eligibility']			
 		if prerequisite=='':
 			return render(request,'addrubrics.html', {'error':"Prerequisite field not filled"})	
-
 		else:
 			prerequisite= request.POST['prerequisite']
-		
 			
 		if facility=='':
 			return render(request,'addrubrics.html', {'error':"Facility field not filled"})	
@@ -433,23 +391,6 @@ def eventDetails(request):
 		
 		
 		return render(request,'addrubrics.html',{'registered':'Event Successfully Registered!'})
-	
-		
-			
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 def organiseEventFormData(request):
 	if request.method=='POST':
 		event_title = request.POST['event_title']
@@ -461,131 +402,79 @@ def organiseEventFormData(request):
 		event_poster = request.POST['event_poster']
 		event_startdate = request.POST['event_startdate']
 		event_enddate = request.POST['event_enddate']
-
 		if OrganiseEvent.objects.filter(event_title=event_title).exists():
 			return render(request,'organise_event.html', {'error':"Event already Registered!"})	
-
 		else:
-
-
 			if event_title=='':
 				return render(request,'organise_event.html', {'error':"Please Enter Event Title!"})	
 			else :
 				event_title = request.POST['event_title']
-
 			if event_category=='':	
-				return render(request,'organise_event.html', {'error':"Please Select Event Category!"})
-			
+				return render(request,'organise_event.html', {'error':"Please Select Event Category!"})		
 			else: 
 				event_category = request.POST['event_category']
-
 			if org_name=='':
-				return render(request,'organise_event.html', {'error':"Please Enter Org Name!"})
-				
+				return render(request,'organise_event.html', {'error':"Please Enter Org Name!"})				
 			else:
 				org_name = request.POST['org_by']
-
 			if org_email=='':
-				return render(request,'organise_event.html', {'error':"Please Enter Org Email!"})
-				
+				return render(request,'organise_event.html', {'error':"Please Enter Org Email!"})			
 			else:
 				org_email = request.POST['org_email']
-
 			if org_mobile=='':
-				return render(request,'organise_event.html', {'error':"Please Enter Org Mobile!"})
-				
+				return render(request,'organise_event.html', {'error':"Please Enter Org Mobile!"})	
 			else :
 				org_mobile = request.POST['mobile']
-
 			if org_contact_person=='':
-				return render(request,'organise_event.html', {'error':"Please Enter Contact Person Name!"})
-					
+				return render(request,'organise_event.html', {'error':"Please Enter Contact Person Name!"})	
 			else:
 				org_contact_person = request.POST['person_name']
 			if event_poster=='':
 				return render(request,'organise_event.html', {'error':"Please Select Event Poster!"})
-				
 			else:
-				event_poster = request.POST['event_poster']
-			
-			
+				event_poster = request.POST['event_poster']					
 			if event_startdate=='':
-				return render(request,'organise_event.html', {'error':"Please  Select Start Date!"})
-				
+				return render(request,'organise_event.html', {'error':"Please  Select Start Date!"})		
 			else:
 				event_startdate = request.POST['event_startdate']
 			if event_enddate=='':
-				return render(request,'organise_event.html', {'error':"Please Select End Date !"})
-				
+				return render(request,'organise_event.html', {'error':"Please Select End Date !"})				
 			else:
 				event_enddate = request.POST['event_enddate']
-
 			event = OrganiseEvent(event_title = event_title,event_category=event_category,org_name=org_name,
 									org_email=org_email,org_mobile=org_mobile,org_contact_person=org_contact_person,
 									event_poster=event_poster,event_startdate=event_startdate,
 									event_enddate = event_enddate) 	
 			event.save()
-			return render(request,'organise_event.html',{'event':'Event Successfully Registered!'})
-	
-
-	
-
+			return render(request,'organise_event.html',{'event':'Event Successfully Registered!'})		
 def addrubrics(request):
 	eventDetails =  EventDetails.objects
-
 	eventsOrganise = OrganiseEvent.objects
-
-	context ={	
-				'eventDetails':eventDetails,
-
+	context ={	'eventDetails':eventDetails,
 				'eventsOrganise':eventsOrganise
 			}
-
 	return render(request,'addrubrics.html',context)
-
 def organiseEvent(request):
 	events = OrganiseEvent.objects
-
-	return render(request,'organise_event.html',{'events':events})
-	
-
-
+	return render(request,'organise_event.html',{'events':events})	
 def eventEdit(request,id):
 	event =get_object_or_404(OrganiseEvent,pk=id)
 	#event =get_object_or_404(EventDetails,pk=id)
 	return render(request,'sponsor_event.html',{'event':event})
-
-
 def registeredEvent(request):
 	events = OrganiseEvent.objects
 	return render(request,'registered_event.html',{'events':events})
-
-
-
 def indx(request):
 	return  render(request,'organiser_index.html')
-
-
-
-
 def form_name_view(request):
 	form = forms.FormName()
-
-
 	if request.method =='POST':
 		form = forms.FormName(request.POST)
-
 		if form.is_valid():
 			print("Validation Success!!")
 			print("name :" + form.cleaned_data['name'])
 			print("Email: "+ form.cleaned_data['email'])
 			print("Text:" + form.cleaned_data['text'])
-
 	return render(request,'organiser.html',{ 'form':form})
-
-
-
-
-
 def about(request):
 	return  render(request,'pages/index.html')
