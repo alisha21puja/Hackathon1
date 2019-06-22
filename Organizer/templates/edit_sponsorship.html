@@ -43,16 +43,41 @@
 					<td class="text-dark ">{{ sponsor.platinum_sponsor}} </td>
 					<td  class="text-dark "> {{ sponsor.f_platinum }}</td>	
 					<td class="text-dark ">{{sponsor.ex_platinum}} </td>
-          <td class="text-dark ">  {{ sponsor.gold_sponsor }}</td>		
-          <td class="text-dark ">  	{{ sponsor.f_gold }}  </td>		
-          <td class="text-dark "> {{ sponsor.ex_gold }}		</td>		
-          <td class="text-dark "> {{ sponsor.silver_sponsor}} </td>	
-        	<td class="text-dark ">  {{ sponsor.f_silver }}</td>	
-          <td class="text-dark ">  {{ sponsor.ex_silver }} </td>
-          <td class="text-dark ">  <a href="#"  class="" data-toggle="modal" data-target="#edit{{sponsor.id}}"> Edit Resources</a></td>
+          <td class="text-dark ">{{ sponsor.gold_sponsor }}</td>		
+          <td class="text-dark ">{{ sponsor.f_gold }}  </td>		
+          <td class="text-dark ">{{ sponsor.ex_gold }}		</td>		
+          <td class="text-dark ">{{ sponsor.silver_sponsor}} </td>	
+        	<td class="text-dark ">{{ sponsor.f_silver }}</td>	
+          <td class="text-dark ">{{ sponsor.ex_silver }} </td>
+          <td class="text-dark ">  <a href=""  class="" data-toggle="modal" data-target="#edit{{sponsor.id}}"> Edit Resources</a></td>
           <td class="text-dark "> <a href=""  class="" data-toggle="modal" data-target="#delete{{sponsor.id}}"> Delete Resources</a></td>
 				</tr>
 
+
+
+
+<div class="modal fade" id="delete{{sponsor.id}}" tabindex="-1" role="dialog" aria-labelledby="exampleModalLongTitle" aria-hidden="true">
+  <div class="modal-dialog" role="document">
+    <div class="modal-content ">
+      <div class="modal-header bg-dark">
+        <h5 class="modal-title text-info" id="exampleModalLongTitle">{{ sponsor.silver_sponsor}}</h5>
+        <button type="button" class="close text-info" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body">
+        <br><br>
+<a href="{% url 'deletesponsor' sponsor.id %}">delete</a>
+
+
+ <div class="modal-footer bg-dark">
+        <button type="button" class="btn btn-outline-info bg-dark" data-dismiss="modal">Close</button>
+       
+      </div>
+    </div>
+  </div>
+</div>
+</div>
 
 
 
@@ -75,13 +100,25 @@
 
 <form action="{% url 'updateSponsorInfo' sponsor.id %}" method="POST">
   {% csrf_token %}
+
   <div class="form-group">
-    <label for="exampleFormControlInput1">Event Title</label>
-    <input type="text" class="form-control"  name="event_title" value="{{ sponsor.event_title}}" placeholder="Event Title">
-  </div>
+     <label for="exampleFormControlInput1">Event Title</label>
+<select name="event_title"  class="form-control   border border-info">
+<option class="form-control border border-info" > Select Event</option>
+      <option class="form-control border border-info" > Selected Event {{ sponsor.event_title}} </option>
+
+      
+</select>
+</div>
+
   <div class="form-group">
     <label for="exampleFormControlInput1">Platinum Sponsor</label>
-    <input type="text" class="form-control" name="platinum_sponsor" value="{{ sponsor.platinum_sponsor}}" placeholder="Event Title">
+    <select name="platinum_sponsor" class="form-control   border border-info">
+    <option class="form-control border border-info" > Select Sponsor</option>
+    <option class="form-control border border-info" > Selected Event {{ sponsor.platinum_sponsor}}</option>
+
+      
+</select>
   </div>
   <div class="form-group">
     <label for="exampleFormControlInput1">Facilities for Platinum</label>
@@ -95,20 +132,38 @@
 
     <label for="exampleFormControlTextarea1">Gold Sponsor</label>
 
-   <input type="text" class="form-control" id="exampleFormControlInput1" name="gold_sponsor" value="{{ sponsor.gold_sponsor }}" placeholder="Organisation Emial">
+       <select name="platinum_sponsor" class="form-control   border border-info">
+    <option class="form-control border border-info" > Select Sponsor</option>
+    <option class="form-control border border-info" > Selected Event {{ sponsor.gold_sponsor }}</option>
+
+      
+</select>
   </div>
+
+
     <div class="form-group">
     <label for="exampleFormControlTextarea1">Gold Facility</label>
         <textarea class="form-control" name="f_gold">{{ sponsor.f_gold }} </textarea>
+
     </div>
 <div class="form-group">
     <label for="exampleFormControlTextarea1">Gold Expectation</label>
-        <textarea class="form-control" name="ex_gold">{{ sponsor.ex_gold }} </textarea>
+     <input type="text" class="form-control" id="exampleFormControlInput1" name="ex_gold" value="{{ sponsor.ex_gold }} " placeholder="Contact Person Name">
+
+   
     </div>
 
   <div class="form-group">
     <label for="exampleFormControlInput1"> Silver Sponsor</label>
-    <input type="text" class="form-control" id="exampleFormControlInput1" name="silver_sponsor" value="{{ sponsor.silver_sponsor}}" placeholder="Contact Person Name">
+
+    <select name="silver_sponsor"  class="form-control   border border-info">
+    <option class="form-control border border-info" > Select Sponsor</option>
+    <option class="form-control border border-info" > Selected Sponsor {{ sponsor.silver_sponsor}}</option>
+
+      
+</select>
+
+ 
   </div> 
 
  <div class="form-group">

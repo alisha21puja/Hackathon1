@@ -13,6 +13,11 @@ def editSponsorShip(request):
 	sponsorShip=SponsorShip.objects
 	return render(request,'edit_sponsorship.html',{'sponsorShip':sponsorShip})
 
+def deletesponsor(request,id):
+	sponsorShip=SponsorShip.objects.get(id = id)
+	sponsorShip.delete();
+	sponsorShip=SponsorShip.objects
+	return render(request,'edit_sponsorship.html',{'sponsorShip':sponsorShip})
 def updateSponsorInfo(request,id):
 
 	submitbutton = request.POST.get('Submit')
@@ -525,11 +530,14 @@ def form_name_view(request):
 	form = forms.FormName()
 	if request.method =='POST':
 		form = forms.FormName(request.POST)
+		form.save()
 		if form.is_valid():
 			print("Validation Success!!")
 			print("name :" + form.cleaned_data['name'])
 			print("Email: "+ form.cleaned_data['email'])
 			print("Text:" + form.cleaned_data['text'])
 	return render(request,'organiser.html',{ 'form':form})
+
+
 def about(request):
 	return  render(request,'pages/index.html')

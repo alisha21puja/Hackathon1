@@ -24,7 +24,7 @@ def check_for_z(value):
 	if value[i].lower()!='z':
 		raise forms.ValidationError("Erros")
 
-class FormName(forms.Form):
+class FormName(forms.ModelForm):
 
 	name = forms.CharField(validators =[check_for_z])
 	email = forms.EmailField()

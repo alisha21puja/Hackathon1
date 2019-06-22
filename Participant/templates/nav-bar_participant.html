@@ -9,29 +9,29 @@
 </head>
 
 <nav class="navbar fixed-top navbar-expand-lg navbar-dark bg-dark">
-  <a class="navbar-brand " href="{% url 'home' %}"><button type="button" class="btn btn-outline-info">Hackathon</button></a>
+  <a class="navbar-brand " href="{% url 'home' %}"><button type="button" class="btn btn-outline-danger">Hackathon</button></a>
   <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarText" aria-controls="navbarText" aria-expanded="false" aria-label="Toggle navigation">
     <span class="navbar-toggler-icon"></span>
   </button>
   <div class="collapse navbar-collapse mr-auto"  id="navbarText">
     <ul class="navbar-nav ml-auto">
       <li class="nav-item active">
-        <a class="nav-link" href="{% url 'participate' %}"><button type="button" class="btn btn-outline-info">Participant </button><span class="sr-only">(current)</span></a>
+        <a class="nav-link" href="{% url 'participate' %}"><button type="button" class="btn btn-outline-danger">Participant </button><span class="sr-only">(current)</span></a>
       </li>
       <li class="nav-item  fg-white">
-      <a class="nav-link btn btn-outline-dark text-white " href="{% url 'participate' %}"><button type="button" class="btn btn-outline-info">History</button></a>
+      <a class="nav-link btn btn-outline-dark text-white " href="{% url 'participate' %}"><button type="button" class="btn btn-outline-danger">History</button></a>
       </li>
        <li class="nav-item  ">
-        <a class="nav-link text-white " href="{% url 'participate'  %}"><button type="button" class="btn btn-outline-info">Participated</button></a>
+        <a class="nav-link text-white " href="{% url 'participate'  %}"><button type="button" class="btn btn-outline-danger">Participated</button></a>
       </li>
 
     
      <li class="nav-item  fg-white">
-        <a class="nav-link text-white " href="{% url 'participate' %}"><button type="button" class="btn btn-outline-info">Welcome {{ user.first_name }}! </button></a>
+        <a class="nav-link text-white " href="{% url 'participate' %}"><button type="button" class="btn btn-outline-danger">Welcome {{ user.first_name }}! </button></a>
       </li>
        <li class="nav-item  ">
         <a class="nav-link text-white " href="javascript:{document.getElementById('logout').submit()}">
-          <button type="button" class="btn btn-outline-info">LogOut</button></a>
+          <button type="button" class="btn btn-outline-danger">LogOut</button></a>
           <form action="{% url 'logout' %}" method="POST" id="logout">
             {% csrf_token %}
             <input type="hidden" name="">
@@ -71,7 +71,7 @@
     <div class="col-md-7">
 <div class="row text-center">
   <div>
-<h6 class="text-white text-center"> Know more about us <a class="  btn-outline-info" href="{% url 'aboutus' %}">
+<h6 class="text-white text-center"> Know more about us <a class="  btn-outline-danger" href="{% url 'aboutus' %}">
      here  </a>    </h6></div>
 
     <div class="ml-4">    <h6  class="text-white text-center">&copy;Reserved to Hackathon 20{% now "y" %}  </h6></div>
@@ -79,17 +79,17 @@
 </div>
 <div class="col-md-5">
     <a class="btn btn-twitter" href="https://twitter.com/">
-      <button type="button" class=" fa fa-twitter btn btn-outline-info">
+      <button type="button" class=" fa fa-twitter btn btn-outline-danger">
         
       </button>
     <span class="fa fa-twitter"></span> 
   </a>
-  <a class="btn-outline-info  btn btn-linkedin" href="https://www.linkedin.com">
+  <a class="btn-outline-danger  btn btn-linkedin" href="https://www.linkedin.com">
   
     <span class="fa fa-linkedin"></span> 
   </a>
   <a class="btn btn-google" href="https://www.google.com/">
-     <button type="button" class="btn btn-outline-info"></button>
+     <button type="button" class="btn btn-outline-danger"></button>
     <span class="fa fa-google"></span> 
   </a>
   <a class="btn btn-facebook" href="https://www.google.com/">

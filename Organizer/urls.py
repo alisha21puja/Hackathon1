@@ -27,7 +27,7 @@ urlpatterns = [
 	path('/sponsorShipDetails',views.sponsorShipDetails,name='sponsorShipDetails'),
 	path('/editSponsorShip',views.editSponsorShip,name='editSponsorShip'),
 	path('/updateSponsorInfo/<int:id>',views.updateSponsorInfo,name='updateSponsorInfo'),
-			
+	path('deletesponsor/<int:id>',views.deletesponsor,name='deletesponsor')	
 
 
 

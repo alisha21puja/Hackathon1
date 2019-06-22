@@ -21,19 +21,19 @@
 		<div class="col-md-12">
 			<div class="table-responsive-md">
 				<h3 class="text-center">Events Details</h3>
-			<hr class="bg-info col-md-8">
+			<hr class="bg-primary col-md-8">
 
 
-			<table class="table table-bordered  table-info table-hover ">
-				<thead  class="thead-dark text-info">
+			<table class="table table-bordered  table-primary table-hover ">
+				<thead  class="thead-dark text-primary">
 					
-				<tr class="text-info">
-					<th class="text-info text-center">  {{ sponsors.event_title }} Event Name </th>
-					<th class="text-info text-center" >Platinum </th>
-					<th class="text-info text-center"> Gold</th>
-					<th class="text-info text-center">Silver</th>
-					<th class="text-info text-center">Event Sponsor Details </th>
-					<th class="text-info text-center">Event Details </th>
+				<tr class="text-primary">
+					<th class="text-primary text-center">  {{ sponsors.event_title }} Event Name </th>
+					<th class="text-primary text-center" >Platinum </th>
+					<th class="text-primary text-center"> Gold</th>
+					<th class="text-primary text-center">Silver</th>
+					<th class="text-primary text-center">Event Sponsor Details </th>
+					<th class="text-primary text-center">Event Details </th>
 					
 				</tr>
 
@@ -45,9 +45,9 @@
 					<td class="text-dark text-center">{{ sponsor.ex_platinum }} </td>
 					<td class="text-dark text-center"> {{ sponsor.ex_gold }} </td>
 					<td class="text-dark text-center"> {{ sponsor.ex_silver }} </td>
-					<td class="text-dark text-center"> <a href="#{% url 'sponsorEdit' sponsor.id %}"  class="btn btn-dark btn-outline-info"    data-toggle="modal" data-target="#exampleModal{{sponsor.id}}" > Details</a></td>
+					<td class="text-dark text-center"> <a href="#{% url 'sponsorEdit' sponsor.id %}"  class="btn btn-dark btn-outline-primary"    data-toggle="modal" data-target="#exampleModal{{sponsor.id}}" > Details</a></td>
 
-					<td class="text-dark text-center"> <a href="#xampleModalLong"  class="btn btn-dark btn-outline-info"     data-toggle="modal" data-target="#exampleModalLong" > Event Details</a></td>
+					<td class="text-dark text-center"> <a href="#xampleModalLong"  class="btn btn-dark btn-outline-primary"     data-toggle="modal" data-target="#exampleModalLong" > Event Details</a></td>
     
 						
 				</tr>
@@ -61,8 +61,8 @@
   <div class="modal-dialog modal-xl" role="document">
     <div class="modal-content">
       <div class="modal-header bg-dark col-md-12">
-        <center><h5 class="text-info text-center" >{{ sponsor.event_title }}  </h5></center>
-        <button type="button" class="close text-info" data-dismiss="modal" aria-label="Close">
+        <center><h5 class="text-primary text-center" >{{ sponsor.event_title }}  </h5></center>
+        <button type="button" class="close text-primary" data-dismiss="modal" aria-label="Close">
           <span aria-hidden="true">&times;</span>
         </button>
       </div>
@@ -89,7 +89,7 @@
 	
 
 <h5> {{ sponsor.platinum_sponsor}}</h5>
- <hr class="bg-info col-md-12">
+ <hr class="bg-primary col-md-12">
 
 <div class="form-group row">
     <label for="staticEmail"  class="col-sm-2 col-form-label ">Facilities</label>
@@ -110,7 +110,7 @@
   </div>
 
 <h5>{{ sponsor.gold_sponsor }}</h5>
-<hr class="bg-info col-md-12">
+<hr class="bg-primary col-md-12">
 
 <div class="form-group row">
     <label for="staticEmail"  class="col-sm-2 col-form-label ">Facilities </label>
@@ -130,7 +130,7 @@
 
 
 <h5>{{ sponsor.silver_sponsor }}</h5>
-<hr class="bg-info col-md-12">
+<hr class="bg-primary col-md-12">
 
 
 
@@ -164,8 +164,8 @@
 
 
      <div class="modal-footer bg-dark">
-        <button type="button" class="btn btn-dark btn-outline-info" data-dismiss="modal">Close</button>
-       <!-- <button type="button" class="btn  btn-dark btn-outline-info">Save changes</button>-->
+        <button type="button" class="btn btn-dark btn-outline-primary" data-dismiss="modal">Close</button>
+       <!-- <button type="button" class="btn  btn-dark btn-outline-primary">Save changes</button>-->
       </div>
         
        </div>
