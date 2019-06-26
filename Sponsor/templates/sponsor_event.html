@@ -40,22 +40,22 @@
 			</thead>
 			{%  for sponsor in sponsors.all  %}
 				<tr>
-					<td class="text-dark text-center">{{ sponsor.event_title }} {{event.event }}</td>
+					<td class="text-dark text-center"> {{ sponsor.event_title }} {{event.event }} </td>
 					
-					<td class="text-dark text-center">{{ sponsor.ex_platinum }} </td>
+					<td class="text-dark text-center"> {{ sponsor.ex_platinum }} </td>
 					<td class="text-dark text-center"> {{ sponsor.ex_gold }} </td>
 					<td class="text-dark text-center"> {{ sponsor.ex_silver }} </td>
-					<td class="text-dark text-center"> <a href="#{% url 'sponsorEdit' sponsor.id %}"  class="btn btn-dark btn-outline-primary"    data-toggle="modal" data-target="#exampleModal{{sponsor.id}}" > Details</a></td>
+					<td class="text-dark text-center"> <a href="{% url 'sponsorEdit' sponsor.id %}"  class="btn btn-dark btn-outline-primary"    data-toggle="modal" data-target="#exampleModal{{sponsor.id}}" > Details </a></td>
 
-					<td class="text-dark text-center"> <a href="#xampleModalLong"  class="btn btn-dark btn-outline-primary"     data-toggle="modal" data-target="#exampleModalLong" > Event Details</a></td>
+					<td class="text-dark text-center"> <a href="#xampleModalLong"  class="btn btn-dark btn-outline-primary"     data-toggle="modal" data-target="#exampleModalLong" > Event Details</a> </td>
     
 						
 				</tr>
 
 
 
-
-
+<!--
+MODEL START FROM HERE!
 
 <div class="modal fade bd-example-modal-lg" id="exampleModal{{sponsor.id}}" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
   <div class="modal-dialog modal-xl" role="document">
@@ -174,8 +174,8 @@
 
  
     </div>
-
-
+OPEN THE BELOW LINK FOR MODEL DISPLAY
+-->
 
 <!-- Modal -->
 <div class="modal fade" id="exampleModalLong" tabindex="-1" role="dialog" aria-labelledby="exampleModalLongTitle" aria-hidden="true">

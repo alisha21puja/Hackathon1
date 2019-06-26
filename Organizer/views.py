@@ -9,6 +9,11 @@ from django.utils import timezone
 
 
 
+
+
+
+
+
 def editSponsorShip(request):
 	sponsorShip=SponsorShip.objects
 	return render(request,'edit_sponsorship.html',{'sponsorShip':sponsorShip})
@@ -329,11 +334,14 @@ def evenDetailsUpdate(request,id):
 def returnEditRubrics(request):
 	events=EventDetails.objects
 	return render(request,'update_rubrics.html',{'events':events})
+
 def eventUpdate(request,id):
 	if request.method=='POST':
+		submitbutton= request.POST.get('Submit')
 		if submitbutton :
 			eventid=OrganiseEvent.objects.get(pk=id)
 			event_title = request.POST['event_title']
+			event_description  = request.POST['event_description']
 			event_category = request.POST['event_category']
 			org_name = request.POST['org_by']
 			org_email = request.POST['org_email']
@@ -342,7 +350,6 @@ def eventUpdate(request,id):
 			event_poster = request.POST['event_poster']
 			event_startdate = request.POST['event_startdate']
 			event_enddate = request.POST['event_enddate']
-			submitbutton= request.POST.get('Submit')
 			if event_startdate=='':
 				event_startdate= eventid.event_startdate;	
 			else:
@@ -352,11 +359,12 @@ def eventUpdate(request,id):
 				return render(request,'registered_event.html', {'error':"Please Select End Date !"})				
 			else:
 				event_enddate = request.POST['event_enddate']
-			eve = OrganiseEvent(id=id,event_title = event_title,event_category=event_category,org_name=org_name,
-										org_email=org_email,org_mobile=org_mobile,org_contact_person=org_contact_person,
-										event_poster=event_poster,event_startdate=event_startdate,event_enddate = event_enddate) 	
+			eve=OrganiseEvent(id=id,event_title = event_title,event_description=event_description,event_category=event_category,org_name=org_name,
+									org_email=org_email,org_mobile=org_mobile,org_contact_person=org_contact_person,
+									event_poster=event_poster,event_startdate=event_startdate,event_enddate = event_enddate) 
 			eve.save()
-			return render(request,'registered_event.html')
+			
+			return render(request,'registered_event.html'	)
 		else:			
 			if event_title=='':
 				return render(request,'registered_event.html', {'error':"Please Enter Event Title!"})	
@@ -454,6 +462,7 @@ def eventDetails(request):
 def organiseEventFormData(request):
 	if request.method=='POST':
 		event_title = request.POST['event_title']
+		event_description = request.POST['event_description']
 		event_category = request.POST['event_category']
 		org_name = request.POST['org_by']
 		org_email = request.POST['org_email']
@@ -465,14 +474,22 @@ def organiseEventFormData(request):
 		if OrganiseEvent.objects.filter(event_title=event_title).exists():
 			return render(request,'organise_event.html', {'error':"Event already Registered!"})	
 		else:
+
 			if event_title=='':
 				return render(request,'organise_event.html', {'error':"Please Enter Event Title!"})	
 			else :
 				event_title = request.POST['event_title']
+
+			if 	event_description =='':
+				return render(request,'organise_event.html', {'error':"Please Enter Event Title!"})	
+			else:
+				event_description = request.POST['event_description']
+
 			if event_category=='':	
 				return render(request,'organise_event.html', {'error':"Please Select Event Category!"})		
 			else: 
 				event_category = request.POST['event_category']
+
 			if org_name=='':
 				return render(request,'organise_event.html', {'error':"Please Enter Org Name!"})				
 			else:
@@ -501,7 +518,7 @@ def organiseEventFormData(request):
 				return render(request,'organise_event.html', {'error':"Please Select End Date !"})				
 			else:
 				event_enddate = request.POST['event_enddate']
-			event = OrganiseEvent(event_title = event_title,event_category=event_category,org_name=org_name,
+			event = OrganiseEvent(event_title = event_title,event_description=event_description,event_category=event_category,org_name=org_name,
 									org_email=org_email,org_mobile=org_mobile,org_contact_person=org_contact_person,
 									event_poster=event_poster,event_startdate=event_startdate,
 									event_enddate = event_enddate) 	
