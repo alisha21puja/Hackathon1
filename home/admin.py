@@ -5,7 +5,7 @@ from django.contrib import admin
 
 
 
-from .models import  Slider
+from .models import  Slider,OurPartner
 
 
 class SliderAdmin(admin.ModelAdmin):
@@ -19,3 +19,7 @@ class SliderAdmin(admin.ModelAdmin):
 
 
 admin.site.register(Slider,SliderAdmin)
+
+
+admin.site.register(OurPartner)
+

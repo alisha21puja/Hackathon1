@@ -50,22 +50,35 @@
 
  
       
+   
+
+       {% for event in events %}
     <div class="col-md-4">
-
-
-
       <div class="card border-info mb-3" style="width: 18rem;">
-        <div class="card-header">Header</div>
-          <img src="..." class="card-img-top" alt="...">
-            <h5 class="card-title text-info text-center">Card title</h5>
+          <img src="{{ event.event_poster.url }}" class="card-img-top" height="140" width="100">
+            <h5 class="card-title text-info text-center">{{ event.event_title }}</h5>
+            <br>
+           
           <div class="card-body text-info">
-            <h5 class="card-title">Info card title</h5>
-            <p class="card-text">Some quick example text to build on the card title and make up the bulk of the card's content.</p>
-            
+
+            <h5 class="card-title">{{ event.org_name }}</h5>
+            <p class="card-text">{{ event.summary }} <a class=" text-info" href="{% url 'eventDetails' event.id %}">
+        Read More
+  </a></p> 
       <button  class=" btn">
-         <a class=" bg-dark btn btn-outline-info" href="www.google.com">
-        Participate
-  </a>
+        {% if event.event_enddate  %}
+        
+        <div  class="float-left">
+
+          
+
+      <p class="card-text text-info">Event Start: {{ event.event_startdate }}</p>
+      </div>
+
+    <div class="float-right">
+         <a class=" bg-dark btn btn-outline-info" href="{% url 'accounts' %}">Participate  </a>
+       </div>
+         {% endif %}
       </button>
     
              
@@ -73,86 +86,21 @@
         </div>
     </div>
 
+{% endfor %}
 
-   <div class="col-md-4">
-      <div class="card border-info mb-3" style="width: 18rem;">
-        <div class="card-header">Header</div>
-          <img src="..." class="card-img-top" alt="...">
-            <h5 class="card-title text-info text-center">Card title</h5>
-          <div class="card-body text-info">
-            <h5 class="card-title">Info card title</h5>
-            <p class="card-text">Some quick example text to build on the card title and make up the bulk of the card's content.</p>
-            <button  class=" btn"> <a class=" bg-dark btn btn-outline-info" href="www.google.com"> Participate </a></button>
-          </div>
-        </div>
-    </div>
-     <div class="col-md-4">
-       <div class="card border-info mb-3" style="width: 18rem;">
-        <div class="card-header">Header</div>
-          <img src="..." class="card-img-top" alt="...">
-            <h5 class="card-title text-info text-center">Card title</h5>
-          <div class="card-body text-info">
-            <h5 class="card-title">Info card title</h5>
-            <p class="card-text">Some quick example text to build on the card title and make up the bulk of the card's content.</p>
-            <button  class=" btn"> <a class=" bg-dark btn btn-outline-info" href="www.google.com"> Participate </a></button>
-          
-          </div>
-        </div>
+
+
+    
     </div>
 
 
-
-
-</div>
-<hr class="bg-info col-md-8">
- <div class="row shadow p-3 mb-5 bg-white rounded">
-    <div class="col-md-4">
-
-      <div class="card border-info mb-3" style="width: 18rem;">
-        <div class="card-header">Header</div>
-          <img src="..." class="card-img-top" alt="...">
-            <h5 class="card-title text-info text-center">Card title</h5>
-          <div class="card-body text-info">
-            <h5 class="card-title">Info card title</h5>
-            <p class="card-text">Some quick example text to build on the card title and make up the bulk of the card's content.</p>
-            <button  class=" btn"> <a class=" bg-dark btn btn-outline-info" href="www.google.com"> Participate </a></button>
-          
-          </div>
-        </div>
-    </div>
-
-
-   <div class="col-md-4">
-     <div class="card border-info mb-3" style="width: 18rem;">
-        <div class="card-header">Header</div>
-          <img src="..." class="card-img-top" alt="...">
-            <h5 class="card-title text-info text-center">Card title</h5>
-          <div class="card-body text-info">
-            <h5 class="card-title">Info card title</h5>
-            <p class="card-text">Some quick example text to build on the card title and make up the bulk of the card's content.</p>
-            <button  class=" btn"> <a class=" bg-dark btn btn-outline-info" href="www.google.com"> Participate </a></button>
-          
-          </div>
-        </div>
-    </div>
-     <div class="col-md-4">
-       <div class="card border-info mb-3" style="width: 18rem;">
-        <div class="card-header">Header</div>
-          <img src="..." class="card-img-top" alt="...">
-            <h5 class="card-title text-info text-center">Card title</h5>
-          <div class="card-body text-info">
-            <h5 class="card-title">Info card title</h5>
-            <p class="card-text">Some quick example text to build on the card title and make up the bulk of the card's content.</p>
-            <button  class=" btn"> <a class=" bg-dark btn btn-outline-info" href="www.google.com"> Participate </a></button>
-          
-          </div>
-        </div>
-    </div>
+   
 
 
 
 
-</div>
+
+
 
 <hr class="bg-info col-md-8">
 
@@ -164,62 +112,26 @@
     <div class="container">
       <div  class="text-center"><h2> Our Partners</h2><hr class="bg-info col-md-8"></div>
     <div class="row shadow p-3 mb-5 bg-white rounded">
-
+{%  for partner in ourPartner.all %}
     
       <div class="col-md-4">
-        <div class="card border-info  rounded-circle mb-3" style="width: 18rem;">
-         <img src="..." class="card-img-top" height="200" width="200" alt="...">
-           <h5 class="card-title text-info text-center">Partner</h5>
+        <div class="card border-info  mb-3" style="width: 18rem;">
+         <img src="{{ partner.orgLogo.url  }}" class="card-img-top " height="200"  border="100%" width="200" alt="...">
+           <h5 class="card-title text-info text-center"><a href="{{partner.maplocation}}" class="text-info">{{ partner.organisationName }}</a></h5>
             
         </div>
       </div>
 
+{% endfor %}
 
-     <div class="col-md-4">
-        <div class="card border-info  rounded-circle mb-3" style="width: 18rem;">
-         <img src="..." class="card-img-top" height="200" width="200" alt="...">
-           <h5 class="card-title text-info text-center">Partner</h5>
-            
-        </div>
-      </div>
-       <div class="col-md-4">
-        <div class="card border-info  rounded-circle mb-3" style="width: 18rem;">
-         <img src="..." class="card-img-top" height="200" width="200" alt="...">
-           <h5 class="card-title text-info text-center">Partner</h5>
-            
-        </div>
-      </div>
+
+  
 
 
 
 
   </div>
-  <hr class="bg-info col-md-8">
-   <div class="row shadow p-3 mb-5 bg-white rounded">
-      <div class="col-md-4">
-        <div class="card border-info  rounded-circle mb-3" style="width: 18rem;">
-         <img src="..." class="card-img-top" height="200" width="200" alt="...">
-           <h5 class="card-title text-info text-center">Partner</h5>
-            
-        </div>
-      </div>
 
-
-     <div class="col-md-4">
-        <div class="card border-info  rounded-circle mb-3" style="width: 18rem;">
-         <img src="..." class="card-img-top" height="200" width="200" alt="...">
-           <h5 class="card-title text-info text-center">Partner</h5>
-            
-        </div>
-      </div>
-      <div class="col-md-4">
-        <div class="card border-info  rounded-circle mb-3" style="width: 18rem;">
-         <img src="..." class="card-img-top" height="200" width="200" alt="...">
-           <h5 class="card-title text-info text-center">Partner</h5>
-            
-        </div>
-      </div>
-    </div>
   </div>
 </section>
 

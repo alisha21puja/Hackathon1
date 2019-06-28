@@ -2,7 +2,7 @@ from django.shortcuts import render,get_object_or_404
 
 from Blog.models import BlogsInfo
 
-from Organizer.models import 	EventDetails,SponsorShip
+from Organizer.models import 	EventDetails,SponsorShip,EventDetails
 from django.utils import timezone
 
 def sponsor(request):
@@ -10,7 +10,8 @@ def sponsor(request):
 
 def sponsoredEvent(request):
 	sponsors =SponsorShip.objects
-	return render(request,'sponsor_event.html',{'sponsors':sponsors})
+	event=EventDetails.objects
+	return render(request,'sponsor_event.html',{'sponsors':sponsors,'event':event})
 
 def sponsorUpComing(request):
 	return render(request,'sponsor_up_coming.html')

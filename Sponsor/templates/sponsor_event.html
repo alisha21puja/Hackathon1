@@ -16,6 +16,7 @@
 <br>
 
 <section id ="eventDetail">
+  <div class="overlay">
 <div class="container">
 	<div class="row shadow p-3 mb-5 bg-white rounded">
 		<div class="col-md-12">
@@ -45,17 +46,16 @@
 					<td class="text-dark text-center"> {{ sponsor.ex_platinum }} </td>
 					<td class="text-dark text-center"> {{ sponsor.ex_gold }} </td>
 					<td class="text-dark text-center"> {{ sponsor.ex_silver }} </td>
-					<td class="text-dark text-center"> <a href="{% url 'sponsorEdit' sponsor.id %}"  class="btn btn-dark btn-outline-primary"    data-toggle="modal" data-target="#exampleModal{{sponsor.id}}" > Details </a></td>
+					<td class="text-dark text-center"> <a href="{% url 'sponsorEdit' sponsor.id %}"  class="btn btn-dark btn-outline-primary"    data-toggle="modal" data-target="#exampleModal{{sponsor.id}}" > Sponsor Details </a></td>
 
-					<td class="text-dark text-center"> <a href="#xampleModalLong"  class="btn btn-dark btn-outline-primary"     data-toggle="modal" data-target="#exampleModalLong" > Event Details</a> </td>
+					<td class="text-dark text-center"> <a href="#xampleModalLong"  class="btn btn-dark btn-outline-primary"     data-toggle="modal" data-target="#exampleModalLong" >Sponsor Event</a> </td>
+            <td class="text-dark text-center"> <a href="{% url 'sponsorEdit' sponsor.id %}"  class="btn btn-dark btn-outline-primary"     data-toggle="modal" data-target="#exampleModalLong" >Event Details</a> </td>
     
 						
 				</tr>
 
 
 
-<!--
-MODEL START FROM HERE!
 
 <div class="modal fade bd-example-modal-lg" id="exampleModal{{sponsor.id}}" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
   <div class="modal-dialog modal-xl" role="document">
@@ -69,8 +69,8 @@ MODEL START FROM HERE!
       <div class="modal-body">
 
 <div class="row center">
-<div class="col-md-1"></div>
-<div class="col-md-10">
+
+<div class="col-md-6">
 	
 <center>
 
@@ -155,6 +155,92 @@ MODEL START FROM HERE!
 
 
 </div>
+<div class="col-md-6">
+  
+<center>
+      {%  for spon in event.all  %}
+
+<div class="form-group row">
+
+    <label for="staticEmail"  class="col-sm-2 col-form-label"><h6>Event Title</h6></label>
+
+    <div class="col-sm-10">
+      
+      <input type="text" readonly value="{{ spon.event_title}}" class="form-control-plaintext" id="staticEmail"> 
+  </div>
+  
+  </div>
+  
+
+  
+
+<h5> {{ spon.event}}</h5>
+ <hr class="bg-primary col-md-12">
+
+<div class="form-group row">
+    <label for="staticEmail"  class="col-sm-2 col-form-label ">Facilities</label>
+    <div class="col-sm-10">
+    
+    
+
+  
+  <p>{{ spon.event}}</p> 
+</div>
+</div>
+
+<div class="form-group row">
+    <label for="staticEmail"  class="col-sm-2 col-form-label ">Expected Amount</label>
+    <div class="col-sm-10">
+      <input type="text" readonly value="{{ spon.event}}" class="form-control-plaintext" id="staticEmail"> 
+  </div>
+  </div>
+
+<h5>{{ spon.gold_sponsor }}</h5>
+<hr class="bg-primary col-md-12">
+
+<div class="form-group row">
+    <label for="staticEmail"  class="col-sm-2 col-form-label ">Facilities </label>
+    <div class="col-sm-10">
+      <p> {{ spon.event}}</p>
+    <!--  <input type="text" readonly value="" class="form-control-plaintext" id="staticEmail"> -->
+  </div>
+  </div>
+
+<div class="form-group row">
+    <label for="staticEmail"  class="col-sm-2 col-form-label ">Expected Amount</label>
+    <div class="col-sm-10">
+      <input type="text" readonly value="{{ spon.event}}" class="form-control-plaintext" id="staticEmail"> 
+  </div>
+  </div>
+
+
+
+<h5>{{ spon.event}}</h5>
+<hr class="bg-primary col-md-12">
+
+
+
+<div class="form-group row">
+    <label for="staticEmail"  class="col-sm-2 col-form-label ">Facilities</label>
+    <div class="col-sm-10">
+      <p> {{ spon.event}}</p>
+      <input type="text" readonly value="{{ spon.event}}" class="form-control-plaintext" id="staticEmail"> 
+  </div>
+  </div>
+<div class="form-group row">
+    <label for="staticEmail"  class="col-sm-2 col-form-label ">Expected Amount</label>
+    <div class="col-sm-10">
+      <input type="text" readonly value="{{ spon.event}}" class="form-control-plaintext" id="staticEmail"> 
+  </div>
+  </div>
+
+  
+  
+{% endfor %}
+     </center>   
+
+
+</div>
 </div>
 
 
@@ -174,8 +260,8 @@ MODEL START FROM HERE!
 
  
     </div>
-OPEN THE BELOW LINK FOR MODEL DISPLAY
--->
+
+
 
 <!-- Modal -->
 <div class="modal fade" id="exampleModalLong" tabindex="-1" role="dialog" aria-labelledby="exampleModalLongTitle" aria-hidden="true">
@@ -188,12 +274,21 @@ OPEN THE BELOW LINK FOR MODEL DISPLAY
         </button>
       </div>
       <div class="modal-body">
+
+<h1>he</h1>
+        <div class="overlay">
+
+<h1>he</h1>
+        </div>
         ...
       </div>
+
+
       <div class="modal-footer">
         <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
         <button type="button" class="btn btn-primary">Save changes</button>
       </div>
+   
     </div>
   </div>
 </div>
@@ -207,6 +302,7 @@ OPEN THE BELOW LINK FOR MODEL DISPLAY
 </div>
 </div>
 </div>
+</div>  
 </section>
 
 
