@@ -8,11 +8,11 @@ from django.contrib.auth import authenticate, login, logout
 from django.http import HttpResponseRedirect, HttpResponse
 from django.urls import reverse
 from django.contrib.auth.decorators import login_required
-from .models import Article
+from .models import Article,UserProfile
+
 from django.contrib import messages
 from django.views.generic import TemplateView
 from .forms import ArticleForm
-
 
 
 
@@ -33,7 +33,6 @@ class AccountInfo(TemplateView):
 		return render(request,'dashboard.html',{'form':form})
 			
 
-
 def indx(request):
 	return  render(request,'login.html')
 
@@ -43,9 +42,52 @@ def dashboard(request):
 
 
 def loginn(request):
+	if request.method == 'POST':
+			email = request.POST['email']
+			password = request.POST['password']
+			user = auth.authenticate(username=email,password=password)
+			# print(user)
+			
+			# print(key) #33
+			if user is not None:
+				key = user._get_pk_val()
+				user_1 = list(UserProfile.objects.values_list('type_usr','id').filter(id=key).values('type_usr'))
+				user_type = user_1[0]
+				var=user_type['type_usr']
+
+				if user_type['type_usr'] == 100 :
+					auth.login(request,user)
+					return redirect('participantIndex')
+					# return redirect('participantIndex')
+				elif user_type['type_usr'] == 200 :
+					auth.login(request,user)
+					return redirect('organiserIndex')
+				elif user_type['type_usr'] == 300 :
+					auth.login(request,user)
+					return redirect('sponsorIndex')
+				else:
+					messages.error(request,'invalid user type dectected contact admin')
+					return redirect('login')
+			else:
+				messages.error(request,'invalid credentials')
+				return redirect('login')
+	else:
+		return render(request,'login.html')
+
+
+	"""
 	if request.method=='POST':
 		username = request.POST['email']
 		password = request.POST['password']
+
+
+
+
+
+
+
+
+		
 
 		if username =='kapil.thakur9614@gmail.com' and password =='sachin123':
 			user = auth.authenticate(username =username,password=password)
@@ -81,6 +123,7 @@ def loginn(request):
 		else:
 				messages.error(request,'inhiuyvalid credential')
 				return  render(request,'login.html')
+	"""	
 
 
 
@@ -89,7 +132,8 @@ def logout(request):
 	if request.method=='POST':
 		auth.logout(request)
 		messages.success(request,' You are now loged out')
-		return redirect('accounts') 
+
+		return redirect('home') 
 
 
 
@@ -118,7 +162,6 @@ def UserSelection(request,id):
 
 def usertype(request,pk):
 	lo=get_object_or_404(User, pk=pk)
-
 	return  render(request,'usertype.html',{'lo':lo})
 
 
@@ -132,14 +175,6 @@ def helo(request):
 		return  render(request,'base.html')
 	else:
 		return  render(request,'login.html')
-
-
-			
-			
-
-
-	
-
 def signup(request):
 	if request.method=='POST':
 		
@@ -149,6 +184,9 @@ def signup(request):
 		email = request.POST['email']
 		password = request.POST['password']
 		password2 = request.POST['confirmpassword']
+		phone  = request.POST['phone']
+		type_usr = request.POST['type_usr']
+
 		#mobile  = request.POST['mobile']
 		#userType = request.POST['usertype']
 
@@ -165,13 +203,12 @@ def signup(request):
 					user = User.objects.create_user(username=username,password=password,email=email,first_name=first_name,last_name=last_name)
 					#auth.login(request,user)
 					#messages.success(request,'You are now Loged in')
-					
-
-					
-					
 					user.save()
+					key = user._get_pk_val()
+					var = UserProfile(id=key,type_usr = type_usr,phone=phone)
+					var.save()
 					messages.success(request,'You are now registered in')
-					return redirect('usertpe/',pk=user.id)
+					return redirect('accounts')
 
 
 

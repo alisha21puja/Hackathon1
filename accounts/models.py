@@ -29,6 +29,17 @@ class Article(models.Model):
 
 
 
+class UserProfile(models.Model):
+ 	# u_id = models.IntegerField()
+    type_usr = models.IntegerField()
+    phone = models.CharField(max_length=15)
+
+    def __str__(self):
+        return self.phone
+
+
+
+
 #class Profile(models.Model):
 #    user = models.OneToOneField(User, on_delete=models.CASCADE)
 

@@ -15,7 +15,7 @@ urlpatterns = [
 	path('dashboard',views.dashboard,name='dashboard'),
 	path('/organiser',include('Organizer.urls'),name='organiserIndex'),
 	path('/sponsor',include('Sponsor.urls'),name='sponsorIndex'),
-	path('/participant',include('Participant.urls'),name='participantIndex'),
+	path('/participant/',include('Participant.urls'),name='participantIndex'),
 
 
 ]

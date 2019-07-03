@@ -5,9 +5,7 @@
 
 {%load staticfiles %}
 
-
 {% for sl in slide.all %}
-
 
 
 
@@ -18,14 +16,26 @@
     <li data-target="#carouselExampleIndicators" data-slide-to="2"></li>
   </ol>
   <div class="carousel-inner">
-    <div class="carousel-item active" data-interval="1000">
+    <div class=" carousel-item active" data-interval="500">
       <img src="{{sl.slide1.url}}" height="600" class="d-block w-100" alt="slider data not  uploaded" >
+          <div class="carousel-caption d-none d-md-block">
+        <h1> Hey Buddy</h1>
+        <p></p>
+      </div>
     </div>
-    <div class="carousel-item" data-interval="1000">
+    <div class="carousel-item" data-interval="500">
       <img src="{{sl.slide2.url}}" height="600" class="d-block w-100" alt="slider data not  uploaded">
+      <div class="carousel-caption d-none d-md-block">
+      <h1> How You doing</h1>
+      <p>...</p>
     </div>
-    <div class="carousel-item" data-interval="1000">
+    </div>
+    <div class="carousel-item" data-interval="500">
       <img src="{{sl.slide3.url}}" height="600" class="d-block w-100" alt="slider data not  uploaded">
+          <div class="carousel-caption d-none d-md-block">
+           <h1> Going Good</h1>
+          <p>...</p>
+        </div>
     </div>
   </div>
   <a class="carousel-control-prev" href="#carouselExampleIndicators" role="button" data-slide="prev">
@@ -41,14 +51,15 @@
 {% endfor %}
 
 <hr class="bg-info col-md-10">
+
+ 
+
  
   <section id="Events">
   <div class="container ">
     <div  class="text-center"><h2> UpComing Events</h2><hr class="bg-info col-md-8"></div>
   <div class="row shadow p-3 mb-5 bg-white rounded">
 
-
- 
       
    
 
