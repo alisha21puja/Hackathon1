@@ -6,7 +6,10 @@ from django.utils.timezone import now
 
 from froala_editor.fields import FroalaField
 
+from django.contrib.auth import get_user_model
+
 # Create your models here.
+
 
 
 class OrganiseEvent(models.Model):
@@ -20,6 +23,7 @@ class OrganiseEvent(models.Model):
 	event_poster = models.ImageField(upload_to='event_poster/')
 	event_startdate = models.DateTimeField(default= now)
 	event_enddate = models.DateTimeField()
+	us = models.ForeignKey(User,  on_delete=models.CASCADE)
 	def summary(self):
 		return self.event_description[:150]
 class EventDetails(models.Model):
@@ -31,6 +35,7 @@ class EventDetails(models.Model):
 	prerequisite = models.TextField(max_length=1500)
 	facility = models.CharField(max_length=100)
 	event_detail_docs = models.FileField(upload_to='images/event_details_docs/')
+	
 
 class ShareResource(models.Model):
 	event_title = models.CharField(max_length=100)
@@ -41,6 +46,7 @@ class ShareResource(models.Model):
 	documentFile = models.FileField(upload_to='images/shared_resources_docs/')
 	publisedBy =  models.CharField(max_length=100)
 	resourceImage = models.ImageField(upload_to='images/shared_resources/')
+	orgId = models.ForeignKey(OrganiseEvent, on_delete=models.CASCADE,default=50)
 
 class SponsorShip(models.Model):
 	event_title = models.CharField(max_length=100,default=True)

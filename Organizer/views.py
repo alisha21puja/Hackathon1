@@ -267,7 +267,12 @@ def resource(request):
 			return render(request,'shareresource.html', {'error':"Event is not selected"})	
 		else:
 			resourceImage =  request.POST['share_image']
-		share_resource=ShareResource(event_title=event_title,subject=subject,description=description,publishedDate=publishedDate,resourceLink=resourceLink,documentFile=documentFile,publisedBy=publisedBy,resourceImage=resourceImage)
+		org=OrganiseEvent.objects.get(event_title= event_title)
+		orgid=org.id
+		
+		# orgid=list(OrganiseEvent.objects.values_list('id').filter(event_title= event_title))
+
+		share_resource=ShareResource(event_title=event_title,subject=subject,description=description,publishedDate=publishedDate,resourceLink=resourceLink,documentFile=documentFile,publisedBy=publisedBy,resourceImage=resourceImage,orgId=org)
 		share_resource.save()
 		return render(request,'shareresource.html')
 
@@ -340,6 +345,7 @@ def eventUpdate(request,id):
 		submitbutton= request.POST.get('Submit')
 		if submitbutton :
 			eventid=OrganiseEvent.objects.get(pk=id)
+			userl = User.objects.filter(username=user)
 			event_title = request.POST['event_title']
 			event_description  = request.POST['event_description']
 			event_category = request.POST['event_category']
@@ -359,10 +365,22 @@ def eventUpdate(request,id):
 				return render(request,'registered_event.html', {'error':"Please Select End Date !"})				
 			else:
 				event_enddate = request.POST['event_enddate']
-			eve=OrganiseEvent(id=id,event_title = event_title,event_description=event_description,event_category=event_category,org_name=org_name,
-									org_email=org_email,org_mobile=org_mobile,org_contact_person=org_contact_person,
-									event_poster=event_poster,event_startdate=event_startdate,event_enddate = event_enddate) 
-			eve.save()
+			current_user =request.user.id
+			print(current_user)
+			userrrid=request.user.username
+			print(userrrid,"is the id")
+
+			userid=list(User.objects.values_list('id').filter(username=request.user.username))
+			print("this is the id ",userid)
+			# objects.get(pk).filter(user.username).all
+			# userrrid=6;	
+			# userrrid=request.user.username	
+			# print(userrrid,"is the id")
+
+			#eve=OrganiseEvent(id=id,event_title = event_title,event_description=event_description,event_category=event_category,org_name=org_name,
+			#						org_email=org_email,org_mobile=org_mobile,org_contact_person=org_contact_person,
+			#						event_poster=event_poster,event_startdate=event_startdate,event_enddate = event_enddate,us=userrrid) 
+			#eve.save()
 			
 			return render(request,'registered_event.html'	)
 		else:			
@@ -453,7 +471,7 @@ def eventDetails(request):
 			
 
 		eventInstance = EventDetails(event=event,no_participant=no_participant,expected_participant=expected_participant,event_level=event_level,eligibility=eligibility,prerequisite=prerequisite,
-			facility=facility,event_detail_docs=event_detail_docs)
+			facility=facility,event_detail_docs=event_detail_docs,orgId=3)
 
 		eventInstance.save()
 		
@@ -518,10 +536,29 @@ def organiseEventFormData(request):
 				return render(request,'organise_event.html', {'error':"Please Select End Date !"})				
 			else:
 				event_enddate = request.POST['event_enddate']
+
+			# current_user =request.user.id
+			# print(current_user)
+			# userrrid=request.user.username
+			# print(userrrid,"is the id")
+
+			# userid=list(User.objects.values_list('id').filter(username=request.user.username))
+			# print("this is the id ",userid)
+			userid =User.objects.get(pk=request.user.id)
+			# userrrid=6;	
+			# userrrid=request.user.username	
+			# print(userrrid,"is the id")
+
+			#eve=OrganiseEvent(id=id,event_title = event_title,event_description=event_description,event_category=event_category,org_name=org_name,
+			#						org_email=org_email,org_mobile=org_mobile,org_contact_person=org_contact_person,
+			#						event_poster=event_poster,event_startdate=event_startdate,event_enddate = event_enddate,us=userrrid) 
+			#eve.save()
+			
+
 			event = OrganiseEvent(event_title = event_title,event_description=event_description,event_category=event_category,org_name=org_name,
 									org_email=org_email,org_mobile=org_mobile,org_contact_person=org_contact_person,
 									event_poster=event_poster,event_startdate=event_startdate,
-									event_enddate = event_enddate) 	
+									event_enddate = event_enddate,us=userid) 	
 			event.save()
 			return render(request,'organise_event.html',{'event':'Event Successfully Registered!'})		
 def addrubrics(request):

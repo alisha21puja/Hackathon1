@@ -53,9 +53,7 @@
 		    	<option class="form-control border border-info"> Select your Event </option>
 		    	{% for eve in eventsOrganise.all %}
 
-				<option  class="form-control   border border-info" > {{ eve.event_title }} 
-					
-				</option>
+				<option  class="form-control   border border-info" > {{ eve.event_title }} </option>
 
 			{% endfor %}
 
@@ -316,6 +314,10 @@
               	
 {{ event.event_detail_docs.url }}
               </td>		
+                <td class="text-dark text-center"> 
+                
+{{ event.orgId}}
+              </td>   
 					
 				</tr>
 {% endfor %}

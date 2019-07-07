@@ -57,14 +57,17 @@ def loginn(request):
 
 				if user_type['type_usr'] == 100 :
 					auth.login(request,user)
+					request.session['userid']=key
 					return redirect('participantIndex')
 					# return redirect('participantIndex')
 				elif user_type['type_usr'] == 200 :
 					auth.login(request,user)
-					return redirect('organiserIndex')
+					request.session['userid']=key
+					return redirect('sponsorIndex')
 				elif user_type['type_usr'] == 300 :
 					auth.login(request,user)
-					return redirect('sponsorIndex')
+					request.session['userid']=key
+					return redirect('organiserIndex')
 				else:
 					messages.error(request,'invalid user type dectected contact admin')
 					return redirect('login')
