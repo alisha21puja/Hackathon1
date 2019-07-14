@@ -178,6 +178,8 @@ def helo(request):
 		return  render(request,'base.html')
 	else:
 		return  render(request,'login.html')
+
+		
 def signup(request):
 	if request.method=='POST':
 		

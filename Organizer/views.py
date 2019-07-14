@@ -15,13 +15,13 @@ from django.utils import timezone
 
 
 def editSponsorShip(request):
-	sponsorShip=SponsorShip.objects
+	sponsorShip=SponsorShip.objects.filter(us=request.user.id)
 	return render(request,'edit_sponsorship.html',{'sponsorShip':sponsorShip})
 
 def deletesponsor(request,id):
 	sponsorShip=SponsorShip.objects.get(id = id)
 	sponsorShip.delete();
-	sponsorShip=SponsorShip.objects
+	sponsorShip=SponsorShip.objects.filter(us=request.user.id)
 	return render(request,'edit_sponsorship.html',{'sponsorShip':sponsorShip})
 def updateSponsorInfo(request,id):
 
@@ -40,9 +40,9 @@ def updateSponsorInfo(request,id):
 		ex_silver = request.POST['ex_silver']	
 
 		sponsor_ship= SponsorShip(id=id,event_title=event_title,platinum_sponsor=platinum_sponsor,f_platinum=f_platinum,ex_platinum=ex_platinum,gold_sponsor=gold_sponsor,
-		f_gold=f_gold,ex_gold=ex_gold,silver_sponsor=silver_sponsor,f_silver=f_silver,ex_silver=ex_silver)
+		f_gold=f_gold,ex_gold=ex_gold,silver_sponsor=silver_sponsor,f_silver=f_silver,ex_silver=ex_silver,us=request.user.id)
 		sponsor_ship.save()
-		sponsorShip=SponsorShip.objects
+		sponsorShip=SponsorShip.objects.filter(us=request.user.id)
 		return render(request,'edit_sponsorship.html',{'sponsorShip':sponsorShip})
 	else:
 		if platinum_sponsor=='':
@@ -89,7 +89,7 @@ def sponsorShip(request):
 
 def sponsorShipDetails(request): 
 	if request.method =='POST':
-		eventDetail =EventDetails.objects
+		eventDetail =EventDetails.objects.filter(us=request.user.id)
 		event=request.POST['event_title']
 		event_title = request.POST['event_title']
 		platinum_sponsor = request.POST['platinum_sponsor']
@@ -139,14 +139,14 @@ def sponsorShipDetails(request):
 		else:
 			ex_silver = request.POST['ex_silver']
 		sponsor_ship= SponsorShip(event_title=event,platinum_sponsor=platinum_sponsor,f_platinum=f_platinum,ex_platinum=ex_platinum,gold_sponsor=gold_sponsor,
-			f_gold=f_gold,ex_gold=ex_gold,silver_sponsor=silver_sponsor,f_silver=f_silver,ex_silver=ex_silver)
+			f_gold=f_gold,ex_gold=ex_gold,silver_sponsor=silver_sponsor,f_silver=f_silver,ex_silver=ex_silver,us=request.user.id)
 		sponsor_ship.save()
 		return render(request,'sponsorShip.html')
 def blogsDetails(request):
-	blogsInfo=BlogsInfo.objects
+	blogsInfo=BlogsInfo.objects.filter(us=request.user.id)
 	return render(request,'blog_edit.html',{'blogsInfo':blogsInfo})
 def blog(request):
-	blogsInfo=BlogsInfo.objects
+	blogsInfo=BlogsInfo.objects.filter(us=request.user.id)
 	return render(request,'blog_write.html',{'blogsInfo':blogsInfo})
 def writeBlogs(request):
 	if request.method =='POST':	
@@ -187,15 +187,17 @@ def writeBlogs(request):
 		else:
 			refrenceLinks = request.POST['refrence_link']
 		blogsInfo=BlogsInfo(title=title,pubDateTime=pubDateTime,description=description,imageSecond=imageSecond,imageFirst=imageFirst,
-			UserType=UserType,authorName=authorName,blogCategory=blogCategory,refrenceLinks=refrenceLinks)
+			UserType=UserType,authorName=authorName,blogCategory=blogCategory,refrenceLinks=refrenceLinks,us_id=request.user.id)
 		blogsInfo.save()
 		print("author name:" + authorName)
 		return render(request,'blog_write.html', {'error':"Event is not selected"})	
 def shareResource(request):
-	event = OrganiseEvent.objects
+
+	event = OrganiseEvent.objects.filter(us_id=request.user.id)
 	return render(request,'shareresource.html',{'event':event})
 def editResource(request):
-	share_resource=ShareResource.objects	
+	share_resource=ShareResource.objects.filter(us=request.user.id)
+
 	return render(request,'edit_shareresource.html',{'share_resource':share_resource})
 def updateShareResources(request,id):
 	if request.method=='POST':	
@@ -218,10 +220,10 @@ def updateShareResources(request,id):
 				documentFile=share_resource.documentFile
 			else:
 				documentFile =  request.POST['document_file']				
-			share_resource=ShareResource(id=id,event_title=event_title,subject=subject,description=description,publishedDate=publishedDate,resourceLink=resourceLink,documentFile=documentFile,publisedBy=publisedBy,resourceImage=resourceImage)
+			share_resource=ShareResource(id=share_resource.id,event_title=event_title,subject=subject,description=description,publishedDate=publishedDate,resourceLink=resourceLink,documentFile=documentFile,publisedBy=publisedBy,resourceImage=resourceImage,us=request.user.id)
 			share_resource.save()
 			share_resource.refresh_from_db()		
-			share_resource=ShareResource.objects
+			share_resource=ShareResource.objects.filter(us_id=request.user.id)
 			return render(request,'edit_shareresource.html',{'share_resource':share_resource})
 
 
@@ -272,9 +274,13 @@ def resource(request):
 		
 		# orgid=list(OrganiseEvent.objects.values_list('id').filter(event_title= event_title))
 
-		share_resource=ShareResource(event_title=event_title,subject=subject,description=description,publishedDate=publishedDate,resourceLink=resourceLink,documentFile=documentFile,publisedBy=publisedBy,resourceImage=resourceImage,orgId=org)
+		share_resource=ShareResource(event_title=event_title,subject=subject,description=description,publishedDate=publishedDate,resourceLink=resourceLink,documentFile=documentFile,publisedBy=publisedBy,resourceImage=resourceImage,us_id=request.user.id)
 		share_resource.save()
-		return render(request,'shareresource.html')
+
+		share_resource=ShareResource.objects.filter(us_id=request.user.id)
+
+
+		return render(request,'shareresource.html',{'share_resource':share_resource})
 
 
 
@@ -297,7 +303,7 @@ def evenDetailsUpdate(request,id):
 		if submitbutton :
 			if event_detail_docs=='':
 				event_detail_docs  = events.event_detail_docs
-				eventInstance = EventDetails(id=id,event=event,no_participant=no_participant,expected_participant=expected_participant,event_level=event_level,eligibility=eligibility,prerequisite=prerequisite,facility=facility,event_detail_docs=event_detail_docs)
+				eventInstance = EventDetails(id=id,event=event,no_participant=no_participant,expected_participant=expected_participant,event_level=event_level,eligibility=eligibility,prerequisite=prerequisite,facility=facility,event_detail_docs=event_detail_docs,us=request.user.id)
 				eventInstance.save()
 				return render(request,'addrubrics.html',{'registered':'Event Successfully Registered!'})
 		else:
@@ -337,7 +343,7 @@ def evenDetailsUpdate(request,id):
 			else:
 				event_detail_docs=request.POST['event_detail_docs']
 def returnEditRubrics(request):
-	events=EventDetails.objects
+	events=EventDetails.objects.filter(us=request.user.id)
 	return render(request,'update_rubrics.html',{'events':events})
 
 def eventUpdate(request,id):
@@ -345,7 +351,7 @@ def eventUpdate(request,id):
 		submitbutton= request.POST.get('Submit')
 		if submitbutton :
 			eventid=OrganiseEvent.objects.get(pk=id)
-			userl = User.objects.filter(username=user)
+			userl = User.objects.filter(username=request.user.username)
 			event_title = request.POST['event_title']
 			event_description  = request.POST['event_description']
 			event_category = request.POST['event_category']
@@ -469,9 +475,10 @@ def eventDetails(request):
 		else:
 			event_detail_docs = request.POST['event_detail_docs']
 			
+		orgid=OrganiseEvent.objects.filter(event_title=event)
 
 		eventInstance = EventDetails(event=event,no_participant=no_participant,expected_participant=expected_participant,event_level=event_level,eligibility=eligibility,prerequisite=prerequisite,
-			facility=facility,event_detail_docs=event_detail_docs,orgId=3)
+			facility=facility,event_detail_docs=event_detail_docs,us_id=request.user.id,org_id=orgid)
 
 		eventInstance.save()
 		
@@ -562,8 +569,8 @@ def organiseEventFormData(request):
 			event.save()
 			return render(request,'organise_event.html',{'event':'Event Successfully Registered!'})		
 def addrubrics(request):
-	eventDetails =  EventDetails.objects
-	eventsOrganise = OrganiseEvent.objects
+	eventDetails =  EventDetails.objects.filter(us=request.user.id)
+	eventsOrganise = OrganiseEvent.objects.filter(us=request.user.id)
 	context ={	'eventDetails':eventDetails,
 				'eventsOrganise':eventsOrganise
 			}
