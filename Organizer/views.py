@@ -138,8 +138,11 @@ def sponsorShipDetails(request):
 			return render(request,'shareresource.html', {'error':"Title is not given"})	
 		else:
 			ex_silver = request.POST['ex_silver']
+
+
+		orgid=OrganiseEvent.objects.get(event_title=event_title)	
 		sponsor_ship= SponsorShip(event_title=event,platinum_sponsor=platinum_sponsor,f_platinum=f_platinum,ex_platinum=ex_platinum,gold_sponsor=gold_sponsor,
-			f_gold=f_gold,ex_gold=ex_gold,silver_sponsor=silver_sponsor,f_silver=f_silver,ex_silver=ex_silver,us=request.user.id)
+			f_gold=f_gold,ex_gold=ex_gold,silver_sponsor=silver_sponsor,f_silver=f_silver,ex_silver=ex_silver,us_id=request.user.id,org_id=orgid)
 		sponsor_ship.save()
 		return render(request,'sponsorShip.html')
 def blogsDetails(request):
@@ -190,7 +193,7 @@ def writeBlogs(request):
 			UserType=UserType,authorName=authorName,blogCategory=blogCategory,refrenceLinks=refrenceLinks,us_id=request.user.id)
 		blogsInfo.save()
 		print("author name:" + authorName)
-		return render(request,'blog_write.html', {'error':"Event is not selected"})	
+		return render(request,'blog_write.html', {'error':"Successfully added the blog!"})	
 def shareResource(request):
 
 	event = OrganiseEvent.objects.filter(us_id=request.user.id)
@@ -269,12 +272,25 @@ def resource(request):
 			return render(request,'shareresource.html', {'error':"Event is not selected"})	
 		else:
 			resourceImage =  request.POST['share_image']
-		org=OrganiseEvent.objects.get(event_title= event_title)
-		orgid=org.id
-		
-		# orgid=list(OrganiseEvent.objects.values_list('id').filter(event_title= event_title))
 
-		share_resource=ShareResource(event_title=event_title,subject=subject,description=description,publishedDate=publishedDate,resourceLink=resourceLink,documentFile=documentFile,publisedBy=publisedBy,resourceImage=resourceImage,us_id=request.user.id)
+
+
+		# org=OrganiseEvent.objects.get(event_title= event_title)
+		
+
+
+		# orgid=OrganiseEvent.objects.get(event_title=event_title)	
+		# orgid=orgid.id
+		# print("event id is ",orgid)
+
+		orgid=OrganiseEvent.objects.get(event_title=event_title)	
+		print("event id is ",orgid.id)
+
+		
+
+		
+		share_resource=ShareResource(event_title=event_title,subject=subject,description=description,publishedDate=publishedDate,resourceLink=resourceLink,
+			documentFile=documentFile,publisedBy=publisedBy,resourceImage=resourceImage,us_id=request.user.id,org_id=orgid)
 		share_resource.save()
 
 		share_resource=ShareResource.objects.filter(us_id=request.user.id)
@@ -475,7 +491,8 @@ def eventDetails(request):
 		else:
 			event_detail_docs = request.POST['event_detail_docs']
 			
-		orgid=OrganiseEvent.objects.filter(event_title=event)
+		orgid=OrganiseEvent.objects.get(event_title=event)	
+		print("event id is ",orgid.id)
 
 		eventInstance = EventDetails(event=event,no_participant=no_participant,expected_participant=expected_participant,event_level=event_level,eligibility=eligibility,prerequisite=prerequisite,
 			facility=facility,event_detail_docs=event_detail_docs,us_id=request.user.id,org_id=orgid)
@@ -583,7 +600,7 @@ def eventEdit(request,id):
 	#event =get_object_or_404(EventDetails,pk=id)
 	return render(request,'sponsor_event.html',{'event':event})
 def registeredEvent(request):
-	events = OrganiseEvent.objects
+	events = OrganiseEvent.objects.filter(us= request.user.id)
 	return render(request,'registered_event.html',{'events':events})
 def indx(request):
 	return  render(request,'organiser_index.html')

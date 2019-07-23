@@ -4,12 +4,12 @@ from django.conf import settings
 
 from django.utils.timezone import now
 
-from froala_editor.fields import FroalaField
+# from froala_editor.fields import FroalaField
 
 from django.contrib.auth import get_user_model
 
 # Create your models here.
-
+# from .models import OrganiseEvent
 
 
 class OrganiseEvent(models.Model):
@@ -35,7 +35,7 @@ class EventDetails(models.Model):
 	prerequisite = models.TextField(max_length=1500)
 	facility = models.CharField(max_length=100)
 	event_detail_docs = models.FileField(upload_to='images/event_details_docs/')
-	us = models.ForeignKey(User,  on_delete=models.CASCADE )
+	us = models.ForeignKey(User,  on_delete=models.CASCADE)
 	org_id=models.ForeignKey(OrganiseEvent,on_delete=models.CASCADE)
 	
 
@@ -48,7 +48,6 @@ class ShareResource(models.Model):
 	documentFile = models.FileField(upload_to='images/shared_resources_docs/')
 	publisedBy =  models.CharField(max_length=100)
 	resourceImage = models.ImageField(upload_to='images/shared_resources/')
-	# orgId = models.ForeignKey(OrganiseEvent, on_delete=models.CASCADE)
 	us = models.ForeignKey(User,  on_delete=models.CASCADE)
 	org_id=models.ForeignKey(OrganiseEvent,on_delete=models.CASCADE)
 
@@ -63,7 +62,7 @@ class SponsorShip(models.Model):
 	silver_sponsor = models.CharField(max_length=100)
 	f_silver=models.TextField(max_length=1500)
 	ex_silver = models.IntegerField()
-	us = models.ForeignKey(User,  on_delete=models.CASCADE)
+	us = models.ForeignKey(User, on_delete=models.CASCADE)
 	org_id=models.ForeignKey(OrganiseEvent,on_delete=models.CASCADE)
 
 

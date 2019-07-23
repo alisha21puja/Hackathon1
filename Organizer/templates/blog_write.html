@@ -14,6 +14,7 @@
 
       <h3 class="text-center">Write Blogs</h3>
     <hr class="bg-info col-md-8">
+    
 
         {% if error %}
         <div class="alert alert-info alert-dismissible fade show" role="alert">
@@ -56,7 +57,7 @@
 	   
 	  <div class="form-group">
 	    <label for="mobile no">Blog Category &ast; </label>
-	    <input type="text" class="form-control border border-info"  name="blog_category" id="password"  placeholder="Mobile No">
+	    <input type="text" class="form-control border border-info"  name="blog_category" id="password"  placeholder="Blog Category">
 	  
 	  </div>
 	 
@@ -80,7 +81,7 @@
 	
 
 <a href="{% url 'blogsDetails' %}"  class="btn btn-dark btn-outline-info">
- Edit Details</a>
+ Edit Blog</a>
 
 
 

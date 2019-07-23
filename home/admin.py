@@ -18,8 +18,19 @@ class SliderAdmin(admin.ModelAdmin):
 
 
 
+
+
+class OurPartnerAdmin(admin.ModelAdmin):
+	list_display = ('id','organisationName','country','orgLogo','maplocation')
+	# list_display_links = ('id','organisationName')
+	# list_filter =('organisationName',)
+	# list_editable=('organisationName',)
+	# # search_fields=('slide1','slide2')
+	list_per_page=2
+
+
 admin.site.register(Slider,SliderAdmin)
 
 
-admin.site.register(OurPartner)
+admin.site.register(OurPartner,OurPartnerAdmin)
 

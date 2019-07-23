@@ -70,10 +70,12 @@ def loginn(request):
 					return redirect('organiserIndex')
 				else:
 					messages.error(request,'invalid user type dectected contact admin')
-					return redirect('login')
+					return render(request,'login.html',{'error':'invalid user type dectected contact admin'})
+
+					# return redirect('login')
 			else:
-				messages.error(request,'invalid credentials')
-				return redirect('login')
+				# messages.error(request,'invalid credentials')
+				return render(request,'login.html',{'error':'Invalid credentials'})
 	else:
 		return render(request,'login.html')
 
@@ -198,10 +200,16 @@ def signup(request):
 		if password == password2:
 			if User.objects.filter(username=username).exists():
 				messages.error(request,"That username is taken")
-				return redirect('accounts')
+				return  render(request,'login.html',{'errorr':'Username is already taken'})
+
+
+				# return redirect('accounts')
 			else:
 				if User.objects.filter(email=email).exists():
 					messages.error(request,"That email is been use")
+					return  render(request,'login.html',{'errorr':'Email is in use '+email})
+
+
 					return redirect('accounts')
 
 				else:
@@ -218,6 +226,7 @@ def signup(request):
 
 
 		elif first_name=='':
+			
 			messages.error(request,'FirstName  field  is empty')
 
 		elif last_name=='':

@@ -6,7 +6,7 @@ from django.shortcuts import render,get_object_or_404
 from .models import BlogsInfo
 
 def blogs(request):
-	blog = BlogsInfo.objects.request.user.id
+	blog = BlogsInfo.objects
 	return  render(request,'blog.html',{'blog':blog})
 
 

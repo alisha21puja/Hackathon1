@@ -8,9 +8,20 @@ from django.utils import timezone
 def sponsor(request):
 	return  render(request,'sponsor_index.html')
 
+
+def sponsorEventDet(request,id):
+	eventdet = EventDetails.objects.filter(org_id_id=id)
+
+	sponsors = SponsorShip.objects
+
+	event = EventDetails.objects
+	return render(request,'sponsor_event.html',{'sponsors':sponsors,'event':event,'eventdet':eventdet})
+
+
 def sponsoredEvent(request):
-	sponsors =SponsorShip.objects
-	event=EventDetails.objects
+	sponsors = SponsorShip.objects
+
+	event = EventDetails.objects
 	return render(request,'sponsor_event.html',{'sponsors':sponsors,'event':event})
 
 def sponsorUpComing(request):
@@ -18,16 +29,16 @@ def sponsorUpComing(request):
 
 
 
-def sponsorEventUpdate(request,id):
-	sponsors =get_object_or_404(SponsorShip,pk=id)
-	return render(request,'sponsor_event.html',{'sponsor':sponsor})
+def sponsorEventUpdate(request):
+
+	# sponsors =get_object_or_404(SponsorShip,pk=id)
+	return render(request,'sponsor_event.html')
 
 
 
 def sponsorEventDetails(request,id):
+
 	event = get_object_or_404(EventDetails, pk=id)
-
-
 	return render(request,'sponsor_event.html')
 
 

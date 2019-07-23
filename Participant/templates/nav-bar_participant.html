@@ -9,7 +9,7 @@
 </head>
 
 <nav class="navbar fixed-top navbar-expand-lg navbar-dark bg-dark">
-  <a class="navbar-brand " href="{% url 'home' %}"><button type="button" class="btn btn-outline-danger">Hackathon</button></a>
+  <a class="navbar-brand " href="{% url 'home' %}"><button type="button" class="btn btn-outline-danger">Tech Event</button></a>
   <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarText" aria-controls="navbarText" aria-expanded="false" aria-label="Toggle navigation">
     <span class="navbar-toggler-icon"></span>
   </button>
@@ -63,47 +63,44 @@
 </body>
 
 
-<footer class="footer bg-dark navbar-fixed-bottom"  >
-  
-<div class="container pull-center bg-dark">
 
-  <div class="row pull-center ">
-    <div class="col-md-7">
-<div class="row text-center">
-  <div>
-<h6 class="text-white text-center"> Know more about us <a class="  btn-outline-danger" href="{% url 'aboutus' %}">
-     here  </a>    </h6></div>
+<link href="//maxcdn.bootstrapcdn.com/font-awesome/4.1.0/css/font-awesome.min.css" rel="stylesheet">
+<footer class="footer bg-dark navbar-fixed-bottom mr-auto">
+  <div class="container pull-center bg-dark">
+    <div class="row mr-auto ">
+     
+      <div class="col-md-8">
+        <p> 
+           <h6 class="text-white text-center"> Know more about us <a class="  btn-outline-info" href="{% url 'aboutus' %}">
+              here </a></h6>
 
-    <div class="ml-4">    <h6  class="text-white text-center">&copy;Reserved to Hackathon 20{% now "y" %}  </h6></div>
+          <h6 class="text-white text-center"> &copy;Reserved to Hackathon 20{% now "y" %} </h6>
+        </p>
+      </div>
+      <div class="col-md-4">
+        <a class="btn btn-twitter" href="">
+          <button type="button" class=" fa fa-twitter btn btn-outline-info"></button>
+        </a>
+        <a class="btn  btn-linkedin" href="">
+          <button type="button" class=" fa fa-linkedin btn btn-outline-info"></button>
+        </a>
+        <a class="btn btn-google" href="">
+          <button type="button" class="fa fa-google btn btn-outline-info"></button>
+        </a>
+        <a class="btn btn-facebook" href="">
+          <button type="button" class="fa fa-facebook btn btn-outline-info"></button>
+        </a>
+        <a class="btn btn-instagram" href="">
+          <button type="button" class="fa fa-instagram btn btn-outline-info"></button>
+        </a>
+        <a class="btn btn-github" href="">
+          <button type="button" class="fa fa-github btn btn-outline-info"></button>
+        </a>
+      </div>
+    </div>
   </div>
-</div>
-<div class="col-md-5">
-    <a class="btn btn-twitter" href="https://twitter.com/">
-      <button type="button" class=" fa fa-twitter btn btn-outline-danger">
-        
-      </button>
-    <span class="fa fa-twitter"></span> 
-  </a>
-  <a class="btn-outline-danger  btn btn-linkedin" href="https://www.linkedin.com">
-  
-    <span class="fa fa-linkedin"></span> 
-  </a>
-  <a class="btn btn-google" href="https://www.google.com/">
-     <button type="button" class="btn btn-outline-danger"></button>
-    <span class="fa fa-google"></span> 
-  </a>
-  <a class="btn btn-facebook" href="https://www.google.com/">
-    <span class="fa fa-facebook"></span> 
-  </a>
-</div>
-
-</div>
-</div>
-
 </footer>
-
 </html>
-
  {% else %}
      
 

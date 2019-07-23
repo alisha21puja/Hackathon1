@@ -12,6 +12,9 @@ urlpatterns = [
 	path('/event/<int:id>',views.sponsorEventDetails,name='sponsorEventDetails'),
 
 
+	path('/sponsorDetails/<int:id>',views.sponsorEventDet,name='sponsorDetails'),
+
+
 
 	
 
