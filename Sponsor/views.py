@@ -1,8 +1,6 @@
 from django.shortcuts import render,get_object_or_404
-
 from Blog.models import BlogsInfo
-
-from Organizer.models import 	EventDetails,SponsorShip,EventDetails
+from Organizer.models import EventDetails,SponsorShip,EventDetails
 from django.utils import timezone
 
 def sponsor(request):
@@ -10,9 +8,10 @@ def sponsor(request):
 
 
 def sponsorEventDet(request,id):
-	eventdet = EventDetails.objects.filter(org_id_id=id)
+	eventdet = EventDetails.objects.filter(org_id=id)
 
 	sponsors = SponsorShip.objects
+	print(eventdet.event)
 
 	event = EventDetails.objects
 	return render(request,'sponsor_event.html',{'sponsors':sponsors,'event':event,'eventdet':eventdet})

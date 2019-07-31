@@ -26,6 +26,7 @@ class OrganiseEvent(models.Model):
 	us = models.ForeignKey(User,  on_delete=models.CASCADE)
 	def summary(self):
 		return self.event_description[:150]
+
 class EventDetails(models.Model):
 	event = models.CharField(max_length=200)
 	expected_participant = models.IntegerField()
