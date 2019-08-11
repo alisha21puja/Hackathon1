@@ -191,28 +191,71 @@
   <div class="modal-dialog modal-xl" role="document">
     <div class="modal-content">
       <div class="modal-header  bg-dark col-md-12">
-        <h5 class="modal-title" id="exampleModalLongTitle">Modal title</h5>
+
+
+
+
+        <h5 class="modal-title text-info text-white" id="exampleModalLongTitle">{{ eventdet.event}}
+</h5>
         <button type="button" class="close" data-dismiss="modal" aria-label="Close">
           <span aria-hidden="true">&times;</span>
         </button>
       </div>
+
+{% endfor %}
+
+
+
+
+        <div class="overlay">
+
+
+
       <div class="modal-body">
 
-<h1>heloe</h1>
+        <br><br>
+        <br><br>
+        <br><br>
 
-{% for i in eventdet.all %}
+<h1> {{ eve.event}}
+
+
+
+</h1>
+
+
+<h1>
+
+
+
+</h1>
+
+
+
+expected_participant,event_level,,prerequisite ,
+
 
 <div class="col-md-12">
   
 <center>
-
-
-<div class="form-group row">
-    <label for="staticEmail"  class="col-sm-2 col-form-label"><h6>Event Title</h6></label>
+  <div class="form-group row">
+    <label for="staticEmail"  class="col-sm-2 col-form-label"><h6>Event Title </h6></label>
 
     <div class="col-sm-10">
       
-      <input type="text" readonly value="{{ sponsor.event_title}}" class="form-control-plaintext" id="staticEmail"> 
+      <input type="text" readonly value="{{ eventdet.event }}" class="form-control-plaintext" id="staticEmail"> 
+  </div>
+  
+  </div>
+  
+
+
+<div class="form-group row">
+    <label for="staticEmail"  class="col-sm-2 col-form-label"><h6>Expected Participant </h6></label>
+
+    <div class="col-sm-10">
+      
+      <input type="text" readonly value="{{ eventdet.expected_participant }}" class="form-control-plaintext" id="staticEmail"> 
   </div>
   
   </div>
@@ -220,24 +263,21 @@
 
   
 
-<h5> {{ sponsor.platinum_sponsor}}</h5>
+<h5> Event Level</h5>
+
+<div class="form-group row">
+    <label for="staticEmail"  class="col-sm-2 col-form-label ">Event Level</label>
+    <div class="col-sm-10">
+      <input type="text" readonly value="{{ eventdet.event_level}}" class="form-control-plaintext" id="staticEmail"> 
+  </div>
+  </div>
  <hr class="bg-primary col-md-12">
 
-<div class="form-group row">
-    <label for="staticEmail"  class="col-sm-2 col-form-label ">Facilities</label>
-    <div class="col-sm-10">
-      
-    
-
-  
-  <p>{{ sponsor.f_platinum}}</p> 
-</div>
-</div>
 
 <div class="form-group row">
-    <label for="staticEmail"  class="col-sm-2 col-form-label ">Expected Amount</label>
+    <label for="staticEmail"  class="col-sm-2 col-form-label ">Target Audiance</label>
     <div class="col-sm-10">
-      <input type="text" readonly value="{{ sponsor.ex_platinum}}" class="form-control-plaintext" id="staticEmail"> 
+      <input type="text" readonly value="{{ eventdet.eligibility}}" class="form-control-plaintext" id="staticEmail"> 
   </div>
   </div>
 
@@ -247,15 +287,15 @@
 <div class="form-group row">
     <label for="staticEmail"  class="col-sm-2 col-form-label ">Facilities </label>
     <div class="col-sm-10">
-      <p> {{ sponsor.f_gold}}</p>
+      <p> {{ eve.eligibility}}</p>
     <!--  <input type="text" readonly value="" class="form-control-plaintext" id="staticEmail"> -->
   </div>
   </div>
 
 <div class="form-group row">
-    <label for="staticEmail"  class="col-sm-2 col-form-label ">Expected Amount</label>
-    <div class="col-sm-10">
-      <input type="text" readonly value="{{ sponsor.ex_gold}}" class="form-control-plaintext" id="staticEmail"> 
+    <label for="staticEmail"  class="col-sm-2 col-form-label ">Participant Facility</label>
+    <div class="col-sm-10">facility, 
+      <input type="text" readonly value="{{ eve.facility}}" class="form-control-plaintext" id="staticEmail"> 
   </div>
   </div>
 
@@ -267,9 +307,9 @@
 
 
 <div class="form-group row">
-    <label for="staticEmail"  class="col-sm-2 col-form-label ">Facilities</label>
+    <label for="staticEmail"  class="col-sm-2 col-form-label ">Event Docs</label>
     <div class="col-sm-10">
-      <p> {{ sponsor.f_silver}}</p>
+      <p> {{ eve.event_detail_docs}}</p>
       <input type="text" readonly value="{{ sponsor.f_silver}}" class="form-control-plaintext" id="staticEmail"> 
   </div>
   </div>
@@ -289,13 +329,11 @@
 </div>
 
 
-{%endfor %}
-        <div class="overlay">
-
 <h1>he</h1>
         </div>
         ...
       </div>
+
 
 
       <div class="modal-footer">
@@ -307,7 +345,6 @@
   </div>
 </div>
   
-{% endfor %}
 					
 
 
