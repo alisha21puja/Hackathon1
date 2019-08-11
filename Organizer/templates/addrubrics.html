@@ -2,351 +2,357 @@
 
 {%block content %}
 
-
 {%load staticfiles %}
-
-
-
 
 <br><br>
 <br><br>
 <br><br>
 <br><br><br><br>
 <div class="container">
-	<div class="row">
-		<div class="col-md-6">
-			
-			 <h3 class="text-center">Event Details</h3>
-   		 	 <hr class="bg-info col-md-8">
+  <div class="row">
+    <div class="col-md-6">
+      <h3 class="text-center">Event Details</h3>
+      <hr class="bg-info col-md-8">
 
-			
-        {% if error %}
-        <div class="alert alert-info alert-dismissible fade show" role="alert">
-          <strong> {{error}}</strong> 
-          <button type="button" class="close" data-dismiss="alert" aria-label="Close">
-            <span aria-hidden="true">&times;</span>
-          </button>
-        </div>
-		 {%endif%}
-
-		 {% if registered %}
-        <div class="alert alert-success alert-dismissible fade show" role="alert">
-          <strong> {{ registered }}</strong> 
-          <button type="button" class="close" data-dismiss="alert" aria-label="Close">
-            <span aria-hidden="true">&times;</span>
-          </button>
-        </div>
-		 {%endif%}
-
-
-
-      <form action=" {% url 'eventdetails' %}" method="POST" >
-      
-      {% csrf_token %}
-
-        <div class="form-group">  
-		    <label for="firstname">Select Event &ast;</label>
-		 	
-			
-
-		    <select  class="form-control   border border-info" name="event_name">
-		    	<option class="form-control border border-info"> Select your Event </option>
-		    	{% for eve in eventsOrganise.all %}
-
-				<option  class="form-control   border border-info" > {{ eve.event_title }} </option>
-
-			{% endfor %}
-
-			</select>
-			  
-     	</div>
- 
-	  <div class="form-group">
-	    <label for="city">No of Particpant&ast;  </label>
-	  <input type="Number" class="form-control border border-info"  name="no_participant"  id="org_by" aria-describedby="emailHelp" placeholder="Organaization Name/College Name ">
-	  </div>
-
-<div class="form-group">
-	    <label for="city">Expected Particpant&ast;  </label>
-	  <input type="Number" class="form-control border border-info"  name="expected_participant"  id="org_by" aria-describedby="emailHelp" placeholder="Expected Participant">
-	  </div>
-
-	  <div class="form-group">
-	    <label for="lastname">Number of Level &ast;</label>
-		<select name="event_level"  class="form-control  border border-info">
-			<option class="form-control border border-info" > Select Event Level </option>
-			<option class="form-control border border-info" > Zonal </option>
-			<option class="form-control border border-info" > State </option>
-			<option class="form-control border border-info" > National </option>
-		</select>
-	  </div>
-
-	    <div class="form-group">
-	    <label for="email"> Eligibility/Course/Class &ast; </label>
-	    <input type="text" class="form-control border border-info"   name="eligibility" id="email" aria-describedby="emailHelp" placeholder="BCA/BBA/10th standard etc">
-	  
-	  </div>
-	  <div class="form-group">
-	    <label for="mobile no">Prerequisite &ast; </label>
-	    <textarea name="prerequisite"  class="form-control border border-info"></textarea> 
-	  </div>
-	  <div class="form-group">
-	    <label for="Person Name"> Facilities &ast; </label>
-	    <input type="text" class="form-control border border-info"   name="facilities" id="person_name" placeholder="Person Name ">
-	  
-	  </div>
-	   <div class="form-group">
-	    <label for="Person Name">Event Details Document&ast; </label>
-	    <input type="file" class="form-control border border-info"  required name="event_detail_docs" id="person_name" placeholder="Event Poster ">
-	  
-	  </div>
-
-
-	    
-
-	  <div class="form-group">
-	    
-	    <input type="submit" class="btn btn-outline-info bg-dark"  id="password" aria-describedby="emailHelp" value="Submit" >
-	  
-	  </div>
-	      </form>
-
-
-
-		
-
-
-
-
-	</div>
-
-	<div class="col-md-4">
-		<center>
-		<div class="row">
-		 <a href="#"  class="btn btn-dark btn-outline-info" data-toggle="modal" data-target="#edit{{event.id}}">
- Event Details</a>
-
-    <a href="{% url 'editRubrics' %}"  class="btn btn-dark btn-outline-info">
- Edit Details</a>
-
-
-
-
-
-
-<div class="modal fade" id="exampleModalLong" tabindex="-1" role="dialog" aria-labelledby="exampleModalLongTitle" aria-hidden="true">
-  <div class="modal-dialog" role="document">
-    <div class="modal-content">
-      <div class="modal-header">
-        <h5 class="modal-title" id="exampleModalLongTitle">Modal title</h5>
-        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+      {% if error %}
+      <div class="alert alert-info alert-dismissible fade show" role="alert">
+        <strong> {{error}}</strong>
+        <button type="button" class="close" data-dismiss="alert" aria-label="Close">
           <span aria-hidden="true">&times;</span>
         </button>
       </div>
-      <div class="modal-body">
+      {%endif%}
+
+      {% if registered %}
+      <div class="alert alert-success alert-dismissible fade show" role="alert">
+        <strong> {{ registered }}</strong>
+        <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      {%endif%}
+
+
+
+      <form action=" {% url 'eventdetails' %}" method="POST">
+
+        {% csrf_token %}
+
+        <div class="form-group">
+          <label for="firstname">Select Event &ast;</label>
+          <select class="form-control   border border-info" name="event_name">
+            <option class="form-control border border-info"> Select your Event </option>
+            {% for eve in eventsOrganise.all %}
+
+            <option class="form-control   border border-info"> {{ eve.event_title }} </option>
+
+            {% endfor %}
+          </select>
+        </div>
+
+        <div class="form-group">
+          <label for="city">Number of Particpant&ast; </label>
+          <input type="Number" class="form-control border border-info" name="no_participant" id="org_by"
+            aria-describedby="emailHelp" placeholder="Organaization Name/College Name ">
+        </div>
+
+        <div class="form-group">
+          <label for="city">Expected Particpant&ast; </label>
+          <input type="Number" class="form-control border border-info" name="expected_participant" id="org_by"
+            aria-describedby="emailHelp" placeholder="Expected Participant">
+        </div>
+
+        <div class="form-group">
+          <label for="lastname">Number of Level &ast;</label>
+          <select name="event_level" class="form-control  border border-info">
+            <option class="form-control border border-info"> Select Event Level </option>
+            <option class="form-control border border-info"> Zonal </option>
+            <option class="form-control border border-info"> State </option>
+            <option class="form-control border border-info"> National </option>
+          </select>
+        </div>
+
+        <div class="form-group">
+          <label for="email"> Eligibility/Course/Class &ast; </label>
+          <input type="text" class="form-control border border-info" name="eligibility" id="email"
+            aria-describedby="emailHelp" placeholder="BCA/BBA/10th standard etc">
+
+        </div>
+        <div class="form-group">
+          <label for="mobile no">Prerequisite &ast; </label>
+          <textarea name="prerequisite" class="form-control border border-info"></textarea>
+        </div>
+        <div class="form-group">
+          <label for="Person Name"> Facilities &ast; </label>
+          <input type="text" class="form-control border border-info" name="facilities" id="person_name"
+            placeholder="Person Name ">
+
+        </div>
+        <div class="form-group">
+          <label for="Person Name">Event Details Document&ast; </label>
+          <input type="file" class="form-control border border-info" required name="event_detail_docs" id="person_name"
+            placeholder="Event Poster ">
+
+        </div>
+
+
+
+
+        <div class="form-group">
+
+          <input type="submit" class="btn btn-outline-info bg-dark" id="password" aria-describedby="emailHelp"
+            value="Submit">
+
+        </div>
+      </form>
 
 
 
 
 
-<center>
-
-<form action="" method="POST">
-  {% csrf_token %}
-  <div class="form-group">
-    <label for="exampleFormControlInput1">Selected Event</label>
-
-    <input type="text" class="form-control" id="exampleFormControlInput1" name="event_title" value="" placeholder="Event Title">
-  </div>
-  <div class="form-group">
-    <label for="exampleFormControlSelect1">Selected Event</label>
-    <select name="event_name"  class="form-control   border border-info"> 
-
-      <option class="form-control border border-info">Selected Event </option>
-      <option class="form-control border border-info" >hackathons </option>
-      <option class="form-control border border-info" >Tech Fest </option>
-      <option class="form-control border border-info" > Gaming Event</option>
-      <option class="form-control border border-info"> Workshop </option>
-      <option class="form-control border border-info"> IT Fest </option>
-    </select>
-
-   
-    
-  </div>
-  <div class="form-group">
-    <label for="exampleFormControlSelect2">Number of Participant</label>
-  <input type="Number" class="form-control" id="exampleFormControlInput1" value="" name="no_participant" value="" placeholder="Organisation Name">
-  </div>
-  <div class="form-group">
-    <label for="exampleFormControlTextarea1">Expected Participant</label>
-   <input type="Number" class="form-control" id="exampleFormControlInput1" name="expected_participant" value="" placeholder="Organisation Emial">
-  </div>
 
 
-  <div class="form-group">
-    <label for="exampleFormControlInput1">Number of Level</label>
-    <input type="text" class="form-control" id="exampleFormControlInput1" name="event_level" value="" placeholder="Organisation Mobile Number">
-      <select name="event_category"  class="form-control   border border-info"> 
-      <option class="form-control border border-info">Selected Event </option>
-      <option class="form-control border border-info" >hackathons </option>
-      <option class="form-control border border-info" >Tech Fest </option>
-      <option class="form-control border border-info" > Gaming Event</option>
-      <option class="form-control border border-info"> Workshop </option>
-      <option class="form-control border border-info"> IT Fest </option>
-    </select>
+
+    </div>
+
+    <div class="col-md-4">
+      <center>
+        <div class="row">
+          <a href="#" class="btn btn-dark btn-outline-info" data-toggle="modal" data-target="#edit{{event.id}}">
+            Event Details</a>
+
+          <a href="{% url 'editRubrics' %}" class="btn btn-dark btn-outline-info">
+            Edit Details</a>
 
 
 
 
-  </div>
-    <div class="form-group">
-    <label for="exampleFormControlInput1">Eligibility/Course /Class</label>
-    <input type="text" class="form-control" id="exampleFormControlInput1" name=",eligibility" value="" placeholder="Contact Person Name">
-  </div> 
 
-   <div class="form-group">
-    <label for="exampleFormControlInput1">Prerequisite </label>
-    <textarea name="prerequisite">
-    	
+
+          <div class="modal fade" id="exampleModalLong" tabindex="-1" role="dialog"
+            aria-labelledby="exampleModalLongTitle" aria-hidden="true">
+            <div class="modal-dialog" role="document">
+              <div class="modal-content">
+                <div class="modal-header">
+                  <h5 class="modal-title" id="exampleModalLongTitle">Modal title</h5>
+                  <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                  </button>
+                </div>
+                <div class="modal-body">
+
+
+
+
+
+                  <center>
+
+                    <form action="" method="POST">
+                      {% csrf_token %}
+                      <div class="form-group">
+                        <label for="exampleFormControlInput1">Selected Event</label>
+
+                        <input type="text" class="form-control" id="exampleFormControlInput1" name="event_title"
+                          value="" placeholder="Event Title">
+                      </div>
+                      <div class="form-group">
+                        <label for="exampleFormControlSelect1">Selected Event</label>
+                        <select name="event_name" class="form-control   border border-info">
+
+                          <option class="form-control border border-info">Selected Event </option>
+                          <option class="form-control border border-info">hackathons </option>
+                          <option class="form-control border border-info">Tech Fest </option>
+                          <option class="form-control border border-info"> Gaming Event</option>
+                          <option class="form-control border border-info"> Workshop </option>
+                          <option class="form-control border border-info"> IT Fest </option>
+                        </select>
+
+
+
+                      </div>
+                      <div class="form-group">
+                        <label for="exampleFormControlSelect2">Number of Participant</label>
+                        <input type="Number" class="form-control" id="exampleFormControlInput1" value=""
+                          name="no_participant" value="" placeholder="Organisation Name">
+                      </div>
+                      <div class="form-group">
+                        <label for="exampleFormControlTextarea1">Expected Participant</label>
+                        <input type="Number" class="form-control" id="exampleFormControlInput1"
+                          name="expected_participant" value="" placeholder="Organisation Emial">
+                      </div>
+
+
+                      <div class="form-group">
+                        <label for="exampleFormControlInput1">Number of Level</label>
+                        <input type="text" class="form-control" id="exampleFormControlInput1" name="event_level"
+                          value="" placeholder="Organisation Mobile Number">
+                        <select name="event_category" class="form-control   border border-info">
+                          <option class="form-control border border-info">Selected Event </option>
+                          <option class="form-control border border-info">hackathons </option>
+                          <option class="form-control border border-info">Tech Fest </option>
+                          <option class="form-control border border-info"> Gaming Event</option>
+                          <option class="form-control border border-info"> Workshop </option>
+                          <option class="form-control border border-info"> IT Fest </option>
+                        </select>
+
+
+
+
+                      </div>
+                      <div class="form-group">
+                        <label for="exampleFormControlInput1">Eligibility/Course /Class</label>
+                        <input type="text" class="form-control" id="exampleFormControlInput1" name=",eligibility"
+                          value="" placeholder="Contact Person Name">
+                      </div>
+
+                      <div class="form-group">
+                        <label for="exampleFormControlInput1">Prerequisite </label>
+                        <textarea name="prerequisite">
+
     </textarea>
-    <input type="file" class="form-control" id="exampleFormControlInput1" name="prerequisite" placeholder="name@example.com">
+                        <input type="file" class="form-control" id="exampleFormControlInput1" name="prerequisite"
+                          placeholder="name@example.com">
 
-    <img src="" height="200" width="200" />
-  </div>
+                        <img src="" height="200" width="200" />
+                      </div>
 
- <div class="form-group">
-    <label for="exampleFormControlInput1">Facilities * </label>
-    <input type="text" class="form-control" id="exampleFormControlInput1" name="facilities" value="" placeholder="name@example.com">
-     <label></label>
-  </div>
-
-
-
- <div class="form-group">
-    <label for="exampleFormControlInput1">Event Details Document* </label>
-    <input type="file" class="form-control" id="exampleFormControlInput1" name="event_detail_docs" value=" placeholder="name@example.com">
-    <label>file name</label>
-  </div>
- <div class="form-group">
-      
-      <input type="submit" class="btn btn-outline-info bg-dark"  name="Submit" id="password" aria-describedby="emailHelp" value="Submit" >
-    
-    </div>
-
-</form>
-</center>
-
-
-        ...
-      </div>
-      <div class="modal-footer bg-dark">
-        <button type="button" class="btn btn-outline-info bg-dark" data-dismiss="modal">Close</button>
-        <button type="button" class="btn btn-outline-info bg-dark">Save changes</button>
-      </div>
-    </div>
-  </div>
-</div>
+                      <div class="form-group">
+                        <label for="exampleFormControlInput1">Facilities * </label>
+                        <input type="text" class="form-control" id="exampleFormControlInput1" name="facilities" value=""
+                          placeholder="name@example.com">
+                        <label></label>
+                      </div>
 
 
 
+                      <div class="form-group">
+                        <label for="exampleFormControlInput1">Event Details Document* </label>
+                        <input type="file" class="form-control" id="exampleFormControlInput1" name="event_detail_docs"
+                          value=" placeholder=" name@example.com">
+                        <label>file name</label>
+                      </div>
+                      <div class="form-group">
+
+                        <input type="submit" class="btn btn-outline-info bg-dark" name="Submit" id="password"
+                          aria-describedby="emailHelp" value="Submit">
+
+                      </div>
+
+                    </form>
+                  </center>
+
+
+                  ...
+                </div>
+                <div class="modal-footer bg-dark">
+                  <button type="button" class="btn btn-outline-info bg-dark" data-dismiss="modal">Close</button>
+                  <button type="button" class="btn btn-outline-info bg-dark">Save changes</button>
+                </div>
+              </div>
+            </div>
+          </div>
 
 
 
-<div class="modal fade bd-example-modal-lg" id="edit{{event.id}}" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
-  <div class="modal-dialog  modal-xl " role="document">
-    <div class="modal-content">
-      <div class="modal-header bg-dark">
-        <h5 class="modal-title text-info" id="exampleModalLabel">Rubrics Details</h5>
-        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-          <span aria-hidden="true">&times;</span>
-        </button>
-      </div>
-      <div class="modal-body shadow-sm p-3 mb-5 bg-white rounded">
-         {% if error %}
-        <div class="alert alert-info alert-dismissible fade show" role="alert">
-          <strong> {{error}}</strong> 
-          <button type="button" class="close" data-dismiss="alert" aria-label="Close">
-            <span aria-hidden="true">&times;</span>
-          </button>
+
+
+
+          <div class="modal fade bd-example-modal-lg" id="edit{{event.id}}" tabindex="-1" role="dialog"
+            aria-labelledby="exampleModalLabel" aria-hidden="true">
+            <div class="modal-dialog  modal-xl " role="document">
+              <div class="modal-content">
+                <div class="modal-header bg-dark">
+                  <h5 class="modal-title text-info" id="exampleModalLabel">Rubrics Details</h5>
+                  <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                  </button>
+                </div>
+                <div class="modal-body shadow-sm p-3 mb-5 bg-white rounded">
+                  {% if error %}
+                  <div class="alert alert-info alert-dismissible fade show" role="alert">
+                    <strong> {{error}}</strong>
+                    <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                      <span aria-hidden="true">&times;</span>
+                    </button>
+                  </div>
+                  {%endif%}
+
+                  <table class="table table-bordered  table-info table-hover ">
+                    <thead class="thead-dark text-info">
+
+                      <tr class="text-info">
+                        <th class="text-info text-center"> Event Title </th>
+                        <th class="text-info text-center">No Particiapnt</th>
+                        <th class="text-info text-center"> Event Level</th>
+
+                        <th class="text-info text-center">Eligibility </th>
+                        <th class="text-info text-center">Prerequisite </th>
+                        <th class="text-info text-center">Facilities</th>
+                        <th class="text-info text-center">Event Detailed Document</th>
+
+
+                      </tr>
+
+                    </thead>
+                    {% for event in eventDetails.all %}
+
+                    <tr>
+
+                      <td class="text-dark text-center">{{ event.event }} </td>
+
+                      <td class="text-dark text-center"> {{ event.no_participant }}</td>
+                      <td class="text-dark text-center"> {{ event.event_level }}</td>
+
+                      <td class="text-dark text-center"> {{ event.eligibility }} </td>
+
+                      <td class="text-dark text-center">
+
+                        {{ event.prerequisite }}
+                      </td>
+
+
+                      <td class="text-dark text-center">
+
+                        {{ event.facility }}
+
+                      </td>
+                      <td class="text-dark text-center">
+
+                        {{ event.event_detail_docs.url }}
+                      </td>
+                      <td class="text-dark text-center">
+
+                        {{ event.orgId}}
+                      </td>
+
+                    </tr>
+                    {% endfor %}
+                  </table>
+
+
+
+                </div>
+                <div class="modal-footer bg-dark">
+                  <button type="button" class="btn btn-dark btn-outline-info" data-dismiss="modal">Close</button>
+                  <!-- <button type="button" class="btn  btn-dark btn-outline-info">Save changes</button>-->
+                </div>
+
+              </div>
+            </div>
+
+          </div>
+
+
+
         </div>
-     {%endif%}
-
-	<table class="table table-bordered  table-info table-hover ">
-				<thead  class="thead-dark text-info">
-					
-				<tr class="text-info">
-					<th class="text-info text-center">  Event Title </th>
-					<th class="text-info text-center" >No Particiapnt</th>
-					<th class="text-info text-center"> Event Level</th>
-					
-					<th class="text-info text-center">Eligibility </th>
-					<th class="text-info text-center">Prerequisite </th>
-					<th class="text-info text-center">Facilities</th>
-					<th class="text-info text-center">Event Detailed Document</th>
-					
-					
-				</tr>
-
-			</thead>
-			{% for event in eventDetails.all %}
-		
-				<tr> 
-	
-					<td class="text-dark text-center">{{ event.event }} </td>
-					
-					<td class="text-dark text-center"> {{ event.no_participant }}</td>
-					<td class="text-dark text-center"> {{ event.event_level }}</td>
-				
-					<td class="text-dark text-center"> {{ event.eligibility }} </td>
-
-              <td class="text-dark text-center"> 
-
-           {{ event.prerequisite }}
-              </td>		
-           
-			
-			<td class="text-dark text-center"> 
-              	
-              {{ event.facility }}
-
-              </td>		
-				<td class="text-dark text-center"> 
-              	
-{{ event.event_detail_docs.url }}
-              </td>		
-                <td class="text-dark text-center"> 
-                
-{{ event.orgId}}
-              </td>   
-					
-				</tr>
-{% endfor %}
-			</table>
 
 
 
+
+    </div>
+
+  </div>
 </div>
- <div class="modal-footer bg-dark">
-        <button type="button" class="btn btn-dark btn-outline-info" data-dismiss="modal">Close</button>
-       <!-- <button type="button" class="btn  btn-dark btn-outline-info">Save changes</button>-->
-      </div>
-        
-       </div>
-	</div>
-
-</div>
-
-
-
-</div>
-
-
-
-
-		</div>
-
-	</div>
-	</div>
 
 
 

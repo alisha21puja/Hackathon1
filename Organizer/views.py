@@ -3,15 +3,46 @@ from django.http import HttpResponse
 from . import forms
 from .models import OrganiseEvent,EventDetails,ShareResource,SponsorShip,SponsorShipDetails
 from django.contrib.auth.models import User
+from accounts.models import UserProfile
 from Blog.models import BlogsInfo
 from django.utils import timezone
+import io
+from django.http import FileResponse
+from reportlab.pdfgen import canvas
+from reportlab.lib.pagesizes import A4
 
-
-
-
-
-
-
+def EventLocation(request):
+	if request.method =='POST':
+		event_venue_name=request.POST['venue_name']
+		event_venue_addr=request.POST['venue_addr']
+		event_latitude=request.POST['event_latitude']
+		event_longitude=request.POST['event_longitude']
+		event_name=request.POST['event_name']
+		if event_venue_name=='':
+			return render(request,'eventlocationinfo.html', {'error':"Event Venue is missing"})	
+		else:
+			event_venue_name=request.POST['venue_name']	
+		if event_venue_addr=='':
+			return render(request,'eventlocationinfo.html', {'error':"Event Address is missing"})	
+		else:
+			event_venue_addr=request.POST['venue_name']	
+		if event_latitude=='':
+			return render(request,'eventlocationinfo.html', {'error':"Event Latitude is missing"})	
+		else:
+			event_latitude=request.POST['venue_name']	
+		if event_longitude=='':
+			return render(request,'eventlocationinfo.html', {'error':"Event longitude is missing"})	
+		else:
+			event_longitude=request.POST['venue_name']	
+		if event_name=='':
+			return render(request,'eventlocationinfo.html', {'error':"Event Name is missing"})	
+		else:
+			event_name=request.POST['venue_name']	
+		location_data = EventLocation(event_venue_name=event_venue_name,event_venue_addr=event_venue_addr,event_latitude=event_latitude,event_longitude=event_longitude,event_id=request.event_name.id)
+		location_data.save()
+		return  render(request,'organiser_index.html')
+	else:
+		return render(request,'eventlocationinfo.html')
 
 
 def editSponsorShip(request):
@@ -20,11 +51,10 @@ def editSponsorShip(request):
 
 def deletesponsor(request,id):
 	sponsorShip=SponsorShip.objects.get(id = id)
-	sponsorShip.delete();
+	sponsorShip.delete()
 	sponsorShip=SponsorShip.objects.filter(us=request.user.id)
 	return render(request,'edit_sponsorship.html',{'sponsorShip':sponsorShip})
 def updateSponsorInfo(request,id):
-
 	submitbutton = request.POST.get('Submit')
 	if submitbutton :
 		sponsor=SponsorShip.objects.get(pk=id)
@@ -138,7 +168,6 @@ def sponsorShipDetails(request):
 			return render(request,'shareresource.html', {'error':"Title is not given"})	
 		else:
 			ex_silver = request.POST['ex_silver']
-
 
 		orgid=OrganiseEvent.objects.get(event_title=event_title)	
 		sponsor_ship= SponsorShip(event_title=event,platinum_sponsor=platinum_sponsor,f_platinum=f_platinum,ex_platinum=ex_platinum,gold_sponsor=gold_sponsor,
@@ -297,10 +326,6 @@ def resource(request):
 
 
 		return render(request,'shareresource.html',{'share_resource':share_resource})
-
-
-
-
 
 
 
@@ -584,7 +609,8 @@ def organiseEventFormData(request):
 									event_poster=event_poster,event_startdate=event_startdate,
 									event_enddate = event_enddate,us=userid) 	
 			event.save()
-			return render(request,'organise_event.html',{'event':'Event Successfully Registered!'})		
+			# return render(request,'organise_event.html',{'event':'Event Successfully Registered!'})	
+			return render(request,'registered_event.html'	)	
 def addrubrics(request):
 	eventDetails =  EventDetails.objects.filter(us=request.user.id)
 	eventsOrganise = OrganiseEvent.objects.filter(us=request.user.id)
@@ -619,3 +645,72 @@ def form_name_view(request):
 
 def about(request):
 	return  render(request,'pages/index.html')
+
+
+def profile(request):
+	return render(request,'profile.html',{})
+
+def editProfile(request):
+	profiles=UserProfile.objects	
+	return render(request,'editProfile.html',{'profiles':profiles})
+
+def about(request):
+	return  render(request,'pages/index.html')
+
+def updateProfile(request):
+	if request.method=='POST':	
+		submitbutton = request.POST.get('Submit')
+		if submitbutton :
+			user = request.POST['user']	
+			fname =  request.POST['fname']
+			lname =  request.POST['lname']
+			email =  request.POST['email']
+			
+			profiles=User(id=request.user.id,username=user,first_name= fname,last_name=lname,email=email)
+			profiles.save()
+			profiles.refresh_from_db()		
+			edit_profile=UserProfile.objects
+			return render(request,'profile.html',{'edit_profile':edit_profile})
+
+
+def req_pdf(request):
+	response = HttpResponse(content_type='application/pdf')
+	# response['Content-Disposition'] = 'as_attachment=True; filename="mypdf.pdf"'
+	response['Content-Disposition'] = 'inline'; filename="mypdf.pdf"
+	
+	buffer = io.BytesIO()
+	buffer.pagesize=A4
+	p = canvas.Canvas(buffer)
+	p.setLineWidth(.3)
+	p.setFont('Helvetica',12)
+
+	p.line(80,770,480,770)
+	p.drawString(80,755,'HACKATHON USER DETAILS :')
+	p.line(80,750,480,750)
+	# Start writing the PDF here
+	p.drawString(80,725,'Email ')
+	p.drawString(200,725,': ')
+	p.drawString(250,725,request.user.email)
+	p.line(80,700,480,700)
+	p.drawString(80,675,'User Name ' )
+	p.drawString(200,675,': ')
+	p.drawString(250,675,request.user.username)
+	p.drawString(80,650,'First Name ')
+	p.drawString(200,650,': ')
+	p.drawString(250,650,request.user.first_name)
+	p.drawString(80,625,'Last Name ')
+	p.drawString(200,625,': ')
+	p.drawString(250,625,request.user.last_name)
+	p.line(80,550,480,550)
+	p.drawString(80,532,'DATA RETRIVED FROM DATA BASE IF ERROR CONTACT ADMIN')
+	p.line(80,525,480,525)
+	# End writing
+
+	p.showPage()
+	p.save()
+
+	pdf = buffer.getvalue()
+	buffer.close()
+	response.write(pdf)
+
+	return response
