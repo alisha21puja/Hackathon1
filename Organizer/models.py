@@ -89,12 +89,11 @@ class SponsorShipDetails(models.Model):
     org_id = models.ForeignKey(OrganiseEvent, on_delete=models.CASCADE)
 
 class Event_Location(models.Model):
-    loc_id = models.OneToOneField(OrganiseEvent, on_delete=models.CASCADE, primary_key=True)
     event_venue_name = models.CharField(max_length=200)
     event_venue_addr = models.CharField(max_length=300)
     event_latitude = models.CharField(max_length=100)
     event_longitude = models.CharField(max_length=100)
-    eventid = models.ForeignKey(OrganiseEvent, on_delete=models.CASCADE)
+    eventid = models.ForeignKey(OrganiseEvent,on_delete=models.CASCADE)
     event_name = models.CharField(max_length=200)
 
     def __self__():
