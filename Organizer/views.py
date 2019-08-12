@@ -1,7 +1,7 @@
 from django.shortcuts import render, redirect, get_object_or_404
 from django.http import HttpResponse
 from . import forms
-from .models import OrganiseEvent, EventDetails, ShareResource, SponsorShip, SponsorShipDetails, EventLocation
+from .models import OrganiseEvent, EventDetails, ShareResource, SponsorShip, SponsorShipDetails, Event_Location
 from django.contrib.auth.models import User
 from accounts.models import UserProfile
 from Blog.models import BlogsInfo
@@ -41,9 +41,11 @@ def EventLocation(request):
         else:
            event_name = request.POST['event_name']
 
-        eid = OrganiseEvent.objects.get(event_title=event_name).id
-        location_data = EventLocation(event_name=event_name, event_venue_name=event_venue_name, event_venue_addr=event_venue_addr, event_latitude=event_latitude, event_longitude=event_longitude, eventid=eid)
+        eid = OrganiseEvent.objects.get(event_title=event_name)
+        # print("event id is ",eid.id)
+        location_data = Event_Location(event_venue_name=event_venue_name, event_venue_addr=event_venue_addr, event_latitude=event_latitude, event_longitude=event_longitude, eventid=eid.id,event_name=event_name )
         location_data.save()
+
         return render(request, 'organiser_index.html')
     else:
         return render(request, 'eventlocationinfo.html')
@@ -540,7 +542,7 @@ def eventDetails(request):
             event_detail_docs = request.POST['event_detail_docs']
 
         orgid = OrganiseEvent.objects.get(event_title=event)
-        print("event id is ", orgid.id)
+        # print("event id is ", orgid.id)
 
         eventInstance = EventDetails(event=event, no_participant=no_participant, expected_participant=expected_participant, event_level=event_level, eligibility=eligibility, prerequisite=prerequisite,
                                      facility=facility, event_detail_docs=event_detail_docs, us_id=request.user.id, org_id=orgid)
@@ -646,7 +648,7 @@ def addrubrics(request):
 
 
 def organiseEvent(request):
-    events = OrganiseEvent.objects
+    events = OrganiseEvent.objects.filter(us=request.user.id)
     return render(request, 'organise_event.html', {'events': events})
 
 

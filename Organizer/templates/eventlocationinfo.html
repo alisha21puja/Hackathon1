@@ -32,7 +32,7 @@
                 {% csrf_token %}
                 <div class="form-group">
                     <label for="event_name">Select an Event &ast; </label>
-                    <select class="form-control   border border-info" name="event_name">
+                    <select class="form-control readonly  border border-info" name="event_name">
                         <option class="form-control border border-info"> Select your Event </option>
                         {% for eve in event.all %}
                         <option class="form-control   border border-info"> {{ eve.event_title }} </option>
