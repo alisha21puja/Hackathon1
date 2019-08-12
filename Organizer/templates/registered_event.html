@@ -88,7 +88,7 @@
             <div class="form-group">
               <label for="exampleFormControlSelect1">Event Category</label>
               <select name="event_category" class="form-control   border border-info">
-                <option class="form-control border border-info">Selected Event {{ event.event_category }}
+                <option class="form-control border border-info">{{ event.event_category }}
                 </option>
                 <option class="form-control border border-info">hackathons </option>
                 <option class="form-control border border-info">Tech Fest </option>
@@ -129,7 +129,7 @@
               <input type="file" class="form-control" id="exampleFormControlInput1" name="event_poster"
                 placeholder="name@example.com">
 
-              <img src="{{ event.event_poster }}" height="200" width="200" />
+              <img src="../media/images/{{ event.event_poster }}" height="200" width="200" />
             </div>
 
             <div class="form-group">
@@ -246,7 +246,7 @@
             <div class="form-group row">
               <label for="exampleFormControlInput1">Event Poster</label>
               <div class="col-sm-10">
-                <img src="{{ event.event_poster }}" height="200" width="200" />
+                <img src="../media/images/{{ event.event_poster }}" height="200" width="200" />
               </div>
             </div>
 
