@@ -42,8 +42,7 @@ def EventLocation(request):
            event_name = request.POST['event_name']
 
         eid = OrganiseEvent.objects.get(event_title=event_name).id
-        location_data = EventLocation( event_name=event_name, event_venue_name=event_venue_name, event_venue_addr=event_venue_addr,
-                                      event_latitude=event_latitude, event_longitude=event_longitude, event_id=eid)
+        location_data = EventLocation(event_name=event_name, event_venue_name=event_venue_name, event_venue_addr=event_venue_addr, event_latitude=event_latitude, event_longitude=event_longitude, eventid=eid)
         location_data.save()
         return render(request, 'organiser_index.html')
     else:

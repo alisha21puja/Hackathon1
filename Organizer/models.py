@@ -23,7 +23,7 @@ class OrganiseEvent(models.Model):
     event_poster = models.ImageField(upload_to='event_poster/')
     event_startdate = models.DateTimeField(default=now)
     event_enddate = models.DateTimeField()
-    us = models.ForeignKey(User,  on_delete=models.CASCADE)
+    us = models.ForeignKey(User, on_delete=models.CASCADE)
 
     def summary(self):
         return self.event_description[:150]
@@ -94,7 +94,7 @@ class EventLocation(models.Model):
     event_venue_addr = models.CharField(max_length=300)
     event_latitude = models.CharField(max_length=100)
     event_longitude = models.CharField(max_length=100)
-    event_id = models.ForeignKey(OrganiseEvent, on_delete=models.CASCADE)
+    eventid = models.ForeignKey(OrganiseEvent, on_delete=models.CASCADE)
     event_name = models.CharField(max_length=200)
 
     def __self__():

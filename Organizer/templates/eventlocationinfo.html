@@ -5,7 +5,7 @@
 {% load staticfiles %}
 <br><br><br><br>
 <div class="container">
-     <div class="row">
+    <div class="row">
         <div class="col-md-6">
             <h3 class="text-center">ADD THE VENUE DETAILS</h3>
             <hr class="bg-info col-md-8">
@@ -27,73 +27,127 @@
     {% endif %}
 
     <div class="row">
-        <div class="col-md-12">
-            <div class="col-md-6">
-                <form action=" {% url 'WriteBlog' %}" method="POST">
-                    {% csrf_token %}
-                    <div class="form-group">
-                        <label for="event_name">Select an Event &ast; </label>
-                        <select class="form-control   border border-info" name="event_name">
-                            <option class="form-control border border-info"> Select your Event </option>
-                            {% for eve in eventsOrganise.all %}
-                            <option class="form-control   border border-info"> {{ eve.event_title }} </option>
-                            {% endfor %}
-                        </select>
-                    </div>
-                    <div class="form-group">
-                        <label for="venue_name">Venue Name&ast; </label>
-                        <input type="text" class="form-control border border-info" name="venue_name" id="venue_name"
-                            placeholder="Venue Name">
-                    </div>
-                    <div class="form-group">
-                        <label for="venue_addr">Venue Address &ast; </label>
-                        <input type="text" class="form-control border border-info" name="venue_addr" id="venue_addr"
-                            placeholder="Venue Address">
-                    </div>
-                    <div class="form-group">
-                        <label for="event_latitude">Map - Latitude &ast; </label>
-                        <input type="text" class="form-control border border-info" name="event_latitude"
-                            id="event_latitude" placeholder="Latitude of location">
-                    </div>
-                    <div class="form-group">
-                        <label for="event_longitude">Map - Longitude &ast; </label>
-                        <input type="text" class="form-control border border-info" name="event_longitude"
-                            id="event_longitude" placeholder="Longitude of location">
-                    </div>
-                    <div class="form-group">
-                        <input type="submit" class="btn btn-outline-info bg-dark" id="password"
-                            aria-describedby="emailHelp" value="Submit">
-                    </div>
-                </form>
-            </div>
-            <div class="col-md-6">
-                <style>
-                    #map {
-                        height: 90%;
+        <div class="col-md-6">
+            <form action=" {% url 'WriteBlog' %}" method="POST">
+                {% csrf_token %}
+                <div class="form-group">
+                    <label for="event_name">Select an Event &ast; </label>
+                    <select class="form-control   border border-info" name="event_name">
+                        <option class="form-control border border-info"> Select your Event </option>
+                        {% for eve in eventsOrganise.all %}
+                        <option class="form-control   border border-info"> {{ eve.event_title }} </option>
+                        {% endfor %}
+                    </select>
+                </div>
+                <div class="form-group">
+                    <label for="venue_name">Venue Name&ast; </label>
+                    <input type="text" class="form-control border border-info" name="venue_name" id="venue_name"
+                        placeholder="Venue Name">
+                </div>
+                <div class="form-group">
+                    <label for="venue_addr">Venue Address &ast; </label>
+                    <input type="text" class="form-control border border-info" name="venue_addr" id="venue_addr"
+                        placeholder="Venue Address">
+                </div>
+                <div class="form-group">
+                    <label for="event_latitude">Map - Latitude &ast; </label>
+                    <input type="text" class="form-control border border-info" name="event_latitude" id="event_latitude"
+                        placeholder="Latitude of location" value="12.92972">
+                </div>
+                <div class="form-group">
+                    <label for="event_longitude">Map - Longitude &ast; </label>
+                    <input type="text" class="form-control border border-info" name="event_longitude"
+                        id="event_longitude" placeholder="Longitude of location" value="77.6052895">
+                </div>
+                <div class="form-group">
+                    <input type="submit" class="btn btn-outline-info bg-dark" id="password" aria-describedby="emailHelp"
+                        value="Submit">
+                </div>
+            </form>
+        </div>
+        <div class="col-md-6">
+            <style>
+                #map {
+                    height: 90%;
+                }
+
+                html,
+                body {
+                    height: 90%;
+                    margin: 0;
+                    padding: 0;
+                }
+            </style>
+            <div id="map"></div>
+            <script>
+                function initMap() {
+
+                    let lati = document.getElementById('event_latitude').value;
+                    let lngi = document.getElementById('event_longitude').value;
+                    lati = parseFloat(lati);
+                    lngi = parseFloat(lngi);
+
+                    var uluru = { lat: lati, lng: lngi };
+                    var main_url = "https://cdn0.iconfinder.com/data/icons/map-and-navigation-2-1/48/100-512.png";
+
+                    var map = new google.maps.Map(document.getElementById('map'), {
+                        zoom: 14,
+                        center: uluru,
+                        gestureHandling: 'cooperative',
+                        mapTypeId: 'satellite',
+                        heading: 90,
+                        tilt: 45
+
+                    });
+                    map.setTilt(45);
+                    function rotate90() {
+                        var heading = map.getHeading() || 0;
+                        map.setHeading(heading + 90);
                     }
 
-                    html,
-                    body {
-                        height: 90%;
-                        margin: 0;
-                        padding: 0;
+                    function autoRotate() {
+                        // Determine if we're showing aerial imagery.
+                        if (map.getTilt() !== 0) {
+                            window.setInterval(rotate90, 3000);
+                        }
                     }
-                </style>
-                <div id="map"></div>
-                <script>
-                    var map;
-                    function initMap() {
-                        map = new google.maps.Map(document.getElementById('map'), {
-                            center: { lat: 12.92972, lng: 77.6052895 },
-                            zoom: 8
+                    var icon = {
+                        url: main_url, // url
+                        scaledSize: new google.maps.Size(50, 50), // scaled size
+                    };
+                    // The marker, positioned at Uluru
+                    var marker = new google.maps.Marker({
+                        position: uluru,
+                        map: map,
+                        icon: icon,
+                        title: 'Click to zoom'
+                    });
+
+                    map.addListener('center_changed', function () {
+                        // 3 seconds after the center of the map has changed, pan back to the
+                        // marker.
+                        window.setTimeout(function () {
+                            map.panTo(marker.getPosition());
+                        }, 3000);
+                    });
+
+                    marker.addListener('click', function () {
+                        map.setZoom(20);
+                        map.setCenter(marker.getPosition());
+                    });
+                    var panorama = new google.maps.StreetViewPanorama(
+                        document.getElementById('pano'), {
+                            position: uluru,
+                            pov: {
+                                heading: 34,
+                                pitch: 10
+                            }
                         });
-
-                        google.maps.event.addListenerOnce(map, 'tilesloaded', addMarkers);
-                    }
-                </script>
-                <script async defer
-                    src="https://maps.googleapis.com/maps/api/js?key=AIzaSyC6jnD6FLQkeGLK05JfSYbOZLXkenB_dGA&callback=initMap"></script>
-            </div>
+                    map.setStreetView(panorama);
+                }
+            </script>
+            <script async defer
+                src="https://maps.googleapis.com/maps/api/js?key=AIzaSyC6jnD6FLQkeGLK05JfSYbOZLXkenB_dGA&callback=initMap"></script>
         </div>
     </div>
 </div>
