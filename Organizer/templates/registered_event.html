@@ -12,47 +12,46 @@
 
 
 <div class="container">
-	<div class="row">
-<div class="col-md-12">
-			<div class="table-responsive-md">
-				<h3 class="text-center">Events Details</h3>
-			<hr class="bg-info col-md-8">
+  <div class="row">
+    <div class="col-md-12">
+      <div class="table-responsive-md">
+        <h3 class="text-center">Events Details</h3>
+        <hr class="bg-info col-md-8">
 
+        <table class="table table-bordered  table-info table-hover ">
+          <thead class="thead-dark text-info">
+            <tr class="text-info">
+              <th class="text-info text-center"> Event Title </th>
+              <th class="text-info text-center">Event Category</th>
+              <th class="text-info text-center"> Organised By</th>
+              <th class="text-info text-center">Event Details </th>
+              <th class="text-info text-center">Edit Details</th>
+              <th class="text-info text-center">Venue Details</th>
+              <th class="text-info text-center">Edit Venue Details</th>
+            </tr>
+          </thead>
+          {%  for event in events.all  %}
+          <tr>
+            <td class="text-dark text-center">{{ event.event_title }} </td>
+            <td class="text-dark text-center">{{ event.event_category}} </td>
+            <td class="text-dark text-center"> {{ event.org_name}} </td>
+            <td class="text-dark text-center"> <a href="#{% url 'eventEdit' event.id %}"
+                class="btn btn-dark btn-outline-info" data-toggle="modal" data-target="#exampleModal{{event.id}}">
+                Details</a></td>
+            <td class="text-dark text-center">
+              <a href="#{% url 'eventupdate' event.id %}" class="btn btn-dark btn-outline-info" data-toggle="modal"
+                data-target="#edit{{event.id}}">
+                Edit Details</a>
+            </td>
+          </tr>
 
-			<table class="table table-bordered  table-info table-hover ">
-				<thead  class="thead-dark text-info">
-					
-				<tr class="text-info">
-					<th class="text-info text-center">  Event Title </th>
-					<th class="text-info text-center" >Event Category</th>
-					<th class="text-info text-center"> Organised By</th>
-					
-					<th class="text-info text-center">Event Details </th>
-				<th class="text-info text-center">Edit Details</th>
-					
-				</tr>
-
-			</thead>
-			{%  for event in events.all  %}
-				<tr>
-					<td class="text-dark text-center">{{ event.event_title }} </td>
-					
-					<td class="text-dark text-center">{{ event.event_category}} </td>
-					<td class="text-dark text-center"> {{ event.org_name}} </td>
-				
-					<td class="text-dark text-center"> <a href="#{% url 'eventEdit' event.id %}"  class="btn btn-dark btn-outline-info"    data-toggle="modal" data-target="#exampleModal{{event.id}}" > Details</a></td>
-
-              <td class="text-dark text-center"> 
-                <a href="#{% url 'eventupdate' event.id %}"  class="btn btn-dark btn-outline-info" data-toggle="modal" data-target="#edit{{event.id}}">
- Edit Details</a>
-
-              </td>		
-				</tr>
-
-
-
-
-<div class="modal fade" id="edit{{event.id}}" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+        </table>
+      </div>
+    </div>
+  </div>
+</div>
+<div class="modal fade" id="edit{{event.id}}" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel"
+  aria-hidden="true">
   <div class="modal-dialog" role="document">
     <div class="modal-content">
       <div class="modal-header bg-dark">
@@ -62,95 +61,106 @@
         </button>
       </div>
       <div class="modal-body">
-         {% if error %}
+        {% if error %}
         <div class="alert alert-info alert-dismissible fade show" role="alert">
-          <strong> {{error}}</strong> 
+          <strong> {{error}}</strong>
           <button type="button" class="close" data-dismiss="alert" aria-label="Close">
             <span aria-hidden="true">&times;</span>
           </button>
         </div>
-     {%endif%}
-     <center>
+        {%endif%}
+        <center>
 
 
-<form action="{% url 'eventupdate' event.id %}" method="POST">
-  {% csrf_token %}
-  <div class="form-group">
-    <label for="exampleFormControlInput1">Event Title</label>
-    <input type="text" class="form-control" id="exampleFormControlInput1" name="event_title" value="{{ event.event_title }}" placeholder="Event Title">
-  </div>
+          <form action="{% url 'eventupdate' event.id %}" method="POST">
+            {% csrf_token %}
+            <div class="form-group">
+              <label for="exampleFormControlInput1">Event Title</label>
+              <input type="text" class="form-control" id="exampleFormControlInput1" name="event_title"
+                value="{{ event.event_title }}" placeholder="Event Title">
+            </div>
 
-  <div class="form-group">
-    <label for="exampleFormControlInput1">Event Description</label>
-    <textarea class="form-control"  name="event_description" >{{ event.event_description }} </textarea>
-  </div>
-  
-  <div class="form-group">
-    <label for="exampleFormControlSelect1">Event Category</label>
-    <select name="event_category"  class="form-control   border border-info"> 
-      <option class="form-control border border-info">Selected Event {{ event.event_category }}</option>
-      <option class="form-control border border-info" >hackathons </option>
-      <option class="form-control border border-info" >Tech Fest </option>
-      <option class="form-control border border-info" > Gaming Event</option>
-      <option class="form-control border border-info"> Workshop </option>
-      <option class="form-control border border-info"> IT Fest </option>
-    </select>
+            <div class="form-group">
+              <label for="exampleFormControlInput1">Event Description</label>
+              <textarea class="form-control" name="event_description">{{ event.event_description }} </textarea>
+            </div>
 
-   
-    
-  </div>
-  <div class="form-group">
-    <label for="exampleFormControlSelect2">Organisation Name</label>
-  <input type="text" class="form-control" id="exampleFormControlInput1" name="org_by" value="{{ event.org_name }}" placeholder="Organisation Name">
-  </div>
-  <div class="form-group">
-    <label for="exampleFormControlTextarea1">Organisation Email</label>
-   <input type="email" class="form-control" id="exampleFormControlInput1" name="org_email" value="{{ event.org_email }}" placeholder="Organisation Emial">
-  </div>
+            <div class="form-group">
+              <label for="exampleFormControlSelect1">Event Category</label>
+              <select name="event_category" class="form-control   border border-info">
+                <option class="form-control border border-info">Selected Event {{ event.event_category }}
+                </option>
+                <option class="form-control border border-info">hackathons </option>
+                <option class="form-control border border-info">Tech Fest </option>
+                <option class="form-control border border-info"> Gaming Event</option>
+                <option class="form-control border border-info"> Workshop </option>
+                <option class="form-control border border-info"> IT Fest </option>
+              </select>
 
 
 
-
-  <div class="form-group">
-    <label for="exampleFormControlInput1">Organisation Mobile</label>
-    <input type="text" class="form-control" id="exampleFormControlInput1" name="mobile" value="{{ event.org_mobile }}" placeholder="Organisation Mobile Number">
-  </div>  <div class="form-group">
-    <label for="exampleFormControlInput1">Organisation Contact Person</label>
-    <input type="text" class="form-control" id="exampleFormControlInput1" name="person_name" value="{{ event.org_contact_person }}" placeholder="Contact Person Name">
-  </div> 
-   <div class="form-group">
-    <label for="exampleFormControlInput1">Event Poster</label>
-    <input type="file" class="form-control" id="exampleFormControlInput1" name="event_poster" placeholder="name@example.com">
-
-    <img src="{{ event.event_poster }}" height="200" width="200" />
-  </div>
-
- <div class="form-group">
-    <label for="exampleFormControlInput1"> Event Start Date </label>
-    <input type="date" class="form-control" id="exampleFormControlInput1" name="event_startdate" value="{{ event.event_startdate }}" placeholder="name@example.com">
-     <label>{{ event.event_startdate }} </label>
-  </div>
+            </div>
+            <div class="form-group">
+              <label for="exampleFormControlSelect2">Organisation Name</label>
+              <input type="text" class="form-control" id="exampleFormControlInput1" name="org_by"
+                value="{{ event.org_name }}" placeholder="Organisation Name">
+            </div>
+            <div class="form-group">
+              <label for="exampleFormControlTextarea1">Organisation Email</label>
+              <input type="email" class="form-control" id="exampleFormControlInput1" name="org_email"
+                value="{{ event.org_email }}" placeholder="Organisation Emial">
+            </div>
 
 
 
- <div class="form-group">
-    <label for="exampleFormControlInput1">Event End Date </label>
-    <input type="date" class="form-control" id="exampleFormControlInput1" name="event_enddate" value="{{ event.event_enddate }}" placeholder="name@example.com">
-    <label>{{ event.event_enddate }} </label>
-  </div>
- <div class="form-group">
-      
-      <input type="submit" class="btn btn-outline-info bg-dark"  name="Submit" id="password" aria-describedby="emailHelp" value="Submit" >
-    
-    </div>
 
-</form>
-</center>
+            <div class="form-group">
+              <label for="exampleFormControlInput1">Organisation Mobile</label>
+              <input type="text" class="form-control" id="exampleFormControlInput1" name="mobile"
+                value="{{ event.org_mobile }}" placeholder="Organisation Mobile Number">
+            </div>
+            <div class="form-group">
+              <label for="exampleFormControlInput1">Organisation Contact Person</label>
+              <input type="text" class="form-control" id="exampleFormControlInput1" name="person_name"
+                value="{{ event.org_contact_person }}" placeholder="Contact Person Name">
+            </div>
+            <div class="form-group">
+              <label for="exampleFormControlInput1">Event Poster</label>
+              <input type="file" class="form-control" id="exampleFormControlInput1" name="event_poster"
+                placeholder="name@example.com">
+
+              <img src="{{ event.event_poster }}" height="200" width="200" />
+            </div>
+
+            <div class="form-group">
+              <label for="exampleFormControlInput1"> Event Start Date </label>
+              <input type="date" class="form-control" id="exampleFormControlInput1" name="event_startdate"
+                value="{{ event.event_startdate }}" placeholder="name@example.com">
+              <label>{{ event.event_startdate }} </label>
+            </div>
+
+
+
+            <div class="form-group">
+              <label for="exampleFormControlInput1">Event End Date </label>
+              <input type="date" class="form-control" id="exampleFormControlInput1" name="event_enddate"
+                value="{{ event.event_enddate }}" placeholder="name@example.com">
+              <label>{{ event.event_enddate }} </label>
+            </div>
+            <div class="form-group">
+
+              <input type="submit" class="btn btn-outline-info bg-dark" name="Submit" id="password"
+                aria-describedby="emailHelp" value="Submit">
+
+            </div>
+
+          </form>
+        </center>
 
       </div>
       <div class="modal-footer bg-dark">
         <button type="button" class="btn btn-dark btn-outline-info" data-dismiss="modal">Close</button>
-        
+
       </div>
     </div>
   </div>
@@ -160,11 +170,14 @@
 
 
 
-<div class="modal fade bd-example-modal-lg" id="exampleModal{{event.id}}" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+<div class="modal fade bd-example-modal-lg" id="exampleModal{{event.id}}" tabindex="-1" role="dialog"
+  aria-labelledby="exampleModalLabel" aria-hidden="true">
   <div class="modal-dialog modal-xl" role="document">
     <div class="modal-content">
       <div class="modal-header bg-dark col-md-12">
-        <center><h6 class="text-info text-center" >{{ event.event_title }}  </h6></center>
+        <center>
+          <h6 class="text-info text-center">{{ event.event_title }} </h6>
+        </center>
         <button type="button" class="close text-info" data-dismiss="modal" aria-label="Close">
           <span aria-hidden="true">&times;</span>
         </button>
@@ -176,126 +189,119 @@
 
 
 
-<!-- Modal -->
+        <!-- Modal -->
 
 
-</div>
-
-<div class="row center">
-<div class="col-md-1">
-  
-
-
-
-</div>
-    <div class="col-md-10">
-	 <center>
-   <div class="form-group row">
-        <label for="staticEmail"  class="col-sm-2 col-form-label"><h6>Event Title</h6></label>
-        <div class="col-sm-10">        	
-           <h6> {{ event.event_category}}</h6>
-      </div>      
       </div>
-	 <hr class="bg-info col-md-12">
-  <div class="form-group row">
-      <label for="staticEmail"  class="col-sm-2 col-form-label ">Category</label>
-      <div class="col-sm-10">
-           <h6> {{ event.event_category}}</h6>
+
+      <div class="row center">
+        <div class="col-md-1">
+
+
+
+
+        </div>
+        <div class="col-md-10">
+          <center>
+            <div class="form-group row">
+              <label for="staticEmail" class="col-sm-2 col-form-label">
+                <h6>Event Title</h6>
+              </label>
+              <div class="col-sm-10">
+                <h6> {{ event.event_category}}</h6>
+              </div>
+            </div>
+            <hr class="bg-info col-md-12">
+            <div class="form-group row">
+              <label for="staticEmail" class="col-sm-2 col-form-label ">Category</label>
+              <div class="col-sm-10">
+                <h6> {{ event.event_category}}</h6>
+              </div>
+            </div>
+            <hr class="bg-info col-md-12">
+
+            <div class="form-group row">
+              <label for="staticEmail" class="col-sm-2 col-form-label ">Organisation Name</label>
+              <div class="col-sm-10">
+                <h6>{{ event.org_name}}</h6>
+              </div>
+            </div>
+
+            <div class="form-group row">
+              <label for="staticEmail" class="col-sm-2 col-form-label ">Organisation Mobile</label>
+              <div class="col-sm-10">
+                <h6>{{ event.org_mobile }}</h6>
+              </div>
+            </div>
+
+
+
+            <div class="form-group row">
+              <label for="staticEmail" class="col-sm-2 col-form-label ">Organisation Contact Person</label>
+              <div class="col-sm-10">
+                <h6> {{ event.org_contact_person}}</h6>
+
+              </div>
+            </div>
+            <div class="form-group row">
+              <label for="exampleFormControlInput1">Event Poster</label>
+              <div class="col-sm-10">
+                <img src="{{ event.event_poster }}" height="200" width="200" />
+              </div>
+            </div>
+
+
+            <hr class="bg-info col-md-12">
+
+
+            <div class="form-group row">
+              <label for="staticEmail" class="col-sm-2 col-form-label ">Event Start Date</label>
+              <div class="col-sm-10">
+                <h6> {{ event.event_startdate}}</h6>
+              </div>
+            </div>
+
+
+
+
+
+            <div class="form-group row">
+              <label for="staticEmail" class="col-sm-2 col-form-label ">Event End Date</label>
+              <div class="col-sm-10">
+                <h6>{{ event.event_enddate }}</h6>
+
+
+              </div>
+            </div>
+          </center>
+          <hr class="bg-info col-md-12">
+
+
+
+
+
+
+        </div>
       </div>
-  </div>	
- <hr class="bg-info col-md-12">
 
-  <div class="form-group row">
-      <label for="staticEmail"  class="col-sm-2 col-form-label ">Organisation Name</label>
-      <div class="col-sm-10">
-     	  <h6>{{ event.org_name}}</h6> 
-     </div>
-  </div>
-
-  <div class="form-group row">
-      <label for="staticEmail"  class="col-sm-2 col-form-label ">Organisation Mobile</label>
-      <div class="col-sm-10">
-       <h6>{{ event.org_mobile }}</h6>
-      </div>
-  </div>
-
-  
-
-  <div class="form-group row">
-      <label for="staticEmail"  class="col-sm-2 col-form-label ">Organisation Contact Person</label>
-      <div class="col-sm-10">
-         <h6> {{ event.org_contact_person}}</h6>
-   
-       </div>
-  </div>
-     <div class="form-group row">
-    <label for="exampleFormControlInput1">Event Poster</label>
-    <div class="col-sm-10">
-    <img src="{{ event.event_poster }}" height="200" width="200" />
-  </div>
-</div>
-
-
-  <hr class="bg-info col-md-12">
-
-
-    <div class="form-group row">
-      <label for="staticEmail"  class="col-sm-2 col-form-label ">Event Start Date</label>
-      <div class="col-sm-10">
-        <h6> {{ event.event_startdate}}</h6>
-             </div>
-  </div>
-
-
-
-
-
-    <div class="form-group row">
-      <label for="staticEmail"  class="col-sm-2 col-form-label ">Event End Date</label>
-      <div class="col-sm-10">
-        <h6>{{ event.event_enddate }}</h6>
-
-       
-       </div>
-  </div>
- </center>   
-<hr class="bg-info col-md-12">
-
-
-
-	
-
-		
-</div>
-</div>
-
-     <div class="modal-footer bg-dark">
+      <div class="modal-footer bg-dark">
         <button type="button" class="btn btn-dark btn-outline-info" data-dismiss="modal">Close</button>
-       <!-- <button type="button" class="btn  btn-dark btn-outline-info">Save changes</button>-->
+        <!-- <button type="button" class="btn  btn-dark btn-outline-info">Save changes</button>-->
       </div>
-        
-       </div>
-     </div>
 
-
-
- 
     </div>
+  </div>
+
+
+
+
+</div>
 
 
 
 
 
 {% endfor %}
-					
-
-
-</table>
-</div>
-</div>
-</div>
-</div>
-
 
 <!-- Modal -->
 
