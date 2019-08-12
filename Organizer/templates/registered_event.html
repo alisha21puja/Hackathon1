@@ -43,6 +43,16 @@
                 data-target="#edit{{event.id}}">
                 Edit Details</a>
             </td>
+            <td class="text-dark text-center">
+              <a href="#{% url 'eventEdit' event.id %}"
+                class="btn btn-dark btn-outline-info" data-toggle="modal" data-target="#exampleModal{{event.id}}">
+                Location Details</a>
+            </td>
+            <td class="text-dark text-center">
+              <a href="#{% url 'eventEdit' event.id %}"
+                class="btn btn-dark btn-outline-info" data-toggle="modal" data-target="#exampleModal{{event.id}}">
+                Edit Location Details</a>
+            </td>
           </tr>
 
         </table>
@@ -50,6 +60,8 @@
     </div>
   </div>
 </div>
+
+
 <div class="modal fade" id="edit{{event.id}}" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel"
   aria-hidden="true">
   <div class="modal-dialog" role="document">
@@ -70,8 +82,6 @@
         </div>
         {%endif%}
         <center>
-
-
           <form action="{% url 'eventupdate' event.id %}" method="POST">
             {% csrf_token %}
             <div class="form-group">
@@ -79,12 +89,61 @@
               <input type="text" class="form-control" id="exampleFormControlInput1" name="event_title"
                 value="{{ event.event_title }}" placeholder="Event Title">
             </div>
-
             <div class="form-group">
               <label for="exampleFormControlInput1">Event Description</label>
               <textarea class="form-control" name="event_description">{{ event.event_description }} </textarea>
             </div>
+            <div class="form-group">
+              <label for="exampleFormControlSelect2">Organisation Name</label>
+              <input type="text" class="form-control" id="exampleFormControlInput1" name="org_by"
+                value="{{ event.org_name }}" placeholder="Organisation Name">
+            </div>
+            <div class="form-group">
+              <input type="submit" class="btn btn-outline-info bg-dark" name="Submit" id="password"
+                aria-describedby="emailHelp" value="Submit">
+            </div>
+          </form>
+        </center>
+      </div>
+      <div class="modal-footer bg-dark">
+        <button type="button" class="btn btn-dark btn-outline-info" data-dismiss="modal">Close</button>
+      </div>
+    </div>
+  </div>
+</div>
 
+
+<div class="modal fade" id="edit{{event.id}}" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel"
+  aria-hidden="true">
+  <div class="modal-dialog" role="document">
+    <div class="modal-content">
+      <div class="modal-header bg-dark">
+        <h5 class="modal-title text-info" id="exampleModalLabel"> {{ event.event_title }}</h5>
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body">
+        {% if error %}
+        <div class="alert alert-info alert-dismissible fade show" role="alert">
+          <strong> {{error}}</strong>
+          <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+            <span aria-hidden="true">&times;</span>
+          </button>
+        </div>
+        {%endif%}
+        <center>
+          <form action="{% url 'eventupdate' event.id %}" method="POST">
+            {% csrf_token %}
+            <div class="form-group">
+              <label for="exampleFormControlInput1">Event Title</label>
+              <input type="text" class="form-control" id="exampleFormControlInput1" name="event_title"
+                value="{{ event.event_title }}" placeholder="Event Title">
+            </div>
+            <div class="form-group">
+              <label for="exampleFormControlInput1">Event Description</label>
+              <textarea class="form-control" name="event_description">{{ event.event_description }} </textarea>
+            </div>
             <div class="form-group">
               <label for="exampleFormControlSelect1">Event Category</label>
               <select name="event_category" class="form-control   border border-info">
@@ -96,9 +155,6 @@
                 <option class="form-control border border-info"> Workshop </option>
                 <option class="form-control border border-info"> IT Fest </option>
               </select>
-
-
-
             </div>
             <div class="form-group">
               <label for="exampleFormControlSelect2">Organisation Name</label>
@@ -110,10 +166,6 @@
               <input type="email" class="form-control" id="exampleFormControlInput1" name="org_email"
                 value="{{ event.org_email }}" placeholder="Organisation Emial">
             </div>
-
-
-
-
             <div class="form-group">
               <label for="exampleFormControlInput1">Organisation Mobile</label>
               <input type="text" class="form-control" id="exampleFormControlInput1" name="mobile"
@@ -128,19 +180,14 @@
               <label for="exampleFormControlInput1">Event Poster</label>
               <input type="file" class="form-control" id="exampleFormControlInput1" name="event_poster"
                 placeholder="name@example.com">
-
               <img src="../media/images/{{ event.event_poster }}" height="200" width="200" />
             </div>
-
             <div class="form-group">
               <label for="exampleFormControlInput1"> Event Start Date </label>
               <input type="date" class="form-control" id="exampleFormControlInput1" name="event_startdate"
                 value="{{ event.event_startdate }}" placeholder="name@example.com">
               <label>{{ event.event_startdate }} </label>
             </div>
-
-
-
             <div class="form-group">
               <label for="exampleFormControlInput1">Event End Date </label>
               <input type="date" class="form-control" id="exampleFormControlInput1" name="event_enddate"
@@ -148,25 +195,18 @@
               <label>{{ event.event_enddate }} </label>
             </div>
             <div class="form-group">
-
               <input type="submit" class="btn btn-outline-info bg-dark" name="Submit" id="password"
                 aria-describedby="emailHelp" value="Submit">
-
             </div>
-
           </form>
         </center>
-
       </div>
       <div class="modal-footer bg-dark">
         <button type="button" class="btn btn-dark btn-outline-info" data-dismiss="modal">Close</button>
-
       </div>
     </div>
   </div>
 </div>
-
-
 
 
 
@@ -183,23 +223,10 @@
         </button>
       </div>
       <div class="modal-body">
-
-
-
-
-
-
         <!-- Modal -->
-
-
       </div>
-
       <div class="row center">
         <div class="col-md-1">
-
-
-
-
         </div>
         <div class="col-md-10">
           <center>
@@ -219,28 +246,22 @@
               </div>
             </div>
             <hr class="bg-info col-md-12">
-
             <div class="form-group row">
               <label for="staticEmail" class="col-sm-2 col-form-label ">Organisation Name</label>
               <div class="col-sm-10">
                 <h6>{{ event.org_name}}</h6>
               </div>
             </div>
-
             <div class="form-group row">
               <label for="staticEmail" class="col-sm-2 col-form-label ">Organisation Mobile</label>
               <div class="col-sm-10">
                 <h6>{{ event.org_mobile }}</h6>
               </div>
             </div>
-
-
-
             <div class="form-group row">
               <label for="staticEmail" class="col-sm-2 col-form-label ">Organisation Contact Person</label>
               <div class="col-sm-10">
                 <h6> {{ event.org_contact_person}}</h6>
-
               </div>
             </div>
             <div class="form-group row">
@@ -249,60 +270,31 @@
                 <img src="../media/images/{{ event.event_poster }}" height="200" width="200" />
               </div>
             </div>
-
-
             <hr class="bg-info col-md-12">
-
-
             <div class="form-group row">
               <label for="staticEmail" class="col-sm-2 col-form-label ">Event Start Date</label>
               <div class="col-sm-10">
                 <h6> {{ event.event_startdate}}</h6>
               </div>
             </div>
-
-
-
-
-
             <div class="form-group row">
               <label for="staticEmail" class="col-sm-2 col-form-label ">Event End Date</label>
               <div class="col-sm-10">
                 <h6>{{ event.event_enddate }}</h6>
-
-
               </div>
             </div>
           </center>
           <hr class="bg-info col-md-12">
-
-
-
-
-
-
         </div>
       </div>
-
       <div class="modal-footer bg-dark">
         <button type="button" class="btn btn-dark btn-outline-info" data-dismiss="modal">Close</button>
         <!-- <button type="button" class="btn  btn-dark btn-outline-info">Save changes</button>-->
       </div>
-
     </div>
   </div>
-
-
-
-
 </div>
 
-
-
-
-
 {% endfor %}
-
 <!-- Modal -->
-
 {% endblock %}

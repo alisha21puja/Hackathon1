@@ -42,7 +42,6 @@ def EventLocation(request):
            event_name = request.POST['event_name']
 
         eid = OrganiseEvent.objects.get(event_title=event_name)
-        # print("event id is ",eid.id)
         location_data = Event_Location(event_venue_name=event_venue_name, event_venue_addr=event_venue_addr, event_latitude=event_latitude, event_longitude=event_longitude, eventid_id=eid.id,event_name=event_name )
         location_data.save()
 
@@ -328,17 +327,7 @@ def resource(request):
         else:
             resourceImage = request.POST['share_image']
 
-        # org=OrganiseEvent.objects.get(event_title= event_title)
-
-        # orgid=OrganiseEvent.objects.get(event_title=event_title)
-        # orgid=orgid.id
-        # print("event id is ",orgid)
-
         orgid = OrganiseEvent.objects.get(event_title=event_title)
-        print("event id is ", orgid.id)
-
-
-
 
         share_resource = ShareResource(event_title=event_title, subject=subject, description=description, publishedDate=publishedDate, resourceLink=resourceLink,
                                        documentFile=documentFile, publisedBy=publisedBy, resourceImage=resourceImage, us_id=request.user.id, org_id=orgid)
@@ -612,23 +601,8 @@ def organiseEventFormData(request):
             else:
                 event_enddate = request.POST['event_enddate']
 
-            # current_user =request.user.id
-            # print(current_user)
-            # userrrid=request.user.username
-            # print(userrrid,"is the id")
-
-            # userid=list(User.objects.values_list('id').filter(username=request.user.username))
-            # print("this is the id ",userid)
             userid = User.objects.get(pk=request.user.id)
-            # userrrid=6;
-            # userrrid=request.user.username
-            # print(userrrid,"is the id")
-
-            # eve=OrganiseEvent(id=id,event_title = event_title,event_description=event_description,event_category=event_category,org_name=org_name,
-            #						org_email=org_email,org_mobile=org_mobile,org_contact_person=org_contact_person,
-            #						event_poster=event_poster,event_startdate=event_startdate,event_enddate = event_enddate,us=userrrid)
-            # eve.save()
-
+           
             event = OrganiseEvent(event_title=event_title, event_description=event_description, event_category=event_category, org_name=org_name,
                                   org_email=org_email, org_mobile=org_mobile, org_contact_person=org_contact_person,
                                   event_poster=event_poster, event_startdate=event_startdate,
