@@ -28,13 +28,13 @@
 
     <div class="row">
         <div class="col-md-6">
-            <form action=" {% url 'WriteBlog' %}" method="POST">
+            <form action=" {% url 'EventLocation' %}" method="POST">
                 {% csrf_token %}
                 <div class="form-group">
                     <label for="event_name">Select an Event &ast; </label>
                     <select class="form-control   border border-info" name="event_name">
                         <option class="form-control border border-info"> Select your Event </option>
-                        {% for eve in eventsOrganise.all %}
+                        {% for eve in event.all %}
                         <option class="form-control   border border-info"> {{ eve.event_title }} </option>
                         {% endfor %}
                     </select>

@@ -48,6 +48,9 @@ def EventLocation(request):
     else:
         return render(request, 'eventlocationinfo.html')
 
+def EventLocationload(request):
+    event=OrganiseEvent.objects.filter(us=request.user.id)
+    return render(request, 'eventlocationinfo.html',{'event':event})
 
 def editSponsorShip(request):
     sponsorShip = SponsorShip.objects.filter(us=request.user.id)
