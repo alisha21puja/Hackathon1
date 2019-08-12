@@ -13,19 +13,21 @@ from django.contrib.auth import get_user_model
 
 
 class OrganiseEvent(models.Model):
-	event_title = models.CharField(max_length=200)
-	event_description = models.CharField(max_length=800)
-	event_category = models.CharField(max_length=200)
-	org_name = models.CharField(max_length=200)
-	org_email = models.EmailField(max_length=100)
-	org_mobile = models.BigIntegerField()
-	org_contact_person = models.CharField(max_length=100)
-	event_poster = models.ImageField(upload_to='event_poster/')
-	event_startdate = models.DateTimeField(default= now)
-	event_enddate = models.DateTimeField()
-	us = models.ForeignKey(User,  on_delete=models.CASCADE)
-	def summary(self):
-		return self.event_description[:150]
+    event_title = models.CharField(max_length=200)
+    event_description = models.CharField(max_length=800)
+    event_category = models.CharField(max_length=200)
+    org_name = models.CharField(max_length=200)
+    org_email = models.EmailField(max_length=100)
+    org_mobile = models.BigIntegerField()
+    org_contact_person = models.CharField(max_length=100)
+    event_poster = models.ImageField(upload_to='event_poster/')
+    event_startdate = models.DateTimeField(default=now)
+    event_enddate = models.DateTimeField()
+    us = models.ForeignKey(User,  on_delete=models.CASCADE)
+
+    def summary(self):
+        return self.event_description[:150]
+
 
 class EventDetails(models.Model):
     event = models.CharField(max_length=200)
@@ -92,8 +94,8 @@ class EventLocation(models.Model):
     event_venue_addr = models.CharField(max_length=300)
     event_latitude = models.CharField(max_length=100)
     event_longitude = models.CharField(max_length=100)
-    event_id = models.OneToOneField(
-        EventDetails, on_delete=models.CASCADE, primary_key=True)
+    event_id = models.ForeignKey(OrganiseEvent, on_delete=models.CASCADE)
+    event_name = models.CharField(max_length=200)
 
     def __self__():
         return self.event_venue_name
