@@ -30,16 +30,16 @@
             <td class="text-dark text-center">{{ event.event_category}} </td>
             <td class="text-dark text-center"> {{ event.org_name}} </td>
             <td class="text-dark text-center">
-              <a href="#{% url 'eventEdit' event.id %}" class="btn btn-dark btn-outline-info" data-toggle="modal"
+              <a href="#{% url 'eventEdit' event.id %}" class="btn btn-dark btn-outline-info text-light" data-toggle="modal"
                 data-target="#exampleModal{{event.id}}">
                 Details</a></td>
             <td class="text-dark text-center">
-              <a href="#{% url 'eventupdate' event.id %}" class="btn btn-dark btn-outline-info" data-toggle="modal"
+              <a href="#{% url 'eventupdate' event.id %}" class="btn btn-dark btn-outline-info text-light" data-toggle="modal"
                 data-target="#edit{{event.id}}">
                 Edit Details</a>
             </td>
             <td class="text-dark text-center">
-              <a href=""  class="btn btn-dark btn-outline-info" data-toggle="modal" data-target="#delete{{event.id}}">Delete Details</a>
+              <a href=""  class="btn btn-dark btn-outline-info text-light" data-toggle="modal" data-target="#delete{{event.id}}">Delete Details</a>
             </td>
           </tr>
 

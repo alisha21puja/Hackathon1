@@ -257,14 +257,12 @@ def writeBlogs(request):
 
 
 def shareResource(request):
-
     event = OrganiseEvent.objects.filter(us_id=request.user.id)
     return render(request, 'shareresource.html', {'event': event})
 
 
 def editResource(request):
     share_resource = ShareResource.objects.filter(us=request.user.id)
-
     return render(request, 'edit_shareresource.html', {'share_resource': share_resource})
 
 
@@ -372,7 +370,6 @@ def evenDetailsUpdate(request, id):
                 eventInstance.save()
                 return render(request, 'addrubrics.html', {'registered': 'Event Successfully Registered!'})
         else:
-
             if event == '':
                 return render(request, 'update_rubrics.html', {'registered': 'Event Successfully Registered!'})
             else:
@@ -532,8 +529,13 @@ def eventDetails(request):
                                      facility=facility, event_detail_docs=event_detail_docs, us_id=request.user.id, org_id=orgid)
 
         eventInstance.save()
-
-        return render(request, 'addrubrics.html', {'registered': 'Event Successfully Registered!'})
+        eventDetails = EventDetails.objects.filter(us=request.user.id)
+        eventsOrganise = OrganiseEvent.objects.filter(us=request.user.id)
+        context = {	'eventDetails': eventDetails,
+                    'eventsOrganise': eventsOrganise,
+                    'registered': 'Event Successfully Registered!'
+                    }
+        return render(request, 'addrubrics.html', context)
 
 
 def organiseEventFormData(request):
