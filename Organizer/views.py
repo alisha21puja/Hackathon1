@@ -67,11 +67,15 @@ def deletesponsor(request, id):
     sponsorShip = SponsorShip.objects.filter(us=request.user.id)
     return render(request, 'edit_sponsorship.html', {'sponsorShip': sponsorShip})
 
-# def deleteeventdetails(request,id):
-#     event=OrganiseEvent.objects.get(id=id)
-#     event.delete()
-#     event=OrganiseEvent.objects.filter(id=user.id)
-#     return render(request,'')
+def deleteeventdetails(request,id):
+    events=OrganiseEvent.objects.get(id=id)
+    loc = Event_Location.objects.filter(eventid_id=request.user.id)
+    events.delete()
+    loc.delete()
+    events = OrganiseEvent.objects.filter(us=request.user.id)
+    loc = Event_Location.objects.filter(eventid_id=request.user.id)
+    context = {'events': events, 'loc': loc}
+    return render(request, 'registered_event.html', context)
 
 def updateSponsorInfo(request, id):
     submitbutton = request.POST.get('Submit')

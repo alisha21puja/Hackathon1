@@ -17,21 +17,16 @@
           <tr class="text-info">
             <th class="text-info "> Event Title </th>
             <th class="text-info ">Platinum Sponsor</th>
-
             <th class="text-info ">Platinum Facilities </th>
             <th class="text-info "> Platinum Exptectation </th>
-
             <th class="text-info ">Gold Sponsor </th>
             <th class="text-info ">Gold Facilities </th>
-            <!--		<th class="text-info ">Published By</th>-->
             <th class="text-info ">Gold Expectation</th>
             <th class="text-info ">Silver Sponsor</th>
             <th class="text-info ">Silver Facilities</th>
             <th class="text-info ">Silver Expectation </th>
             <th class="text-info ">Edit Details</th>
             <th class="text-info ">Delete Details</th>
-
-
           </tr>
 
         </thead>
@@ -58,7 +53,6 @@
 
 
 
-
         <div class="modal fade" id="delete{{sponsor.id}}" tabindex="-1" role="dialog"
           aria-labelledby="exampleModalLongTitle" aria-hidden="true">
           <div class="modal-dialog" role="document">
@@ -72,11 +66,8 @@
               <div class="modal-body">
                 <br><br>
                 <a href="{% url 'deletesponsor' sponsor.id %}">delete</a>
-
-
                 <div class="modal-footer bg-dark">
                   <button type="button" class="btn btn-outline-info bg-dark" data-dismiss="modal">Close</button>
-
                 </div>
               </div>
             </div>

@@ -39,11 +39,31 @@
                 Edit Details</a>
             </td>
             <td class="text-dark text-center">
-              <a href="#{% url 'eventupdate' event.id %}" class="btn btn-dark btn-outline-info" data-toggle="modal"
-                data-target="#edit{{event.id}}">
-                Delete Details</a>
+              <a href=""  class="btn btn-dark btn-outline-info" data-toggle="modal" data-target="#delete{{event.id}}">Delete Details</a>
             </td>
           </tr>
+
+          <div class="modal fade" id="delete{{event.id}}" tabindex="-1" role="dialog"
+          aria-labelledby="exampleModalLongTitle" aria-hidden="true">
+          <div class="modal-dialog" role="document">
+            <div class="modal-content ">
+              <div class="modal-header bg-dark">
+                <h5 class="modal-title text-info" id="exampleModalLongTitle">{{ event.event_title }}</h5>
+                <button type="button" class="close text-info" data-dismiss="modal" aria-label="Close">
+                  <span aria-hidden="true">&times;</span>
+                </button>
+              </div>
+              <div class="modal-body text-center">
+                  {{ event.event_title }}
+                <a href="{% url 'deleteeventdetails' event.id %}"  class="btn btn-dark btn-outline-info">delete</a>
+                <br><br>
+                <div class="modal-footer bg-dark">
+                  <button type="button" class="btn btn-outline-info bg-dark" data-dismiss="modal">Close</button>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
 
           <div class="modal fade" id="edit{{event.id}}" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel"
             aria-hidden="true">

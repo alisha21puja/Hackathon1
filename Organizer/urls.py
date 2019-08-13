@@ -33,6 +33,7 @@ urlpatterns = [
     path('/updateSponsorInfo/<int:id>',
          views.updateSponsorInfo, name='updateSponsorInfo'),
     path('deletesponsor/<int:id>', views.deletesponsor, name='deletesponsor'),
+    path('deleteeventdetails/<int:id>',views.deleteeventdetails,name='deleteeventdetails'),
     path('/EventLocation', views.EventLocation, name='EventLocation'),
     path('/EventLocationload', views.EventLocationload, name='EventLocationload'),
     path('/profile', views.profile, name='profile'),
