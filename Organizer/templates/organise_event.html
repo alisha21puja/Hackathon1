@@ -18,36 +18,11 @@
 				</button>
 			</div>
 			{%endif%}
-			<style type="css">
-				alert {
-					padding: 20px;
-					background-color: #f44336; /* Red */
-					color: white;
-					margin-bottom: 15px;
-					}
-
-					/* The close button */
-					.closebtn {
-					margin-left: 15px;
-					color: white;
-					font-weight: bold;
-					float: right;
-					font-size: 22px;
-					line-height: 20px;
-					cursor: pointer;
-					transition: 0.3s;
-					}
-
-					/* When moving the mouse over the close button */
-					.closebtn:hover {
-					color: black;
-					}
-			</style>
 			<script type="text/javascript">
 				function validate() {
 					var reg_email = /^([A-Za-z0-9_\-\.]){1,}\@([A-Za-z0-9_\-\.]){1,}\.([A-Za-z]{2,4})$/;
 					var reg_name = /^([A-Za-z0-9_\-\.]){5,50}$/;
-					var reg_only_char = /^([A-Za-z]){5,}$/;
+					var reg_only_char = /^([A-Za-z ]){5,}$/;
 					var reg_only_num = /^([0-9]){10}$/;
 					var email = document.forms["reg_event"]["org_email"].value;
 					var title = document.forms["reg_event"]["event_title"].value;
@@ -85,15 +60,17 @@
 
 					if (reg_only_num.test(event_mobile) == false) {
 						alert('INVALID PHONE NUMBER. PLEASE ENTER A VALID PHONE NUMBER');
-						document.forms["reg_event"]["org_email"].focus();
+						document.forms["reg_event"]["mobile"].focus();
 						return false;
 					}
 
 					if (reg_only_char.test(event_person_name) == false) {
 						alert('INVALID ORGANISER CONTACT PERSON NAME. PLEASE ENTER A VALID EVENT ORGANISER CONTACT NAME');
-						document.forms["reg_event"]["org_by"].focus();
+						document.forms["reg_event"]["person_name"].focus();
 						return false;
 					}
+
+					// verify the dates entry
 				}
 
 			</script>
