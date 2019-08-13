@@ -67,6 +67,11 @@ def deletesponsor(request, id):
     sponsorShip = SponsorShip.objects.filter(us=request.user.id)
     return render(request, 'edit_sponsorship.html', {'sponsorShip': sponsorShip})
 
+# def deleteeventdetails(request,id):
+#     event=OrganiseEvent.objects.get(id=id)
+#     event.delete()
+#     event=OrganiseEvent.objects.filter(id=user.id)
+#     return render(request,'')
 
 def updateSponsorInfo(request, id):
     submitbutton = request.POST.get('Submit')
