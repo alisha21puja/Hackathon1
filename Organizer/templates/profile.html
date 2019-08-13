@@ -45,12 +45,15 @@
   <div class="container">
     <div class="row">
       <div class="col-md-3"></div>
-      <div class="col-md-3">
-        <button class="btn btn-outline-info"> <a href="{% url 'editProfile' %}">Edit Profile</a></button>
+      <div class="col-md-2">
+        <a href="{% url 'editProfile' %}"  class="btn btn-dark btn-outline-info text-light">Edit Profile</a>
       </div>
-      <div class="col-md-3">
-        <button class="btn btn-outline-info"> <a href="{% url 'req_pdf' %}">Get PDF</a></button>
+      <div class="col-md-2">
+         <a href="{% url 'req_pdf' %}"  class="btn btn-dark btn-outline-info text-light">Get PDF</a>
       </div>
+      <div class="col-md-2">
+          <a href="{% url 'req_pdf' %}"  class="btn btn-dark btn-outline-info text-light">Delete Profile</a>
+        </div>
       <div class="col-md-3"></div>
     </div>
   </div>

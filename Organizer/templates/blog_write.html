@@ -4,18 +4,12 @@
 
 
 {%load staticfiles %}
-
+<br><br><br><br>
 <div class=" container">
 	<div class="row">
-		<br><br><br><br><br><br><br><br><br><br><br><br>
-
 		<div class="col-md-6">
-			<br><br><br><br><br><br><br><br><br>
-
 			<h3 class="text-center">Write Blogs</h3>
 			<hr class="bg-info col-md-8">
-
-
 			{% if error %}
 			<div class="alert alert-info alert-dismissible fade show" role="alert">
 				<strong> {{error}}</strong>
@@ -24,25 +18,14 @@
 				</button>
 			</div>
 			{%endif%}
-
-
-
-			<!-- Alerts -->
-
-
-
 			<form action=" {% url 'WriteBlog' %}" method="POST">
-
 				{% csrf_token %}
-
 				<div class="form-group">
 					<label for="firstname"> Title &ast;</label>
 					<input type="text" class="form-control border border-info" name="blog_title" id="person_name"
 						placeholder="Blog Title">
 				</div>
-
 				<div class="form-group" id="froala-editor">
-
 					<label for="Person Name">Description&ast; </label>
 					<textarea class="form-control border border-info" placeholder="Description"
 						name="description"></textarea>
@@ -51,48 +34,47 @@
 					<label for="Person Name">Image First &ast; </label>
 					<input type="file" class="form-control border border-info" name="image_first" id="event_startdate"
 						placeholder="First Image ">
-
 				</div>
 				<div class="form-group">
 					<label for="city">Second Image &ast; </label>
 					<input type="file" class="form-control border border-info" name="image_second" id="org_by"
 						aria-describedby="emailHelp" placeholder="Second Image ">
 				</div>
-
 				<div class="form-group">
 					<label for="mobile no">Blog Category &ast; </label>
 					<input type="text" class="form-control border border-info" name="blog_category" id="password"
 						placeholder="Blog Category">
-
 				</div>
-
 				<div class="form-group">
 					<label for="Person Name">Refrence Link &ast; </label>
 					<input type="text" class="form-control border border-info" name="refrence_link" id="person_name"
 						placeholder="Refrence Links ">
-
 				</div>
 				<div class="form-group">
-
 					<input type="submit" class="btn btn-outline-info bg-dark" id="password" aria-describedby="emailHelp"
 						value="Submit">
-
 				</div>
-
 			</form>
-
 		</div>
-
 		<div class="col-md-6">
-			<br><br><br><br><br><br><br><br><br><br><br>
-
-
-			<a href="{% url 'blogsDetails' %}" class="btn btn-dark btn-outline-info">
-				Edit Blog</a>
-
-
-
-
+			<br> <br>
+			<br>
+			<div class="row">
+				<table class="table table-bordered  table-light table-hover ">
+					<tr class="text-dark">
+						<td class="text-dark text-center">
+							<a href="{% url 'blogsDetails' %}" class="btn btn-dark btn-outline-info text-light">
+								Edit Blog(s)</a>
+						</td>
+					</tr>
+					<tr class="text-dark">
+						<td class="text-dark text-center">
+							<a href="{% url 'blogsDetails' %}" class="btn btn-dark btn-outline-info text-light">
+								Delete Blog(s)</a>
+						</td>
+					</tr>
+				</table>
+			</div>
 			<div class="modal fade bd-example-modal-lg" id="edit{{event.id}}" tabindex="-1" role="dialog"
 				aria-labelledby="exampleModalLabel" aria-hidden="true">
 				<div class="modal-dialog  modal-xl " role="document">
@@ -112,76 +94,45 @@
 								</button>
 							</div>
 							{%endif%}
-
 							<table class="table table-bordered  table-info table-hover ">
 								<thead class="thead-dark text-info">
-
 									<tr class="text-info">
 										<th class="text-info text-center"> Blog Title</th>
 										<th class="text-info text-center">Description</th>
 										<th class="text-info text-center"> First Image</th>
-
 										<th class="text-info text-center">Second Image </th>
 										<th class="text-info text-center">Blog Category </th>
 										<th class="text-info text-center">Refrence Link</th>
-
-
-
 									</tr>
-
 								</thead>
 								{% for blog in blogsInfo.all %}
-
 								<tr>
-
-
 									<td class="text-dark text-center">{{ blog.title }} </td>
-
 									<td class="text-dark text-center"> {{ blog.summary }}</td>
-									<td class="text-dark text-center"><img src="{{ blog.imageFirst.url }}" height="100"
+									<td class="text-dark text-center"><img src="../../media/images/{{ blog.imageFirst.url }}" height="100"
 											width="100s"></td>
-
-									<td class="text-dark text-center"><img src="{{ blog.imageSecond.url }} "
+									<td class="text-dark text-center"><img src="../../media/images/{{ blog.imageSecond.url }} "
 											height="100" width="100s"> </td>
-
 									<td class="text-dark text-center">
-
 										{{ blog.blogCategory }}
 									</td>
-
-
 									<td class="text-dark text-center">
-
 										{{ blog.refrenceLinks }}
-
-
 									</td>
-
 								</tr>
 								{% endfor %}
 							</table>
-
-
-
 						</div>
 						<div class="modal-footer bg-dark">
 							<button type="button" class="btn btn-dark btn-outline-info"
 								data-dismiss="modal">Close</button>
 							<!-- <button type="button" class="btn  btn-dark btn-outline-info">Save changes</button>-->
 						</div>
-
 					</div>
 				</div>
-
 			</div>
-
-
 		</div>
 	</div>
 </div>
-
-
-
-
 
 {% endblock %}

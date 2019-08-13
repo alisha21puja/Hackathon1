@@ -137,7 +137,7 @@ def updateSponsorInfo(request, id):
 
 
 def sponsorShip(request):
-    event = OrganiseEvent.objects
+    event = OrganiseEvent.objects.filter(us_id=request.user.id)
     return render(request, 'sponsorShip.html', {'event': event})
 
 
@@ -197,7 +197,8 @@ def sponsorShipDetails(request):
         sponsor_ship = SponsorShip(event_title=event, platinum_sponsor=platinum_sponsor, f_platinum=f_platinum, ex_platinum=ex_platinum, gold_sponsor=gold_sponsor,
                                    f_gold=f_gold, ex_gold=ex_gold, silver_sponsor=silver_sponsor, f_silver=f_silver, ex_silver=ex_silver, us_id=request.user.id, org_id=orgid)
         sponsor_ship.save()
-        return render(request, 'sponsorShip.html')
+        event = OrganiseEvent.objects.filter(us_id=request.user.id)
+        return render(request, 'sponsorShip.html', {'event': event})
 
 
 def blogsDetails(request):
@@ -603,7 +604,10 @@ def organiseEventFormData(request):
                                   event_enddate=event_enddate, us=userid)
             event.save()
             # return render(request,'organise_event.html',{'event':'Event Successfully Registered!'})
-            return render(request, 'registered_event.html'	)
+            events = OrganiseEvent.objects.filter(us=request.user.id)
+            loc = Event_Location.objects.filter(eventid_id=request.user.id)
+            context = {'events': events, 'loc': loc}
+            return render(request, 'registered_event.html',context)
 
 
 def addrubrics(request):

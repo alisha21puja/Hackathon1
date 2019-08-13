@@ -5,16 +5,12 @@
 
 {%load staticfiles %}
 
+<br><br><br><br>
 <div class=" container">
 <div class="row">
-	<br><br><br><br><br><br><br><br><br><br><br><br>
-
 	<div class="col-md-6">
-	<br><br><br><br><br><br><br><br><br>
-
-      <h3 class="text-center">Offered Sponsor Resources</h3>
+      <h3 class="text-center">Add Event Sponsorship Details </h3>
     <hr class="bg-info col-md-8">
-
         {% if error %}
         <div class="alert alert-info alert-dismissible fade show" role="alert">
           <strong> {{error}}</strong> 
@@ -23,32 +19,15 @@
           </button>
         </div>
 		 {%endif%}
-
-       
-
-      <!-- Alerts -->
-
-     
-
-      <form action=" {% url 'sponsorShipDetails' %}" method="POST" >
-      
+      <form action=" {% url 'sponsorShipDetails' %}" method="POST" > 
       {% csrf_token %}
-
-
-
         <div class="form-group">  
 		    <label for="firstname">Select Event &ast;</label>
-		 	
-			
-
 		    <select  class="form-control   border border-info" name="event_title">
 		    	<option class="form-control border border-info"> Select your Event </option>
 		    	{% for eve in event.all %}
-
 				<option  class="form-control   border border-info" > {{ eve.event_title }} 
-					
 				</option>
-
 			{% endfor %}
 
 			</select>

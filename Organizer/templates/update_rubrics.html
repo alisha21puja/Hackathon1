@@ -4,195 +4,150 @@
 
 
 {%load staticfiles %}
-
-
 <br>
-<br>  
+<br>
 <br>
 <br>
 <div class="container">
-	<div class="row">
-<div class="col-md-12">
-			<div class="table-responsive-md">
-				<h3 class="text-center">Events Details</h3>
-			<hr class="bg-info col-md-8">
+  <div class="row">
+    <div class="col-md-12">
+      <div class="table-responsive-md">
+        <h3 class="text-center">Events Details</h3>
+        <hr class="bg-info col-md-8">
+        <table class="table table-bordered  table-info table-hover ">
+          <thead class="thead-dark text-info">
+            <tr class="text-info">
+              <th class="text-info text-center"> Event Title </th>
+              <th class="text-info text-center">Expected Participant</th>
+              <th class="text-info text-center"> Team Member</th>
+              <th class="text-info text-center">Event Level </th>
+              <th class="text-info text-center">Eligibility</th>
+              <th class="text-info text-center"> Prerequisite</th>
+              <th class="text-info text-center"> Facility</th>
+              <th class="text-info text-center">Event Detail Docs</th>
+              <th class="text-info text-center">Edit Details</th>
+            </tr>
+          </thead>
+          {%  for event in events.all  %}
+          <tr>
+            <td class="text-dark text-center">{{ event.event }} </td>
+            <td class="text-dark text-center">{{ event.expected_participant}} </td>
+            <td class="text-dark text-center"> {{ event.no_participant}} </td>
+            <td class="text-dark text-center">{{ event.event_level }}</td>
+            <td class="text-dark text-center">{{ event.eligibility }}</td>
+            <td class="text-dark text-center">{{ event.prerequisite }}</td>
+            <td class="text-dark text-center">{{ event.facility }}</td>
+            <td class="text-dark text-center">{{ event.event_detail_docs }}</td>
+            <td class="text-dark text-center">
+              <a href="" class="btn btn-dark btn-outline-info" data-toggle="modal" data-target="#edit{{event.id}}">
+                Edit Details</a>
+            </td>
+          </tr>
 
+          <div class="modal fade" id="edit{{event.id}}" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel"
+            aria-hidden="true">
+            <div class="modal-dialog" role="document">
+              <div class="modal-content">
+                <div class="modal-header bg-dark">
+                  <h5 class="modal-title text-info" id="exampleModalLabel"> {{ event.event}}</h5>
+                  <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                  </button>
+                </div>
+                <div class="modal-body">
+                  {% if error %}
+                  <div class="alert alert-info alert-dismissible fade show" role="alert">
+                    <strong> {{error}}</strong>
+                    <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                      <span aria-hidden="true">&times;</span>
+                    </button>
+                  </div>
+                  {%endif%}
+                  <center>
 
-			<table class="table table-bordered  table-info table-hover ">
-				<thead  class="thead-dark text-info">
-				<tr class="text-info">
-					<th class="text-info text-center">  Event Title </th>
-					<th class="text-info text-center" >Expected Participant</th>
-					<th class="text-info text-center"> Team Member</th>
-					
-					<th class="text-info text-center">Event Level </th>
-				<th class="text-info text-center">Eligibility</th>
-				<th class="text-info text-center"> Prerequisite</th>
-				<th class="text-info text-center"> Facility</th>
-				<th class="text-info text-center">Event Detail Docs</th>
-				<th class="text-info text-center">Edit Details</th>
-					
-				</tr>
+                    <form action="{% url 'evenDetailsUpdate' event.id %}" method="POST">
+                      {% csrf_token %}
+                      <div class="form-group">
+                        <label for="exampleFormControlInput1">Event Title</label>
+                        <input type="text" class="form-control" id="exampleFormControlInput1" name="event_title"
+                          value="{{event.event}}" placeholder="Event Title">
+                      </div>
+                      <div class="form-group">
+                        <label for="exampleFormControlSelect1">Expected Teams</label>
+                        <input type="text" class="form-control" id="exampleFormControlInput1"
+                          name="expected_participant" value="{{event.expected_participant}} " placeholder="Event Title">
+                      </div>
+                      <div class="form-group">
+                        <label for="exampleFormControlSelect2">Team Member</label>
+                        <input type="text" class="form-control" id="exampleFormControlInput1" name="no_participant"
+                          value="{{event.no_participant}} " placeholder="Organisation Name">
+                      </div>
+                      <div class="form-group">
+                        <label for="exampleFormControlTextarea1">Event Level</label>
+                        <select name="event_level" class="form-control   border border-info">
+                          <option class="form-control border border-info">Selected Event {{event.event_level}}</option>
+                          <option class="form-control border border-info">Zonal</option>
+                          <option class="form-control border border-info">State </option>
+                          <option class="form-control border border-info"> National</option>
+                        </select>
+                      </div>
+                      <div class="form-group">
+                        <label for="exampleFormControlInput1">Eligibility</label>
+                        <input type="text" class="form-control" id="exampleFormControlInput1" name="eligibility"
+                          value="{{event.eligibility}} " placeholder="Organisation Mobile Number">
+                      </div>
+                      <div class="form-group">
+                        <label for="exampleFormControlInput1">Event Prerequisite</label>
+                        <input type="text" class="form-control" id="exampleFormControlInput1" name="prerequisite"
+                          value="{{event.prerequisite}} " placeholder="Contact Person Name">
+                      </div>
+                      <div class="form-group">
+                        <label for="exampleFormControlInput1">Event Facilities</label>
+                        <input type="text" class="form-control" id="exampleFormControlInput1" name="facilities"
+                          value="  {{event.facility}}" placeholder="name@example.com">
+                      </div>
+                      <div class="form-group">
+                        <label for="exampleFormControlInput1">Event Details Document </label>
+                        <input type="file" class="form-control" id="exampleFormControlInput1" name="event_detail_docs"
+                          placeholder="name@example.com">
+                        <label> {{event.event_detail_docs}} </label>
+                      </div>
+                      <div class="form-group">
+                        <input type="submit" class="btn btn-outline-info bg-dark" name="Submit"
+                          aria-describedby="emailHelp" value="Submit">
+                      </div>
+                    </form>
+                  </center>
+                </div>
+                <div class="modal-footer bg-dark">
+                  <button type="button" class="btn btn-dark btn-outline-info" data-dismiss="modal">Close</button>
+                </div>
+              </div>
+            </div>
+          </div>
 
-			</thead>
-			{%  for event in events.all  %}
-				<tr>
-					<td class="text-dark text-center">{{ event.event }} </td> 
-
-					<td class="text-dark text-center">{{ event.expected_participant}} </td>
-					<td class="text-dark text-center"> {{ event.no_participant}} </td>
-					<td class="text-dark text-center">{{ event.event_level }}</td>
-					<td class="text-dark text-center">{{ event.eligibility }}</td>
-
-
-					<td class="text-dark text-center">{{ event.prerequisite }}</td>
-					<td class="text-dark text-center">{{ event.facility }}</td>
-					<td class="text-dark text-center">{{ event.event_detail_docs }}</td>
-
-					
-
-              <td class="text-dark text-center"> 
-                <a href=""  class="btn btn-dark btn-outline-info" data-toggle="modal" data-target="#edit{{event.id}}">
- Edit Details</a>
-
-              </td>		
-				</tr>
-
-
-
-
-<div class="modal fade" id="edit{{event.id}}" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
-  <div class="modal-dialog" role="document">
-    <div class="modal-content">
-      <div class="modal-header bg-dark">
-        <h5 class="modal-title text-info" id="exampleModalLabel"> {{ event.event}}</h5>
-        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-          <span aria-hidden="true">&times;</span>
-        </button>
-      </div>
-      <div class="modal-body">
-         {% if error %}
-        <div class="alert alert-info alert-dismissible fade show" role="alert">
-          <strong> {{error}}</strong> 
-          <button type="button" class="close" data-dismiss="alert" aria-label="Close">
-            <span aria-hidden="true">&times;</span>
-          </button>
-        </div>
-     {%endif%}
-     <center>
-
-
-<form action="{% url 'evenDetailsUpdate' event.id %}" method="POST">
-  {% csrf_token %}
-  <div class="form-group">
-    <label for="exampleFormControlInput1">Event Title</label>      
-					  
-    <input type="text" class="form-control" id="exampleFormControlInput1" name="event_title" value="{{event.event}}" placeholder="Event Title">
-
-  </div>
-  <div class="form-group">
-    <label for="exampleFormControlSelect1">Expected Teams</label>
-     <input type="text" class="form-control" id="exampleFormControlInput1" name="expected_participant" value="{{event.expected_participant}} " placeholder="Event Title">
-
-
-   
-   ,,,,,,,
-  </div>
-  <div class="form-group">
-    <label for="exampleFormControlSelect2">Team Member</label>
-  <input type="text" class="form-control" id="exampleFormControlInput1" name="no_participant" value="{{event.no_participant}} " placeholder="Organisation Name">
-  </div>
-  <div class="form-group">
-    <label for="exampleFormControlTextarea1">Event Level</label>
-   
-
-
-    <select name="event_level"  class="form-control   border border-info"> 
-      <option class="form-control border border-info">Selected Event {{event.event_level}}</option>
-      <option class="form-control border border-info" >Zonal</option>
-      <option class="form-control border border-info" >State </option>
-      <option class="form-control border border-info" > National</option>
-     
-    </select>
-
-  </div>
-
-
-
-
-  <div class="form-group">
-    <label for="exampleFormControlInput1">Eligibility</label>
-    <input type="text" class="form-control" id="exampleFormControlInput1" name="eligibility" value="{{event.eligibility}} " placeholder="Organisation Mobile Number">
-  </div>  <div class="form-group">
-    <label for="exampleFormControlInput1">Event Prerequisite</label>
-    <input type="text" class="form-control" id="exampleFormControlInput1" name="prerequisite" value="{{event.prerequisite}} " placeholder="Contact Person Name">
-  </div> 
-   <div class="form-group">
-    <label for="exampleFormControlInput1">Event Facilities</label>
-    <input type="text" class="form-control" id="exampleFormControlInput1" name="facilities" value="  {{event.facility}}" placeholder="name@example.com">
-
-  </div>
-
-
-
-
- <div class="form-group">
-    <label for="exampleFormControlInput1">Event Details Document </label>
-    <input type="file" class="form-control" id="exampleFormControlInput1" name="event_detail_docs"  placeholder="name@example.com">
-    <label> {{event.event_detail_docs}} </label>
-  </div>
- <div class="form-group">
-      
-      <input type="submit" class="btn btn-outline-info bg-dark"  name="Submit"aria-describedby="emailHelp" value="Submit" >
-    
-    </div>
-
-</form>
-</center>
-
-      </div>
-      <div class="modal-footer bg-dark">
-        <button type="button" class="btn btn-dark btn-outline-info" data-dismiss="modal">Close</button>
-        
+          <div class="modal fade bd-example-modal-lg" id="exampleModal{{event.id}}" tabindex="-1" role="dialog"
+            aria-labelledby="exampleModalLabel" aria-hidden="true">
+            <div class="modal-dialog modal-xl" role="document">
+              <div class="modal-content">
+                <div class="modal-header bg-dark col-md-12">
+                  <center>
+                    <h6 class="text-info text-center">{{ event.event_title }} </h6>
+                  </center>
+                  <button type="button" class="close text-info" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                  </button>
+                </div>
+                <div class="modal-body">
+                </div>
+              </div>
+            </div>
+          </div>
+          {% endfor %}
+        </table>
       </div>
     </div>
   </div>
-</div>
-
-
-
-
-
-<div class="modal fade bd-example-modal-lg" id="exampleModal{{event.id}}" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
-  <div class="modal-dialog modal-xl" role="document">
-    <div class="modal-content">
-      <div class="modal-header bg-dark col-md-12">
-        <center><h6 class="text-info text-center" >{{ event.event_title }}  </h6></center>
-        <button type="button" class="close text-info" data-dismiss="modal" aria-label="Close">
-          <span aria-hidden="true">&times;</span>
-        </button>
-      </div>
-      <div class="modal-body">
-
-
-
-
-
-
-<!-- Modal -->
-
-
-</div>
-
-
-{% endfor %}
-					
-
-
-</table>
-</div>
-</div>
-</div>
 </div>
 
 

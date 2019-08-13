@@ -29,17 +29,9 @@
         <a class="nav-link" href="{% url 'organiseEvent' %}"><button type="button" class="btn btn-outline-info"
             style="color: white">Organise Event </button><span class="sr-only">(current)</span></a>
       </li>
-      <li class="nav-item active">
-        <a class="nav-link" href="{% url 'registeredevent' %}"><button type="button" class="btn btn-outline-info"
-            style="color: white">Registered Events </button><span class="sr-only"></span></a>
-      </li>
       <li class="nav-item  fg-white">
         <a class="nav-link btn btn-outline-dark text-white " href="{% url 'addEventDetails' %}"><button type="button"
             class="btn btn-outline-info" style="color: white">Event Details</button></a>
-      </li>
-      <li class="nav-item  ">
-        <a class="nav-link text-white " href="{% url 'blog'  %}"><button type="button" class="btn btn-outline-info"
-            style="color: white">Blogs</button></a>
       </li>
       <li class="nav-item  ">
         <a class="nav-link text-white " href="{% url 'shareResource'  %}"><button type="button"
@@ -47,16 +39,23 @@
       </li>
       <li class="nav-item  fg-white">
         <a class="nav-link text-white " href="{% url 'sponsorShip' %}"><button type="button"
-            class="btn btn-outline-info" style="color: white">Sponsor Ship </button></a>
+            class="btn btn-outline-info" style="color: white">Sponsorship </button></a>
       </li>
-      <!-- <div class="btn-group"> -->
+      <li class="nav-item active">
+        <a class="nav-link" href="{% url 'registeredevent' %}"><button type="button" class="btn btn-outline-info"
+            style="color: white">Registered Events </button><span class="sr-only"></span></a>
+      </li>
+      <li class="nav-item  ">
+        <a class="nav-link text-white " href="{% url 'blog'  %}"><button type="button" class="btn btn-outline-info"
+            style="color: white">Blogs</button></a>
+      </li>
       <li class="nav-item  fg-white">
         <a class="nav-link text-white " href="{% url 'profile'%}"><button type="button" class="btn btn-outline-info"
-            style="color: white">Welcome {{ user.first_name }}! </button></a>
+            style="color: white">Welcome {{ user.first_name }} </button></a>
       </li>
       <li class="nav-item  ">
         <a class="nav-link text-white " href="javascript:{document.getElementById('logout').submit()}">
-          <button type="button" class="btn btn-outline-info" style="color: white">LogOut</button>
+          <button type="button" class="btn btn-outline-info" style="color: white">Logout</button>
         </a>
         <form action="{% url 'logout' %}" method="POST" id="logout">
           {% csrf_token %}
