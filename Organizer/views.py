@@ -39,19 +39,22 @@ def EventLocation(request):
         if event_name == '':
             return render(request, 'eventlocationinfo.html', {'error': "Event Name is missing"})
         else:
-           event_name = request.POST['event_name']
+            event_name = request.POST['event_name']
 
         eid = OrganiseEvent.objects.get(event_title=event_name)
-        location_data = Event_Location(event_venue_name=event_venue_name, event_venue_addr=event_venue_addr, event_latitude=event_latitude, event_longitude=event_longitude, eventid_id=eid.id,event_name=event_name )
+        location_data = Event_Location(event_venue_name=event_venue_name, event_venue_addr=event_venue_addr,
+                                       event_latitude=event_latitude, event_longitude=event_longitude, eventid_id=eid.id, event_name=event_name)
         location_data.save()
 
         return render(request, 'organiser_index.html')
     else:
         return render(request, 'eventlocationinfo.html')
 
+
 def EventLocationload(request):
-    event=OrganiseEvent.objects.filter(us=request.user.id)
-    return render(request, 'eventlocationinfo.html',{'event':event})
+    event = OrganiseEvent.objects.filter(us=request.user.id)
+    return render(request, 'eventlocationinfo.html', {'event': event})
+
 
 def editSponsorShip(request):
     sponsorShip = SponsorShip.objects.filter(us=request.user.id)
@@ -183,7 +186,7 @@ def sponsorShipDetails(request):
 
         orgid = OrganiseEvent.objects.get(event_title=event_title)
         sponsor_ship = SponsorShip(event_title=event, platinum_sponsor=platinum_sponsor, f_platinum=f_platinum, ex_platinum=ex_platinum, gold_sponsor=gold_sponsor,
-                f_gold=f_gold, ex_gold=ex_gold, silver_sponsor=silver_sponsor, f_silver=f_silver, ex_silver=ex_silver, us_id=request.user.id, org_id=orgid)
+                                   f_gold=f_gold, ex_gold=ex_gold, silver_sponsor=silver_sponsor, f_silver=f_silver, ex_silver=ex_silver, us_id=request.user.id, org_id=orgid)
         sponsor_ship.save()
         return render(request, 'sponsorShip.html')
 
@@ -276,7 +279,8 @@ def updateShareResources(request, id):
                 documentFile = share_resource.documentFile
             else:
                 documentFile = request.POST['document_file']
-            share_resource = ShareResource(id=share_resource.id, event_title=event_title, subject=subject, description=description, publishedDate=publishedDate, resourceLink=resourceLink,documentFile=documentFile,publisedBy=publisedBy,resourceImage=resourceImage,us=request.user.id)
+            share_resource = ShareResource(id=share_resource.id, event_title=event_title, subject=subject, description=description, publishedDate=publishedDate,
+                                           resourceLink=resourceLink, documentFile=documentFile, publisedBy=publisedBy, resourceImage=resourceImage, us=request.user.id)
             share_resource.save()
             share_resource.refresh_from_db()
             share_resource = ShareResource.objects.filter(
@@ -353,7 +357,8 @@ def evenDetailsUpdate(request, id):
         if submitbutton:
             if event_detail_docs == '':
                 event_detail_docs = events.event_detail_docs
-                eventInstance = EventDetails(id=id, event=event, no_participant=no_participant, expected_participant=expected_participant, event_level=event_level, eligibility=eligibility, prerequisite=prerequisite,facility=facility,event_detail_docs=event_detail_docs,us=request.user.id)
+                eventInstance = EventDetails(id=id, event=event, no_participant=no_participant, expected_participant=expected_participant, event_level=event_level,
+                                             eligibility=eligibility, prerequisite=prerequisite, facility=facility, event_detail_docs=event_detail_docs, us=request.user.id)
                 eventInstance.save()
                 return render(request, 'addrubrics.html', {'registered': 'Event Successfully Registered!'})
         else:
@@ -425,23 +430,9 @@ def eventUpdate(request, id):
             else:
                 event_enddate = request.POST['event_enddate']
             current_user = request.user.id
-            print(current_user)
             userrrid = request.user.username
-            print(userrrid, "is the id")
-
             userid = list(User.objects.values_list(
                 'id').filter(username=request.user.username))
-            print("this is the id ", userid)
-            # objects.get(pk).filter(user.username).all
-            # userrrid=6;
-            # userrrid=request.user.username
-            # print(userrrid,"is the id")
-
-            # eve=OrganiseEvent(id=id,event_title = event_title,event_description=event_description,event_category=event_category,org_name=org_name,
-            #						org_email=org_email,org_mobile=org_mobile,org_contact_person=org_contact_person,
-            #						event_poster=event_poster,event_startdate=event_startdate,event_enddate = event_enddate,us=userrrid)
-            # eve.save()
-
             return render(request, 'registered_event.html'	)
         else:
             if event_title == '':
@@ -483,7 +474,6 @@ def eventUpdate(request, id):
 
 
 def eventDetails(request):
-    #print("Dude ints nnot working")
     if request.method == 'POST':
         event = request.POST['event_name']
         no_participant = request.POST['no_participant']
@@ -517,21 +507,16 @@ def eventDetails(request):
             return render(request, 'addrubrics.html', {'error': "Prerequisite field not filled"})
         else:
             prerequisite = request.POST['prerequisite']
-
         if facility == '':
             return render(request, 'addrubrics.html', {'error': "Facility field not filled"})
-
         else:
             facility = request.POST['facilities']
-
         if event_detail_docs == '':
             return render(request, 'addrubrics.html', {'error': "File is not attached"})
-
         else:
             event_detail_docs = request.POST['event_detail_docs']
 
         orgid = OrganiseEvent.objects.get(event_title=event)
-        # print("event id is ", orgid.id)
 
         eventInstance = EventDetails(event=event, no_participant=no_participant, expected_participant=expected_participant, event_level=event_level, eligibility=eligibility, prerequisite=prerequisite,
                                      facility=facility, event_detail_docs=event_detail_docs, us_id=request.user.id, org_id=orgid)
@@ -602,7 +587,7 @@ def organiseEventFormData(request):
                 event_enddate = request.POST['event_enddate']
 
             userid = User.objects.get(pk=request.user.id)
-           
+
             event = OrganiseEvent(event_title=event_title, event_description=event_description, event_category=event_category, org_name=org_name,
                                   org_email=org_email, org_mobile=org_mobile, org_contact_person=org_contact_person,
                                   event_poster=event_poster, event_startdate=event_startdate,
@@ -634,7 +619,9 @@ def eventEdit(request, id):
 
 def registeredEvent(request):
     events = OrganiseEvent.objects.filter(us=request.user.id)
-    return render(request, 'registered_event.html', {'events': events})
+    loc = Event_Location.objects.filter(eventid_id=request.user.id)
+    context = {'events': events, 'loc': loc}
+    return render(request, 'registered_event.html', context)
 
 
 def indx(request):
@@ -680,7 +667,8 @@ def updateProfile(request):
             lname = request.POST['lname']
             email = request.POST['email']
 
-            profiles = User(id=request.user.id, username=user, first_name=fname, last_name=lname, email=email)
+            profiles = User(id=request.user.id, username=user,
+                            first_name=fname, last_name=lname, email=email)
             profiles.save()
             profiles.refresh_from_db()
             edit_profile = UserProfile.objects
