@@ -15,29 +15,20 @@
       {% include 'alerts.html' %}
       <form method="POST" action="{% url 'login' %}">
         {% csrf_token %}
-
-
         <div class="form-group">
-
           <label for="email">Email </label>
           <input type="text" class="form-control btn-outline-info" id="email" name="email" aria-describedby="emailHelp"
             placeholder="Enter Email Please">
-
         </div>
         <div class="form-group">
           <label for="Password">Password </label>
           <input type="Password" class="form-control btn-outline-info" name="password" id="password"
             aria-describedby="emailHelp" placeholder="Enter Password Please">
-
         </div>
-
         <div class="form-group">
-
           <input type="submit" class="btn btn-outline-info bg-dark" id="password" aria-describedby="emailHelp"
             value="Submit">
           <!--Add buttons to initiate auth sequence and sign out--> <br>
-
-
         </div>
       </form>
 
@@ -51,13 +42,8 @@
       </div>
 
       <button class="btn btn-outline-info bg-dark" id="signout_button" style="display: none;">Sign Out</button>
-
     </div>
-
     <div class="col-md-6"><br><br>
-
-
-
       <h3 class="text-center">Registration</h3>
       <hr class="bg-info col-md-8">
       {% if error %}
@@ -67,30 +53,15 @@
           <span aria-hidden="true">&times;</span>
         </button>
       </div>
-
-
-
-
-
-
-
-
       {%endif%}
-
       <!-- Alerts -->
-
       {% include 'alerts.html' %}
-
       <form action=" {% url '/signup'%}" method="POST">
-
         {% csrf_token %}
-
         <div class="form-group">
-
           <label for="firstname">First Name </label>
           <input type="text" class="form-control border border-info" name="firstname" id="firstname"
             aria-describedby="emailHelp" placeholder="Enter First Name Please">
-
         </div>
         <div class="form-group">
           <label for="lastname">Last Name </label>
@@ -102,70 +73,73 @@
           <label for="city">User name </label>
           <input type="text" class="form-control border border-info" name="username" id="mobile"
             aria-describedby="emailHelp" placeholder="Enter Your Mobile Number ">
-
-
-        </div>
-
-
-        <div class="form-group">
           <label for="email">Email </label>
           <input type="email" class="form-control border border-info" required name="email" id="email"
-            aria-describedby="emailHelp" placeholder="Enter Email Please">
+            aria-describedby="emailHelp" placeholder="Email ">
 
         </div>
         <div class="form-group">
           <label for="Password">Password </label>
           <input type="Password" class="form-control border border-info" required name="password" id="password"
-            placeholder="Enter Password Please!">
+            placeholder="Password">
 
         </div>
         <div class="form-group">
-          <label for="Password"> Confirm Password </label>
+          <label for="Password">Confirm Password </label>
           <input type="Password" class="form-control border border-info" name="confirmpassword" id="password"
-            placeholder="Enter Password Again! ">
+            placeholder=" Comfirm Password">
 
         </div>
 
         <div class="form-group">
-          <label for="phone"> Phone Number </label>
+          <label for="phone">Mobile Number </label>
           <input type="text" class="form-control border border-info" name="phone" id="phone"
-            placeholder="Enter Phone Number ">
+            placeholder="Mobile Number">
         </div>
-
-        <div class="form-group">
-          <label for="type_usr"> User Type </label>
-          <select name="type_usr" class="form-control">
-            <option>Select</option>
-            <option value=100>Participant</option>
-            <option value=200>Sponser</option>
-            <option value=300>Organiser</option>
-          </select>
-        </div>
-
-
-
-
-
-
-        <div class="form-group">
-
-          <input type="submit" class="btn btn-outline-info bg-dark" id="password" aria-describedby="emailHelp"
-            value="Submit">
-
-        </div>
-      </form>
-
-
+    </div>
+    <div class="form-group">
+      <label for="email">Email </label>
+      <input type="email" class="form-control border border-info" required name="email" id="email"
+        aria-describedby="emailHelp" placeholder="Enter Email Please">
 
     </div>
+    <div class="form-group">
+      <label for="Password">Password </label>
+      <input type="Password" class="form-control border border-info" required name="password" id="password"
+        placeholder="Enter Password Please!">
+
+    </div>
+    <div class="form-group">
+      <label for="Password"> Confirm Password </label>
+      <input type="Password" class="form-control border border-info" name="confirmpassword" id="password"
+        placeholder="Enter Password Again! ">
+
+    </div>
+
+    <div class="form-group">
+      <label for="phone"> Phone Number </label>
+      <input type="text" class="form-control border border-info" name="phone" id="phone"
+        placeholder="Enter Phone Number ">
+    </div>
+
+    <div class="form-group">
+      <label for="type_usr"> User Type </label>
+      <select name="type_usr" class="form-control">
+        <option>Select</option>
+        <option value=100>Participant</option>
+        <option value=200>Sponser</option>
+        <option value=300>Organiser</option>
+      </select>
+    </div>
+    <div class="form-group">
+      <input type="submit" class="btn btn-outline-info bg-dark" id="password" aria-describedby="emailHelp"
+        value="Submit">
+    </div>
+    </form>
   </div>
-
-
 </div>
-
-
+</div>
 <!--Add buttons to initiate auth sequence and sign out-->
-
 <pre id="content" style="white-space: pre-wrap;"></pre>
 
 <script type="text/javascript">

@@ -3,7 +3,7 @@ from django.contrib.auth.models import User
 from django.conf import settings
 
 from django.utils.timezone import now
-
+from django.utils import timezone
 # from froala_editor.fields import FroalaField
 
 from django.contrib.auth import get_user_model
@@ -27,7 +27,6 @@ class OrganiseEvent(models.Model):
 
     def summary(self):
         return self.event_description[:150]
-
 
 class EventDetails(models.Model):
     event = models.CharField(max_length=200)

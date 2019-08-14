@@ -1,0 +1,152 @@
+{% extends 'nav-bar-sponsor.html' %}
+
+{%block content %}
+
+
+{%load staticfiles %}
+
+<br><br><br><br><br>
+
+
+<div class="container">
+
+
+		<div class="row">
+
+			<div class="col-md-12 col-lg-14 col-xl-12  col-sm-12">
+
+				<div class="card border-primary">
+				  <div class="card-header border-primary">
+				  	<h3 class="text-center text-primary">
+				{{sponsor.event_title }} <a class="btn-dark btn-outline-primary btn  float-right"  href="{%  url 'enquiree' events.id %}"> Enquire</a></h3>
+				  </div>
+					<div class="card-body">
+						<div>
+				 			<div class="float-right">
+							    	<a href="" class="btn-outline-primary btn btn-dark"> Sponsor Platinum</a>
+						  	</div>
+							<h5 class="card-title  text-primary text-justify"> Sponsor: {{ sponsor.platinum_sponsor }}</h5> 
+						    <h6 class="card-text"> {{ sponsor.f_platinum }}	</h6><br>
+						    <h6 class="card-text text-primary">Platinum Expectations:<h6>{{ sponsor.ex_platinum }}</h6></h6>
+						</div><br>
+			 			<div>
+				 			<div class="float-right">
+					    	<a href="" class="btn-outline-primary btn btn-dark"> Sponsor Gold</a>
+						  	</div>
+							<h5 class="card-title  text-primary text-justify"> Sponsor: {{ sponsor.gold_sponsor}}</h5> 
+						    <h6 class="card-text text-primary text-justify"> <h6>{{ sponsor.f_gold }}</h6></h6><br>
+						    <h6 class="card-text text-primary">Gold Expectations:<h6>{{ sponsor.ex_gold }}</h6></h6>
+						</div>
+						<div>
+			 				<div class="float-right">
+						    <a href="" class="btn-outline-primary btn btn-dark"> Sponsor Silver</a>
+						  	</div>
+							<h5 class="card-title  text-primary text-justify"> Sponsor: {{ sponsor.silver_sponsor}}</h5> 
+						    <h6 class="card-text"> <h6>{{ sponsor.f_silver }} </h6></h6>
+						    <h6 class="card-text text-primary">Platinum Expectations: <h6>{{ sponsor.ex_silver }}</h6></h6>
+
+						</div>
+					</div>
+				  	<div class="card-footer text-muted border-primary">
+						 <h6 class="text-center text-primary"> {{events.event_startdate  }}--{{events.event_enddate}}</h6>
+						</div>
+				</div>
+		</div>
+		</div><br>
+
+<center><h1> Event Details</h1></center>
+	<div class="row">
+		<div class="col-md-12 col-xl-12 col-sm-12">
+
+		{% if error %}
+
+		<h1>{{error}}</h1>
+		{% endif %}
+			<div class="card border-primary">
+			  <div class="card-header border-primary">
+			  	<h3 class="text-center text-primary">
+			{{ events.event_title }}</h3>	
+			  </div>
+				<div class="card-body">
+				  	<div class="float-right"><br>
+				  		 <img src="{{event.event_poster.url }}" class="border-primary" height="300" width="300">
+				  	</div>
+				 	
+				 	<div class="col-md-8 col-sm-8">
+
+  <h6 class="card-text"> {{ events.event_description }} 	</h6>
+
+
+<ul class="list-group list-group-flush"  >
+
+  <li class="list-group-item d-flex justify-content-between align-items-center">
+   Organised by:
+    <span class="badge "><h6>{{ events.org_name }}</h6></span>
+  </li>
+  <li class="list-group-item d-flex justify-content-between align-items-center">
+    Organiser Email: 
+    <span class="badge  "><h6>{{events.org_email}}</h6></span>
+  </li>
+    <li class="list-group-item d-flex justify-content-between align-items-center">
+   Organiser Mobile Number:
+    <span class="badge "> <h6> {{events.org_mobile}}</h6></span>
+  </li>  <li class="list-group-item d-flex justify-content-between align-items-center">
+   Organiser Name: 
+    <span class="badge "><h6>{{events.org_contact_person}}</h6></span>
+  </li>  <li class="list-group-item d-flex justify-content-between align-items-center">
+  Expected Participant: 
+    <span class="badge "><h6>{{eventdet.expected_participant}}</h6></span>
+  </li>  <li class="list-group-item d-flex justify-content-between align-items-center">
+ Event Levle:
+    <span class="badge "> <h6>{{eventdet.event_level}}</h6></span>
+  </li>
+  <li class="list-group-item d-flex justify-content-between align-items-center">
+   Event Facility: 
+    <span class="badge "><h6>{{eventdet.facility}}</h6></span>
+  </li>
+   <li class="list-group-item d-flex justify-content-between align-items-center">
+  Event Category: 
+    <span class="badge "><h6>{{events.event_category}}</h6></span>
+  </li>
+</ul>
+</div>
+					<!--     <h5 class="card-title  text-primary text-justify">Organised by:{{ events.org_name }}</h5> 
+					    <h6 class="card-text"> {{ events.event_description }} 	</h6>
+					    <h6 class="card-text text-primary">Organiser Email: {{events.org_email}}</h6>
+					</div>
+					<div class="">
+					    <h6 class="card-text text-primary">Organiser Mobile Number: <h6> {{events.org_mobile}}</h6></h6>
+
+					    <h6 class="card-text text-primary">Organiser Name: <h6>{{events.org_contact_person}}</h6></h6>
+					    
+					    <h6 class="card-text text-primary">Expected Participant: <h6>{{eventdet.expected_participant}}</h6></h6>
+					</div>
+					<div> 
+					    <h6 class="card-text text-primary">Event Levle: <h6>{{eventdet.event_level}}</h6></h6>
+
+					    <h6 class="card-text text-primary">Event Facility: <h6>{{eventdet.facility}}</h6></h6>
+					    <h6 class="card-text text-primary">Event Category: <h6>{{events.event_category}}</h6></h6>
+				    </div><br> -->
+
+
+
+				   
+				   
+
+				</div>
+			  <div class="card-footer text-muted border-primary">
+
+	   					 <h6 class="text-center text-primary"> {{events.event_startdate  }}--{{events.event_enddate}}</h6>
+	  		</div>
+		</div>
+
+	</div>
+</div>
+
+</div>
+
+<br><br><br>
+</div>
+
+
+{% endblock %}

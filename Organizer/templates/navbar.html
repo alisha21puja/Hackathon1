@@ -21,6 +21,7 @@
       style="color: white">Tech Event</button></a>
   <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarText"
     aria-controls="navbarText" aria-expanded="false" aria-label="Toggle navigation">
+
     <span class="navbar-toggler-icon"></span>
   </button>
   <div class="collapse navbar-collapse mr-auto" id="navbarText">
@@ -48,6 +49,7 @@
       <li class="nav-item  ">
         <a class="nav-link text-white " href="{% url 'blog'  %}"><button type="button" class="btn btn-outline-info"
             style="color: white">Blogs</button></a>
+
       </li>
       <li class="nav-item  fg-white">
         <a class="nav-link text-white " href="{% url 'profile'%}"><button type="button" class="btn btn-outline-info"
@@ -115,11 +117,7 @@
 </footer>
 
 </html>
-
 {% else %}
-
-
-
 
 {% include 'index.html' %}
 
