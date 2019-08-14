@@ -37,58 +37,73 @@
 					var str = "Select Event Type";
 
 					if (reg_name.test(title) == false) {
-						msg="INVALID EVENT NAME";
-						document.getElementById("error_title").innerHTML = msg;
+						msg = "INVALID EVENT NAME";
+						document.getElementById("error_title_div").style.visibility = 'visible';
+						document.getElementById("error_para").innerHTML = msg;
+						// document.getElementById("error_title").innerHTML = msg;
 						document.forms["reg_event"]["event_title"].focus();
 						return false;
 					}
 
 					if (event_type == str) {
-						msg="INVALID EVENT TYPE. PLEASE ENTER A VALID EVENT TYPE";
-						document.getElementById("error_type").innerHTML = msg;
+						msg = "INVALID EVENT TYPE. PLEASE ENTER A VALID EVENT TYPE";
+						document.getElementById("error_title_div").style.visibility = 'visible';
+						document.getElementById("error_para").innerHTML = msg;
+						// document.getElementById("error_type").innerHTML = msg;
 						document.forms["reg_event"]["event_category"].focus();
 						return false;
 					}
 
 					if (reg_only_char.test(event_org_name) == false) {
-						msg="INVALID ORGANISER NAME. PLEASE ENTER A VALID EVENT ORGANISER NAME";
-						document.getElementById("error_orgname").innerHTML = msg;
+						msg = "INVALID ORGANISER NAME. PLEASE ENTER A VALID EVENT ORGANISER NAME";
+						document.getElementById("error_title_div").style.visibility = 'visible';
+						document.getElementById("error_para").innerHTML = msg;
+						// document.getElementById("error_orgname").innerHTML = msg;
 						document.forms["reg_event"]["org_by"].focus();
 						return false;
 					}
 
 					if (reg_email.test(email) == false) {
-						msg="INVALID EMAIL ADDRESS. PLEASE ENTER A VALID EMAIL";
-						document.getElementById("error_email").innerHTML = msg;
+						msg = "INVALID EMAIL ADDRESS. PLEASE ENTER A VALID EMAIL";
+						document.getElementById("error_title_div").style.visibility = 'visible';
+						document.getElementById("error_para").innerHTML = msg;
+						// document.getElementById("error_email").innerHTML = msg;
 						document.forms["reg_event"]["org_email"].focus();
 						return false;
 					}
 
 					if (reg_only_num.test(event_mobile) == false) {
-						msg="INVALID PHONE NUMBER. PLEASE ENTER A VALID PHONE NUMBER";
-						document.getElementById("error_phone").innerHTML = msg;
+						msg = "INVALID PHONE NUMBER. PLEASE ENTER A VALID PHONE NUMBER";
+						document.getElementById("error_title_div").style.visibility = 'visible';
+						document.getElementById("error_para").innerHTML = msg;
+						// document.getElementById("error_phone").innerHTML = msg;
 						document.forms["reg_event"]["mobile"].focus();
 						return false;
 					}
 
 					if (reg_only_char.test(event_person_name) == false) {
-						msg="INVALID ORGANISER CONTACT PERSON NAME. PLEASE ENTER A VALID EVENT ORGANISER CONTACT NAME";
-						document.getElementById("error_cp").innerHTML = msg;
+						msg = "INVALID ORGANISER CONTACT PERSON NAME. PLEASE ENTER A VALID EVENT ORGANISER CONTACT NAME";
+						document.getElementById("error_title_div").style.visibility = 'visible';
+						document.getElementById("error_para").innerHTML = msg;
+						// document.getElementById("error_cp").innerHTML = msg;
 						document.forms["reg_event"]["person_name"].focus();
 						return false;
 					}
 
-					if(reg_file.test(file)==false)
-					{
-						msg="INVALID FILE TYPE";
-						document.getElementById("error_file_type").innerHTML=msg;
+					if (reg_file.test(file) == false) {
+						msg = "INVALID FILE TYPE";
+						document.getElementById("error_title_div").style.visibility = 'visible';
+						document.getElementById("error_para").innerHTML = msg;
+						// document.getElementById("error_file_type").innerHTML = msg;
 						document.forms["reg_event"]["event_poster"].focus();
 						return false;
 					}
 
 					if ((Date.parse(event_start_date) >= Date.parse(event_end_date))) {
-						msg="END DATE SHOULD BE GREATER THAN START DATE";
-						document.getElementById("error_dt").innerHTML = msg;
+						msg = "END DATE SHOULD BE GREATER THAN START DATE";
+						document.getElementById("error_title_div").style.visibility = 'visible';
+						document.getElementById("error_para").innerHTML = msg;
+						// document.getElementById("error_dt").innerHTML = msg;
 						document.forms["reg_event"]["event_enddate"].focus();
 						return false;
 					}
@@ -99,12 +114,18 @@
 			<form action=" {% url 'organiseEventFormData' %}" method="POST" name="reg_event"
 				onsubmit="return validate()">
 				{% csrf_token %}
-
+				<div class="alert alert-info alert-dismissible fade show" role="alert" id="error_title_div"
+					style="visibility: hidden">
+					<p id="error_para"></p>
+					<button type="button" class="close" data-dismiss="alert" aria-label="Close">
+						<span aria-hidden="true">&times;</span>
+					</button>
+				</div>
 				<div class="form-group" id="event_title_div">
 					<label for="firstname">Event Title &ast;</label>
 					<input type="text" class="form-control border border-info" name="event_title" id="event_title"
 						aria-describedby="emailHelp" placeholder="Event Name" required>
-						<p id="error_title" class="font-weight-bold text-danger"></p>
+					<!-- <p id="error_title" class="font-weight-bold text-danger"></p> -->
 				</div>
 				<div class="form-group">
 					<label for="city">Event Description &ast; </label>
@@ -121,37 +142,37 @@
 						<option class="form-control border border-info"> Workshop </option>
 						<option class="form-control border border-info"> IT Fest </option>
 					</select>
-					<p id="error_type" class="font-weight-bold text-danger"></p>
+					<!-- <p id="error_type" class="font-weight-bold text-danger"></p> -->
 				</div>
 				<div class="form-group">
 					<label for="city">Organization Name / College Name &ast; </label>
 					<input type="text" class="form-control border border-info" name="org_by" id="org_by"
 						aria-describedby="emailHelp" placeholder="Organaization Name / College Name " required>
-						<p id="error_orgname" class="font-weight-bold text-danger"></p>
+					<!-- <p id="error_orgname" class="font-weight-bold text-danger"></p> -->
 				</div>
 				<div class="form-group">
 					<label for="org_email">Organiser Email &ast; </label>
 					<input type="email" class="form-control border border-info" name="org_email" id="org_email"
 						aria-describedby="emailHelp" placeholder="Oragniser Email" required>
-						<p id="error_email" class="font-weight-bold text-danger"></p>
+					<!-- <p id="error_email" class="font-weight-bold text-danger"></p> -->
 				</div>
 				<div class="form-group">
 					<label for="mobile no">Mobile Number (excl. +91)&ast; </label>
 					<input type="text" class="form-control border border-info" name="mobile" id="mobile"
 						placeholder="Mobile Number" required>
-						<p id="error_phone" class="font-weight-bold text-danger"></p>
+					<!-- <p id="error_phone" class="font-weight-bold text-danger"></p> -->
 				</div>
 				<div class="form-group">
 					<label for="Person Name"> Contact Person Name &ast; </label>
 					<input type="text" class="form-control border border-info" name="person_name" id="person_name"
 						placeholder="Contact Person Name " required>
-						<p id="error_cp" class="font-weight-bold text-danger"></p>
+					<!-- <p id="error_cp" class="font-weight-bold text-danger"></p> -->
 				</div>
 				<div class="form-group">
 					<label for="Person Name">Event Poster &ast; </label>
 					<input type="file" class="form-control border border-info" required name="event_poster"
 						id="event_poster" placeholder="Event Poster ">
-						<p id="error_file_type" class="font-weight-bold text-danger"></p>
+					<!-- <p id="error_file_type" class="font-weight-bold text-danger"></p> -->
 				</div>
 				<div class="form-group">
 					<label for="Person Name">Event starts Date &ast; </label>
@@ -163,7 +184,7 @@
 					<label for="Person Name">Event End Date &ast; </label>
 					<input type="Date" class="form-control border border-info" name="event_enddate" id="event_enddate"
 						placeholder="End Date " required>
-						<p id="error_dt" class="font-weight-bold text-danger"></p>
+					<!-- <p id="error_dt" class="font-weight-bold text-danger"></p> -->
 				</div>
 				<div class="form-group">
 
@@ -172,7 +193,42 @@
 				</div>
 			</form>
 		</div>
-		<div class="col-md-7">
+		<div class="col-md-2">
+
+		</div>
+		<div class="col-md-5">
+			<h3 class="text-center">Keep in mind!</h3>
+			<hr class="bg-info col-md-8">
+			<div class="alert alert-info alert-dismissible fade show" role="alert" id="error_title_div">
+				<p>All fields are mandatory!</p>
+				<button type="button" class="close" data-dismiss="alert" aria-label="Close">
+					<span aria-hidden="true">&times;</span>
+				</button>
+			</div>
+			<div class="alert alert-info alert-dismissible fade show" role="alert" id="error_title_div">
+				<p>Add venu info!</p>
+				<button type="button" class="close" data-dismiss="alert" aria-label="Close">
+					<span aria-hidden="true">&times;</span>
+				</button>
+			</div>
+			<div class="alert alert-info alert-dismissible fade show" role="alert" id="error_title_div">
+				<p>Add detailed event information!</p>
+				<button type="button" class="close" data-dismiss="alert" aria-label="Close">
+					<span aria-hidden="true">&times;</span>
+				</button>
+			</div>
+			<div class="alert alert-info alert-dismissible fade show" role="alert" id="error_title_div">
+				<p>share resources to participants!</p>
+				<button type="button" class="close" data-dismiss="alert" aria-label="Close">
+					<span aria-hidden="true">&times;</span>
+				</button>
+			</div>
+			<div class="alert alert-info alert-dismissible fade show" role="alert" id="error_title_div">
+				<p>Give sponsership details!</p>
+				<button type="button" class="close" data-dismiss="alert" aria-label="Close">
+					<span aria-hidden="true">&times;</span>
+				</button>
+			</div>
 		</div>
 	</div>
 </div>
