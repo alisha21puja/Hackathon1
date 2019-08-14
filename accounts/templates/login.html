@@ -4,25 +4,46 @@
 
 
 {%load staticfiles %}
-
+<br><br><br>
 <div class="container">
   <div class="row shadow p-3 mb-5 bg-white rounded">
-
-    <div class="col-md-6"><br><br>
+    <div class="col-md-6">
       <h3 class="text-center">Login</h3>
       <hr class="bg-info col-md-8">
+      <script type="text/javascript">
+        //validation
+        function validate_login() {
+          var reg_email = /^([A-Za-z0-9_\-\.]){1,}\@([A-Za-z0-9_\-\.]){1,}\.([A-Za-z]{2,4})$/;
+          var email = document.forms["login_form"]["email"].value;
 
+          if (reg_email.test(email) == false) {
+            var msg = "INVALID EMAIL ADDRESS. PLEASE ENTER A VALID EMAIL";
+            document.getElementById("error_title_div").style.visibility = 'visible';
+            document.getElementById("error_para").innerHTML = msg;
+            // document.getElementById("error_email").innerHTML = msg;
+            document.forms["login_form"]["email"].focus();
+            return false;
+          }
+        }
+      </script>
       {% include 'alerts.html' %}
-      <form method="POST" action="{% url 'login' %}">
+      <form method="POST" action="{% url 'login' %}" name="login_form" onsubmit="return validate_login()">
         {% csrf_token %}
+        <div class="alert alert-info  alert-dismissible fade show" role="alert" id="error_title_div"
+          style="visibility: hidden">
+          <p id="error_para"></p>
+          <button type="button" class="close" data-dismiss="alert">
+            <span aria-hidden="true">&times;</span>
+          </button>
+        </div>
         <div class="form-group">
           <label for="email">Email </label>
-          <input type="text" class="form-control btn-outline-info" id="email" name="email" aria-describedby="emailHelp"
-            placeholder="Enter Email Please">
+          <input type="text" class="form-control border border-info" id="email" name="email" required
+            aria-describedby="emailHelp" placeholder="Enter Email Please">
         </div>
         <div class="form-group">
           <label for="Password">Password </label>
-          <input type="Password" class="form-control btn-outline-info" name="password" id="password"
+          <input type="Password" class="form-control border border-info" name="password" id="password" required
             aria-describedby="emailHelp" placeholder="Enter Password Please">
         </div>
         <div class="form-group">
@@ -31,19 +52,20 @@
           <!--Add buttons to initiate auth sequence and sign out--> <br>
         </div>
       </form>
-
-      <div class="row ">
-        <div>
+      <br>
+      <br>
+      <div class="row">
+        <div class="col-md-6">
           <button class="btn btn-outline-info bg-dark" id="authorize_button" style="">Sign in with Google</button>
         </div>
-        <div>
+        <div class="col-md-6">
           <button class="btn btn-outline-info bg-dark" id="authorize_button" style="">Sign in with Facebook</button>
         </div>
       </div>
 
       <button class="btn btn-outline-info bg-dark" id="signout_button" style="display: none;">Sign Out</button>
     </div>
-    <div class="col-md-6"><br><br>
+    <div class="col-md-6">
       <h3 class="text-center">Registration</h3>
       <hr class="bg-info col-md-8">
       {% if error %}
@@ -55,24 +77,113 @@
       </div>
       {%endif%}
       <!-- Alerts -->
+      <script type="text/javascript">
+        //validation
+        function validate_registration() {
+          var reg_email = /^([A-Za-z0-9_\-\.]){1,}\@([A-Za-z0-9_\-\.]){1,}\.([A-Za-z]{2,4})$/;
+          var reg_only_char = /^([A-Za-z ]){5,}$/;
+          var reg_only_num = /^([0-9]){10}$/;
+          var f_name = document.forms["reg_form"]["firstname"].value;
+          var l_name = document.forms["reg_form"]["lastname"].value;
+          var u_name = document.forms["reg_form"]["username"].value;
+          var email = document.forms["reg_form"]["email"].value;
+          var password_1 = document.forms["reg_form"]["password"].value;
+          var password_2 = document.forms["reg_form"]["confirmpassword"].value;
+          var mob = document.forms["reg_form"]["mobile"].value;
+          var type = document.forms["reg_form"]["type_usr"].value;
+          var str = "Select";
+          // error_reg_div/error_reg_para
+
+          if (reg_only_char.test(f_name) == false) {
+            var msg = "INVALID NAME. PLEASE ENTER A VALID FIRST NAME";
+            document.getElementById("error_reg_div").style.visibility = 'visible';
+            document.getElementById("error_reg_para").innerHTML = msg;
+            // document.getElementById("error_cp").innerHTML = msg;
+            document.forms["reg_form"]["firstname"].focus();
+            return false;
+          }
+
+          if (reg_only_char.test(l_name) == false) {
+            var msg = "INVALID NAME. PLEASE ENTER A VALID SECOND NAME";
+            document.getElementById("error_reg_div").style.visibility = 'visible';
+            document.getElementById("error_reg_para").innerHTML = msg;
+            // document.getElementById("error_cp").innerHTML = msg;
+            document.forms["reg_form"]["lastname"].focus();
+            return false;
+          }
+
+          if (reg_email.test(u_name) == false) {
+            var msg = "MAIL ID EXPECTED! PLEASE ENTER A VALID EMAIL";
+            document.getElementById("error_reg_div").style.visibility = 'visible';
+            document.getElementById("error_reg_para").innerHTML = msg;
+            // document.getElementById("error_email").innerHTML = msg;
+            document.forms["reg_form"]["username"].focus();
+            return false;
+          }
+
+          if (reg_email.test(email) == false) {
+            var msg = "MAIL ID EXPECTED! PLEASE ENTER A VALID EMAIL";
+            document.getElementById("error_reg_div").style.visibility = 'visible';
+            document.getElementById("error_reg_para").innerHTML = msg;
+            // document.getElementById("error_email").innerHTML = msg;
+            document.forms["reg_form"]["email"].focus();
+            return false;
+          }
+
+          if (password_1 != password_2) {
+            var msg = "PASSWORD DESNOT MATCH";
+            document.getElementById("error_reg_div").style.visibility = 'visible';
+            document.getElementById("error_reg_para").innerHTML = msg;
+            document.forms["reg_form"]["confirmpassword"].focus();
+            return false;
+          }
+
+          if (reg_only_num.test(mob) == false) {
+            var msg = "INVALID PHONE NUMBER. PLEASE ENTER A VALID PHONE NUMBER";
+            document.getElementById("error_reg_div").style.visibility = 'visible';
+            document.getElementById("error_reg_para").innerHTML = msg;
+            // document.getElementById("error_phone").innerHTML = msg;
+            document.forms["reg_form"]["mobile"].focus();
+            return false;
+          }
+
+          if (type == str) {
+            var msg = "INVALID USER TYPE. PLEASE ENTER A VALID USER TYPE";
+            document.getElementById("error_reg_div").style.visibility = 'visible';
+            document.getElementById("error_reg_para").innerHTML = msg;
+            // document.getElementById("error_type").innerHTML = msg;
+            document.forms["reg_form"]["event_category"].focus();
+            return false;
+          }
+        }
+      </script>
       {% include 'alerts.html' %}
-      <form action=" {% url '/signup'%}" method="POST">
+      <form action=" {% url 'signup' %}" method="POST" name="reg_form" onsubmit="return validate_registration()">
         {% csrf_token %}
+        <div class="alert alert-info  alert-dismissible fade show" role="alert" id="error_reg_div"
+          style="visibility: hidden">
+          <p id="error_reg_para"></p>
+          <button type="button" class="close" data-dismiss="alert">
+            <span aria-hidden="true">&times;</span>
+          </button>
+        </div>
         <div class="form-group">
           <label for="firstname">First Name </label>
-          <input type="text" class="form-control border border-info" name="firstname" id="firstname"
+          <input type="text" class="form-control border border-info" required name="firstname" id="firstname"
             aria-describedby="emailHelp" placeholder="Enter First Name Please">
         </div>
         <div class="form-group">
           <label for="lastname">Last Name </label>
-          <input type="text" class="form-control border border-info" name="lastname" id="lastname"
+          <input type="text" class="form-control border border-info" required name="lastname" id="lastname"
             aria-describedby="emailHelp" placeholder="Enter Last Name Please">
 
         </div>
         <div class="form-group">
           <label for="city">User name </label>
-          <input type="text" class="form-control border border-info" name="username" id="mobile"
+          <input type="text" class="form-control border border-info" required name="username" id="username"
             aria-describedby="emailHelp" placeholder="Enter Your Mobile Number ">
+        </div>
+        <div class="form-group">
           <label for="email">Email </label>
           <input type="email" class="form-control border border-info" required name="email" id="email"
             aria-describedby="emailHelp" placeholder="Email ">
@@ -86,19 +197,19 @@
         </div>
         <div class="form-group">
           <label for="Password">Confirm Password </label>
-          <input type="Password" class="form-control border border-info" name="confirmpassword" id="password"
-            placeholder=" Comfirm Password">
+          <input type="Password" class="form-control border border-info" required name="confirmpassword"
+            id="confirmpassword" placeholder=" Comfirm Password">
 
         </div>
 
         <div class="form-group">
           <label for="phone">Mobile Number </label>
-          <input type="text" class="form-control border border-info" name="phone" id="phone"
+          <input type="text" class="form-control border border-info" required name="phone" id="phone"
             placeholder="Mobile Number">
         </div>
         <div class="form-group">
           <label for="type_usr"> User Type </label>
-          <select name="type_usr" class="form-control border border-info">
+          <select name="type_usr" id="type_usr" required class="form-control border border-info">
             <option>Select</option>
             <option value=100>Participant</option>
             <option value=200>Sponser</option>
