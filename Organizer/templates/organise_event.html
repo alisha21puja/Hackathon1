@@ -57,7 +57,7 @@
 	<div class="form-group">
 	    <label for="lastname">Event Category &ast;</label>
 		<select name="event_category"  class="form-control   border border-info">
-			<option class="form-control border border-info" > Select Event Type </option>
+			<option class="form-control border border-info" > Select Event Category </option>
 			<option class="form-control border border-info" >hackathons </option>
 			<option class="form-control border border-info" >Tech Fest </option>
 			<option class="form-control border border-info" > Gaming Event</option>
@@ -68,17 +68,17 @@
 
 
 	  <div class="form-group">
-	    <label for="city">Organized by Org/College &ast;  </label>
+	    <label for="city">Organized by Organization/College &ast;  </label>
 	  <input type="text" class="form-control border border-info"  name="org_by"  id="org_by" aria-describedby="emailHelp" placeholder="Organaization Name/College Name ">
 	  </div>
 	    <div class="form-group">
 	    <label for="email">Organiser Email &ast; </label>
-	    <input type="email" class="form-control border border-info"   name="org_email" id="email" aria-describedby="emailHelp" placeholder="Email">
+	    <input type="email" class="form-control border border-info"  value="{{ request.user.email }}" readonly name="org_email" id="email" aria-describedby="emailHelp" placeholder=" Organsiser Email">
 	  
 	  </div>
 	  <div class="form-group">
-	    <label for="mobile no">Mobile No &ast; </label>
-	    <input type="text" class="form-control border border-info"  name="mobile" id="password"  placeholder="Mobile No">
+	    <label for="mobile no">Mobile Number &ast; </label>
+	    <input type="text" class="form-control border border-info"  name="mobile" id="password"  placeholder="Mobile Number">
 	  
 	  </div>
 	  <div class="form-group">
@@ -93,18 +93,18 @@
 	  </div>
 	    <div class="form-group">
 	    <label for="Person Name">Event starts Date &ast; </label>
-	    <input type="Date" class="form-control border border-info"  name="event_startdate" id="event_startdate" placeholder="Event Poster ">
+	    <input type="Date" class="form-control border border-info"  name="event_startdate" id="event_startdate" placeholder="Event Start Date ">
 	  
 	  </div>
 
 	    <div class="form-group">
 	    <label for="Person Name">Event End Date &ast; </label>
-	    <input type="Date" class="form-control border border-info"  name="event_enddate" id="event_startdate" placeholder="Event Poster ">
+	    <input type="Date" class="form-control border border-info"  name="event_enddate" id="event_startdate" placeholder=" Event End Date ">
 	  
 	  </div>
 	  <div class="form-group">
 	    
-	    <input type="submit" class="btn btn-outline-info bg-dark"  id="password" aria-describedby="emailHelp" value="Submit" >
+	    <input type="submit" class="btn btn-outline-info bg-dark text-white"  id="password" aria-describedby="emailHelp" value="Submit" >
 	  
 	  </div>
 	      </form>

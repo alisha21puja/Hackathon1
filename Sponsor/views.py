@@ -1,10 +1,31 @@
 from django.shortcuts import render,get_object_or_404
 from Blog.models import BlogsInfo
-from Organizer.models import EventDetails,SponsorShip,EventDetails
+from Organizer.models import EventDetails,SponsorShip,EventDetails,OrganiseEvent
 from django.utils import timezone
+from django.core.mail  import send_mail
+
 
 def sponsor(request):
 	return  render(request,'sponsor_index.html')
+
+
+
+
+def enquireInfoMail(request):
+	if request.POST:
+		subject = request.POST['subject']
+		to = request.POST['to']
+		fromm = request.POST['from']
+		mobile = request.POST['mobile']
+		message = request.POST['message']
+		send_mail('Subject' +subject,
+			'Message'+ message + 'Will Contact your soon',
+			'sachin.thakur9614@gmail.com',
+			[to,'sachin.thakur@mca.christuniversity.in',],
+			fail_silently =False)
+		
+		return  render(request,'sponsor_index.html')
+
 
 
 def sponsorEventDet(request,id):
@@ -23,8 +44,41 @@ def sponsoredEvent(request):
 	event = EventDetails.objects
 	return render(request,'sponsor_event.html',{'sponsors':sponsors,'event':event})
 
+def eventInfo(request,id):
+	
+	events = OrganiseEvent.objects.get(pk=id)
+	sponsor  = SponsorShip.objects.get(org_id = id)
+
+	eventdet = EventDetails.objects.get(org_id=id)
+	print("hello",eventdet)
+
+	context ={	'events':events,
+				'eventdet':eventdet,
+				'sponsor':sponsor
+			}
+
+	print("event is",events.event_title)
+	return render(request,'sponsor_event_details.html',context)
+
+
+
+
 def sponsorUpComing(request):
-	return render(request,'sponsor_up_coming.html')
+	sponsors = SponsorShip.objects
+
+	event = OrganiseEvent.objects.all()
+
+	print("event is")
+	
+
+	context ={	'sponsors ':sponsors,
+				'event':event,
+			
+			}
+
+
+
+	return render(request,'sponsor_up_coming.html',context)
 
 
 
@@ -39,6 +93,10 @@ def sponsorEventDetails(request,id):
 
 	event = get_object_or_404(EventDetails, pk=id)
 	return render(request,'sponsor_event.html')
+
+def enquireInfo(request,id):
+	event = OrganiseEvent.objects.get(pk=id)
+	return render(request,'sponsor_enquire.html',{'event':event})
 
 
 def enquire(request):

@@ -40,6 +40,30 @@
 
 			</thead>
 			{%  for sponsor in sponsors.all  %}
+
+
+
+
+
+<div class="card" style="width: 18rem;">
+  <img src="..." class="card-img-top" alt="...">
+  <div class="card-body">
+    <h5 class="card-title">{{ sponsor.event_title }} {{event.event }} </h5>
+    <p class="card-text">{{ sponsor.ex_platinum }} </p>
+  </div>
+  <ul class="list-group list-group-flush">
+    <li class="list-group-item"> {{ sponsor.ex_gold }}   {{ sponsor.ex_silver }} </li>
+    <li class="list-group-item">Dapibus ac facilisis in</li>
+    <li class="list-group-item">Vestibulum at eros</li>
+  </ul>
+  <div class="card-body">
+    <a href="#" class="card-link">Card link</a>
+    <a href="#" class="card-link">Another link</a>
+  </div>
+</div>
+
+
+
 				<tr>
 					<td class="text-dark text-center"> {{ sponsor.event_title }} {{event.event }} </td>
 					

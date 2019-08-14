@@ -9,26 +9,26 @@
 </head>
 
 <nav class="navbar fixed-top navbar-expand-lg navbar-dark bg-dark">
-  <a class="navbar-brand " href="{% url 'organiserIndex' %}"><button type="button" class="btn btn-outline-info">Tech Event</button></a>
+  <a class="navbar-brand " href="{% url 'organiserIndex' %}"><button type="button" class="btn btn-outline-info text-white">Tech Event</button></a>
   <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarText" aria-controls="navbarText" aria-expanded="false" aria-label="Toggle navigation">
     <span class="navbar-toggler-icon"></span>
   </button>
   <div class="collapse navbar-collapse mr-auto"  id="navbarText">
     <ul class="navbar-nav ml-auto">
       <li class="nav-item active">
-        <a class="nav-link" href="{% url 'organiseEvent' %}"><button type="button" class="btn btn-outline-info">Organise Event </button><span class="sr-only">(current)</span></a>
+        <a class="nav-link" href="{% url 'organiseEvent' %}"><button type="button" class="btn btn-outline-info text-white">Organise Event </button><span class="sr-only">(current)</span></a>
       </li>
        <li class="nav-item active">
-        <a class="nav-link" href="{% url 'registeredevent' %}"><button type="button" class="btn btn-outline-info">Registered Events </button><span class="sr-only"></span></a>
+        <a class="nav-link" href="{% url 'registeredevent' %}"><button type="button" class="btn btn-outline-info text-white">Registered Events </button><span class="sr-only"></span></a>
       </li>
       <li class="nav-item  fg-white">
-      <a class="nav-link btn btn-outline-dark text-white " href="{% url 'addEventDetails' %}"><button type="button" class="btn btn-outline-info">Event Details</button></a>
+      <a class="nav-link btn btn-outline-dark text-white " href="{% url 'addEventDetails' %}"><button type="button" class="btn btn-outline-info text-white">Event Details</button></a>
       </li>
        <li class="nav-item  ">
-        <a class="nav-link text-white " href="{% url 'blog'  %}"><button type="button" class="btn btn-outline-info">Blogs</button></a>
+        <a class="nav-link text-white " href="{% url 'blog'  %}"><button type="button" class="btn btn-outline-info text-white">Blogs</button></a>
       </li>
         <li class="nav-item  ">
-        <a class="nav-link text-white " href="{% url 'shareResource'  %}"><button type="button" class="btn btn-outline-info">Share Resources</button></a>
+        <a class="nav-link text-white " href="{% url 'shareResource'  %}"><button type="button" class="btn btn-outline-info text-white">Share Resources</button></a>
       </li>
 
      
@@ -36,16 +36,16 @@
       <div class="btn-group">
 
            <li class="nav-item  fg-white">
-       <a class="nav-link text-white " href="#"><button type="button" class="btn btn-outline-info">Welcome {{ user.first_name }}! </button></a>
+       <a class="nav-link text-white " href="#"><button type="button" class="btn btn-outline-info text-white">Welcome {{ user.first_name }}! </button></a>
       </li>
 
        <li class="nav-item  fg-white">
-        <a class="nav-link text-white " href="{% url 'sponsorShip' %}"><button type="button" class="btn btn-outline-info">Sponsor Ship </button></a>
+        <a class="nav-link text-white " href="{% url 'sponsorShip' %}"><button type="button" class="btn btn-outline-info text-white">Sponsorship </button></a>
       </li>
 
        <li class="nav-item  ">
         <a class="nav-link text-white " href="javascript:{document.getElementById('logout').submit()}">
-          <button type="button" class="btn btn-outline-info">LogOut</button></a>
+          <button type="button" class="btn btn-outline-info text-white">Logout</button></a>
          <form action="{% url 'logout' %}" method="POST" id="logout">
             {% csrf_token %}
             <input type="hidden" name="">
@@ -75,21 +75,25 @@
 </body>
 
 
-
 <link href="//maxcdn.bootstrapcdn.com/font-awesome/4.1.0/css/font-awesome.min.css" rel="stylesheet">
 <footer class="footer bg-dark navbar-fixed-bottom mr-auto">
   <div class="container pull-center bg-dark">
     <div class="row mr-auto ">
-     
-      <div class="col-md-8">
-        <p> 
-           <h6 class="text-white text-center"> Know more about us <a class="  btn-outline-info" href="{% url 'aboutus' %}">
-              here </a></h6>
 
+      <div class="col-md-3">
+        <p>
+          <h6 class="text-white text-center"> Know more about us <a class="  btn-outline-info"
+              href="{% url 'aboutus' %}">
+              here </a></h6>
+        </p>
+      </div>
+
+      <div class="col-md-4">
+        <p>
           <h6 class="text-white text-center"> &copy;Reserved to Hackathon 20{% now "y" %} </h6>
         </p>
       </div>
-      <div class="col-md-4">
+      <div class="col-md-5">
         <a class="btn btn-twitter" href="">
           <button type="button" class=" fa fa-twitter btn btn-outline-info"></button>
         </a>
@@ -112,7 +116,9 @@
     </div>
   </div>
 </footer>
+
 </html>
+
 
   {% else %}
      

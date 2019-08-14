@@ -22,16 +22,7 @@ def contacts(request):
 		message = request.POST['message']
 
 		contact =Contact(name= name,email=email,subject=subject,phone =phone,message=message )
-		send_mail('Subject' +subject,
-			'Message'+ message + 'Will Contact your soon',
-			'sachin.thakur9614@gmail.com',
-			[email,'sachin.thakur@mca.christuniversity.in',],
-			fail_silently =False
-
-
-
-
-			)
+		
 
 
 		contact.save()

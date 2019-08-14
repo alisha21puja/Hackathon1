@@ -3,7 +3,7 @@ from django.contrib.auth.models import User
 from django.conf import settings
 
 from django.utils.timezone import now
-
+from django.utils import timezone
 # from froala_editor.fields import FroalaField
 
 from django.contrib.auth import get_user_model
@@ -20,12 +20,13 @@ class OrganiseEvent(models.Model):
 	org_email = models.EmailField(max_length=100)
 	org_mobile = models.BigIntegerField()
 	org_contact_person = models.CharField(max_length=100)
-	event_poster = models.ImageField(upload_to='event_poster/')
-	event_startdate = models.DateTimeField(default= now)
-	event_enddate = models.DateTimeField()
+	event_poster = models.ImageField(upload_to='images/event_poster/',default="images/event_poster/Quotefancy-15975-3840x2160.jpg" ,blank=True )
+	event_startdate = models.DateTimeField(default= '2019-08-14 10:02:20.392972')
+	event_enddate = models.DateTimeField(default='2019-08-14 10:02:20.392972')
 	us = models.ForeignKey(User,  on_delete=models.CASCADE)
 	def summary(self):
 		return self.event_description[:150]
+
 
 class EventDetails(models.Model):
 	event = models.CharField(max_length=200)
@@ -51,6 +52,8 @@ class ShareResource(models.Model):
 	resourceImage = models.ImageField(upload_to='images/shared_resources/')
 	us = models.ForeignKey(User,  on_delete=models.CASCADE)
 	org_id=models.ForeignKey(OrganiseEvent,on_delete=models.CASCADE)
+
+
 
 class SponsorShip(models.Model):
 	event_title = models.CharField(max_length=100,default=True)
