@@ -18,6 +18,7 @@
 				</button>
 			</div>
 			{%endif%}
+
 			<script type="text/javascript">
 				function validate() {
 					var reg_email = /^([A-Za-z0-9_\-\.]){1,}\@([A-Za-z0-9_\-\.]){1,}\.([A-Za-z]{2,4})$/;
@@ -70,7 +71,11 @@
 						return false;
 					}
 
-					// verify the dates entry
+					if ((Date.parse(event_start_date) >= Date.parse(event_end_date))) {
+						alert("End date should be greater than Start date");
+						document.forms["reg_event"]["event_enddate"].focus();
+						return false;
+					}
 				}
 
 			</script>
@@ -82,12 +87,10 @@
 					<label for="firstname">Event Title &ast;</label>
 					<input type="text" class="form-control border border-info" name="event_title" id="event_title"
 						aria-describedby="emailHelp" placeholder="Event Name" required>
-					<div id="event_title_error"></div>
 				</div>
 				<div class="form-group">
 					<label for="city">Event Description &ast; </label>
 					<textarea class="form-control border border-info" name="event_description" required></textarea>
-					<div id="event_description_error"></div>
 				</div>
 				<div class="form-group">
 					<label for="lastname">Event Category &ast;</label>
@@ -100,50 +103,42 @@
 						<option class="form-control border border-info"> Workshop </option>
 						<option class="form-control border border-info"> IT Fest </option>
 					</select>
-					<div id=event_category_error></div>
 				</div>
 				<div class="form-group">
 					<label for="city">Organization Name / College Name &ast; </label>
 					<input type="text" class="form-control border border-info" name="org_by" id="org_by"
 						aria-describedby="emailHelp" placeholder="Organaization Name / College Name " required>
-					<div id="org_by_error"></div>
 				</div>
 				<div class="form-group">
 					<label for="org_email">Organiser Email &ast; </label>
 					<input type="email" class="form-control border border-info" name="org_email" id="org_email"
 						aria-describedby="emailHelp" placeholder="Oragniser Email" required>
-					<div id="org_email_error"></div>
 				</div>
 				<div class="form-group">
 					<label for="mobile no">Mobile Number (excl. +91)&ast; </label>
 					<input type="text" class="form-control border border-info" name="mobile" id="mobile"
 						placeholder="Mobile Number" required>
-					<div id="mobile_error"></div>
 				</div>
 				<div class="form-group">
 					<label for="Person Name"> Contact Person Name &ast; </label>
 					<input type="text" class="form-control border border-info" name="person_name" id="person_name"
 						placeholder="Contact Person Name " required>
-					<div id="person_name_error"></div>
 				</div>
 				<div class="form-group">
 					<label for="Person Name">Event Poster &ast; </label>
 					<input type="file" class="form-control border border-info" required name="event_poster"
 						id="event_poster" placeholder="Event Poster ">
-					<div id="event_poster_error"></div>
 				</div>
 				<div class="form-group">
 					<label for="Person Name">Event starts Date &ast; </label>
 					<input type="Date" class="form-control border border-info" name="event_startdate"
 						id="event_startdate" placeholder="Start Date " required>
-					<div id="event_startdate_error"></div>
 				</div>
 
 				<div class="form-group">
 					<label for="Person Name">Event End Date &ast; </label>
 					<input type="Date" class="form-control border border-info" name="event_enddate" id="event_enddate"
 						placeholder="End Date " required>
-					<div id="event_enddate_error"></div>
 				</div>
 				<div class="form-group">
 
