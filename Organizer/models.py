@@ -94,6 +94,3 @@ class Event_Location(models.Model):
     event_longitude = models.CharField(max_length=100)
     eventid = models.ForeignKey(OrganiseEvent,on_delete=models.CASCADE)
     event_name = models.CharField(max_length=200)
-
-    def __self__():
-        return self.event_venue_name
