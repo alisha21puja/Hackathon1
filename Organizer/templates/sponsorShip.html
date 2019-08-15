@@ -23,8 +23,8 @@
 			<form action=" {% url 'sponsorShipDetails' %}" method="POST">
 				{% csrf_token %}
 				<div class="form-group">
-					<label for="firstname">Select Event &ast;</label>
-					<select class="form-control   border border-info" name="event_title">
+					<label for="event_title">Select Event&ast;</label>
+					<select class="form-control   border border-info" name="event_title" required>
 						<option class="form-control border border-info"> Select your Event </option>
 						{% for eve in event.all %}
 						<option class="form-control   border border-info"> {{ eve.event_title }}
@@ -33,54 +33,54 @@
 					</select>
 				</div>
 				<div class="form-group">
-					<label for="Person Name">Platinum Sponsor &ast; </label>
-					<select name="platinum_sponsor" class="form-control   border border-info">
+					<label for="platinum_sponsor">Platinum Sponsor&ast; </label>
+					<select name="platinum_sponsor" id="platinum_sponsor" class="form-control   border border-info" required>
 						<option class="form-control border border-info"> Select Sponsor </option>
 						<option class="form-control border border-info">Platinum Sponsor </option>
 					</select>
 				</div>
 				<div class="form-group">
-					<label for="city">Facilities for Platinum &ast; </label>
-					<textarea class="form-control border border-info" placeholder="Description"
+					<label for="f_platinum">Facilities for Platinum&ast; </label>
+					<textarea class="form-control border border-info" placeholder="Description" required id="f_platinum"
 						name="f_platinum"></textarea>
 				</div>
 				<div class="form-group">
-					<label for="mobile no"> Expected Amount from platinum &ast; </label>
-					<input type="text" class="form-control border border-info" name="ex_platinum" id="password"
+					<label for="ex_platinum"> Expected Amount from platinum&ast; </label>
+					<input type="text" class="form-control border border-info" name="ex_platinum" id="ex_platinum" required
 						placeholder="Expected Amount">
 				</div>
 				<div class="form-group">
-					<label for="firstname">Gold Sponsor &ast;</label>
-					<select name="gold_sponsor" class="form-control   border border-info">
+					<label for="gold_sponsor">Gold Sponsor&ast;</label>
+					<select name="gold_sponsor" id="gold_sponsor" class="form-control   border border-info" required>
 						<option class="form-control border border-info"> Select Sponsor </option>
 						<option class="form-control border border-info">Gold Sponsor </option>
 					</select>
 				</div>
 				<div class="form-group" id="froala-editor">
-					<label for="Person Name">Facilities for Gold&ast; </label>
-					<textarea class="form-control border border-info" placeholder="Facilities Provieded for Gold"
-						name="f_gold"></textarea>
+					<label for="f_gold">Facilities for Gold&ast; </label>
+					<textarea class="form-control border border-info" placeholder="Facilities Provieded for Gold" required
+						name="f_gold" id="f_gold"></textarea>
 				</div>
 				<div class="form-group">
-					<label for="mobile no"> Gold Sponsor Expected Amount &ast; </label>
-					<input type="text" class="form-control border border-info" name="ex_gold" id="password"
+					<label for="ex_gold"> Gold Sponsor Expected Amount&ast; </label>
+					<input type="text" class="form-control border border-info" name="ex_gold" id="ex_gold" required
 						placeholder="Expected Amount">
 				</div>
 				<div class="form-group">
-					<label for="Person Name">Silver Sponsor &ast; </label>
-					<select name="silver_sponsor" class="form-control   border border-info">
+					<label for="silver_sponsor">Silver Sponsor&ast; </label>
+					<select name="silver_sponsor" class="form-control   border border-info" id="silver_sponsor" required>
 						<option class="form-control border border-info"> Select Sponsor </option>
 						<option class="form-control border border-info">Sliver Sponsor </option>
 					</select>
 				</div>
 				<div class="form-group">
-					<label for="city">Facilities for Silver &ast; </label>
-					<textarea class="form-control border border-info" placeholder="Facilities"
+					<label for="f_silver">Facilities for Silver&ast; </label>
+					<textarea class="form-control border border-info" placeholder="Facilities" required id="f_silver"
 						name="f_silver"></textarea>
 				</div>
 				<div class="form-group">
-					<label for="mobile no"> Expected Amount from Silver &ast; </label>
-					<input type="text" class="form-control border border-info" name="ex_silver" id="password"
+					<label for="ex_silver"> Expected Amount from Silver&ast; </label>
+					<input type="text" class="form-control border border-info" name="ex_silver" id="ex_silver" required
 						placeholder="Expected Amount for Silver">
 				</div>
 				<div class="form-group">

@@ -21,34 +21,34 @@
 			<form action=" {% url 'WriteBlog' %}" method="POST">
 				{% csrf_token %}
 				<div class="form-group">
-					<label for="firstname"> Title &ast;</label>
-					<input type="text" class="form-control border border-info" name="blog_title" id="person_name"
-						placeholder="Blog Title">
+					<label for="blog_title"> Title&ast;</label>
+					<input type="text" class="form-control border border-info" name="blog_title" id="blog_title"
+						placeholder="Blog Title" required>
 				</div>
 				<div class="form-group" id="froala-editor">
-					<label for="Person Name">Description&ast; </label>
+					<label for="description">Description&ast; </label>
 					<textarea class="form-control border border-info" placeholder="Description"
-						name="description"></textarea>
+						id="description" name="description" required></textarea>
 				</div>
 				<div class="form-group">
-					<label for="Person Name">Image First &ast; </label>
-					<input type="file" class="form-control border border-info" name="image_first" id="event_startdate"
-						placeholder="First Image ">
+					<label for="image_first">Image First&ast; </label>
+					<input type="file" class="form-control border border-info" name="image_first" id="image_first"
+						placeholder="First Image " required>
 				</div>
 				<div class="form-group">
-					<label for="city">Second Image &ast; </label>
-					<input type="file" class="form-control border border-info" name="image_second" id="org_by"
-						aria-describedby="emailHelp" placeholder="Second Image ">
+					<label for="image_second">Second Image&ast; </label>
+					<input type="file" class="form-control border border-info" name="image_second" id="image_second"
+						aria-describedby="emailHelp" placeholder="Second Image " required>
 				</div>
 				<div class="form-group">
-					<label for="mobile no">Blog Category &ast; </label>
-					<input type="text" class="form-control border border-info" name="blog_category" id="password"
-						placeholder="Blog Category">
+					<label for="blog_category">Blog Category&ast; </label>
+					<input type="text" class="form-control border border-info" name="blog_category" id="blog_category"
+						placeholder="Blog Category" required>
 				</div>
 				<div class="form-group">
-					<label for="Person Name">Refrence Link &ast; </label>
-					<input type="text" class="form-control border border-info" name="refrence_link" id="person_name"
-						placeholder="Refrence Links ">
+					<label for="refrence_link">Refrence Link&ast; </label>
+					<input type="text" class="form-control border border-info" name="refrence_link" id="refrence_link"
+						placeholder="Refrence Links " required>
 				</div>
 				<div class="form-group">
 					<input type="submit" class="btn btn-outline-info bg-dark" id="password" aria-describedby="emailHelp"

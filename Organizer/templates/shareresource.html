@@ -19,13 +19,85 @@
 				</button>
 			</div>
 			{%endif%}
+			<script type="text/javascript">
+				function validate() {
+					var reg_name = /^([A-Za-z0-9_\-\.]){5,100}$/;
+					var reg_only_char = /^([A-Za-z ]){5,}$/;
+					var reg_img = /(\.jpg|\.jpeg|\.png)$/i;
+					var reg_doc = /(\.pdf|\.docx|\.doc)$/i;
+					var evnt_name = document.forms["share_resource"]["event_name"].value;
+					var sub = document.forms["share_resource"]["subject"].value;
+					var desc = document.forms["share_resource"]["descr"].value;
+					var date = document.forms["share_resource"]["published_date"].value;
+					var link = document.forms["share_resource"]["addlinks"].value;
+					var doc_file = document.forms["share_resource"]["document_file"].value;
+					var by = document.forms["share_resource"]["published_by"].value;
+					var img = document.forms["share_resource"]["share_image"].value;
+					var str = "Select Event Type";
 
-			<form action=" {% url 'Resource' %}" method="POST">
+					if(evnt_name==str)
+					{
+						var msg = "INVALID EVENT. PLEASE ENTER A VALID EVENT";
+						document.getElementById("error_title_div").style.visibility = 'visible';
+						document.getElementById("error_para").innerHTML = msg;
+           				// alert("hai");
+						// document.getElementById("error_type").innerHTML = msg;
+						document.forms["share_resource"]["event_name"].focus();
+						return false;
+					}
+
+					if (reg_name.test(sub) == false) {
+						msg = "INVALID SUBJECT. WRITE PROPER SUBJECT";
+						document.getElementById("error_title_div").style.visibility = 'visible';
+						document.getElementById("error_para").innerHTML = msg;
+						// document.getElementById("error_file_type").innerHTML = msg;
+						document.forms["share_resource"]["subject"].focus();
+						return false;
+					}
+
+					if (reg_file.test(doc_file) == false) {
+						msg = "INVALID FILE TYPE";
+						document.getElementById("error_title_div").style.visibility = 'visible';
+						document.getElementById("error_para").innerHTML = msg;
+						// document.getElementById("error_file_type").innerHTML = msg;
+						document.forms["share_resource"]["document_file"].focus();
+						return false;
+					}
+
+					if (reg_only_char.test(event_org_name) == false) {
+						msg = "INVALID NAME. PLEASE ENTER A VALID NAME";
+						document.getElementById("error_title_div").style.visibility = 'visible';
+						document.getElementById("error_para").innerHTML = msg;
+						// document.getElementById("error_orgname").innerHTML = msg;
+						document.forms["share_resource"]["published_by"].focus();
+						return false;
+					}
+
+					if (reg_file.test(img) == false) {
+						msg = "INVALID FILE TYPE";
+						document.getElementById("error_title_div").style.visibility = 'visible';
+						document.getElementById("error_para").innerHTML = msg;
+						// document.getElementById("error_file_type").innerHTML = msg;
+						document.forms["share_resource"]["share_image"].focus();
+						return false;
+					}
+				}
+			</script>
+
+			<form action=" {% url 'Resource' %}" method="POST" name="share_resource" id="share_resource"
+				onsubmit="return validate()">
 				{% csrf_token %}
+				<div class="alert alert-info alert-dismissible fade show" role="alert" id="error_title_div"
+					style="visibility: hidden">
+					<p id="error_para"></p>
+					<button type="button" class="close" data-dismiss="alert" aria-label="Close">
+						<span aria-hidden="true">&times;</span>
+					</button>
+				</div>
 				<div class="form-group">
-					<label for="firstname">Event Title &ast;</label>
-					<select class="form-control   border border-info" name="event_name">
-						<option class="form-control border border-info"> Select your Event </option>
+					<label for="event_name">Event Title&ast;</label>
+					<select class="form-control   border border-info" name="event_name" id="event_name" required>
+						<option class="form-control border border-info">Select your Event</option>
 						{% for eve in event.all %}
 						<option class="form-control border border-info" value="{{ eve.event_title }}">
 							{{ eve.event_title }}
@@ -34,41 +106,41 @@
 					</select>
 				</div>
 				<div class="form-group">
-					<label for="Person Name"> Subject&ast; </label>
-					<input type="text" class="form-control border border-info" name="subject" id="person_name"
-						placeholder="Subject ">
+					<label for="subject"> Subject&ast; </label>
+					<input type="text" class="form-control border border-info" name="subject" id="subject"
+						placeholder="Subject " required>
 				</div>
 				<div class="form-group" id="froala-editor">
 					<div class="summernote">
-						<label for="Person Name">Description&ast; </label>
-						<textarea id="froala-editor" class="form-control border border-info"
-							name="description"></textarea>
+						<label for="descr">Description&ast; </label>
+						<textarea id="descr" name="descr" class="form-control border border-info"
+							required></textarea>
 					</div>
 				</div>
 				<div class="form-group">
-					<label for="Person Name">Published Date &ast; </label>
-					<input type="Date" class="form-control border border-info" name="published_date"
-						id="event_startdate" placeholder="Published Date ">
+					<label for="published_date">Published Date&ast; </label>
+					<input type="Date" class="form-control border border-info" name="published_date" id="published_date"
+						placeholder="Published Date " required>
 				</div>
 				<div class="form-group">
-					<label for="city">Add Github/Docs/Drive Resource Link &ast; </label>
-					<input type="text" class="form-control border border-info" name="addlinks" id="org_by"
-						aria-describedby="emailHelp" placeholder="Add Github and Drive Link ">
+					<label for="addlinks">Add Github/Docs/Drive Resource Link&ast; </label>
+					<input type="text" class="form-control border border-info" name="addlinks" id="addlinks"
+						aria-describedby="emailHelp" placeholder="Add Github and Drive Link " required>
 				</div>
 				<div class="form-group">
-					<label for="email"> Document File &ast; </label>
-					<input type="file" class="form-control border border-info" name="document_file" id="email"
-						aria-describedby="emailHelp" placeholder="Email">
+					<label for="document_file"> Document File&ast; </label>
+					<input type="file" class="form-control border border-info" name="document_file" id="document_file"
+						aria-describedby="emailHelp" placeholder="Email" required>
 				</div>
 				<div class="form-group">
-					<label for="mobile no">Published By &ast; </label>
-					<input type="text" class="form-control border border-info" name="published_by" id="password"
-						placeholder="Name of the Person">
+					<label for="published_by">Published By&ast; </label>
+					<input type="text" class="form-control border border-info" name="published_by" id="published_by"
+						placeholder="Name of the Person" required>
 				</div>
 				<div class="form-group">
-					<label for="Person Name">Share Image &ast; </label>
-					<input type="file" class="form-control border border-info" name="share_image" id="person_name"
-						placeholder="Share Image ">
+					<label for="share_image">Share Image&ast; </label>
+					<input type="file" class="form-control border border-info" name="share_image" id="share_image"
+						placeholder="Share Image " required>
 				</div>
 				<div class="form-group">
 					<input type="submit" class="btn btn-outline-info bg-dark" id="password" aria-describedby="emailHelp"

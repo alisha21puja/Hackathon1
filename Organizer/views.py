@@ -300,7 +300,7 @@ def resource(request):
     if request.method == 'POST':
         event_title = request.POST['event_name']
         subject = request.POST['subject']
-        description = request.POST['description']
+        description = request.POST['descr']
         publishedDate = request.POST['published_date']
         resourceLink = request.POST['addlinks']
         documentFile = request.POST['document_file']
