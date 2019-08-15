@@ -35,12 +35,11 @@
 					var img = document.forms["share_resource"]["share_image"].value;
 					var str = "Select Event Type";
 
-					if(evnt_name==str)
-					{
+					if (evnt_name == str) {
 						var msg = "INVALID EVENT. PLEASE ENTER A VALID EVENT";
 						document.getElementById("error_title_div").style.visibility = 'visible';
 						document.getElementById("error_para").innerHTML = msg;
-           				// alert("hai");
+						// alert("hai");
 						// document.getElementById("error_type").innerHTML = msg;
 						document.forms["share_resource"]["event_name"].focus();
 						return false;
@@ -113,8 +112,7 @@
 				<div class="form-group" id="froala-editor">
 					<div class="summernote">
 						<label for="descr">Description&ast; </label>
-						<textarea id="descr" name="descr" class="form-control border border-info"
-							required></textarea>
+						<textarea id="descr" name="descr" class="form-control border border-info" required></textarea>
 					</div>
 				</div>
 				<div class="form-group">
@@ -153,6 +151,12 @@
 			<br>
 			<div class="row">
 				<table class="table table-bordered  table-light table-hover ">
+					<tr class="text-dark">
+						<td class="text-dark text-center">
+							<a href="{% url 'editResource' %}" class="btn btn-dark btn-outline-info text-light">
+								View Detail(s)</a>
+						</td>
+					</tr>
 					<tr class="text-dark">
 						<td class="text-dark text-center">
 							<a href="{% url 'editResource' %}" class="btn btn-dark btn-outline-info text-light">
