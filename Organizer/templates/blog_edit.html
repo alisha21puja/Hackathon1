@@ -5,73 +5,44 @@
 
 {%load staticfiles %}
 
-<br><br><br><br><br><br>
+<br><br><br><br>
+
 <div class="container">
 
-  <div class="row">
-    <br><br><br>
+  <div class="row shadow p-3 mb-5 bg-white rounded">
     <div class="col-md-12">
-
-      <table class="table table-bordered  table-info table-hover ">
-        <thead class="thead-dark text-info">
-
-          <tr class="text-info">
-            <th class="text-info text-center"> Blog Title</th>
-            <th class="text-info text-center">Description</th>
-            <th class="text-info text-center"> First Image</th>
-
-            <th class="text-info text-center">Second Image </th>
-            <th class="text-info text-center">Blog Category </th>
-            <th class="text-info text-center">Refrence Link</th>
-            <th class="text-info text-center">Edit</th>
-            <th class="text-info text-center">Delete</th>
-
-
-
-          </tr>
-
-        </thead>
-        {% for blog in blogsInfo.all %}
-
-        <tr>
-
-
-          <td class="text-dark text-center">{{ blog.title }} </td>
-
-          <td class="text-dark text-center"> {{ blog.summary }}</td>
-          <td class="text-dark text-center"><img src="{{ blog.imageFirst.url }}" height="100" width="100s"></td>
-
-          <td class="text-dark text-center"><img src="{{ blog.imageSecond.url }} " height="100" width="100s"> </td>
-
-          <td class="text-dark text-center">
-
-            {{ blog.blogCategory }}
-          </td>
-
-
-          <td class="text-dark text-center">
-
-            {{ blog.refrenceLinks }}
-
-
-          </td>
-          <td class="text-dark text-center">
-
-            <a href="#" class="btn btn-dark btn-outline-info" data-toggle="modal" data-target="#edit{{blog.id}}">
-              Edit Blog</a>
-
-
-          </td>
-          <td class="text-dark text-center">
-            <a href="" class="btn btn-dark btn-outline-info" data-toggle="modal" data-target="#delete{{blog.id}}">
-              Delete Blog</a>
-
-          </td>
-
-        </tr>
-
-
-
+      <h3 class=" text-center">Blog Details</h3>
+      <hr class="bg-info col-md-10">
+    </div>
+    {% for blog in blogsInfo.all %}
+    <div class="col-md-6">
+      <div class="card border border-info ">
+        <!--style="width: 18rem;">-->
+        <div class="card-body">
+          <h5 class="card-title text-center">Blog Title : {{ blog.title }}</h5>
+          <hr class="bg-info col-md-8">
+          <!-- <h6 class="card-subtitle mb-2 text-muted">Helps to organise event</h6> -->
+          <p class="card-text"> Blog Category &nbsp;&nbsp;: {{ blog.blogCategory }}</p>
+          <p class="card-text"> Description : </p>
+          <p class="card-text"> {{ blog.summary }}</p>
+          <p class="card-text"> Images: </p>
+          <div class="row">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                <img src="{{ blog.imageFirst.url }}" height="200" width="200">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                <img src="{{ blog.imageSecond.url }} " height="200" width="200">
+          </div>
+          <br>
+          <p class="card-text"> Refrence Link &nbsp; : {{ blog.refrenceLinks }} </p>
+          <div class="row">
+            <button class=" btn">
+              <a href="#" class="btn btn-dark btn-outline-info" data-toggle="modal" data-target="#edit{{blog.id}}">
+                Edit Blog</a>
+            </button>
+            <button class=" btn">
+              <a href="" class="btn btn-dark btn-outline-info" data-toggle="modal" data-target="#delete{{blog.id}}">
+                Delete Blog</a>
+            </button>
+          </div>
+        </div>
 
         <div class="modal fade" id="edit{{blog.id}}" tabindex="-1" role="dialog" aria-labelledby="exampleModalLongTitle"
           aria-hidden="true">
@@ -83,29 +54,20 @@
                   <span aria-hidden="true">&times;</span>
                 </button>
               </div>
+
               <div class="modal-body">
-
-
-
-
-
                 <center>
-
                   <form action="" method="POST">
                     {% csrf_token %}
                     <div class="form-group">
                       <label for="exampleFormControlInput1">Blog Title</label>
-
                       <input type="text" class="form-control" id="exampleFormControlInput1" name="event_title"
                         value="{{ blog.title }}" placeholder="Event Title">
                     </div>
-
-
                     <div class="form-group">
                       <label for="exampleFormControlInput1">Blog Description</label>
                       <textarea class="form-control">  {{ blog.description }}</textarea>
                     </div>
-
                     <div class="form-group">
                       <label for="exampleFormControlSelect2">Image First</label>
                       <input type="file" class="form-control" name="">
@@ -115,14 +77,8 @@
                       <input type="file" class="form-control" id="exampleFormControlInput1" name="expected_participant"
                         value="" placeholder="Organisation Emial">
                     </div>
-
-
-
-
-
                     <div class="form-group">
                       <label for="exampleFormControlInput1">Blog Category</label>
-
                       <select name="event_category" class="form-control   border border-info">
                         <option class="form-control border border-info">Selected Event {{ blog.blogCategory }} </option>
                         <option class="form-control border border-info">Machine Learning </option>
@@ -131,49 +87,139 @@
                         <option class="form-control border border-info"> IoT</option>
                         <option class="form-control border border-info"> Cloud Computing </option>
                       </select>
-
-
-
-
                     </div>
                     <div class="form-group">
                       <label for="exampleFormControlInput1">Refrence Link</label>
                       <input type="text" class="form-control" id="exampleFormControlInput1" name="eligibility"
                         value=" {{ blog.refrenceLinks }}" placeholder="Contact Person Name">
                     </div>
-
-
-
-
-
-
                     <div class="form-group">
-
                       <input type="submit" class="btn btn-outline-info bg-dark" name="Submit" id="password"
                         aria-describedby="emailHelp" value="Submit">
-
                     </div>
-
                   </form>
                 </center>
-
-
-
               </div>
               <div class="modal-footer bg-dark">
                 <button type="button" class="btn btn-outline-info bg-dark" data-dismiss="modal">Close</button>
-
               </div>
             </div>
           </div>
         </div>
-
-
-        {% endfor %}
-      </table>
-
+      </div>
     </div>
+
+    {% endfor %}
   </div>
 </div>
+
+
+<!-- <div class="container">
+  <div class="row">
+    <br><br><br>
+    <div class="col-md-12">
+      <table class="table table-bordered  table-info table-hover ">
+        <thead class="thead-dark text-info">
+          <tr class="text-info">
+            <th class="text-info text-center"> Blog Title</th>
+            <th class="text-info text-center">Description</th>
+            <th class="text-info text-center"> First Image</th>
+            <th class="text-info text-center">Second Image </th>
+            <th class="text-info text-center">Blog Category </th>
+            <th class="text-info text-center">Refrence Link</th>
+            <th class="text-info text-center">Edit</th>
+            <th class="text-info text-center">Delete</th>
+          </tr>
+        </thead>
+        {% for blog in blogsInfo.all %}
+        <tr>
+          <td class="text-dark text-center">{{ blog.title }} </td>
+          <td class="text-dark text-center"> {{ blog.summary }}</td>
+          <td class="text-dark text-center"><img src="{{ blog.imageFirst.url }}" height="100" width="100s"></td>
+          <td class="text-dark text-center"><img src="{{ blog.imageSecond.url }} " height="100" width="100s"> </td>
+          <td class="text-dark text-center">
+            {{ blog.blogCategory }}
+          </td>
+          <td class="text-dark text-center">
+            {{ blog.refrenceLinks }}
+          </td>
+          <td class="text-dark text-center">
+            <a href="#" class="btn btn-dark btn-outline-info" data-toggle="modal" data-target="#edit{{blog.id}}">
+              Edit Blog</a>
+          </td>
+          <td class="text-dark text-center">
+            <a href="" class="btn btn-dark btn-outline-info" data-toggle="modal" data-target="#delete{{blog.id}}">
+              Delete Blog</a>
+          </td>
+        </tr>
+
+        <div class="modal fade" id="edit{{blog.id}}" tabindex="-1" role="dialog" aria-labelledby="exampleModalLongTitle"
+          aria-hidden="true">
+          <div class="modal-dialog" role="document">
+            <div class="modal-content ">
+              <div class="modal-header bg-dark">
+                <h5 class="modal-title text-info" id="exampleModalLongTitle">{{ blog.title }}</h5>
+                <button type="button" class="close text-info" data-dismiss="modal" aria-label="Close">
+                  <span aria-hidden="true">&times;</span>
+                </button>
+              </div>
+
+              <div class="modal-body">
+                <center>
+                  <form action="" method="POST">
+                    {% csrf_token %}
+                    <div class="form-group">
+                      <label for="exampleFormControlInput1">Blog Title</label>
+                      <input type="text" class="form-control" id="exampleFormControlInput1" name="event_title"
+                        value="{{ blog.title }}" placeholder="Event Title">
+                    </div>
+                    <div class="form-group">
+                      <label for="exampleFormControlInput1">Blog Description</label>
+                      <textarea class="form-control">  {{ blog.description }}</textarea>
+                    </div>
+                    <div class="form-group">
+                      <label for="exampleFormControlSelect2">Image First</label>
+                      <input type="file" class="form-control" name="">
+                    </div>
+                    <div class="form-group">
+                      <label for="exampleFormControlTextarea1">Image Second</label>
+                      <input type="file" class="form-control" id="exampleFormControlInput1" name="expected_participant"
+                        value="" placeholder="Organisation Emial">
+                    </div>
+                    <div class="form-group">
+                      <label for="exampleFormControlInput1">Blog Category</label>
+                      <select name="event_category" class="form-control   border border-info">
+                        <option class="form-control border border-info">Selected Event {{ blog.blogCategory }}
+                        </option>
+                        <option class="form-control border border-info">Machine Learning </option>
+                        <option class="form-control border border-info">UI/UX </option>
+                        <option class="form-control border border-info"> Python</option>
+                        <option class="form-control border border-info"> IoT</option>
+                        <option class="form-control border border-info"> Cloud Computing </option>
+                      </select>
+                    </div>
+                    <div class="form-group">
+                      <label for="exampleFormControlInput1">Refrence Link</label>
+                      <input type="text" class="form-control" id="exampleFormControlInput1" name="eligibility"
+                        value=" {{ blog.refrenceLinks }}" placeholder="Contact Person Name">
+                    </div>
+                    <div class="form-group">
+                      <input type="submit" class="btn btn-outline-info bg-dark" name="Submit" id="password"
+                        aria-describedby="emailHelp" value="Submit">
+                    </div>
+                  </form>
+                </center>
+              </div>
+              <div class="modal-footer bg-dark">
+                <button type="button" class="btn btn-outline-info bg-dark" data-dismiss="modal">Close</button>
+              </div>
+            </div>
+          </div>
+        </div>
+        {% endfor %}
+      </table>
+    </div>
+  </div>
+</div> -->
 
 {% endblock %}

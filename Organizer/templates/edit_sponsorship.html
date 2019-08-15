@@ -5,154 +5,169 @@
 {%load staticfiles %}
 
 <br><br><br><br>
+
 <div class="container">
-  <table class="table table-bordered  table-info table-hover ">
-    <thead class="thead-dark text-info">
+  <div class="col-md-12">
+    <h3 class=" text-center">Event Sponsership Details</h3>
+    <hr class="bg-info col-md-10">
+  </div>
 
-      <tr class="text-info">
-        <th class="text-info "> Event Title </th>
-        <th class="text-info ">Platinum Sponsor</th>
-        <th class="text-info ">Platinum Facilities </th>
-        <th class="text-info "> Platinum Exptectation </th>
-        <th class="text-info ">Gold Sponsor </th>
-        <th class="text-info ">Gold Facilities </th>
-        <th class="text-info ">Gold Expectation</th>
-        <th class="text-info ">Silver Sponsor</th>
-        <th class="text-info ">Silver Facilities</th>
-        <th class="text-info ">Silver Expectation </th>
-        <th class="text-info ">Edit Details</th>
-        <th class="text-info ">Delete Details</th>
-      </tr>
+  <div class="row shadow p-3 mb-5 bg-white rounded">
 
-    </thead>
     {% for sponsor in sponsorShip.all %}
-    <tr>
-      <td class="text-dark ">{{ sponsor.event_title}} </td>
-      <td class="text-dark ">{{ sponsor.platinum_sponsor}} </td>
-      <td class="text-dark "> {{ sponsor.f_platinum }}</td>
-      <td class="text-dark ">{{sponsor.ex_platinum}} </td>
-      <td class="text-dark ">{{ sponsor.gold_sponsor }}</td>
-      <td class="text-dark ">{{ sponsor.f_gold }} </td>
-      <td class="text-dark ">{{ sponsor.ex_gold }} </td>
-      <td class="text-dark ">{{ sponsor.silver_sponsor}} </td>
-      <td class="text-dark ">{{ sponsor.f_silver }}</td>
-      <td class="text-dark ">{{ sponsor.ex_silver }} </td>
-      <td class="text-dark "> <a href="" class="btn btn-dark btn-outline-info text-light" data-toggle="modal"
-          data-target="#edit{{sponsor.id}}"> Edit</a></td>
-      <td class="text-dark "> <a href="" class="btn btn-dark btn-outline-info text-light" data-toggle="modal"
-          data-target="#delete{{sponsor.id}}"> Delete </a></td>
-    </tr>
-
-    <div class="modal fade" id="delete{{sponsor.id}}" tabindex="-1" role="dialog"
-      aria-labelledby="exampleModalLongTitle" aria-hidden="true">
-      <div class="modal-dialog" role="document">
-        <div class="modal-content ">
-          <div class="modal-header bg-dark">
-            <h5 class="modal-title text-info" id="exampleModalLongTitle">{{ sponsor.silver_sponsor}}</h5>
-            <button type="button" class="close text-info" data-dismiss="modal" aria-label="Close">
-              <span aria-hidden="true">&times;</span>
+    <div class="col-md-6">
+      <div class="card border border-info ">
+        <div class="card-body">
+          <h5 class="card-title text-center">Event Title : {{ sponsor.event_title}}</h5>
+          <hr class="bg-info col-md-8">
+          <!-- <h6 class="card-subtitle mb-2 text-muted">Helps to organise event</h6> -->
+          <p class="card-text"> Sponsor Type
+            &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;:
+            {{ sponsor.platinum_sponsor}} </p>
+          <p class="card-text"> Sponsor Facilities &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;:
+            {{ sponsor.f_platinum }} </p>
+          <p class="card-text"> Sponsor Exptectation &nbsp;&nbsp;&nbsp;: {{sponsor.ex_platinum}} </p>
+          <p class="card-text"> Sponsor Type
+            &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;:
+            {{ sponsor.gold_sponsor }} </p>
+          <p class="card-text"> Sponsor Facilities &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;:
+            {{ sponsor.f_gold }} </p>
+          <p class="card-text"> Sponsor Exptectation &nbsp;&nbsp;&nbsp;: {{ sponsor.ex_gold }} </p>
+          <p class="card-text"> Sponsor Type
+            &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;:
+            {{ sponsor.silver_sponsor}} </p>
+          <p class="card-text"> Sponsor Facilities &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;:
+            {{ sponsor.f_silver }}</p>
+          <p class="card-text"> Sponsor Exptectation &nbsp;&nbsp;&nbsp;: {{ sponsor.ex_silver }} </p>
+          <div class="row">
+            <button class=" btn">
+              <a href="" class="btn btn-dark btn-outline-info text-light" data-toggle="modal"
+                data-target="#edit{{sponsor.id}}"> Edit Details</a>
+            </button>
+            <button class=" btn">
+              <a href="" class="btn btn-dark btn-outline-info text-light" data-toggle="modal"
+                data-target="#delete{{sponsor.id}}"> Delete Details</a>
             </button>
           </div>
-          <div class="modal-body">
-            <br><br>
-            <a href="{% url 'deletesponsor' sponsor.id %}" class="btn btn-dark btn-outline-info text-light">delete</a>
-            <div class="modal-footer bg-dark">
-              <button type="button" class="btn btn-outline-info bg-dark" data-dismiss="modal">Close</button>
+        </div>
+
+        <div class="modal fade" id="delete{{sponsor.id}}" tabindex="-1" role="dialog"
+          aria-labelledby="exampleModalLongTitle" aria-hidden="true">
+          <div class="modal-dialog" role="document">
+            <div class="modal-content ">
+              <div class="modal-header bg-dark">
+                <h5 class="modal-title text-info" id="exampleModalLongTitle">{{ sponsor.event_title}}</h5>
+                <button type="button" class="close text-info" data-dismiss="modal" aria-label="Close">
+                  <span aria-hidden="true">&times;</span>
+                </button>
+              </div>
+              <div class="modal-body">
+                <br>{{ sponsor.event_title}} &nbsp;:&nbsp;&nbsp;&nbsp;
+                <a href="{% url 'deletesponsor' sponsor.id %}" class="btn btn-dark btn-outline-info text-light">
+                  delete</a>
+                <br>
+              </div>
+              <div class="modal-footer bg-dark">
+                <button type="button" class="btn btn-outline-info bg-dark" data-dismiss="modal">Close</button>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <div class="modal fade" id="edit{{sponsor.id}}" tabindex="-1" role="dialog"
+          aria-labelledby="exampleModalLongTitle" aria-hidden="true">
+          <div class="modal-dialog" role="document">
+            <div class="modal-content ">
+              <div class="modal-header bg-dark">
+                <h5 class="modal-title text-info" id="exampleModalLongTitle">{{ sponsor.silver_sponsor}}</h5>
+                <button type="button" class="close text-info" data-dismiss="modal" aria-label="Close">
+                  <span aria-hidden="true">&times;</span>
+                </button>
+              </div>
+              <div class="modal-body">
+                <center>
+                  <form action="{% url 'updateSponsorInfo' sponsor.id %}" method="POST">
+                    {% csrf_token %}
+                    <div class="form-group">
+                      <label for="exampleFormControlInput1">Event Title</label>
+                      <select name="event_title" class="form-control   border border-info">
+                        <option class="form-control border border-info"> Select Event</option>
+                        <option class="form-control border border-info"> Selected Event {{ sponsor.event_title}}
+                        </option>
+                      </select>
+                    </div>
+                    <div class="form-group">
+                      <label for="exampleFormControlInput1">Platinum Sponsor</label>
+                      <select name="platinum_sponsor" class="form-control   border border-info">
+                        <option class="form-control border border-info"> Select Sponsor</option>
+                        <option class="form-control border border-info"> Selected Event
+                          {{ sponsor.platinum_sponsor}}
+                        </option>
+                      </select>
+                    </div>
+                    <div class="form-group">
+                      <label for="exampleFormControlInput1">Facilities for Platinum</label>
+                      <textarea class="form-control" name="f_platinum">{{ sponsor.f_platinum }} </textarea>
+                    </div>
+                    <div class="form-group">
+                      <label for="exampleFormControlSelect2">Platinum Expectation</label>
+                      <input type="text" class="form-control" value="{{sponsor.ex_platinum}}" name="ex_platinum">
+                    </div>
+                    <div class="form-group">
+                      <label for="exampleFormControlTextarea1">Gold Sponsor</label>
+                      <select name="platinum_sponsor" class="form-control   border border-info">
+                        <option class="form-control border border-info"> Select Sponsor</option>
+                        <option class="form-control border border-info"> Selected Event {{ sponsor.gold_sponsor }}
+                        </option>
+                      </select>
+                    </div>
+                    <div class="form-group">
+                      <label for="exampleFormControlTextarea1">Gold Facility</label>
+                      <textarea class="form-control" name="f_gold">{{ sponsor.f_gold }} </textarea>
+                    </div>
+                    <div class="form-group">
+                      <label for="exampleFormControlTextarea1">Gold Expectation</label>
+                      <input type="text" class="form-control" id="exampleFormControlInput1" name="ex_gold"
+                        value="{{ sponsor.ex_gold }} " placeholder="Contact Person Name">
+                    </div>
+                    <div class="form-group">
+                      <label for="exampleFormControlInput1"> Silver Sponsor</label>
+                      <select name="silver_sponsor" class="form-control   border border-info">
+                        <option class="form-control border border-info"> Select Sponsor</option>
+                        <option class="form-control border border-info"> Selected Sponsor
+                          {{ sponsor.silver_sponsor}}
+                        </option>
+                      </select>
+                    </div>
+                    <div class="form-group">
+                      <label for="exampleFormControlInput1"> Silver Facilities</label>
+                      <textarea class="form-control" name="f_silver">{{ sponsor.f_silver }} </textarea>
+                    </div>
+                    <div class="form-group">
+                      <label for="exampleFormControlInput1"> Silver Expectation</label>
+                      <input type="text" class="form-control" id="exampleFormControlInput1" name="ex_silver"
+                        value="{{ sponsor.ex_silver }}" placeholder="Contact Person Name">
+                    </div>
+                    <div class="form-group">
+                      <input type="submit" class="btn btn-outline-info bg-dark" name="Submit" id="password"
+                        aria-describedby="emailHelp" value="Submit">
+                    </div>
+                  </form>
+                </center>
+              </div>
+              <div class="modal-footer bg-dark">
+                <button type="button" class="btn btn-outline-info bg-dark" data-dismiss="modal">Close</button>
+              </div>
             </div>
           </div>
         </div>
       </div>
     </div>
-
-    <div class="modal fade" id="edit{{sponsor.id}}" tabindex="-1" role="dialog" aria-labelledby="exampleModalLongTitle"
-      aria-hidden="true">
-      <div class="modal-dialog" role="document">
-        <div class="modal-content ">
-          <div class="modal-header bg-dark">
-            <h5 class="modal-title text-info" id="exampleModalLongTitle">{{ sponsor.silver_sponsor}}</h5>
-            <button type="button" class="close text-info" data-dismiss="modal" aria-label="Close">
-              <span aria-hidden="true">&times;</span>
-            </button>
-          </div>
-          <div class="modal-body">
-            <center>
-              <form action="{% url 'updateSponsorInfo' sponsor.id %}" method="POST">
-                {% csrf_token %}
-                <div class="form-group">
-                  <label for="exampleFormControlInput1">Event Title</label>
-                  <select name="event_title" class="form-control   border border-info">
-                    <option class="form-control border border-info"> Select Event</option>
-                    <option class="form-control border border-info"> Selected Event {{ sponsor.event_title}}
-                    </option>
-                  </select>
-                </div>
-                <div class="form-group">
-                  <label for="exampleFormControlInput1">Platinum Sponsor</label>
-                  <select name="platinum_sponsor" class="form-control   border border-info">
-                    <option class="form-control border border-info"> Select Sponsor</option>
-                    <option class="form-control border border-info"> Selected Event
-                      {{ sponsor.platinum_sponsor}}
-                    </option>
-                  </select>
-                </div>
-                <div class="form-group">
-                  <label for="exampleFormControlInput1">Facilities for Platinum</label>
-                  <textarea class="form-control" name="f_platinum">{{ sponsor.f_platinum }} </textarea>
-                </div>
-                <div class="form-group">
-                  <label for="exampleFormControlSelect2">Platinum Expectation</label>
-                  <input type="text" class="form-control" value="{{sponsor.ex_platinum}}" name="ex_platinum">
-                </div>
-                <div class="form-group">
-                  <label for="exampleFormControlTextarea1">Gold Sponsor</label>
-                  <select name="platinum_sponsor" class="form-control   border border-info">
-                    <option class="form-control border border-info"> Select Sponsor</option>
-                    <option class="form-control border border-info"> Selected Event {{ sponsor.gold_sponsor }}
-                    </option>
-                  </select>
-                </div>
-                <div class="form-group">
-                  <label for="exampleFormControlTextarea1">Gold Facility</label>
-                  <textarea class="form-control" name="f_gold">{{ sponsor.f_gold }} </textarea>
-                </div>
-                <div class="form-group">
-                  <label for="exampleFormControlTextarea1">Gold Expectation</label>
-                  <input type="text" class="form-control" id="exampleFormControlInput1" name="ex_gold"
-                    value="{{ sponsor.ex_gold }} " placeholder="Contact Person Name">
-                </div>
-                <div class="form-group">
-                  <label for="exampleFormControlInput1"> Silver Sponsor</label>
-                  <select name="silver_sponsor" class="form-control   border border-info">
-                    <option class="form-control border border-info"> Select Sponsor</option>
-                    <option class="form-control border border-info"> Selected Sponsor
-                      {{ sponsor.silver_sponsor}}
-                    </option>
-                  </select>
-                </div>
-                <div class="form-group">
-                  <label for="exampleFormControlInput1"> Silver Facilities</label>
-                  <textarea class="form-control" name="f_silver">{{ sponsor.f_silver }} </textarea>
-                </div>
-                <div class="form-group">
-                  <label for="exampleFormControlInput1"> Silver Expectation</label>
-                  <input type="text" class="form-control" id="exampleFormControlInput1" name="ex_silver"
-                    value="{{ sponsor.ex_silver }}" placeholder="Contact Person Name">
-                </div>
-                <div class="form-group">
-                  <input type="submit" class="btn btn-outline-info bg-dark" name="Submit" id="password"
-                    aria-describedby="emailHelp" value="Submit">
-                </div>
-              </form>
-            </center>
-          </div>
-          <div class="modal-footer bg-dark">
-            <button type="button" class="btn btn-outline-info bg-dark" data-dismiss="modal">Close</button>
-          </div>
-        </div>
-      </div>
-    </div>
     {% endfor %}
-  </table>
+  </div>
+
+  <hr class="bg-info col-md-8">
+</div>
 </div>
 
 {% endblock %}
