@@ -9,54 +9,54 @@
 <br><br><br><br><br><br>
 
 <div class="container">
-  <h2 class="text-center">Profile</h2>
+  <!-- <h2 class="text-center">Profile</h2> -->
   <hr class="bg-info col-md-8">
 
-  <div class="alert alert-warning alert-dismissible fade show" role="alert">
+  <!-- <div class="alert alert-warning alert-dismissible fade show" role="alert">
     <strong>Profile is Created Successfully!</strong>
     <button type="button" class="close" data-dismiss="alert" aria-label="Close">
       <span aria-hidden="true">&times;</span>
     </button>
-  </div>
-  <div class="container">
-    <div class="row shadow p-3 mb-5 bg-white rounded">
-      <div class="col-xl-12">
-        <table class="table table-bordered  table-info table-hover ">
-          <thead class="thead-dark text-info">
-            <tr class="text-info">
-              <th class="text-info "> User </th>
-              <th class="text-info "> First Name </th>
-              <th class="text-info "> Last Name </th>
-              <th class="text-info "> Email </th>
-            </tr>
-          <tbody>
-            <tr>
-              <td>{{ user }}</td>
-              <td>{{ user.first_name }}</td>
-              <td>{{ user.last_name }}</td>
-              <td>{{ user.email }}</td>
-            </tr>
-          </tbody>
-          </thead>
-        </table>
-      </div>
-    </div>
-  </div>
-  <div class="container">
-    <div class="row">
-      <div class="col-md-3"></div>
-      <div class="col-md-2">
-        <a href="{% url 'editProfile' %}"  class="btn btn-dark btn-outline-info text-light">Edit Profile</a>
-      </div>
-      <div class="col-md-2">
-         <a href="{% url 'req_pdf' %}"  class="btn btn-dark btn-outline-info text-light">Get PDF</a>
-      </div>
-      <div class="col-md-2">
-          <a href="{% url 'req_pdf' %}"  class="btn btn-dark btn-outline-info text-light">Delete Profile</a>
+  </div> -->
+
+  <div class="container col-md-10">
+    <div class="card border border-info ">
+      <!--style="width: 18rem;">-->
+      <div class="card-body">
+        <h2 class="card-title text-center">Profile</h2>
+        <hr class="bg-info col-md-8">
+        <!-- <h6 class="card-subtitle mb-2 text-muted">Helps to organise event</h6> -->
+        <p class="card-text">
+          &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+          User Name &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;: &nbsp;&nbsp; {{ user }} </p>
+        <p class="card-text">
+          &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+          First Name &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;: &nbsp;&nbsp; {{ user.first_name }} </p>
+        <p class="card-text">
+          &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+          Last Name &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;: &nbsp;&nbsp; {{ user.last_name }} </p>
+        <p class="card-text">
+          &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+          Email &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;:
+          &nbsp;&nbsp; {{ user.email }} </p>
+        <hr class="bg-info col-md-8">
+        <div class="row">
+          <div class="col-md-2"></div>
+          <div class="col-md-3">
+            <a href="{% url 'editProfile' %}" class="btn btn-dark btn-outline-info text-light">Edit Profile</a>
+          </div>
+          <div class="col-md-3">
+            <a href="{% url 'req_pdf' %}" class="btn btn-dark btn-outline-info text-light">Get PDF</a>
+          </div>
+          <div class="col-md-3">
+            <a href="{% url 'req_pdf' %}" class="btn btn-dark btn-outline-info text-light">Delete Profile</a>
+          </div>
+          <div class="col-md-1"></div>
         </div>
-      <div class="col-md-3"></div>
+      </div>
     </div>
   </div>
+  <hr class="bg-info col-md-8">
 </div>
-<br><br><br><br>
+<br><br><br>
 {% endblock %}
