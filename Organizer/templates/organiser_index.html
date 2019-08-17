@@ -20,7 +20,7 @@
           <hr class="bg-info col-md-8">
           <h6 class="card-subtitle mb-2 text-muted">Helps to organise event</h6>
           <p class="card-text"> Start with registering your event with us ! </p>
-          <button class=" btn"> <a href="#" class="bg-dark btn btn-outline-info text-light">Card link</a>
+          <button class=" btn"> <a href="{% url 'organiseEvent' %}" class="bg-dark btn btn-outline-info text-light">Organise Event</a>
           </button>
         </div>
       </div>
@@ -32,7 +32,7 @@
           <hr class="bg-info col-md-8">
           <h6 class="card-subtitle mb-2 text-muted">Add more event details</h6>
           <p class="card-text">Add more event details and make people know about event.</p>
-          <button class=" btn"> <a href="{% url 'eventdetails' %}"
+          <button class=" btn"> <a href="{% url 'addEventDetails' %}"
               class="bg-dark btn btn-outline-info text-light">Events
               Details</a></button>
           <!-- <a href="#" class="card-link">Another link</a>-->
@@ -42,16 +42,17 @@
     <div class="col-md-4">
       <div class="card border border-info" style="width: 18rem;">
         <div class="card-body">
-          <h5 class="card-title text-center">Blog</h5>
+          <h5 class="card-title text-center">Profile</h5>
           <hr class="bg-info col-md-8">
-          <h6 class="card-subtitle mb-2 text-muted">Express your views !</h6>
-          <p class="card-text">Lets you to share your thoughts and get connected together.</p>
-          <button class=" btn"> <a href="{% url 'blog' %}"
-              class="bg-dark btn btn-outline-info text-light">Blogs</a></button>
-          <!--<a href="#" class="card-link">Another link</a>-->
+          <h6 class="card-subtitle mb-2 text-muted">See what you are !</h6>
+          <p class="card-text">Gives a glance about yourselves.</p> <br>
+          <button class=" btn"><a href="{% url 'sponsorShip' %}"
+              class="bg-dark btn btn-outline-info text-light">Profile</a></button>
+          <!-- <a href="#" class="card-link">Another link</a>-->
         </div>
       </div>
     </div>
+    
   </div>
   <hr class="bg-info col-md-8">
   <div class="row shadow p-3 mb-5 bg-white rounded">
@@ -85,13 +86,13 @@
     <div class="col-md-4">
       <div class="card border border-info" style="width: 18rem;">
         <div class="card-body">
-          <h5 class="card-title text-center">Profile</h5>
+          <h5 class="card-title text-center">Blog</h5>
           <hr class="bg-info col-md-8">
-          <h6 class="card-subtitle mb-2 text-muted">See what you are !</h6>
-          <p class="card-text">Gives a glance about yourselves.</p> <br>
-          <button class=" btn"><a href="{% url 'sponsorShip' %}"
-              class="bg-dark btn btn-outline-info text-light">Profile</a></button>
-          <!-- <a href="#" class="card-link">Another link</a>-->
+          <h6 class="card-subtitle mb-2 text-muted">Express your views !</h6>
+          <p class="card-text">Lets you to share your thoughts and get connected together.</p>
+          <button class=" btn"> <a href="{% url 'blog' %}"
+              class="bg-dark btn btn-outline-info text-light">Blogs</a></button>
+          <!--<a href="#" class="card-link">Another link</a>-->
         </div>
       </div>
     </div>

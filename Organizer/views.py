@@ -440,8 +440,13 @@ def eventUpdate(request, id):
             userrrid = request.user.username
             userid = list(User.objects.values_list(
                 'id').filter(username=request.user.username))
-            return render(request, 'registered_event.html'	)
+            events = OrganiseEvent.objects.filter(us=request.user.id)
+            loc = Event_Location.objects.filter(eventid_id=request.user.id)
+            context = {'events': events, 'loc': loc}
+            return render(request, 'registered_event.html',context)
+            # return render(request, 'registered_event.html'	)
         else:
+
             if event_title == '':
                 return render(request, 'registered_event.html', {'error': "Please Enter Event Title!"})
             else:
