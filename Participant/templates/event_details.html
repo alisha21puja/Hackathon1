@@ -5,7 +5,6 @@
 
 {%load staticfiles %}
 
-
 <br><br><br><br><br><br>
 
 <div class="container">
@@ -22,7 +21,9 @@
     <hr class="bg-danger col-md-8"> 
 	<td class="text-dark text-center">Event Category : {{ event.event_category }} </td><br/>
 	<td class="text-dark text-center">Event Organizer Name : {{ event.org_name }} </td><br/>
-	<td class="text-dark text-center">Event Contact Details : {{ event.org_contact_person }} </td>
+	<td class="text-dark text-center">Event Contact Person : {{ event.org_contact_person }} </td><br>
+  <td class="text-dark text-center">Event Organizer Mobile number : {{ event.org_mobile }} </td><br/>
+  <td class="text-dark text-center">Event Organizer Email id : {{ event.org_email }} </td><br>
 	<br/>Event Description : 
     <p class="card-text"  align="justify" >{{ event.event_description }}</p>
    <center><button  class=" btn"> <a href="{% url 'participated_event' %}" class="bg-dark btn btn-outline-danger text-white" >Participate</a></button></center>
