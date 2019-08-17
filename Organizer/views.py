@@ -416,6 +416,7 @@ def eventUpdate(request, id):
         submitbutton = request.POST.get('Submit')
         if submitbutton:
             eventid = OrganiseEvent.objects.get(pk=id)
+            print('get the id ',eventid.id)
             userl = User.objects.filter(username=request.user.username)
             event_title = request.POST['event_title']
             event_description = request.POST['event_description']
@@ -427,6 +428,10 @@ def eventUpdate(request, id):
             event_poster = request.POST['event_poster']
             event_startdate = request.POST['event_startdate']
             event_enddate = request.POST['event_enddate']
+
+            # sve=OrganiseEvent(id=eventid.id,event_title=event_title,event_category= event_category,org_name=org_name,org_email=org_email,org_mobile=org_mobile,org_contact_person=org_contact_person,event_poster=event_poster,event_startdate=event_startdate,event_enddate=event_enddate,event_description=event_description)
+            # sve.save()
+
             if event_startdate == '':
                 event_startdate = eventid.event_startdate
             else:
@@ -434,19 +439,8 @@ def eventUpdate(request, id):
             if event_enddate == '':
                 event_enddate = eventid.event_enddate
                 return render(request, 'registered_event.html', {'error': "Please Select End Date !"})
-            else:
+            else:  
                 event_enddate = request.POST['event_enddate']
-            current_user = request.user.id
-            userrrid = request.user.username
-            userid = list(User.objects.values_list(
-                'id').filter(username=request.user.username))
-            events = OrganiseEvent.objects.filter(us=request.user.id)
-            loc = Event_Location.objects.filter(eventid_id=request.user.id)
-            context = {'events': events, 'loc': loc}
-            return render(request, 'registered_event.html',context)
-            # return render(request, 'registered_event.html'	)
-        else:
-
             if event_title == '':
                 return render(request, 'registered_event.html', {'error': "Please Enter Event Title!"})
             else:
@@ -483,8 +477,18 @@ def eventUpdate(request, id):
                 return render(request, 'registered_event.html', {'error': "Please Select End Date !"})
             else:
                 event_enddate = request.POST['event_enddate']
-
-
+            sve=OrganiseEvent(id=eventid.id,event_title=event_title,event_category= event_category,org_name=org_name,org_email=org_email,org_mobile=org_mobile,org_contact_person=org_contact_person,event_poster=event_poster,event_startdate=event_startdate,event_enddate=event_enddate,us=request.user.id,event_description=event_description)
+            sve.save()
+            # sve.refresh_from_db()
+            events = OrganiseEvent.objects.get(us=request.user.id)
+            context = {'events': events}
+            return render(request, 'registered_event.html',context)
+            # return render(request, 'registered_event.html'	)
+        else:
+            events = OrganiseEvent.objects.filter(us=request.user.id)
+            context = {'events': events}
+            return render(request, 'registered_event.html',context)
+           
 def eventDetails(request):
     if request.method == 'POST':
         event = request.POST['event_name']
