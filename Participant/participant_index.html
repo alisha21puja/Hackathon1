@@ -1,0 +1,113 @@
+{% extends 'nav-bar_participant.html' %}
+
+{%block content %}
+
+
+{%load staticfiles %}
+
+
+
+<br><br>
+<br><br>
+<br><br>
+
+
+<div class="container">
+  <h3 class="text-center">Dashboard</h3>
+   <hr class="bg-danger col-md-8">
+
+
+  <div class="row shadow p-3 mb-5 bg-white rounded">
+
+    <div class="col-md-4">
+    <div class="card border border-danger " style="width: 18rem;">
+  <div class="card-body">
+    <h5 class="card-title text-center">Upcoming Event</h5>
+    <hr class="bg-danger col-md-8">
+
+    <h6 class="card-subtitle mb-2 text-muted">Card subtitle</h6>
+    <p class="card-text">Some quick example text to build on the card title and make up the bulk of the card's content.</p>
+   <button  class=" btn"> <a href="{% url 'event_details' %}" class="bg-dark btn btn-outline-danger text-white">Participate</a></button>
+  </div>
+</div>
+  </div>
+    <div class="col-md-4">
+    <div class="card border border-danger" style="width: 18rem;">
+  <div class="card-body">
+    <h5 class="card-title text-center">Participated Events</h5>
+    <hr class="bg-danger col-md-8">
+
+    <h6 class="card-subtitle mb-2 text-muted">Card subtitle</h6>
+    <p class="card-text">Some quick example text to build on the card title and make up the bulk of the card's content.</p>
+   <button  class=" btn"> <a href="{% url 'participated_event' %}" class="bg-dark btn btn-outline-danger text-white">Check Information</a></button>
+   <!-- <a href="#" class="card-link">Another link</a>-->
+  </div>
+</div>
+  </div>
+    <div class="col-md-4">
+    <div class="card border border-danger" style="width: 18rem;">
+  <div class="card-body">
+    <h5 class="card-title text-center">Blog</h5>
+    <hr class="bg-danger col-md-8">
+
+    <h6 class="card-subtitle mb-2 text-muted">Card subtitle</h6>
+    <p class="card-text">Some quick example text to build on the card title and make up the bulk of the card's content.</p>
+     <button  class=" btn"> <a href="{% url 'blog' %}" class="bg-dark btn btn-outline-danger text-white">Blogs</a></button>
+    <!--<a href="#" class="card-link">Another link</a>-->
+  </div>
+</div>
+  </div>
+</div>
+   <hr class="bg-danger col-md-8">
+<div class="row shadow p-3 mb-5 bg-white rounded">
+
+    <div class="col-md-4">
+    <div class="card border border-danger" style="width: 18rem;">
+  <div class="card-body">
+    <h5 class="card-title text-center">Enquiries</h5>
+    <hr class="bg-danger col-md-8">
+
+    <h6 class="card-subtitle mb-2 text-muted">Card subtitle</h6>
+    <p class="card-text">Some quick example text to build on the card title and make up the bulk of the card's content.</p>
+    <button  class=" btn">  <a href=" {% url 'shareResource' %}" class="bg-dark btn btn-outline-danger text-white">Enquiries</a></button>
+    <!--<a href="#" class="card-link">Another link</a>-->
+  </div>
+</div>
+  </div>
+    <div class="col-md-4">
+    <div class="card border border-danger" style="width: 18rem;">
+  <div class="card-body">
+    <h5 class="card-title text-center">Event Feedback</h5>
+    <hr class="bg-danger col-md-8">
+
+    <h6 class="card-subtitle mb-2 text-muted">Card subtitle</h6>
+    <p class="card-text">Some quick example text to build on the card title and make up the bulk of the card's content.</p>
+     <button  class=" btn"><a href="{% url 'sponsorShip' %}" class="bg-dark btn btn-outline-danger text-white">Feedback</a></button>
+    <!--<a href="#" class="card-link">Another link</a>-->
+  </div>
+</div>
+  </div>
+    <div class="col-md-4">
+    <div class="card border border-danger" style="width: 18rem;">
+  <div class="card-body">
+    <h5 class="card-title text-center">Profile</h5>
+    <hr class="bg-danger col-md-8">
+
+    <h6 class="card-subtitle mb-2 text-muted">Card subtitle</h6>
+    <p class="card-text">Some quick example text to build on the card title and make up the bulk of the card's content.</p>
+     <button  class=" btn"><a href="{% url 'part_profile' %}" class="bg-dark btn btn-outline-danger text-white">Profile</a></button>
+   <!-- <a href="#" class="card-link">Another link</a>-->
+  </div>
+</div>
+  </div>
+</div>
+
+
+
+
+</div>
+<br><br>
+
+
+
+{% endblock %}
