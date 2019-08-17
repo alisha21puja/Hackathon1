@@ -7,140 +7,106 @@
 
 
 
-<br><br><br>
-<br><br><br>
+<br><br>
+<br><br>
+<br><br>
 
 
+<div class="container">
+  <h3 class="text-center">Dashboard</h3>
+   <hr class="bg-danger col-md-8">
 
-<hr class="bg-danger col-md-10">
- 
-  <section id="Events">
-  <div class="container ">
-    <div  class="text-center"><h2> UpComing Events</h2><hr class="bg-danger col-md-8"></div>
+
   <div class="row shadow p-3 mb-5 bg-white rounded">
-{% for eve in even.all %}
 
     <div class="col-md-4">
-      <div class="card border-danger mb-3" style="width: 18rem;">
-        <div class="card-header">header</div>
-          <img src="..." class="card-img-top" alt="...">
-            <h5 class="card-title text-danger text-center">{{ eve.event }}</h5>
-          <div class="card-body text-danger">
-            <h5 class="card-title"> {{ eve.no_participant }}</h5>
-            <p class="card-text">{{ eve.event_level }}</p>
-      <button  class=" btn">
-         <a class=" bg-dark btn btn-outline-danger" href="www.google.com">
-        Participate
-  
-  </a>
-      </button>
-    
-  {% endfor %} 
-            
-          </div>
-        </div>
-    </div>
+    <div class="card border border-danger " style="width: 18rem;">
+  <div class="card-body">
+    <h5 class="card-title text-center">Upcoming Event</h5>
+    <hr class="bg-danger col-md-8">
 
-
-   <div class="col-md-4">
-      <div class="card border-danger mb-3" style="width: 18rem;">
-        <div class="card-header">Header</div>
-          <img src="..." class="card-img-top" alt="...">
-            <h5 class="card-title text-danger text-center">Card title</h5>
-          <div class="card-body text-danger">
-            <h5 class="card-title">danger card title</h5>
-            <p class="card-text">Some quick example text to build on the card title and make up the bulk of the card's content.</p>
-            <button  class=" btn"> <a class=" bg-dark btn btn-outline-danger" href="www.google.com"> Participate </a></button>
-          </div>
-        </div>
-    </div>
-     <div class="col-md-4">
-       <div class="card border-danger mb-3" style="width: 18rem;">
-        <div class="card-header">Header</div>
-          <img src="..." class="card-img-top" alt="...">
-            <h5 class="card-title text-danger text-center">Card title</h5>
-          <div class="card-body text-danger">
-            <h5 class="card-title">danger card title</h5>
-            <p class="card-text">Some quick example text to build on the card title and make up the bulk of the card's content.</p>
-            <button  class=" btn"> <a class=" bg-dark btn btn-outline-danger" href="www.google.com"> Participate </a></button>
-          
-          </div>
-        </div>
-    </div>
-
-
-
-
+    <h6 class="card-subtitle mb-2 text-muted">Card subtitle</h6>
+    <p class="card-text">Some quick example text to build on the card title and make up the bulk of the card's content.</p>
+   <button  class=" btn"> <a href="{% url 'event_details' %}" class="bg-dark btn btn-outline-danger text-white">Participate</a></button>
+  </div>
 </div>
-<hr class="bg-danger col-md-8">
- <div class="row shadow p-3 mb-5 bg-white rounded">
+  </div>
     <div class="col-md-4">
+    <div class="card border border-danger" style="width: 18rem;">
+  <div class="card-body">
+    <h5 class="card-title text-center">Participated Events</h5>
+    <hr class="bg-danger col-md-8">
 
-      <div class="card border-danger mb-3" style="width: 18rem;">
-        <div class="card-header">Header</div>
-          <img src="..." class="card-img-top" alt="...">
-            <h5 class="card-title text-danger text-center">Card title</h5>
-          <div class="card-body text-danger">
-            <h5 class="card-title">danger card title</h5>
-            <p class="card-text">Some quick example text to build on the card title and make up the bulk of the card's content.</p>
-            <button  class=" btn"> <a class=" bg-dark btn btn-outline-danger" href="www.google.com"> Participate </a></button>
-          
-          </div>
-        </div>
-    </div>
+    <h6 class="card-subtitle mb-2 text-muted">Card subtitle</h6>
+    <p class="card-text">Some quick example text to build on the card title and make up the bulk of the card's content.</p>
+   <button  class=" btn"> <a href="{% url 'participated_event' %}" class="bg-dark btn btn-outline-danger text-white">Check Information</a></button>
+   <!-- <a href="#" class="card-link">Another link</a>-->
+  </div>
+</div>
+  </div>
+    <div class="col-md-4">
+    <div class="card border border-danger" style="width: 18rem;">
+  <div class="card-body">
+    <h5 class="card-title text-center">Blog</h5>
+    <hr class="bg-danger col-md-8">
 
+    <h6 class="card-subtitle mb-2 text-muted">Card subtitle</h6>
+    <p class="card-text">Some quick example text to build on the card title and make up the bulk of the card's content.</p>
+     <button  class=" btn"> <a href="{% url 'blog' %}" class="bg-dark btn btn-outline-danger text-white">Blogs</a></button>
+    <!--<a href="#" class="card-link">Another link</a>-->
+  </div>
+</div>
+  </div>
+</div>
+   <hr class="bg-danger col-md-8">
+<div class="row shadow p-3 mb-5 bg-white rounded">
 
-   <div class="col-md-4">
-     <div class="card border-danger mb-3" style="width: 18rem;">
-        <div class="card-header">Header</div>
-          <img src="..." class="card-img-top" alt="...">
-            <h5 class="card-title text-danger text-center">Card title</h5>
-          <div class="card-body text-danger">
-            <h5 class="card-title">danger card title</h5>
-            <p class="card-text">Some quick example text to build on the card title and make up the bulk of the card's content.</p>
-            <button  class=" btn"> <a class=" bg-dark btn btn-outline-danger" href="www.google.com"> Participate </a></button>
-          
-          </div>
-        </div>
-    </div>
-     <div class="col-md-4">
-       <div class="card border-danger mb-3" style="width: 18rem;">
-        <div class="card-header">Header</div>
-          <img src="..." class="card-img-top" alt="...">
-            <h5 class="card-title text-danger text-center">Card title</h5>
-          <div class="card-body text-danger">
-            <h5 class="card-title">danger card title</h5>
-            <p class="card-text">Some quick example text to build on the card title and make up the bulk of the card's content.</p>
-            <button  class=" btn"> <a class=" bg-dark btn btn-outline-danger" href="www.google.com"> Participate </a></button>
-          
-          </div>
-        </div>
+    <div class="col-md-4">
+    <div class="card border border-danger" style="width: 18rem;">
+  <div class="card-body">
+    <h5 class="card-title text-center">Enquiries</h5>
+    <hr class="bg-danger col-md-8">
 
-        <nav aria-label="Page navigation example">
-  <ul class="pagination justify-content-end">
-  	<!-- Add this if you want previous  button -->
-  <!--  <li class="page-item disabled"> 
-      <a class="page-link" href="#" tabindex="-1" aria-disabled="true">Previous</a>
-    </li>-->
-    <li class="page-item"><a class="page-link" href="#">1</a></li>
-    <li class="page-item"><a class="page-link" href="#">2</a></li>
-    <li class="page-item"><a class="page-link" href="#">3</a></li>
-    <li class="page-item">
-      <a class="page-link" href="#">Next</a>
-    </li>
-  </ul>
-</nav>
-    </div>
+    <h6 class="card-subtitle mb-2 text-muted">Card subtitle</h6>
+    <p class="card-text">Some quick example text to build on the card title and make up the bulk of the card's content.</p>
+    <button  class=" btn">  <a href=" {% url 'shareResource' %}" class="bg-dark btn btn-outline-danger text-white">Enquiries</a></button>
+    <!--<a href="#" class="card-link">Another link</a>-->
+  </div>
+</div>
+  </div>
+    <div class="col-md-4">
+    <div class="card border border-danger" style="width: 18rem;">
+  <div class="card-body">
+    <h5 class="card-title text-center">Event Feedback</h5>
+    <hr class="bg-danger col-md-8">
+
+    <h6 class="card-subtitle mb-2 text-muted">Card subtitle</h6>
+    <p class="card-text">Some quick example text to build on the card title and make up the bulk of the card's content.</p>
+     <button  class=" btn"><a href="{% url 'sponsorShip' %}" class="bg-dark btn btn-outline-danger text-white">Feedback</a></button>
+    <!--<a href="#" class="card-link">Another link</a>-->
+  </div>
+</div>
+  </div>
+    <div class="col-md-4">
+    <div class="card border border-danger" style="width: 18rem;">
+  <div class="card-body">
+    <h5 class="card-title text-center">Profile</h5>
+    <hr class="bg-danger col-md-8">
+
+    <h6 class="card-subtitle mb-2 text-muted">Card subtitle</h6>
+    <p class="card-text">Some quick example text to build on the card title and make up the bulk of the card's content.</p>
+     <button  class=" btn"><a href="{% url 'part_profile' %}" class="bg-dark btn btn-outline-danger text-white">Profile</a></button>
+   <!-- <a href="#" class="card-link">Another link</a>-->
+  </div>
+</div>
+  </div>
+</div>
 
 
 
 
 </div>
-
-</div>
-
-</section>
-
+<br><br>
 
 
 
