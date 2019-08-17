@@ -1,0 +1,64 @@
+{% extends 'nav-bar_participant.html' %}
+
+{%block content %}
+
+
+{%load staticfiles %}
+
+
+<br><br><br><br><br><br>
+
+{%block head%}
+
+<title>Profile</title>
+{%endblock%}
+
+
+{%block body%}
+	<div class="container">
+	<h2 class="text-center">Profile</h2>
+	 <hr class="bg-danger col-md-8">
+
+	 <div class="alert alert-warning alert-dismissible fade show" role="alert">
+  <strong>Profile is Created Successfully!</strong> 
+  <button class="btn btn-outline-danger bg-dark text-white"> <a href="{% url 'part_editProfile' %}">Edit Profile</a></button>
+  <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+    <span aria-hidden="true">&times;</span>
+  </button>
+</div>
+<div class="container">
+  <div class="row shadow p-3 mb-5 bg-white rounded">
+  <div class="col-xl-12">
+<table class="table table-bordered  table-danger table-hover ">
+        <thead  class="thead-dark text-danger">
+          
+        <tr class="text-danger">
+          <th class="text-danger "> User </th>
+          <th class="text-danger "> First Name </th>
+          <th class="text-danger "> Last Name </th>
+          <th class="text-danger "> Email </th>
+          
+        </tr>
+
+        <tbody>
+    <tr>
+      <td>{{ user }}</td>
+      <td>{{ user.first_name }}</td>
+      <td>{{ user.last_name }}</td>
+      <td>{{ user.email }}</td>
+    </tr>
+    
+  </tbody>
+</thead>
+</table>
+</div>
+</div>
+</div>
+
+ 
+      
+{%endblock%}
+
+
+<br><br><br><br><br><br><br><br><br><br><br>
+{% endblock %}
