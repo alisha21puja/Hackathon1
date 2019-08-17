@@ -2,9 +2,7 @@
 
 {%block content %}
 
-
 {%load staticfiles %}
-
 
 <br>
 <hr class="bg-info col-md-8">
@@ -34,24 +32,16 @@
 
 <section>
 	<div class="container">
-
-
 		<div class="text-center">
 			<h1>Our Team </h1>
 			<hr class="bg-info col-md-8">
 		</div>
-
-
 		<div class="row shadow p-3 mb-5 bg-white rounded">
-
 			{% for team in teaminfo.all %}
 			<div class="col-md-6 ">
 				<div class="well well-sm">
 					<div class="media">
-
-
 						<a class="thumbnail pull-left" href="#">
-
 							<img class="border border-info rounded-circle" src="{{ team.profilePic.url }}" height="100"
 								width="100">
 							<div class="col-md-1"></div>
@@ -59,7 +49,6 @@
 						<div class="media-body">
 							<h4 class="media-heading"><span class="label label-info">{{ team.firstName }} <span>
 										{{ team.lastName }} </span> </h4>
-
 							<p><span class="label label-info"></span> <span
 									class="label label-warning">{{ team.designation }}</span></p>
 							<p>
@@ -72,9 +61,7 @@
 								<button class=" btn ">
 									<a class=" bg-dark btn btn-outline-info" href="{{team.twitterLink}}">
 										Twitter </a> </button>
-
 							</p>
-
 						</div>
 					</div>
 				</div>
@@ -82,25 +69,11 @@
 			</div>
 			{% endfor %}
 			<div class="col-md-6 ">
-
 			</div>
-
-
-
-
-
 		</div>
-
-
-
-
-
 </section>
 
-
 <section>
-
-
 	<div class="container">
 		<div class="text-center">
 			<h1>Our Services</h1>
@@ -108,52 +81,36 @@
 		</div>
 		<div class="row shadow p-3 mb-5 bg-white rounded">
 			<div class="col-md-6 ">
-
 				{% for service in services.all %}
 				<ul class="list-group list-group-flush">
-
 					<li class="list-group-item text-center"> {{ service.serviceName }}</li>
-
-
 				</ul>
 				{% endfor %}
 			</div>
-
 			<div class="col-md-6 ">
 				<h3 class="text-center">Contact Us</h3>
 				<hr class="bg-info col-md-8">
-
-
 				<form method="POST" action="{% url 'contact' %}">
 					{% csrf_token %}
 					<div class="form-group">
 						<label for="Password">Name:</label>
 						<input type="text" class="form-control btn-outline-info" name="name" id="name"
 							aria-describedby="emailHelp" placeholder="Enter Name">
-
 					</div>
-
-
 					<div class="form-group">
-
 						<label for="email">Email: </label>
 						<input type="email" class="form-control btn-outline-info" id="email" name="email"
 							aria-describedby="emailHelp" placeholder="Enter Email Please">
-
 					</div>
 					<div class="form-group">
-
 						<label for="email">Subject: </label>
 						<input type="text" class="form-control btn-outline-info" id="email" name="subject"
 							aria-describedby="emailHelp" placeholder="Enter Email Please">
-
 					</div>
-
 					<div class="form-group">
 						<label for="Password">Mobile:</label>
 						<input type="text" class="form-control btn-outline-info" name='mobile' id="name"
 							aria-describedby="emailHelp" placeholder="Enter Name">
-
 					</div>
 					<div class="form-group">
 						<label for="Password">Message: </label>

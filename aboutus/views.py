@@ -6,13 +6,11 @@ from .models import Contact
 from .models import TeamInfo
 from .models import OurServices
 
-
 def addAboutSection(request):
     aboutDesc = AboutDescription.objects
     teaminfo = TeamInfo.objects
     services = OurServices.objects
     return render(request, 'about.html', {'aboutDesc': aboutDesc, 'teaminfo': teaminfo, 'services': services})
-
 
 def contacts(request):
     if request.method == 'POST':
@@ -21,10 +19,8 @@ def contacts(request):
         subject = request.POST['subject']
         phone = request.POST['mobile']
         message = request.POST['message']
-
         contact = Contact(name=name, email=email,
                           subject=subject, phone=phone, message=message)
-
         contact.save()
         # send Email
         send_mail('Subject' + subject,
@@ -32,9 +28,7 @@ def contacts(request):
                   'sachin.thakur9614@gmail.com',
                   [email, 'sachin.thakur@mca.christuniversity.in', ],
                   fail_silently=False
-
                   )
-
         messages.success(
             request, 'Your request has been submited, We will contact you shortly')
         return mail.send()
