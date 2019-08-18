@@ -3,7 +3,6 @@
 <head>
   {% if user.is_authenticated %}
   <title></title>
-
   <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.2.1/css/bootstrap.min.css"
     integrity="sha384-GJzZqFGwb1QTTN6wy59ffF1BuGJpLSa9DkKMp0DgiMDm4iYMj70gZWKYbI706tWS" crossorigin="anonymous">
   <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js"
@@ -16,7 +15,6 @@
     integrity="sha384-B0UglyR+jN6CkvvICOB2joaf5I4l3gm9GU6Hc1og6Ls7i6U/mkkaduKaBhlAXv9k"
     crossorigin="anonymous"></script>
 </head>
-
 <nav class="navbar fixed-top navbar-expand-lg navbar-dark bg-dark">
   <a class="navbar-brand " href="{% url 'sponsorIndex' %}"><button type="button" class="btn btn-outline-primary">Tech
       Event</button></a>
@@ -58,27 +56,12 @@
           <input type="hidden" name="">
         </form>
       </li>
-
-
-
-
-
     </ul>
-
-
   </div>
 </nav>
-
-
-
 <header>
 
 </header>
-
-
-
-
-
 <body>
 
   {% block content%}
@@ -87,41 +70,40 @@
   {% endblock %}
 
 </body>
-
-
-
 <link href="//maxcdn.bootstrapcdn.com/font-awesome/4.1.0/css/font-awesome.min.css" rel="stylesheet">
 <footer class="footer bg-dark navbar-fixed-bottom mr-auto">
   <div class="container pull-center bg-dark">
     <div class="row mr-auto ">
-
-      <div class="col-md-8">
+      <div class="col-md-3">
         <p>
-          <h6 class="text-white text-center"> Know more about us <a class="  btn-outline-info"
+          <h6 class="text-white text-center"> Know more about us <a class="  btn-outline-primary"
               href="{% url 'aboutus' %}">
               here </a></h6>
-
-          <h6 class="text-white text-center"> &copy;Reserved to Hackathon 20{% now "y" %} </h6>
         </p>
       </div>
       <div class="col-md-4">
-        <a class="btn btn-twitter" href="">
-          <button type="button" class=" fa fa-twitter btn btn-outline-info"></button>
+        <p>
+          <h6 class="text-white text-center"> &copy;Reserved to Hackathon 20{% now "y" %} </h6>
+        </p>
+      </div>
+      <div class="col-md-5">
+        <a class="btn btn-twitter" href="" style="padding-top: 15px">
+          <button type="button" class=" fa fa-twitter btn btn-outline-primary"></button>
         </a>
-        <a class="btn  btn-linkedin" href="">
-          <button type="button" class=" fa fa-linkedin btn btn-outline-info"></button>
+        <a class="btn  btn-linkedin" href="" style="padding-top: 15px">
+          <button type="button" class=" fa fa-linkedin btn btn-outline-primary"></button>
         </a>
-        <a class="btn btn-google" href="">
-          <button type="button" class="fa fa-google btn btn-outline-info"></button>
+        <a class="btn btn-google " href="" style="padding-top: 15px">
+          <button type="button" class="fa fa-google btn btn-outline-primary"></button>
         </a>
-        <a class="btn btn-facebook" href="">
-          <button type="button" class="fa fa-facebook btn btn-outline-info"></button>
+        <a class="btn btn-facebook" href="" style="padding-top: 15px">
+          <button type="button" class="fa fa-facebook btn btn-outline-primary"></button>
         </a>
-        <a class="btn btn-instagram" href="">
-          <button type="button" class="fa fa-instagram btn btn-outline-info"></button>
+        <a class="btn btn-instagram" href="" style="padding-top: 15px">
+          <button type="button" class="fa fa-instagram btn btn-outline-primary"></button>
         </a>
-        <a class="btn btn-github" href="">
-          <button type="button" class="fa fa-github btn btn-outline-info"></button>
+        <a class="btn btn-github" href="" style="padding-top: 15px">
+          <button type="button" class="fa fa-github btn btn-outline-primary"></button>
         </a>
       </div>
     </div>
