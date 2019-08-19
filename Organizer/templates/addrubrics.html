@@ -30,54 +30,55 @@
       <script type="text/javascript">
         function validate() {
           var reg_email = /^([A-Za-z0-9_\-\.]){1,}\@([A-Za-z0-9_\-\.]){1,}\.([A-Za-z]{2,4})$/;
-					var reg_file = /(\.pdf|\.docx|\.doc)$/i;
-					var str_event = "Select your Event";
+          var reg_file = /(\.pdf|\.docx|\.doc)$/i;
+          var str_event = "Select your Event";
           var str_level = "Select Event Level";
           // alert("hai");
           var sel_event = document.forms["event_details_form"]["event_name"].value;
-					var num_part = document.forms["event_details_form"]["no_participant"].value;
-					var exp_part = document.forms["event_details_form"]["expected_participant"].value;
-					var sel_level = document.forms["event_details_form"]["event_level"].value;
-					var elig = document.forms["event_details_form"]["eligibility"].value;
-					var pre = document.forms["event_details_form"]["prerequisite"].value;
-					var faclty = document.forms["event_details_form"]["facilities"].value;
-					var doc = document.forms["event_details_form"]["event_detail_docs"].value;
+          var num_part = document.forms["event_details_form"]["no_participant"].value;
+          var exp_part = document.forms["event_details_form"]["expected_participant"].value;
+          var sel_level = document.forms["event_details_form"]["event_level"].value;
+          var elig = document.forms["event_details_form"]["eligibility"].value;
+          var pre = document.forms["event_details_form"]["prerequisite"].value;
+          var faclty = document.forms["event_details_form"]["facilities"].value;
+          var doc = document.forms["event_details_form"]["event_detail_docs"].value;
           // alert("hai");
           if (sel_event == str_event) {
-						var msg = "INVALID EVENT TYPE. PLEASE ENTER A VALID EVENT TYPE";
+            var msg = "INVALID EVENT TYPE. PLEASE ENTER A VALID EVENT TYPE";
             // alert("hai");
-						document.getElementById("error_title_div").style.visibility = 'visible';
-						document.getElementById("error_para").innerHTML = msg;
-						// document.getElementById("error_type").innerHTML = msg;
-						document.forms["event_details_form"]["event_name"].focus();
-						return false;
-					}
+            document.getElementById("error_title_div").style.visibility = 'visible';
+            document.getElementById("error_para").innerHTML = msg;
+            // document.getElementById("error_type").innerHTML = msg;
+            document.forms["event_details_form"]["event_name"].focus();
+            return false;
+          }
 
           if (sel_level == str_level) {
-						var msg = "INVALID EVENT TYPE. PLEASE ENTER A VALID EVENT TYPE";
-						document.getElementById("error_title_div").style.visibility = 'visible';
-						document.getElementById("error_para").innerHTML = msg;
+            var msg = "INVALID EVENT TYPE. PLEASE ENTER A VALID EVENT TYPE";
+            document.getElementById("error_title_div").style.visibility = 'visible';
+            document.getElementById("error_para").innerHTML = msg;
             // alert("hai");
-						// document.getElementById("error_type").innerHTML = msg;
-						document.forms["event_details_form"]["event_level"].focus();
-						return false;
-					}
+            // document.getElementById("error_type").innerHTML = msg;
+            document.forms["event_details_form"]["event_level"].focus();
+            return false;
+          }
 
-					if (reg_file.test(doc) == false) {
-						msg = "INVALID FILE TYPE";
-						document.getElementById("error_title_div").style.visibility = 'visible';
-						document.getElementById("error_para").innerHTML = msg;
-						// document.getElementById("error_file_type").innerHTML = msg;
-						document.forms["event_details_form"]["event_detail_docs"].focus();
-						return false;
-					}
+          if (reg_file.test(doc) == false) {
+            msg = "INVALID FILE TYPE";
+            document.getElementById("error_title_div").style.visibility = 'visible';
+            document.getElementById("error_para").innerHTML = msg;
+            // document.getElementById("error_file_type").innerHTML = msg;
+            document.forms["event_details_form"]["event_detail_docs"].focus();
+            return false;
+          }
 
         }
       </script>
-      <form action=" {% url 'eventdetails' %}" method="POST" name="event_details_form" id="event_details_form" onsubmit="return validate()">
+      <form action=" {% url 'eventdetails' %}" method="POST" name="event_details_form" id="event_details_form"
+        onsubmit="return validate()">
         {% csrf_token %}
-        <div class="alert alert-info alert-dismissible fade show" role="alert" id="error_title_div" name="error_title_div"
-          style="visibility: hidden">
+        <div class="alert alert-info alert-dismissible fade show" role="alert" id="error_title_div"
+          name="error_title_div" style="visibility: hidden">
           <p id="error_para" name="error_para"></p>
           <button type="button" class="close" data-dismiss="alert" aria-label="Close">
             <span aria-hidden="true">&times;</span>
@@ -99,8 +100,8 @@
         </div>
         <div class="form-group">
           <label for="expected_participant">Expected Particpant&ast; </label>
-          <input type="Number" class="form-control border border-info" name="expected_participant" id="expected_participant"
-            aria-describedby="emailHelp" placeholder="Expected Participant" required>
+          <input type="Number" class="form-control border border-info" name="expected_participant"
+            id="expected_participant" aria-describedby="emailHelp" placeholder="Expected Participant" required>
         </div>
         <div class="form-group">
           <label for="event_level">Level of event&ast;</label>
@@ -127,8 +128,8 @@
         </div>
         <div class="form-group">
           <label for="event_detail_docs">Event Details Document&ast; </label>
-          <input type="file" class="form-control border border-info" required name="event_detail_docs" id="event_detail_docs"
-            placeholder="Event Poster " >
+          <input type="file" class="form-control border border-info" required name="event_detail_docs"
+            id="event_detail_docs" placeholder="Event Poster ">
         </div>
         <div class="form-group">
           <input type="submit" class="btn btn-outline-info bg-dark" id="password" aria-describedby="emailHelp" required
@@ -136,12 +137,58 @@
         </div>
       </form>
     </div>
-    <div class="col-md-6">
+    <div class="col-md-1">
+
+    </div>
+    <div class="col-md-5">
       <br>
       <br>
-      <br> <br>
       <br>
       <div class="row">
+        <div class="alert alert-info alert-dismissible fade show col-md-12" role="alert">
+            <a href="{% url 'editRubrics' %}" class="btn btn-dark btn-outline-info text-light">
+                View Event Details</a>
+          <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+            <span aria-hidden="true">&times;</span>
+          </button>
+        </div>
+        <div class="alert alert-info alert-dismissible fade show col-md-12" role="alert">
+            <a href="{% url 'editRubrics' %}" class="btn btn-dark btn-outline-info text-light">
+                Edit Event Details</a>
+          <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+            <span aria-hidden="true">&times;</span>
+          </button>
+        </div>
+        <div class="alert alert-info alert-dismissible fade show col-md-12" role="alert">
+            <a href="{% url 'editRubrics' %}" class="btn btn-dark btn-outline-info text-light">
+                Delete Event Details</a>
+          <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+            <span aria-hidden="true">&times;</span>
+          </button>
+        </div>
+        <div class="alert alert-info alert-dismissible fade show col-md-12" role="alert">
+            <a href="{% url 'EventLocationload' %}" class="bg-dark btn btn-outline-info text-light"> Add Venue
+                Details</a>
+          <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+            <span aria-hidden="true">&times;</span>
+          </button>
+        </div>
+        <div class="alert alert-info alert-dismissible fade show col-md-12" role="alert">
+            <a href="{% url 'view_locatiion' %}" class="btn btn-dark btn-outline-info text-light"> View Venue
+                Details</a>
+          <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+            <span aria-hidden="true">&times;</span>
+          </button>
+        </div>
+        <div class="alert alert-info alert-dismissible fade show col-md-12" role="alert">
+            <a href="{% url 'view_locatiion' %}" class="btn btn-dark btn-outline-info text-light"> Edit Venue
+                Details</a>
+          <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+            <span aria-hidden="true">&times;</span>
+          </button>
+        </div>
+      </div>
+      <!-- <div class="row">
         <table class="table table-bordered  table-light table-hover ">
           <tr class="text-dark">
             <td class="text-dark text-center">
@@ -155,10 +202,10 @@
                 Edit Event Details</a></td>
           </tr>
           <tr class="text-dark">
-              <td class="text-dark text-center">
-                <a href="{% url 'editRubrics' %}" class="btn btn-dark btn-outline-info text-light">
-                  Delete Event Details</a></td>
-            </tr>
+            <td class="text-dark text-center">
+              <a href="{% url 'editRubrics' %}" class="btn btn-dark btn-outline-info text-light">
+                Delete Event Details</a></td>
+          </tr>
           <tr class="text-dark">
             <td class="text-dark text-center">
               <a href="{% url 'EventLocationload' %}" class="bg-dark btn btn-outline-info text-light"> Add Venue
@@ -167,16 +214,18 @@
           </tr>
           <tr class="text-dark">
             <td class="text-dark text-center">
-              <a href="{% url 'view_locatiion' %}" class="btn btn-dark btn-outline-info text-light"> View Venue Details</a>
+              <a href="{% url 'view_locatiion' %}" class="btn btn-dark btn-outline-info text-light"> View Venue
+                Details</a>
             </td>
           </tr>
           <tr class="text-dark">
             <td class="text-dark text-center">
-              <a href="{% url 'view_locatiion' %}" class="btn btn-dark btn-outline-info text-light"> Edit Venue Details</a>
+              <a href="{% url 'view_locatiion' %}" class="btn btn-dark btn-outline-info text-light"> Edit Venue
+                Details</a>
             </td>
           </tr>
         </table>
-      </div>
+      </div> -->
     </div>
 
     <!-- <div class="modal fade" id="exampleModalLong" tabindex="-1" role="dialog" aria-labelledby="exampleModalLongTitle"
@@ -320,7 +369,7 @@
         </div>
       </div>
     </div> -->
-  
+
   </div>
 </div>
 

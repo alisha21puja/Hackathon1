@@ -10,13 +10,23 @@
             <h3 class="text-center">VENUE DETAILS</h3>
             <hr class="bg-info col-md-8">
         </div>
-        <div class="col-md-12">
+
+        <div class="alert alert-info alert-dismissible fade show col-md-12" role="alert">
+            <a href="{% url 'EventLocationload' %}" class="bg-dark btn btn-outline-info text-light "> Add Venue
+                Details</a>
+            <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                <span aria-hidden="true">&times;</span>
+            </button>
+        </div>
+
+        <!-- FIXED BUTTON 
+            <div class="col-md-12">
             <div class="text-center">
                 <a href="{% url 'EventLocationload' %}" class="bg-dark btn btn-outline-info text-light "> Add Venue
                     Details</a>
             </div>
             <hr class="bg-info col-md-8">
-        </div>
+        </div> -->
     </div>
     {% if error %}
     <div class="col-md-12">
@@ -61,21 +71,139 @@
                         {{ loc.event_latitude }}</p>
                     <p class="card-text"> LONGITUDE &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;:
                         {{ loc.event_longitude }}</p>
-
                     <input type="text" value="{{ loc.event_latitude }}" name="event_latitude" id="event_latitude"
                         hidden>
                     <input type="text" value="{{ loc.event_longitude }}" name="event_longitude" id="event_longitude"
                         hidden>
                     <div class="text-center">
                         <a href="#" class="btn btn-dark btn-outline-info text-light" data-toggle="modal"
-                            data-target="#edit{{blog.id}}">
+                            data-target="#edit{{loc.id}}">
                             Edit Venu Details</a>
 
                         <a href="#" class="btn btn-dark btn-outline-info text-light" data-toggle="modal"
-                            data-target="#edit{{blog.id}}">
+                            data-target="#delete{{loc.id}}">
                             Delete Venu Details</a>
                     </div>
                     <hr class="bg-info col-md-8">
+                    <!-- modal edit details -->
+                    <div class="modal fade" id="edit{{loc.id}}" tabindex="-1" role="dialog"
+                        aria-labelledby="exampleModalLongTitle" aria-hidden="true">
+                        <div class="modal-dialog" role="document">
+                            <div class="modal-content">
+                                <div class="modal-header bg-dark col-md-12">
+                                    <h5 class=" modal-title text-info" id="exampleModalLabel"> EDIT :
+                                        {{ loc.event_name }}
+                                    </h5>
+                                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                        <span aria-hidden="true">&times;</span>
+                                    </button>
+                                </div>
+                                <div class="modal-body">
+                                    {% if error %}
+                                    <div class="alert alert-info alert-dismissible fade show" role="alert">
+                                        <strong> {{error}}</strong>
+                                        <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                                            <span aria-hidden="true">&times;</span>
+                                        </button>
+                                    </div>
+                                    {%endif%}
+                                    <center>
+                                        <form action="{% url 'locationupdate' loc.id %}" method="POST">
+                                            {% csrf_token %}
+                                            <div class="form-group">
+                                                <label for="event_name" class="float-left">Event Name:</label>
+                                                <input type="text" class="form-control" id="event_name"
+                                                    name="event_name" value="{{ loc.event_name }}"
+                                                    placeholder="{{ loc.event_name }}" disabled>
+                                            </div>
+                                            <div class="form-group">
+                                                <label for="event_venue_name" class="float-left">Venue Name&ast;</label>
+                                                <input type="text" class="form-control" id="event_venue_name"
+                                                    name="event_venue_name" value="{{ loc.event_title }}"
+                                                    placeholder="{{ loc.event_venue_name }}">
+                                            </div>
+                                            <div class="form-group">
+                                                <label for="event_venue_addr" class="float-left">Venue
+                                                    address&ast;</label>
+                                                <input type="text" class="form-control" id="event_venue_addr"
+                                                    name="event_venue_addr" value="{{ loc.event_venue_addr }}"
+                                                    placeholder="{{ loc.event_venue_addr }}">
+                                            </div>
+                                            <div class="form-group">
+                                                <label for="event_latitude" class="float-left">Latitude&ast; </label>
+                                                <input type="text" class="form-control" id="event_latitude"
+                                                    name="event_latitude" value="{{ loc.event_latitude }}"
+                                                    placeholder="{{ loc.event_latitude }}">
+                                            </div>
+                                            <div class="form-group">
+                                                <label for="event_longitude" class="float-left">Longititude&ast;
+                                                </label>
+                                                <input type="text" class="form-control" id="event_longitude"
+                                                    name="event_longitude" value="{{ loc.event_longitude }}"
+                                                    placeholder="{{ loc.event_longitude }}">
+                                            </div>
+                                            <div class="form-group">
+                                                <input type="submit" class="btn btn-outline-info bg-dark" name="Submit"
+                                                    id="password" aria-describedby="emailHelp" value="Submit">
+                                            </div>
+                                        </form>
+                                    </center>
+                                </div>
+                                <div class="modal-footer bg-dark">
+                                    <button type="button" class="btn btn-dark btn-outline-info"
+                                        data-dismiss="modal">Close</button>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <!-- end edit modal  -->
+
+                    <!-- delete modal -->
+                    <div class="modal fade" id="delete{{loc.id}}" tabindex="-1" role="dialog"
+                        aria-labelledby="exampleModalLongTitle" aria-hidden="true">
+                        <div class="modal-dialog" role="document">
+                            <div class="modal-content">
+                                <div class="modal-header bg-dark col-md-12">
+                                    <h5 class=" modal-title text-info" id="exampleModalLabel"> EDIT :
+                                        {{ loc.event_name }}
+                                    </h5>
+                                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                        <span aria-hidden="true">&times;</span>
+                                    </button>
+                                </div>
+                                <div class="modal-body">
+                                    {% if error %}
+                                    <div class="alert alert-info alert-dismissible fade show" role="alert">
+                                        <strong> {{error}}</strong>
+                                        <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                                            <span aria-hidden="true">&times;</span>
+                                        </button>
+                                    </div>
+                                    {%endif%}
+                                    <center>
+                                        <form action="{% url 'locationdelete' loc.id %}" method="POST">
+                                            {% csrf_token %}
+                                            <div class="form-group">
+                                                <label for="event_name" class="float-left">Event Name:</label>
+                                                <input type="text" class="form-control" id="event_name"
+                                                    name="event_name" value="{{ loc.event_name }}"
+                                                    placeholder="{{ loc.event_name }}" disabled>
+                                            </div>
+                                            <div class="form-group">
+                                                <input type="submit" class="btn btn-outline-info bg-dark" name="Submit"
+                                                    id="password" aria-describedby="emailHelp" value="Delete">
+                                            </div>
+                                        </form>
+                                    </center>
+                                </div>
+                                <div class="modal-footer bg-dark">
+                                    <button type="button" class="btn btn-dark btn-outline-info"
+                                        data-dismiss="modal">Close</button>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <!-- end delete modal -->
                     {% endfor %}
                 </div>
             </div>
