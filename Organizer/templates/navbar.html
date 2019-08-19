@@ -44,12 +44,15 @@
       </li>
       <li class="nav-item active">
         <a class="nav-link" href="{% url 'registeredevent' %}"><button type="button" class="btn btn-outline-info"
-            style="color: white">Registered Events </button><span class="sr-only"></span></a>
+            style="color: white">Your Events </button><span class="sr-only"></span></a>
+      </li>
+      <li class="nav-item  ">
+        <a class="nav-link text-white " href="{% url 'view_locatiion'  %}"><button type="button" class="btn btn-outline-info"
+            style="color: white">Venue Details</button></a>
       </li>
       <li class="nav-item  ">
         <a class="nav-link text-white " href="{% url 'blog'  %}"><button type="button" class="btn btn-outline-info"
             style="color: white">Blogs</button></a>
-
       </li>
       <li class="nav-item  fg-white">
         <a class="nav-link text-white " href="{% url 'profile'%}"><button type="button" class="btn btn-outline-info"

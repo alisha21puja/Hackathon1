@@ -1,0 +1,171 @@
+{% extends 'navbar.html' %}
+
+{% block content %}
+
+{% load staticfiles %}
+<br><br><br><br>
+<div class="container">
+    <div class="row">
+        <div class="col-md-12">
+            <h3 class="text-center">VENUE DETAILS</h3>
+            <hr class="bg-info col-md-8">
+        </div>
+        <div class="col-md-12">
+            <div class="text-center">
+                <a href="{% url 'EventLocationload' %}" class="bg-dark btn btn-outline-info text-light "> Add Venue
+                    Details</a>
+            </div>
+            <hr class="bg-info col-md-8">
+        </div>
+    </div>
+    {% if error %}
+    <div class="col-md-12">
+        <div class="alert alert-info alert-dismissible fade show" role="alert">
+            <strong> {{error}}</strong>
+            <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                <span aria-hidden="true">&times;</span>
+            </button>
+        </div>
+    </div>
+    {% endif %}
+    <div class="row">
+        <div class="col-md-6">
+            <div class="card border border-info " style="width: 35rem; ">
+                <div class="card-body">
+                    <form name="map_load" id="map_load" method="POST" action="{% url 'load_map' %}">
+                        {% csrf_token %}
+                        <div class="form-group">
+                            <label for="event_name">Select an Event &ast; </label>
+
+                            <select class="form-control readonly  border border-info" name="event_name">
+                                <option class="form-control border border-info"> Select your Event </option>
+                                {% for eve in event.all %}
+                                <option class="form-control   border border-info"> {{ eve.event_title }} </option>
+                                {% endfor %}
+                            </select>
+                        </div>
+                        <div class="form-group">
+                            <div class="text-center">
+                                <input type="submit" name="load_map" value="SEARCH"
+                                    class="bg-dark btn btn-outline-info text-light">
+                            </div>
+                        </div>
+                    </form>
+                    {% for loc in location.all %}
+                    <hr class="bg-info col-md-8">
+                    <p class="card-text"> EVENT NAME &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;: {{ loc.event_name }}</p>
+                    <p class="card-text"> VENUE NAME &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;: {{ loc.event_venue_name }}</p>
+                    <p class="card-text"> VENUE ADDRESS : {{ loc.event_venue_addr }}</p>
+                    <p class="card-text"> LATITUDE
+                        &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;:
+                        {{ loc.event_latitude }}</p>
+                    <p class="card-text"> LONGITUDE &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;:
+                        {{ loc.event_longitude }}</p>
+
+                    <input type="text" value="{{ loc.event_latitude }}" name="event_latitude" id="event_latitude"
+                        hidden>
+                    <input type="text" value="{{ loc.event_longitude }}" name="event_longitude" id="event_longitude"
+                        hidden>
+                    <div class="text-center">
+                        <a href="#" class="btn btn-dark btn-outline-info text-light" data-toggle="modal"
+                            data-target="#edit{{blog.id}}">
+                            Edit Venu Details</a>
+
+                        <a href="#" class="btn btn-dark btn-outline-info text-light" data-toggle="modal"
+                            data-target="#edit{{blog.id}}">
+                            Delete Venu Details</a>
+                    </div>
+                    <hr class="bg-info col-md-8">
+                    {% endfor %}
+                </div>
+            </div>
+        </div>
+        <div class="col-md-6" style="width: 35rem; height: 32rem;">
+            <style>
+                #map {
+                    height: 90%;
+                }
+
+                html,
+                body {
+                    height: 90%;
+                    margin: 0;
+                    padding: 0;
+                }
+            </style>
+            <div id="map"></div>
+            <script>
+                function initMap() {
+
+                    let lati = document.getElementById('event_latitude').value;
+                    let lngi = document.getElementById('event_longitude').value;
+                    lati = parseFloat(lati);
+                    lngi = parseFloat(lngi);
+
+                    var uluru = { lat: lati, lng: lngi };
+                    var main_url = "https://cdn0.iconfinder.com/data/icons/map-and-navigation-2-1/48/100-512.png";
+
+                    var map = new google.maps.Map(document.getElementById('map'), {
+                        zoom: 14,
+                        center: uluru,
+                        gestureHandling: 'cooperative',
+                        mapTypeId: 'satellite',
+                        heading: 90,
+                        tilt: 45
+
+                    });
+                    map.setTilt(45);
+                    function rotate90() {
+                        var heading = map.getHeading() || 0;
+                        map.setHeading(heading + 90);
+                    }
+
+                    function autoRotate() {
+                        // Determine if we're showing aerial imagery.
+                        if (map.getTilt() !== 0) {
+                            window.setInterval(rotate90, 3000);
+                        }
+                    }
+                    var icon = {
+                        url: main_url, // url
+                        scaledSize: new google.maps.Size(50, 50), // scaled size
+                    };
+                    // The marker, positioned at Uluru
+                    var marker = new google.maps.Marker({
+                        position: uluru,
+                        map: map,
+                        icon: icon,
+                        title: 'Click to zoom'
+                    });
+
+                    map.addListener('center_changed', function () {
+                        // 3 seconds after the center of the map has changed, pan back to the
+                        // marker.
+                        window.setTimeout(function () {
+                            map.panTo(marker.getPosition());
+                        }, 3000);
+                    });
+
+                    marker.addListener('click', function () {
+                        map.setZoom(20);
+                        map.setCenter(marker.getPosition());
+                    });
+                    var panorama = new google.maps.StreetViewPanorama(
+                        document.getElementById('pano'), {
+                            position: uluru,
+                            pov: {
+                                heading: 34,
+                                pitch: 10
+                            }
+                        });
+                    map.setStreetView(panorama);
+                }
+            </script>
+            <script async defer
+                src="https://maps.googleapis.com/maps/api/js?key=AIzaSyC6jnD6FLQkeGLK05JfSYbOZLXkenB_dGA&callback=initMap"></script>
+        </div>
+    </div>
+    <hr class="bg-info col-md-8">
+</div>
+
+{% endblock %}
