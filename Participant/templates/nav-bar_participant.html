@@ -1,121 +1,114 @@
 <html>
+
 <head>
   <title></title>
   {% if user.is_authenticated %}
-  <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.2.1/css/bootstrap.min.css" integrity="sha384-GJzZqFGwb1QTTN6wy59ffF1BuGJpLSa9DkKMp0DgiMDm4iYMj70gZWKYbI706tWS" crossorigin="anonymous">
-  <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
-<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.6/umd/popper.min.js" integrity="sha384-wHAiFfRlMFy6i5SRaxvfOCifBUQy1xHdJ/yoi7FRNXMRBu5WHdZYu1hA6ZOblgut" crossorigin="anonymous"></script>
-<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.2.1/js/bootstrap.min.js" integrity="sha384-B0UglyR+jN6CkvvICOB2joaf5I4l3gm9GU6Hc1og6Ls7i6U/mkkaduKaBhlAXv9k" crossorigin="anonymous"></script>
+  <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.2.1/css/bootstrap.min.css"
+    integrity="sha384-GJzZqFGwb1QTTN6wy59ffF1BuGJpLSa9DkKMp0DgiMDm4iYMj70gZWKYbI706tWS" crossorigin="anonymous">
+  <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js"
+    integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo"
+    crossorigin="anonymous"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.6/umd/popper.min.js"
+    integrity="sha384-wHAiFfRlMFy6i5SRaxvfOCifBUQy1xHdJ/yoi7FRNXMRBu5WHdZYu1hA6ZOblgut"
+    crossorigin="anonymous"></script>
+  <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.2.1/js/bootstrap.min.js"
+    integrity="sha384-B0UglyR+jN6CkvvICOB2joaf5I4l3gm9GU6Hc1og6Ls7i6U/mkkaduKaBhlAXv9k"
+    crossorigin="anonymous"></script>
 </head>
 
 <nav class="navbar fixed-top navbar-expand-lg navbar-dark bg-dark">
-  <a class="navbar-brand " href="{% url 'home' %}"><button type="button" class="btn btn-outline-danger text-white">Tech Event</button></a>
-  <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarText" aria-controls="navbarText" aria-expanded="false" aria-label="Toggle navigation">
+  <a class="navbar-brand" href="{% url 'home' %}"><button type="button" class="btn btn-outline-danger"
+      style="color: white">Tech Event</button></a>
+       <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarText"
+    aria-controls="navbarText" aria-expanded="false" aria-label="Toggle navigation">
+
     <span class="navbar-toggler-icon"></span>
   </button>
-  <div class="collapse navbar-collapse mr-auto"  id="navbarText">
+  <div class="collapse navbar-collapse mr-auto" id="navbarText">
     <ul class="navbar-nav ml-auto">
       <li class="nav-item active">
-        <a class="nav-link" href="{% url 'participantIndex' %}"><button type="button" class="btn btn-outline-danger text-white">Dashboard</button><span class="sr-only">(current)</span></a>
+        <a class="nav-link" href="{% url 'participantIndex' %}"><button type="button" class="btn btn-outline-danger"
+            style="color: white">Dashboard </button><span class="sr-only">(current)</span></a>
       </li>
-      <li class="nav-item active">
-        <a class="nav-link" href="{% url 'event_details' %}"><button type="button" class="btn btn-outline-danger text-white">Upcoming Events</button><span class="sr-only">(current)</span></a>
-      </li>
-      
-       <li class="nav-item">
-        <a class="nav-link text-white " href="{% url 'participate'  %}"><button type="button" class="btn btn-outline-danger text-white">Participated</button></a>
-      </li>
-
       <li class="nav-item  fg-white">
-      <a class="nav-link btn btn-outline-dark text-white " href="{% url 'participate' %}"><button type="button" class="btn btn-outline-danger text-white">Blogs</button></a>
+        <a class="nav-link btn btn-outline-dark text-white " href="{% url 'event_details' %}"><button type="button"
+            class="btn btn-outline-danger" style="color: white">Upcoming Events</button></a>
       </li>
-
-      <div class="btn-group">
-    <li class="nav-item  fg-white">
-         <button type="button" id="dropdownMenuButton" data-toggle="dropdown" class="btn btn-outline-danger text-white">Welcome {{ user.first_name }}! </button>
-    <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
-    <a class="dropdown-item" href="{% url 'part_profile'  %}" >View Profile</a>
-    <a class="dropdown-item" href="{% url 'deleteparticipant' %}" onclick="return confirm('Are you sure you want to delete your profile?')">Delete Account</a>
-  </div>
-</li>
-</div>
-   <li class="nav-item  ">
+      <li class="nav-item  ">
+        <a class="nav-link text-white " href="{% url 'participate'  %}"><button type="button"
+            class="btn btn-outline-danger" style="color: white">Participated Events</button></a>
+      </li>
+      <li class="nav-item  fg-white">
+        <a class="nav-link text-white " href="{% url 'partblog' %}"><button type="button"
+            class="btn btn-outline-danger" style="color: white">Blogs </button></a>
+      </li>
+      <li class="nav-item  fg-white">
+        <a class="nav-link text-white " href="{% url 'part_profile'%}"><button type="button" class="btn btn-outline-danger"
+            style="color: white">Welcome {{ user.first_name }} </button></a>
+      </li>
+      <li class="nav-item  ">
         <a class="nav-link text-white " href="javascript:{document.getElementById('logout').submit()}">
-          <button type="button" class="btn btn-outline-danger text-white">LogOut</button></a>
-          <form action="{% url 'logout' %}" method="POST" id="logout">
-            {% csrf_token %}
-            <input type="hidden" name="">
-          </form>
+          <button type="button" class="btn btn-outline-danger" style="color: white">Logout</button>
+        </a>
+        <form action="{% url 'logout' %}" method="POST" id="logout">
+          {% csrf_token %}
+          <input type="hidden" name="">
+        </form>
       </li>
-
-     
-       
-
     </ul>
-
-   
   </div>
 </nav>
 
-
-
-  <header>
-
-</header>
-
 <body>
-
-{% block content%}
-
+  {% block content%}
 
 {% endblock %}
-
 </body>
-
-
-
 <link href="//maxcdn.bootstrapcdn.com/font-awesome/4.1.0/css/font-awesome.min.css" rel="stylesheet">
 <footer class="footer bg-dark navbar-fixed-bottom mr-auto">
   <div class="container pull-center bg-dark">
     <div class="row mr-auto ">
-     
-      <div class="col-md-8">
-        <p> 
-           <h6 class="text-white text-center"> Know more about us <a class="  btn-outline-danger " href="{% url 'aboutus' %}">
-              here </a></h6>
 
+      <div class="col-md-3">
+        <p>
+          <h6 class="text-white text-center"> Know more about us <a class="  btn-outline-danger"
+              href="{% url 'aboutus' %}">
+              here </a></h6>
+        </p>
+      </div>
+
+      <div class="col-md-4">
+        <p>
           <h6 class="text-white text-center"> &copy;Reserved to Hackathon 20{% now "y" %} </h6>
         </p>
       </div>
-      <div class="col-md-4">
-        <a class="btn btn-twitter" href="">
-          <button type="button" class=" fa fa-twitter btn btn-outline-danger text-white"></button>
+      <div class="col-md-5">
+              <a class="btn btn-twitter" href="" style="padding-top: 15px">
+          <button type="button" class=" fa fa-twitter btn btn-outline-danger"></button>
         </a>
-        <a class="btn  btn-linkedin" href="">
-          <button type="button" class=" fa fa-linkedin btn btn-outline-danger text-white"></button>
+        <a class="btn  btn-linkedin" href="" style="padding-top: 15px">
+          <button type="button" class=" fa fa-linkedin btn btn-outline-danger"></button>
         </a>
-        <a class="btn btn-google" href="">
-          <button type="button" class="fa fa-google btn btn-outline-danger text-white"></button>
+        <a class="btn btn-google" href="" style="padding-top: 15px">
+          <button type="button" class="fa fa-google btn btn-outline-danger"></button>
         </a>
-        <a class="btn btn-facebook" href="">
-          <button type="button" class="fa fa-facebook btn btn-outline-danger text-white"></button>
+        <a class="btn btn-facebook" href="" style="padding-top: 15px">
+          <button type="button" class="fa fa-facebook btn btn-outline-danger"></button>
         </a>
-        <a class="btn btn-instagram" href="">
-          <button type="button" class="fa fa-instagram btn btn-outline-danger text-white"></button>
+        <a class="btn btn-instagram" href="" style="padding-top: 15px">
+          <button type="button" class="fa fa-instagram btn btn-outline-danger"></button>
         </a>
-        <a class="btn btn-github" href="">
-          <button type="button" class="fa fa-github btn btn-outline-danger text-white"></button>
+        <a class="btn btn-github" href="" style="padding-top: 15px">
+          <button type="button" class="fa fa-github btn btn-outline-danger"></button>
         </a>
       </div>
     </div>
   </div>
 </footer>
+
 </html>
- {% else %}
-     
-
-
+{% else %}
 
 {% include 'index.html' %}
-   
-      {% endif %}
+
+{% endif %}
