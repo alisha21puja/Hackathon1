@@ -2,6 +2,7 @@ from django.urls import path
 
 from django.conf import settings
 
+from django.conf.urls.static import static
 
 from Participant import views as ve
 
@@ -14,10 +15,12 @@ urlpatterns = [
 	path('/deleteparticipant',ve.deleteparticipant,name='deleteparticipant'),
 	path('/event_details',ve.event_details,name='event_details'),
 	path('/participated_event',ve.participated_event,name='participated_event'),
-
-
+	path('/partblog', ve.partblog, name='partblog'),
+	path('/partblog',ve.partblog,name='partblog'),
+	path('/partWriteBlog',ve.partWriteBlog,name='part-blog_write'),
+	path('/partblogsDetail', ve.partblogsDetails, name='partblogsDetails'),
+	path('/req_pdf',ve.req_pdf,name="req_pdf")
 	
-
-
+	
 
 ]
