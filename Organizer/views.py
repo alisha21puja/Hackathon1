@@ -699,7 +699,8 @@ def about(request):
 
 
 def profile(request):
-    return render(request, 'profile.html', {})
+    profile=UserProfile.objects.filter(id=request.user.id)
+    return render(request, 'profile.html', {'profile':profile})
 
 
 def editProfile(request):

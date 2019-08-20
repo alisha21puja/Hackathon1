@@ -172,6 +172,7 @@ def signup(request):
         password2 = request.POST['confirmpassword']
         phone = request.POST['phone']
         type_usr = request.POST['type_usr']
+        src=request.POST['profile_img']
         #mobile  = request.POST['mobile']
         #userType = request.POST['usertype']
         if password == password2:
@@ -191,7 +192,7 @@ def signup(request):
                     #messages.success(request,'You are now Loged in')
                     user.save()
                     key = user._get_pk_val()
-                    var = UserProfile(id=key, type_usr=type_usr, phone=phone)
+                    var = UserProfile(id=key, type_usr=type_usr, phone=phone,profile_img=src)
                     var.save()
                     messages.success(request, 'You are now registered in')
                     return redirect('accounts')

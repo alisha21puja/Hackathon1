@@ -83,6 +83,7 @@
           var reg_email = /^([A-Za-z0-9_\-\.]){1,}\@([A-Za-z0-9_\-\.]){1,}\.([A-Za-z]{2,4})$/;
           var reg_only_char = /^([A-Za-z ]){5,}$/;
           var reg_only_num = /^([0-9]){10}$/;
+          var reg_file = /(\.jpeg|\.jpg|\.png)$/i;
           var f_name = document.forms["reg_form"]["firstname"].value;
           var l_name = document.forms["reg_form"]["lastname"].value;
           var u_name = document.forms["reg_form"]["username"].value;
@@ -91,6 +92,7 @@
           var password_2 = document.forms["reg_form"]["confirmpassword"].value;
           var mob = document.forms["reg_form"]["mobile"].value;
           var type = document.forms["reg_form"]["type_usr"].value;
+          var src=document.forms["reg_form"]["profile_img"].value;
           var str = "Select";
           // error_reg_div/error_reg_para
 
@@ -155,6 +157,14 @@
             document.forms["reg_form"]["event_category"].focus();
             return false;
           }
+
+          if (reg_file.test(src) == false) {
+            msg = "INVALID FILE TYPE";
+            document.getElementById("error_title_div").style.visibility = 'visible';
+            document.getElementById("error_para").innerHTML = msg;
+            // document.getElementById("error_file_type").innerHTML = msg;
+            document.forms["reg_form"]["profile_img"].focus();
+            return false;
         }
       </script>
       {% include 'alerts.html' %}
@@ -201,7 +211,6 @@
             id="confirmpassword" placeholder=" Comfirm Password">
 
         </div>
-
         <div class="form-group">
           <label for="phone">Mobile Number </label>
           <input type="text" class="form-control border border-info" required name="phone" id="phone"
@@ -211,10 +220,14 @@
           <label for="type_usr"> User Type </label>
           <select name="type_usr" id="type_usr" required class="form-control border border-info">
             <option>Select</option>
-            <option value=100>Participant</option>
-            <option value=200>Sponser</option>
-            <option value=300>Organiser</option>
+            <option value='100'>Participant</option>
+            <option value='200'>Sponser</option>
+            <option value='300'>Organiser</option>
           </select>
+        </div>
+        <div class="form-group">
+          <label for="profile_img">Profile Picture</label>
+          <input type="file" name="profile_img" id="profile_img" required class="form-control border border-info">
         </div>
         <div class="form-group">
           <input type="submit" class="btn btn-outline-info bg-dark" id="password" aria-describedby="emailHelp"

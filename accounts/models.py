@@ -23,6 +23,7 @@ class UserProfile(models.Model):
     # u_id = models.IntegerField()
     type_usr = models.IntegerField()
     phone = models.CharField(max_length=15)
+    profile_img=models.ImageField(upload_to='media/images/Profile/')
 
     def __str__(self):
         return self.phone
