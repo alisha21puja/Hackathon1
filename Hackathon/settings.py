@@ -135,13 +135,9 @@ USE_TZ = True
 # https://docs.djangoproject.com/en/2.1/howto/static-files/
 
 
-
-
-
 STATICFILES_DIRS=[
         os.path.join(BASE_DIR,'Hackathon/static')
 ]
-
 
 
 STATIC_ROOT =os.path.join(BASE_DIR,'static')
@@ -164,9 +160,3 @@ EMAIL_HOST_PASSWORD ='hjbgycwcbqwadtra'
 EMAIL_USE_TLS=True
 AUTHENTICATION= 'plain'
 OPENSSL_VERIFY_MODE='none'
-
-
-FROALA_EDITOR_PLUGINS =('align', 'char_counter', 'code_beautifier' ,'code_view', 'colors', 'draggable', 'emoticons',
-        'entities', 'file', 'font_family', 'font_size', 'fullscreen', 'image_manager', 'image', 'inline_style',
-        'line_breaker', 'link', 'lists', 'paragraph_format', 'paragraph_style', 'quick_insert', 'quote', 'save', 'table',
-        'url', 'video')

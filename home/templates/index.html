@@ -20,21 +20,21 @@
       <img src="{{sl.slide1.url}}" height="600" class="d-block w-100" alt="slider data not  uploaded">
       <div class="carousel-caption d-none d-md-block">
         <h1> Tech Event</h1>
-        <p></p>
+        <!-- <p></p> -->
       </div>
     </div>
     <div class="carousel-item" data-interval="500">
       <img src="{{sl.slide2.url}}" height="600" class="d-block w-100" alt="slider data not  uploaded">
       <div class="carousel-caption d-none d-md-block">
         <h1> Welcome you for the Tech event </h1>
-        <p>...</p>
+        <!-- <p>...</p> -->
       </div>
     </div>
     <div class="carousel-item" data-interval="500">
       <img src="{{sl.slide3.url}}" height="600" class="d-block w-100" alt="slider data not  uploaded">
       <div class="carousel-caption d-none d-md-block">
         <h1> Going Good</h1>
-        <p>...</p>
+        <!-- <p>...</p> -->
       </div>
     </div>
   </div>
@@ -52,7 +52,6 @@
 
 <hr class="bg-info col-md-10">
 
-
 <section id="Events">
   <div class="container ">
     <div class="text-center">
@@ -63,7 +62,7 @@
       {% for event in events %}
       <div class="col-md-4">
         <div class="card border-info mb-3" style="width: 18rem;">
-          <img src="../media/images/{{ event.event_poster.url }}" class="card-img-top" height="140" width="100">
+          <img src="media/images/event_poster/{{ event.event_poster }}" class="card-img-top" height="140" width="100">
           <h5 class="card-title text-info text-center">{{ event.event_title }}</h5>
           <br>
           <div class="card-body text-info">
@@ -86,23 +85,8 @@
       </div>
 
       {% endfor %}
-
-
-
-
     </div>
-
-
-
-
-
-
-
-
-
-
     <hr class="bg-info col-md-8">
-
   </div>
 </section>
 
@@ -119,74 +103,56 @@
       <div class="col-md-4">
         <div class="card border-info  mb-3" style="width: 18rem;">
           <img src="{{ partner.orgLogo.url  }}" class="card-img-top " height="200" border="100%" width="200" alt="...">
-          <h5 class="card-title text-info text-center"><a href="{{partner.maplocation}}"
+          <h5 class="card-title text-info text-center"><a href="{{ partner.maplocation }}"
               class="text-info">{{ partner.organisationName }}</a></h5>
 
         </div>
       </div>
 
       {% endfor %}
-
-
-
-
-
-
-
     </div>
-
   </div>
 </section>
-
-
-
 
 
 <section id="partners">
   <div class="container">
     <div class="text-center">
-      <h2> Community Members</h2>
+      <h2> Community</h2>
       <hr class="bg-info col-md-8">
     </div>
     <div class="row shadow p-3 mb-5 bg-white rounded">
 
 
+      <div class="col-md-1"></div>
       <div class="col-md-4">
         <div class="card rounded-pill border-info ml-auto  mb-3" style="width: 25rem;">
-          <img src="..." class="rounded-pill" height="125" width="200" alt="...">
+          <img src="media/images/Comunitybanners/Quotefancy-1700728-3840x2160.jpg" class="rounded-pill" height="125" width="400">
           <h5 class="card-title text-info text-center">Participant Members</h5>
 
         </div>
       </div>
 
-      <div class="col-md-2"></div>
+      <div class="col-md-1"></div>
       <div class="col-md-4">
         <div class="card border-info  rounded-pill mr-auto mb-3" style="width: 25rem;">
-          <img src="..." class="card-img-top" height="125" width="200" alt="...">
+          <img src="media/images/Comunitybanners/Quotefancy-1700728-3840x2160.jpg" class="rounded-pill" height="125" width="400">
           <h5 class="card-title text-info text-center">Organiser Members</h5>
-
         </div>
       </div>
 
-
-
-
-
-    </div>
-    <hr class="bg-info col-md-8">
-    <div class="row shadow p-3 mb-5 bg-white rounded">
-      <div class="col-md-2"></div>
-      <center>
+  
+      <div class="col-md-4"></div>
         <div class="col-md-4">
           <div class="card border-info  rounded-pill mr-auto mb-3" style="width: 25rem;">
-            <img src="..." class="card-img-top" height="125" width="200" alt="...">
+            <img src="media/images/Comunitybanners/Quotefancy-1700728-3840x2160.jpg" class="rounded-pill" height="125" width="400" >
             <h5 class="card-title text-info text-center">Sponsors Members</h5>
 
           </div>
         </div>
-      </center>
-    </div>
+    <hr class="bg-info col-md-8">
   </div>
+</div>
 </section>
 
 

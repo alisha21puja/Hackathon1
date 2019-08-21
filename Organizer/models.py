@@ -20,7 +20,7 @@ class OrganiseEvent(models.Model):
     org_email = models.EmailField(max_length=100)
     org_mobile = models.BigIntegerField()
     org_contact_person = models.CharField(max_length=100)
-    event_poster = models.ImageField(upload_to='event_poster/')
+    event_poster = models.ImageField(upload_to='images/event_poster/')
     event_startdate = models.DateTimeField(default=now)
     event_enddate = models.DateTimeField()
     us = models.ForeignKey(User, on_delete=models.CASCADE)

@@ -26,40 +26,40 @@
   </button>
   <div class="collapse navbar-collapse mr-auto" id="navbarText">
     <ul class="navbar-nav ml-auto">
-      <li class="nav-item active">
+      <li class="nav-item fg-white">
         <a class="nav-link" href="{% url 'organiseEvent' %}"><button type="button" class="btn btn-outline-info"
             style="color: white">Organise Event </button><span class="sr-only">(current)</span></a>
       </li>
       <li class="nav-item  fg-white">
-        <a class="nav-link btn btn-outline-dark text-white " href="{% url 'addEventDetails' %}"><button type="button"
+        <a class="nav-link " href="{% url 'addEventDetails' %}"><button type="button"
             class="btn btn-outline-info" style="color: white">Event Details</button></a>
       </li>
-      <li class="nav-item  ">
-        <a class="nav-link text-white " href="{% url 'shareResource'  %}"><button type="button"
+      <li class="nav-item  fg-white">
+        <a class="nav-link" href="{% url 'shareResource'  %}"><button type="button"
             class="btn btn-outline-info" style="color: white">Share Resources</button></a>
       </li>
       <li class="nav-item  fg-white">
-        <a class="nav-link text-white " href="{% url 'sponsorShip' %}"><button type="button"
+        <a class="nav-link" href="{% url 'sponsorShip' %}"><button type="button"
             class="btn btn-outline-info" style="color: white">Sponsorship </button></a>
       </li>
-      <li class="nav-item active">
+      <li class="nav-item fg-white">
         <a class="nav-link" href="{% url 'registeredevent' %}"><button type="button" class="btn btn-outline-info"
             style="color: white">Your Events </button><span class="sr-only"></span></a>
       </li>
-      <li class="nav-item  ">
-        <a class="nav-link text-white " href="{% url 'view_locatiion'  %}"><button type="button" class="btn btn-outline-info"
+      <li class="nav-item fg-white ">
+        <a class="nav-link " href="{% url 'view_locatiion'  %}"><button type="button" class="btn btn-outline-info"
             style="color: white">Venue Details</button></a>
       </li>
-      <li class="nav-item  ">
-        <a class="nav-link text-white " href="{% url 'blog'  %}"><button type="button" class="btn btn-outline-info"
+      <li class="nav-item  fg-white ">
+        <a class="nav-link " href="{% url 'blog'  %}"><button type="button" class="btn btn-outline-info"
             style="color: white">Blogs</button></a>
       </li>
       <li class="nav-item  fg-white">
-        <a class="nav-link text-white " href="{% url 'profile'%}"><button type="button" class="btn btn-outline-info"
+        <a class="nav-link " href="{% url 'profile'%}"><button type="button" class="btn btn-outline-info"
             style="color: white">Welcome {{ user.first_name }} </button></a>
       </li>
-      <li class="nav-item  ">
-        <a class="nav-link text-white " href="javascript:{document.getElementById('logout').submit()}">
+      <li class="nav-item  fg-white">
+        <a class="nav-link " href="javascript:{document.getElementById('logout').submit()}">
           <button type="button" class="btn btn-outline-info" style="color: white">Logout</button>
         </a>
         <form action="{% url 'logout' %}" method="POST" id="logout">
