@@ -26,7 +26,10 @@
           }
         }
       </script>
+<<<<<<< HEAD
       
+=======
+>>>>>>> 00486efd62bd717f2eaff3e6c9f80a737c54bef9
       {% include 'alerts.html' %}
       <form method="POST" action="{% url 'login' %}" name="login_form" onsubmit="return validate_login()">
         {% csrf_token %}
@@ -115,8 +118,13 @@
             return false;
           }
 
+<<<<<<< HEAD
           if (reg_email.test(u_name) == false) {
             var msg = "MAIL ID EXPECTED! PLEASE ENTER A VALID EMAIL";
+=======
+          if (reg_only_char.test(u_name) == false) {
+            var msg = "CHARACTERS ARE EXPECTED! PLEASE ENTER A VALID USERNAME";
+>>>>>>> 00486efd62bd717f2eaff3e6c9f80a737c54bef9
             document.getElementById("error_reg_div").style.visibility = 'visible';
             document.getElementById("error_reg_para").innerHTML = msg;
             // document.getElementById("error_email").innerHTML = msg;

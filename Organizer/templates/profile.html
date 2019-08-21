@@ -93,12 +93,20 @@
       
         </div>
         </div> 
+<<<<<<< HEAD
         
         {% for pro in profiles.all %}
         <div class="col-md-3">
           <img src="{{ pro.profile_img.url }}" height="143px">
         </div>
         {% endfor %}
+=======
+        <div class="col-md-3">
+        {% for pro in profiles.all %}
+          <img src="media/images/Profile/{{ pro.profile_img.url }}" height="143px">
+        {% endfor %}
+      </div>
+>>>>>>> 00486efd62bd717f2eaff3e6c9f80a737c54bef9
         <hr class="bg-info col-md-10">
       </div>
         <div class="row">
