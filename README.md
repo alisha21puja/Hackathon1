@@ -1,0 +1,5 @@
+# Hackathon [techevent]
+3MCA RDBMS PROJECT
+- SACHIN THAKUR
+- ALISHA SINGH
+- ALWIN JOSEPH

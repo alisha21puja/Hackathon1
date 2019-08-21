@@ -5,112 +5,102 @@
 
 {%load staticfiles %}
 
-
-
 <br><br>
 <br><br>
-<br><br>
-
-
 
 <div class="container">
-	<h3 class="text-center">Dashboard</h3>
-	 <hr class="bg-primary col-md-8">
-
-
-	<div class="row shadow p-3 mb-5 bg-white rounded">
-
-		<div class="col-md-4">
-		<div class="card border border-primary " style="width: 18rem;">
-  <div class="card-body">
-    <h5 class="card-title text-center">Sponsered Event</h5>
-    <hr class="bg-primary col-md-8">
-
-    <h6 class="card-subtitle mb-2 text-muted">Write up</h6>
-    <p class="card-text"> Count </p>
-    <button  class=" btn"> <a href="{% url 'sponsoredEvent' %}" class="bg-dark btn btn-outline-primary">Card link</a>
-    </button>
-
-    <a href="#" class="card-link">Another link</a>
+  <h3 class="text-center">Dashboard</h3>
+  <hr class="bg-primary col-md-8">
+  <div class="row shadow p-3 mb-5 bg-white rounded">
+    <div class="col-md-4">
+      <div class="card border border-primary " style="width: 18rem;">
+        <div class="card-body">
+          <h5 class="card-title text-center">Sponsered Event</h5>
+          <hr class="bg-primary col-md-8">
+          <h6 class="card-subtitle mb-2 text-muted">Write up</h6>
+          <p class="card-text"> Count </p>
+          <button class=" btn"> <a href="{% url 'sponsoredEvent' %}" class="bg-dark btn btn-outline-primary">Card
+              link</a>
+          </button>
+          <a href="#" class="card-link">Another link</a>
+        </div>
+      </div>
+    </div>
+    <div class="col-md-4">
+      <div class="card border border-primary" style="width: 18rem;">
+        <div class="card-body">
+          <h5 class="card-title text-center">Enquires</h5>
+          <hr class="bg-primary col-md-8">
+          <h6 class="card-subtitle mb-2 text-muted">Card subtitle</h6>
+          <p class="card-text">Some quick example text to build on the card title and make up the bulk of the card's
+            content.</p>
+          <button class=" btn"> <a href="{% url 'enquire' %}"
+              class="bg-dark btn btn-outline-primary">Enquires</a></button>
+          <!-- <a href="#" class="card-link">Another link</a>-->
+        </div>
+      </div>
+    </div>
+    <div class="col-md-4">
+      <div class="card border border-primary" style="width: 18rem;">
+        <div class="card-body">
+          <h5 class="card-title text-center">Blog</h5>
+          <hr class="bg-primary col-md-8">
+          <h6 class="card-subtitle mb-2 text-muted">Card subtitle</h6>
+          <p class="card-text">Some quick example text to build on the card title and make up the bulk of the card's
+            content.</p>
+          <button class=" btn"> <a href="{% url 'blog' %}" class="bg-dark btn btn-outline-primary">Blogs</a></button>
+          <!--<a href="#" class="card-link">Another link</a>-->
+        </div>
+      </div>
+    </div>
   </div>
-</div>
-	</div>
-		<div class="col-md-4">
-		<div class="card border border-primary" style="width: 18rem;">
-  <div class="card-body">
-    <h5 class="card-title text-center">Enquires</h5>
-    <hr class="bg-primary col-md-8">
-
-    <h6 class="card-subtitle mb-2 text-muted">Card subtitle</h6>
-    <p class="card-text">Some quick example text to build on the card title and make up the bulk of the card's content.</p>
-   <button  class=" btn"> <a href="{% url 'enquire' %}" class="bg-dark btn btn-outline-primary">Enquires</a></button>
-   <!-- <a href="#" class="card-link">Another link</a>-->
+  <hr class="bg-primary col-md-8">
+  <div class="row shadow p-3 mb-5 bg-white rounded">
+    <div class="col-md-4">
+      <div class="card border border-primary" style="width: 18rem;">
+        <div class="card-body">
+          <h5 class="card-title text-center">Expectations</h5>
+          <hr class="bg-primary col-md-8">
+          <h6 class="card-subtitle mb-2 text-muted">Card subtitle</h6>
+          <p class="card-text">Some quick example text to build on the card title and make up the bulk of the card's
+            content.</p>
+          <button class=" btn"> <a href=" {% url 'shareResource' %}"
+              class="bg-dark btn btn-outline-primary">Expectations</a></button>
+          <!--<a href="#" class="card-link">Another link</a>-->
+        </div>
+      </div>
+    </div>
+    <div class="col-md-4">
+      <div class="card border border-primary" style="width: 18rem;">
+        <div class="card-body">
+          <h5 class="card-title text-center">Organiser Events</h5>
+          <hr class="bg-primary col-md-8">
+          <h6 class="card-subtitle mb-2 text-muted">Card subtitle</h6>
+          <p class="card-text">Some quick example text to build on the card title and make up the bulk of the card's
+            content.</p>
+          <button class=" btn"><a href="{% url 'sponsorShip' %}" class="bg-dark btn btn-outline-primary">Organiser
+              Events</a></button>
+          <!--<a href="#" class="card-link">Another link</a>-->
+        </div>
+      </div>
+    </div>
+    <div class="col-md-4">
+      <div class="card border border-primary" style="width: 18rem;">
+        <div class="card-body">
+          <h5 class="card-title text-center">Profile</h5>
+          <hr class="bg-primary col-md-8">
+          <h6 class="card-subtitle mb-2 text-muted">Card subtitle</h6>
+          <p class="card-text">Some quick example text to build on the card title and make up the bulk of the card's
+            content.</p>
+          <button class=" btn"><a href="{% url 'sponsorShip' %}"
+              class="bg-dark btn btn-outline-primary">Profile</a></button>
+          <!-- <a href="#" class="card-link">Another link</a>-->
+        </div>
+      </div>
+    </div>
   </div>
+  
+  <hr class="bg-primary col-md-8">
 </div>
-	</div>
-		<div class="col-md-4">
-		<div class="card border border-primary" style="width: 18rem;">
-  <div class="card-body">
-    <h5 class="card-title text-center">Blog</h5>
-    <hr class="bg-primary col-md-8">
-
-    <h6 class="card-subtitle mb-2 text-muted">Card subtitle</h6>
-    <p class="card-text">Some quick example text to build on the card title and make up the bulk of the card's content.</p>
-     <button  class=" btn"> <a href="{% url 'blog' %}" class="bg-dark btn btn-outline-primary">Blogs</a></button>
-    <!--<a href="#" class="card-link">Another link</a>-->
-  </div>
-</div>
-	</div>
-</div>
-	 <hr class="bg-primary col-md-8">
-<div class="row shadow p-3 mb-5 bg-white rounded">
-
-		<div class="col-md-4">
-		<div class="card border border-primary" style="width: 18rem;">
-  <div class="card-body">
-    <h5 class="card-title text-center">Expectations</h5>
-    <hr class="bg-primary col-md-8">
-
-    <h6 class="card-subtitle mb-2 text-muted">Card subtitle</h6>
-    <p class="card-text">Some quick example text to build on the card title and make up the bulk of the card's content.</p>
-    <button  class=" btn">  <a href=" {% url 'shareResource' %}" class="bg-dark btn btn-outline-primary">Expectations</a></button>
-    <!--<a href="#" class="card-link">Another link</a>-->
-  </div>
-</div>
-	</div>
-		<div class="col-md-4">
-		<div class="card border border-primary" style="width: 18rem;">
-  <div class="card-body">
-    <h5 class="card-title text-center">Organiser Events</h5>
-    <hr class="bg-primary col-md-8">
-
-    <h6 class="card-subtitle mb-2 text-muted">Card subtitle</h6>
-    <p class="card-text">Some quick example text to build on the card title and make up the bulk of the card's content.</p>
-     <button  class=" btn"><a href="{% url 'sponsorShip' %}" class="bg-dark btn btn-outline-primary">Organiser Events</a></button>
-    <!--<a href="#" class="card-link">Another link</a>-->
-  </div>
-</div>
-	</div>
-		<div class="col-md-4">
-		<div class="card border border-primary" style="width: 18rem;">
-  <div class="card-body">
-    <h5 class="card-title text-center">Profile</h5>
-    <hr class="bg-primary col-md-8">
-
-    <h6 class="card-subtitle mb-2 text-muted">Card subtitle</h6>
-    <p class="card-text">Some quick example text to build on the card title and make up the bulk of the card's content.</p>
-     <button  class=" btn"><a href="{% url 'sponsorShip' %}" class="bg-dark btn btn-outline-primary">Profile</a></button>
-   <!-- <a href="#" class="card-link">Another link</a>-->
-  </div>
-</div>
-	</div>
-</div>
-
-
-
-
-</div>
-<br><br>
-
 
 {% endblock %}

@@ -1,0 +1,51 @@
+{% extends 'nav-bar_participant.html' %}
+
+{%block content %}
+
+{%load staticfiles %}
+
+
+<br><br><br><br><br><br>
+
+<div class="row">
+  <div class="col-md-3"></div>
+  <div class="col-md-6">
+    <h2 class="text-center">Update Profile</h2>
+    <hr class="bg-danger col-md-8">
+    <form action="{% url 'part_updateProfile'%}" method="POST">
+      {% csrf_token %}
+
+      <div class="form-group">
+        <label for="exampleFormControlInput1">User Name</label>
+        <input type="text" class="form-control" name="user" value="{{ user }}">
+      </div>
+
+      <div class="form-group">
+        <label for="exampleFormControlInput1">First Name</label>
+        <input type="text" class="form-control" name="fname" value="{{ user.first_name }}">
+      </div>
+
+      <div class="form-group">
+        <label for="exampleFormControlInput1">Last Name</label>
+        <input type="text" class="form-control" name="lname" value="{{ user.last_name }}">
+      </div>
+
+      <div class="form-group">
+        <label for="exampleFormControlInput1">User Email</label>
+        <input type="text" class="form-control" name="email" value="{{ user.email }}">
+      </div>
+
+      <div class="form-group">
+
+        <input type="submit" class="btn btn-outline-danger bg-dark text-white" name="Submit" id="password"
+          aria-describedby="emailHelp" value="Submit">
+
+      </div>
+
+    </form>
+  </div>
+  <div class="col-md-3"></div>
+</div>
+</div>
+<br><br><br>
+{% endblock %}

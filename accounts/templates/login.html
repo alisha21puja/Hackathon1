@@ -4,279 +4,357 @@
 
 
 {%load staticfiles %}
-
+<br><br><br>
 <div class="container">
   <div class="row shadow p-3 mb-5 bg-white rounded">
-    
-      <div class="col-md-6"><br><br>
+    <div class="col-md-6">
       <h3 class="text-center">Login</h3>
       <hr class="bg-info col-md-8">
+      <script type="text/javascript">
+        //validation
+        function validate_login() {
+          var reg_email = /^([A-Za-z0-9_\-\.]){1,}\@([A-Za-z0-9_\-\.]){1,}\.([A-Za-z]{2,4})$/;
+          var email = document.forms["login_form"]["email"].value;
 
-        {% include 'alerts.html' %}
-      <form method="POST"  action="{% url 'login' %}">
+          if (reg_email.test(email) == false) {
+            var msg = "INVALID EMAIL ADDRESS. PLEASE ENTER A VALID EMAIL";
+            document.getElementById("error_title_div").style.visibility = 'visible';
+            document.getElementById("error_para").innerHTML = msg;
+            // document.getElementById("error_email").innerHTML = msg;
+            document.forms["login_form"]["email"].focus();
+            return false;
+          }
+        }
+      </script>
+      {% include 'alerts.html' %}
+      <form method="POST" action="{% url 'login' %}" name="login_form" onsubmit="return validate_login()">
         {% csrf_token %}
-
-
-        <div class="form-group">
-        
-    <label for="email">User Name </label>
-    <input type="text" class="form-control btn-outline-info" id="email" name="email" aria-describedby="emailHelp" placeholder="Email ">
-  
-  </div>
-  <div class="form-group">
-    <label for="Password">Password </label>
-    <input type="Password" class="form-control btn-outline-info" name="password" id="password" aria-describedby="emailHelp" placeholder=" Password ">
-  
-  </div>
-
-    <div class="form-group">
-    
-    <input type="submit" class="btn btn-outline-info bg-dark" id="password" aria-describedby="emailHelp" value="Submit" >
-   <!--Add buttons to initiate auth sequence and sign out--> <br>
-
-
-  </div>
-      </form>
-
- <div class="row "> 
-  <div>
-    <button  class="btn btn-outline-info bg-dark"  id="authorize_button" style="">Sign in with Google</button>
-  </div>
-  <div>
-    <button  class="btn btn-outline-info bg-dark"  id="authorize_button" style="">Sign in with Facebook</button>
-    </div>
- </div>
-
-    <button class="btn btn-outline-info bg-dark" id="signout_button" style="display: none;">Sign Out</button>
-   
-     </div>
-
-    <div class="col-md-6"><br><br>
-      
-
-
-      <h3 class="text-center">Registration</h3>
-    <hr class="bg-info col-md-8">
-        {% if error %}
-        <div class="alert alert-info alert-dismissible fade show" role="alert">
-          <strong> {{error}}</strong> 
-          <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+        <div class="alert alert-info  alert-dismissible fade show" role="alert" id="error_title_div"
+          style="visibility: hidden">
+          <p id="error_para"></p>
+          <button type="button" class="close" data-dismiss="alert">
             <span aria-hidden="true">&times;</span>
           </button>
         </div>
-
-
-
-       
-
-
-
-
-      {%endif%}
-
-      <!-- Alerts -->
-
-      {% include 'alerts.html' %}
-
-      <form action=" {% url '/signup'%}" method="POST" >
-      
-      {% csrf_token %}
-
         <div class="form-group">
-      
-    <label for="firstname">First Name </label>
-    <input type="text" class="form-control border border-info"  name="firstname" id="firstname" aria-describedby="emailHelp" placeholder="First Name ">
-  
-  </div>
-<div class="form-group">
-    <label for="lastname">Last Name </label>
-    <input type="text" class="form-control border border-info"   name="lastname" id="lastname" aria-describedby="emailHelp" placeholder="Last Name">
-  
-  </div>
-  <div class="form-group">
-    <label for="city">User Name </label>
-  <input type="text" class="form-control border border-info" name="username"  id="mobile" aria-describedby="emailHelp" placeholder="User Name ">
-  
-  
-  </div>
-
-
+          <label for="email">Email </label>
+          <input type="text" class="form-control border border-info" id="email" name="email" required
+            aria-describedby="emailHelp" placeholder="Enter Email Please">
+        </div>
         <div class="form-group">
-    <label for="email">Email </label>
-    <input type="email" class="form-control border border-info" required  name="email" id="email" aria-describedby="emailHelp" placeholder="Email ">
-  
-  </div>
-  <div class="form-group">
-    <label for="Password">Password </label>
-    <input type="Password" class="form-control border border-info" required name="password" id="password"  placeholder="Password">
-  
-  </div>
-  <div class="form-group">
-    <label for="Password">Confirm Password </label>
-    <input type="Password" class="form-control border border-info"  name="confirmpassword" id="password" placeholder=" Comfirm Password">
-  
-  </div>
-
-<div class="form-group">
-  <label for="phone">Mobile Number </label>
-  <input type="text" class="form-control border border-info"  name="phone" id="phone" placeholder="Mobile Number">
-  </div>
-
-  <div class="form-group">
-    <label for="type_usr"> User Type </label>
-    <select name="type_usr" class="form-control">
-       <option >Select</option>
-      <option value=100>Participant</option>
-      <option value=200>Sponser</option>
-      <option value=300>Organiser</option>
-      </select>
-  </div>
-
-
-
-
-
-
-    <div class="form-group">
-    
-    <input type="submit" class="btn btn-outline-info bg-dark" id="password" aria-describedby="emailHelp" value="Submit" >
-  
-  </div>
+          <label for="Password">Password </label>
+          <input type="Password" class="form-control border border-info" name="password" id="password" required
+            aria-describedby="emailHelp" placeholder="Enter Password Please">
+        </div>
+        <div class="form-group">
+          <input type="submit" class="btn btn-outline-info bg-dark" id="password" aria-describedby="emailHelp"
+            value="Submit">
+          <!--Add buttons to initiate auth sequence and sign out--> <br>
+        </div>
       </form>
+      <br>
+      <br>
+      <div class="row">
+        <div class="col-md-6">
+          <button class="btn btn-outline-info bg-dark" id="authorize_button" style="">Sign in with Google</button>
+        </div>
+        <div class="col-md-6">
+          <button class="btn btn-outline-info bg-dark" id="authorize_button" style="">Sign in with Facebook</button>
+        </div>
+      </div>
 
+      <button class="btn btn-outline-info bg-dark" id="signout_button" style="display: none;">Sign Out</button>
+    </div>
+    <div class="col-md-6">
+      <h3 class="text-center">Registration</h3>
+      <hr class="bg-info col-md-8">
+      {% if error %}
+      <div class="alert alert-info alert-dismissible fade show" role="alert">
+        <strong> {{error}}</strong>
+        <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      {%endif%}
+      <!-- Alerts -->
+      <script type="text/javascript">
+        //validation
+        function validate_registration() {
+          var reg_email = /^([A-Za-z0-9_\-\.]){1,}\@([A-Za-z0-9_\-\.]){1,}\.([A-Za-z]{2,4})$/;
+          var reg_only_char = /^([A-Za-z ]){5,}$/;
+          var reg_only_num = /^([0-9]){10}$/;
+          var reg_file = /(\.jpeg|\.jpg|\.png)$/i;
+          var f_name = document.forms["reg_form"]["firstname"].value;
+          var l_name = document.forms["reg_form"]["lastname"].value;
+          var u_name = document.forms["reg_form"]["username"].value;
+          var email = document.forms["reg_form"]["email"].value;
+          var password_1 = document.forms["reg_form"]["password"].value;
+          var password_2 = document.forms["reg_form"]["confirmpassword"].value;
+          var mob = document.forms["reg_form"]["mobile"].value;
+          var type = document.forms["reg_form"]["type_usr"].value;
+          var src=document.forms["reg_form"]["profile_img"].value;
+          var str = "Select";
+          // error_reg_div/error_reg_para
 
+          if (reg_only_char.test(f_name) == false) {
+            var msg = "INVALID NAME. PLEASE ENTER A VALID FIRST NAME";
+            document.getElementById("error_reg_div").style.visibility = 'visible';
+            document.getElementById("error_reg_para").innerHTML = msg;
+            // document.getElementById("error_cp").innerHTML = msg;
+            document.forms["reg_form"]["firstname"].focus();
+            return false;
+          }
 
+          if (reg_only_char.test(l_name) == false) {
+            var msg = "INVALID NAME. PLEASE ENTER A VALID SECOND NAME";
+            document.getElementById("error_reg_div").style.visibility = 'visible';
+            document.getElementById("error_reg_para").innerHTML = msg;
+            // document.getElementById("error_cp").innerHTML = msg;
+            document.forms["reg_form"]["lastname"].focus();
+            return false;
+          }
+
+          if (reg_email.test(u_name) == false) {
+            var msg = "MAIL ID EXPECTED! PLEASE ENTER A VALID EMAIL";
+            document.getElementById("error_reg_div").style.visibility = 'visible';
+            document.getElementById("error_reg_para").innerHTML = msg;
+            // document.getElementById("error_email").innerHTML = msg;
+            document.forms["reg_form"]["username"].focus();
+            return false;
+          }
+
+          if (reg_email.test(email) == false) {
+            var msg = "MAIL ID EXPECTED! PLEASE ENTER A VALID EMAIL";
+            document.getElementById("error_reg_div").style.visibility = 'visible';
+            document.getElementById("error_reg_para").innerHTML = msg;
+            // document.getElementById("error_email").innerHTML = msg;
+            document.forms["reg_form"]["email"].focus();
+            return false;
+          }
+
+          if (password_1 != password_2) {
+            var msg = "PASSWORD DESNOT MATCH";
+            document.getElementById("error_reg_div").style.visibility = 'visible';
+            document.getElementById("error_reg_para").innerHTML = msg;
+            document.forms["reg_form"]["confirmpassword"].focus();
+            return false;
+          }
+
+          if (reg_only_num.test(mob) == false) {
+            var msg = "INVALID PHONE NUMBER. PLEASE ENTER A VALID PHONE NUMBER";
+            document.getElementById("error_reg_div").style.visibility = 'visible';
+            document.getElementById("error_reg_para").innerHTML = msg;
+            // document.getElementById("error_phone").innerHTML = msg;
+            document.forms["reg_form"]["mobile"].focus();
+            return false;
+          }
+
+          if (type == str) {
+            var msg = "INVALID USER TYPE. PLEASE ENTER A VALID USER TYPE";
+            document.getElementById("error_reg_div").style.visibility = 'visible';
+            document.getElementById("error_reg_para").innerHTML = msg;
+            // document.getElementById("error_type").innerHTML = msg;
+            document.forms["reg_form"]["event_category"].focus();
+            return false;
+          }
+
+          if (reg_file.test(src) == false) {
+            msg = "INVALID FILE TYPE";
+            document.getElementById("error_title_div").style.visibility = 'visible';
+            document.getElementById("error_para").innerHTML = msg;
+            // document.getElementById("error_file_type").innerHTML = msg;
+            document.forms["reg_form"]["profile_img"].focus();
+            return false;
+        }
+      </script>
+      {% include 'alerts.html' %}
+      <form action=" {% url 'signup' %}" method="POST" name="reg_form" onsubmit="return validate_registration()">
+        {% csrf_token %}
+        <div class="alert alert-info  alert-dismissible fade show" role="alert" id="error_reg_div"
+          style="visibility: hidden">
+          <p id="error_reg_para"></p>
+          <button type="button" class="close" data-dismiss="alert">
+            <span aria-hidden="true">&times;</span>
+          </button>
+        </div>
+        <div class="form-group">
+          <label for="firstname">First Name </label>
+          <input type="text" class="form-control border border-info" required name="firstname" id="firstname"
+            aria-describedby="emailHelp" placeholder="Enter First Name Please">
+        </div>
+        <div class="form-group">
+          <label for="lastname">Last Name </label>
+          <input type="text" class="form-control border border-info" required name="lastname" id="lastname"
+            aria-describedby="emailHelp" placeholder="Enter Last Name Please">
+
+        </div>
+        <div class="form-group">
+          <label for="city">User name </label>
+          <input type="text" class="form-control border border-info" required name="username" id="username"
+            aria-describedby="emailHelp" placeholder="Enter Your Mobile Number ">
+        </div>
+        <div class="form-group">
+          <label for="email">Email </label>
+          <input type="email" class="form-control border border-info" required name="email" id="email"
+            aria-describedby="emailHelp" placeholder="Email ">
+
+        </div>
+        <div class="form-group">
+          <label for="Password">Password </label>
+          <input type="Password" class="form-control border border-info" required name="password" id="password"
+            placeholder="Password">
+
+        </div>
+        <div class="form-group">
+          <label for="Password">Confirm Password </label>
+          <input type="Password" class="form-control border border-info" required name="confirmpassword"
+            id="confirmpassword" placeholder=" Comfirm Password">
+
+        </div>
+        <div class="form-group">
+          <label for="phone">Mobile Number </label>
+          <input type="text" class="form-control border border-info" required name="phone" id="phone"
+            placeholder="Mobile Number">
+        </div>
+        <div class="form-group">
+          <label for="type_usr"> User Type </label>
+          <select name="type_usr" id="type_usr" required class="form-control border border-info">
+            <option>Select</option>
+            <option value='100'>Participant</option>
+            <option value='200'>Sponser</option>
+            <option value='300'>Organiser</option>
+          </select>
+        </div>
+        <div class="form-group">
+          <label for="profile_img">Profile Picture</label>
+          <input type="file" name="profile_img" id="profile_img" required class="form-control border border-info">
+        </div>
+        <div class="form-group">
+          <input type="submit" class="btn btn-outline-info bg-dark" id="password" aria-describedby="emailHelp"
+            value="Submit">
+        </div>
+      </form>
     </div>
   </div>
-
-
 </div>
+<!--Add buttons to initiate auth sequence and sign out-->
+<pre id="content" style="white-space: pre-wrap;"></pre>
 
-    
-    <!--Add buttons to initiate auth sequence and sign out-->
-    
-    <pre id="content" style="white-space: pre-wrap;"></pre>
+<script type="text/javascript">
+  // Client ID and API key from the Developer Console
+  var CLIENT_ID = '117313785974-13346rmlvpfpqia7knlds1sbd5k7iqsi.apps.googleusercontent.com';
+  var API_KEY = 'AIzaSyBZs4Ue6SwaAyAOeB3YnxdFvBQWcdnI_Rc';
 
-    <script type="text/javascript">
-      // Client ID and API key from the Developer Console
-      var CLIENT_ID = '117313785974-13346rmlvpfpqia7knlds1sbd5k7iqsi.apps.googleusercontent.com';
-      var API_KEY = 'AIzaSyBZs4Ue6SwaAyAOeB3YnxdFvBQWcdnI_Rc';
+  // Array of API discovery doc URLs for APIs used by the quickstart
+  var DISCOVERY_DOCS = ["https://www.googleapis.com/discovery/v1/apis/gmail/v1/rest"];
 
-      // Array of API discovery doc URLs for APIs used by the quickstart
-      var DISCOVERY_DOCS = ["https://www.googleapis.com/discovery/v1/apis/gmail/v1/rest"];
+  // Authorization scopes required by the API; multiple scopes can be
+  // included, separated by spaces.
+  var SCOPES = 'https://www.googleapis.com/auth/gmail.readonly';
 
-      // Authorization scopes required by the API; multiple scopes can be
-      // included, separated by spaces.
-      var SCOPES = 'https://www.googleapis.com/auth/gmail.readonly';
+  var authorizeButton = document.getElementById('authorize_button');
+  var signoutButton = document.getElementById('signout_button');
 
-      var authorizeButton = document.getElementById('authorize_button');
-      var signoutButton = document.getElementById('signout_button');
+  /**
+   *  On load, called to load the auth2 library and API client library.
+   */
+  function handleClientLoad() {
+    gapi.load('client:auth2', initClient);
+  }
 
-      /**
-       *  On load, called to load the auth2 library and API client library.
-       */
-      function handleClientLoad() {
-        gapi.load('client:auth2', initClient);
-      }
+  /**
+   *  Initializes the API client library and sets up sign-in state
+   *  listeners.
+   */
+  function initClient() {
+    gapi.client.init({
+      apiKey: API_KEY,
+      clientId: CLIENT_ID,
+      discoveryDocs: DISCOVERY_DOCS,
+      scope: SCOPES
+    }).then(function () {
+      // Listen for sign-in state changes.
+      gapi.auth2.getAuthInstance().isSignedIn.listen(updateSigninStatus);
 
-      /**
-       *  Initializes the API client library and sets up sign-in state
-       *  listeners.
-       */
-      function initClient() {
-        gapi.client.init({
-          apiKey: API_KEY,
-          clientId: CLIENT_ID,
-          discoveryDocs: DISCOVERY_DOCS,
-          scope: SCOPES
-        }).then(function () {
-          // Listen for sign-in state changes.
-          gapi.auth2.getAuthInstance().isSignedIn.listen(updateSigninStatus);
+      // Handle the initial sign-in state.
+      updateSigninStatus(gapi.auth2.getAuthInstance().isSignedIn.get());
+      authorizeButton.onclick = handleAuthClick;
+      signoutButton.onclick = handleSignoutClick;
+    }, function (error) {
+      appendPre(JSON.stringify(error, null, 2));
+    });
+  }
 
-          // Handle the initial sign-in state.
-          updateSigninStatus(gapi.auth2.getAuthInstance().isSignedIn.get());
-          authorizeButton.onclick = handleAuthClick;
-          signoutButton.onclick = handleSignoutClick;
-        }, function(error) {
-          appendPre(JSON.stringify(error, null, 2));
-        });
-      }
+  /**
+   *  Called when the signed in status changes, to update the UI
+   *  appropriately. After a sign-in, the API is called.
+   */
+  function updateSigninStatus(isSignedIn) {
+    if (isSignedIn) {
+      authorizeButton.style.display = 'none';
+      signoutButton.style.display = 'block';
+      listLabels();
+    } else {
+      authorizeButton.style.display = 'block';
+      signoutButton.style.display = 'none';
+    }
+  }
 
-      /**
-       *  Called when the signed in status changes, to update the UI
-       *  appropriately. After a sign-in, the API is called.
-       */
-      function updateSigninStatus(isSignedIn) {
-        if (isSignedIn) {
-          authorizeButton.style.display = 'none';
-          signoutButton.style.display = 'block';
-          listLabels();
-        } else {
-          authorizeButton.style.display = 'block';
-          signoutButton.style.display = 'none';
+  /**
+   *  Sign in the user upon button click.
+   */
+  function handleAuthClick(event) {
+    gapi.auth2.getAuthInstance().signIn();
+  }
+
+  /**
+   *  Sign out the user upon button click.
+   */
+  function handleSignoutClick(event) {
+    gapi.auth2.getAuthInstance().signOut();
+  }
+
+  /**
+   * Append a pre element to the body containing the given message
+   * as its text node. Used to display the results of the API call.
+   *
+   * @param {string} message Text to be placed in pre element.
+   */
+  function appendPre(message) {
+    var pre = document.getElementById('content');
+    var textContent = document.createTextNode(message + '\n');
+    pre.appendChild(textContent);
+  }
+
+  /**
+   * Print all Labels in the authorized user's inbox. If no labels
+   * are found an appropriate message is printed.
+   */
+  function listLabels() {
+    gapi.client.gmail.users.labels.list({
+      'userId': 'me'
+    }).then(function (response) {
+      var labels = response.result.labels;
+      appendPre('Labels:');
+
+      if (labels && labels.length > 0) {
+        for (i = 0; i < labels.length; i++) {
+          var label = labels[i];
+          appendPre(label.name)
         }
+      } else {
+        appendPre('No Labels found.');
       }
+    });
+  }
 
-      /**
-       *  Sign in the user upon button click.
-       */
-      function handleAuthClick(event) {
-        gapi.auth2.getAuthInstance().signIn();
-      }
+</script>
 
-      /**
-       *  Sign out the user upon button click.
-       */
-      function handleSignoutClick(event) {
-        gapi.auth2.getAuthInstance().signOut();
-      }
-
-      /**
-       * Append a pre element to the body containing the given message
-       * as its text node. Used to display the results of the API call.
-       *
-       * @param {string} message Text to be placed in pre element.
-       */
-      function appendPre(message) {
-        var pre = document.getElementById('content');
-        var textContent = document.createTextNode(message + '\n');
-        pre.appendChild(textContent);
-      }
-
-      /**
-       * Print all Labels in the authorized user's inbox. If no labels
-       * are found an appropriate message is printed.
-       */
-      function listLabels() {
-        gapi.client.gmail.users.labels.list({
-          'userId': 'me'
-        }).then(function(response) {
-          var labels = response.result.labels;
-          appendPre('Labels:');
-
-          if (labels && labels.length > 0) {
-            for (i = 0; i < labels.length; i++) {
-              var label = labels[i];
-              appendPre(label.name)
-            }
-          } else {
-            appendPre('No Labels found.');
-          }
-        });
-      }
-
-    </script>
-
-    <script async defer src="https://apis.google.com/js/api.js"
-      onload="this.onload=function(){};handleClientLoad()"
-      onreadystatechange="if (this.readyState === 'complete') this.onload()">
-    </script>
+<script async defer src="https://apis.google.com/js/api.js" onload="this.onload=function(){};handleClientLoad()"
+  onreadystatechange="if (this.readyState === 'complete') this.onload()">
+  </script>
 
 
 
 
 {% endblock %}
-
-
-
-

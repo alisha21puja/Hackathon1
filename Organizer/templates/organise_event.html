@@ -2,130 +2,235 @@
 
 {%block content %}
 
-
 {%load staticfiles %}
 
-
-
-
+<br><br><br><br>
 <div class="container">
-	<br><br><br>
-		<br><br>		<br><br>		<br><br>
-<div class="row">
-
-	<div class="col-md-5">
-
-
-
-
-      <h3 class="text-center">Register an Event</h3>
-    <hr class="bg-info col-md-8">
-
-
-
-        {% if error %}
-        <div class="alert alert-info alert-dismissible fade show" role="alert">
-          <strong> {{error}}</strong> 
-          <button type="button" class="close" data-dismiss="alert" aria-label="Close">
-            <span aria-hidden="true">&times;</span>
-          </button>
-        </div>
-		 {%endif%}
-
-       
-
-      <!-- Alerts -->
-
-     
-
-      <form action=" {% url 'organiseEventFormData' %}" method="POST" >
-      
-      {% csrf_token %}
-
-        <div class="form-group">
-      
-    <label for="firstname">Event Title &ast;</label>
-    <input type="text" class="form-control border border-info"  name="event_title" id="event_titile" aria-describedby="emailHelp" placeholder="Event Name">
-  
- 	 </div>
-
- 	  <div class="form-group">
-	    <label for="city">Event Description &ast;  </label>
-	    <textarea    class="form-control border border-info" name="event_description" > </textarea>
-	  </div>
-
-	<div class="form-group">
-	    <label for="lastname">Event Category &ast;</label>
-		<select name="event_category"  class="form-control   border border-info">
-			<option class="form-control border border-info" > Select Event Category </option>
-			<option class="form-control border border-info" >hackathons </option>
-			<option class="form-control border border-info" >Tech Fest </option>
-			<option class="form-control border border-info" > Gaming Event</option>
-			<option class="form-control border border-info"> Workshop </option>
-			<option class="form-control border border-info"> IT Fest </option>
-		</select>
-	  </div>
-
-
-	  <div class="form-group">
-	    <label for="city">Organized by Organization/College &ast;  </label>
-	  <input type="text" class="form-control border border-info"  name="org_by"  id="org_by" aria-describedby="emailHelp" placeholder="Organaization Name/College Name ">
-	  </div>
-	    <div class="form-group">
-	    <label for="email">Organiser Email &ast; </label>
-	    <input type="email" class="form-control border border-info"  value="{{ request.user.email }}" readonly name="org_email" id="email" aria-describedby="emailHelp" placeholder=" Organsiser Email">
-	  
-	  </div>
-	  <div class="form-group">
-	    <label for="mobile no">Mobile Number &ast; </label>
-	    <input type="text" class="form-control border border-info"  name="mobile" id="password"  placeholder="Mobile Number">
-	  
-	  </div>
-	  <div class="form-group">
-	    <label for="Person Name"> Contact Person Name &ast; </label>
-	    <input type="text" class="form-control border border-info"   name="person_name" id="person_name" placeholder="Person Name ">
-	  
-	  </div>
-	   <div class="form-group">
-	    <label for="Person Name">Event Poster &ast; </label>
-	    <input type="file" class="form-control border border-info"  required name="event_poster" id="person_name" placeholder="Event Poster ">
-	  
-	  </div>
-	    <div class="form-group">
-	    <label for="Person Name">Event starts Date &ast; </label>
-	    <input type="Date" class="form-control border border-info"  name="event_startdate" id="event_startdate" placeholder="Event Start Date ">
-	  
-	  </div>
-
-	    <div class="form-group">
-	    <label for="Person Name">Event End Date &ast; </label>
-	    <input type="Date" class="form-control border border-info"  name="event_enddate" id="event_startdate" placeholder=" Event End Date ">
-	  
-	  </div>
-	  <div class="form-group">
-	    
-	    <input type="submit" class="btn btn-outline-info bg-dark text-white"  id="password" aria-describedby="emailHelp" value="Submit" >
-	  
-	  </div>
-	      </form>
-
-
-
-		
-
-
-
-
-	</div>
-
-
-<div class="col-md-7">
+	<div class="row">
+		<div class="col-md-5">
+			<h3 class="text-center">Register an Event</h3>
+			<hr class="bg-info col-md-8">
+			{% if error %}
+			<div class="alert alert-info alert-dismissible fade show" role="alert">
+				<strong> {{error}}</strong>
+				<button type="button" class="close" data-dismiss="alert" aria-label="Close">
+					<span aria-hidden="true">&times;</span>
+				</button>
 			</div>
+			{%endif%}
+			<script type="text/javascript">
+				function validate() {
+					var reg_email = /^([A-Za-z0-9_\-\.]){1,}\@([A-Za-z0-9_\-\.]){1,}\.([A-Za-z]{2,4})$/;
+					var reg_name = /^([A-Za-z0-9_\-\.]){5,50}$/;
+					var reg_only_char = /^([A-Za-z ]){5,}$/;
+					var reg_only_num = /^([0-9]){10}$/;
+					var reg_file = /(\.jpg|\.jpeg|\.png)$/i;
+					var email = document.forms["reg_event"]["org_email"].value;
+					var title = document.forms["reg_event"]["event_title"].value;
+					var event_type = document.forms["reg_event"]["event_category"].value;
+					var event_org_name = document.forms["reg_event"]["org_by"].value;
+					var event_mobile = document.forms["reg_event"]["mobile"].value;
+					var event_person_name = document.forms["reg_event"]["person_name"].value;
+					var event_start_date = document.forms["reg_event"]["event_startdate"].value;
+					var event_end_date = document.forms["reg_event"]["event_enddate"].value;
+					var file = document.forms["reg_event"]["event_poster"].value;
+					var str = "Select Event Type";
 
-</div>
+					if (reg_name.test(title) == false) {
+						msg = "INVALID EVENT NAME";
+						document.getElementById("error_title_div").style.visibility = 'visible';
+						document.getElementById("error_para").innerHTML = msg;
+						// document.getElementById("error_title").innerHTML = msg;
+						document.forms["reg_event"]["event_title"].focus();
+						return false;
+					}
 
+					if (event_type == str) {
+						msg = "INVALID EVENT TYPE. PLEASE ENTER A VALID EVENT TYPE";
+						document.getElementById("error_title_div").style.visibility = 'visible';
+						document.getElementById("error_para").innerHTML = msg;
+						// document.getElementById("error_type").innerHTML = msg;
+						document.forms["reg_event"]["event_category"].focus();
+						return false;
+					}
 
+					if (reg_only_char.test(event_org_name) == false) {
+						msg = "INVALID ORGANISER NAME. PLEASE ENTER A VALID EVENT ORGANISER NAME";
+						document.getElementById("error_title_div").style.visibility = 'visible';
+						document.getElementById("error_para").innerHTML = msg;
+						// document.getElementById("error_orgname").innerHTML = msg;
+						document.forms["reg_event"]["org_by"].focus();
+						return false;
+					}
 
+					if (reg_email.test(email) == false) {
+						msg = "INVALID EMAIL ADDRESS. PLEASE ENTER A VALID EMAIL";
+						document.getElementById("error_title_div").style.visibility = 'visible';
+						document.getElementById("error_para").innerHTML = msg;
+						// document.getElementById("error_email").innerHTML = msg;
+						document.forms["reg_event"]["org_email"].focus();
+						return false;
+					}
+
+					if (reg_only_num.test(event_mobile) == false) {
+						msg = "INVALID PHONE NUMBER. PLEASE ENTER A VALID PHONE NUMBER";
+						document.getElementById("error_title_div").style.visibility = 'visible';
+						document.getElementById("error_para").innerHTML = msg;
+						// document.getElementById("error_phone").innerHTML = msg;
+						document.forms["reg_event"]["mobile"].focus();
+						return false;
+					}
+
+					if (reg_only_char.test(event_person_name) == false) {
+						msg = "INVALID ORGANISER CONTACT PERSON NAME. PLEASE ENTER A VALID EVENT ORGANISER CONTACT NAME";
+						document.getElementById("error_title_div").style.visibility = 'visible';
+						document.getElementById("error_para").innerHTML = msg;
+						// document.getElementById("error_cp").innerHTML = msg;
+						document.forms["reg_event"]["person_name"].focus();
+						return false;
+					}
+
+					if (reg_file.test(file) == false) {
+						msg = "INVALID FILE TYPE";
+						document.getElementById("error_title_div").style.visibility = 'visible';
+						document.getElementById("error_para").innerHTML = msg;
+						// document.getElementById("error_file_type").innerHTML = msg;
+						document.forms["reg_event"]["event_poster"].focus();
+						return false;
+					}
+
+					if ((Date.parse(event_start_date) >= Date.parse(event_end_date))) {
+						msg = "END DATE SHOULD BE GREATER THAN START DATE";
+						document.getElementById("error_title_div").style.visibility = 'visible';
+						document.getElementById("error_para").innerHTML = msg;
+						// document.getElementById("error_dt").innerHTML = msg;
+						document.forms["reg_event"]["event_enddate"].focus();
+						return false;
+					}
+				}
+
+			</script>
+			<!-- Alerts -->
+			<form action=" {% url 'organiseEventFormData' %}" method="POST" name="reg_event"
+				onsubmit="return validate()">
+				{% csrf_token %}
+				<div class="alert alert-info alert-dismissible fade show" role="alert" id="error_title_div"
+					style="visibility: hidden">
+					<p id="error_para"></p>
+					<button type="button" class="close" data-dismiss="alert" aria-label="Close">
+						<span aria-hidden="true">&times;</span>
+					</button>
+				</div>
+				<div class="form-group" id="event_title_div">
+					<label for="firstname">Event Title &ast;</label>
+					<input type="text" class="form-control border border-info" name="event_title" id="event_title"
+						aria-describedby="emailHelp" placeholder="Event Name" required>
+					<!-- <p id="error_title" class="font-weight-bold text-danger"></p> -->
+				</div>
+				<div class="form-group">
+					<label for="city">Event Description &ast; </label>
+					<textarea class="form-control border border-info" name="event_description" required></textarea>
+				</div>
+				<div class="form-group">
+					<label for="lastname">Event Category &ast;</label>
+					<select name="event_category" id="event_category" class="form-control   border border-info"
+						required>
+						<option class="form-control border border-info"> Select Event Type </option>
+						<option class="form-control border border-info">hackathons </option>
+						<option class="form-control border border-info">Tech Fest </option>
+						<option class="form-control border border-info"> Gaming Event</option>
+						<option class="form-control border border-info"> Workshop </option>
+						<option class="form-control border border-info"> IT Fest </option>
+					</select>
+					<!-- <p id="error_type" class="font-weight-bold text-danger"></p> -->
+				</div>
+				<div class="form-group">
+					<label for="city">Organization Name / College Name &ast; </label>
+					<input type="text" class="form-control border border-info" name="org_by" id="org_by"
+						aria-describedby="emailHelp" placeholder="Organaization Name / College Name " required>
+					<!-- <p id="error_orgname" class="font-weight-bold text-danger"></p> -->
+				</div>
+				<div class="form-group">
+					<label for="org_email">Organiser Email &ast; </label>
+					<input type="email" class="form-control border border-info" name="org_email" id="org_email"
+						aria-describedby="emailHelp" placeholder="Oragniser Email" required>
+					<!-- <p id="error_email" class="font-weight-bold text-danger"></p> -->
+				</div>
+				<div class="form-group">
+					<label for="mobile no">Mobile Number (excl. +91)&ast; </label>
+					<input type="text" class="form-control border border-info" name="mobile" id="mobile"
+						placeholder="Mobile Number" required>
+					<!-- <p id="error_phone" class="font-weight-bold text-danger"></p> -->
+				</div>
+				<div class="form-group">
+					<label for="Person Name"> Contact Person Name &ast; </label>
+					<input type="text" class="form-control border border-info" name="person_name" id="person_name"
+						placeholder="Contact Person Name " required>
+					<!-- <p id="error_cp" class="font-weight-bold text-danger"></p> -->
+				</div>
+				<div class="form-group">
+					<label for="Person Name">Event Poster &ast; </label>
+					<input type="file" class="form-control border border-info" required name="event_poster"
+						id="event_poster" placeholder="Event Poster ">
+					<!-- <p id="error_file_type" class="font-weight-bold text-danger"></p> -->
+				</div>
+				<div class="form-group">
+					<label for="Person Name">Event starts Date &ast; </label>
+					<input type="Date" class="form-control border border-info" name="event_startdate"
+						id="event_startdate" placeholder="Start Date " required>
+				</div>
+
+				<div class="form-group">
+					<label for="Person Name">Event End Date &ast; </label>
+					<input type="Date" class="form-control border border-info" name="event_enddate" id="event_enddate"
+						placeholder="End Date " required>
+					<!-- <p id="error_dt" class="font-weight-bold text-danger"></p> -->
+				</div>
+				<div class="form-group">
+
+					<input type="submit" class="btn btn-outline-info bg-dark" id="password" aria-describedby="emailHelp"
+						value="Submit">
+				</div>
+			</form>
+		</div>
+		<div class="col-md-2">
+
+		</div>
+		<div class="col-md-5">
+			<h3 class="text-center">Keep in mind!</h3>
+			<hr class="bg-info col-md-8">
+			<div class="alert alert-info alert-dismissible fade show" role="alert" id="error_title_div">
+				<p>All fields are mandatory!</p>
+				<button type="button" class="close" data-dismiss="alert" aria-label="Close">
+					<span aria-hidden="true">&times;</span>
+				</button>
+			</div>
+			<div class="alert alert-info alert-dismissible fade show" role="alert" id="error_title_div">
+				<p>Add venu info!</p>
+				<button type="button" class="close" data-dismiss="alert" aria-label="Close">
+					<span aria-hidden="true">&times;</span>
+				</button>
+			</div>
+			<div class="alert alert-info alert-dismissible fade show" role="alert" id="error_title_div">
+				<p>Add detailed event information!</p>
+				<button type="button" class="close" data-dismiss="alert" aria-label="Close">
+					<span aria-hidden="true">&times;</span>
+				</button>
+			</div>
+			<div class="alert alert-info alert-dismissible fade show" role="alert" id="error_title_div">
+				<p>share resources to participants!</p>
+				<button type="button" class="close" data-dismiss="alert" aria-label="Close">
+					<span aria-hidden="true">&times;</span>
+				</button>
+			</div>
+			<div class="alert alert-info alert-dismissible fade show" role="alert" id="error_title_div">
+				<p>Give sponsership details!</p>
+				<button type="button" class="close" data-dismiss="alert" aria-label="Close">
+					<span aria-hidden="true">&times;</span>
+				</button>
+			</div>
+		</div>
+	</div>
 </div>
 
 

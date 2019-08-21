@@ -2,53 +2,36 @@
 
 {%block content %}
 
-
 {%load staticfiles %}
 
-
-
-
-
 <br><br><br><br>
-<br><br>
-<center><h1> Sponsor  Events</h1></center>
-
 
 <div class="container">
-	
-	<div class="row">  {% for event in event.all %}
-	<div class="col-md-4">
-
-		<!-- {{ event.event }} -->
-		<!--  <p class="card-text">{{ event.summary }} <a class=" text-info" href="{% url 'eventDetails' event.id %}">
+		<h3 class="text-center"> Sponsor Events</h3>
+		
+		<hr class="bg-primary col-md-8">
+	<div class="row"> {% for event in event.all %}
+		<div class="col-md-4">
+			<!-- {{ event.event }} -->
+			<!--  <p class="card-text">{{ event.summary }} <a class=" text-info" href="{% url 'eventDetails' event.id %}">
 		        Read More
 		  </a></p>  -->
-
-		
-
-	<div class="card" style="width: 18rem;">
-  <img src="{{ event.event_poster.url }}" class="card-img-top" alt="">
-  <div class="card-body">
-    <h5 class="card-title">{{event.event_title}}</h5>
-    <p class="card-text">{{ event.summary }} <a class=" text-info" href="{% url 'eventParticipate' event.id %}">
-		        Read More
-		  </a></p>
-
-  </div>
-
- <div class="card-body">
-    <a href="#" class="card-link btn btn-outline-primary btn-dark">Card link</a>
-    <a href="#" class="card-link">Another link</a>
-  </div> 
-</div><br>
-</div> {% endfor %}
+			<div class="card" style="width: 18rem;">
+				<img src="{{ event.event_poster.url }}" class="card-img-top" alt="">
+				<div class="card-body">
+					<h5 class="card-title">{{event.event_title}}</h5>
+					<p class="card-text">{{ event.summary }} <a class=" text-info"
+							href="{% url 'eventParticipate' event.id %}">
+							Read More
+						</a></p>
+				</div>
+				<div class="card-body">
+					<a href="#" class="card-link btn btn-outline-primary btn-dark">Card link</a>
+					<a href="#" class="card-link">Another link</a>
+				</div>
+			</div><br>
+		</div> {% endfor %}
+	</div>
 </div>
-
-   
-
-	
-
-</div>
-
 
 {% endblock %}

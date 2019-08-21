@@ -4,7 +4,7 @@
 
 
 {%load staticfiles %}
- 
+
 
 <br><br>
 <br><br>
@@ -16,34 +16,35 @@
 
 <h1>Article Form</h1>
 <form role="form" action="" method="post">
-    {% csrf_token %}
-    {{ form.as_p }}
-    <button type="submit">Submit</button>
+  {% csrf_token %}
+  {{ form.as_p }}
+  <button type="submit">Submit</button>
 </form>
 <div class="container">
 
-<div class="alert alert-info alert-dismissible fade show" role="alert">
-  <h4 class="alert-heading">  Well Done!</h4> <button type="button" class="close" data-dismiss="alert" aria-label="Close">
-            <span aria-hidden="true">&times;</span>
-          </button>
-  <p> Welcome  to our Hackathon Web Portal. Please select your user Type </p>
-  <hr>
-  <p class="mb-0">Looking forward for your active login on site</p>
-</div>
+  <div class="alert alert-info alert-dismissible fade show" role="alert">
+    <h4 class="alert-heading"> Well Done!</h4> <button type="button" class="close" data-dismiss="alert"
+      aria-label="Close">
+      <span aria-hidden="true">&times;</span>
+    </button>
+    <p> Welcome to our Hackathon Web Portal. Please select your user Type </p>
+    <hr>
+    <p class="mb-0">Looking forward for your active login on site</p>
+  </div>
   <div class="row shadow p-3 mb-5 bg-white rounded">
 
-<div class="alert alert-info alert-dismissible fade show" role="alert">
-  <strong>Place the Name!</strong> You should check in on some of those fields below!!!
-  <button type="button" class="close" data-dismiss="alert" aria-label="Close">
-    <span aria-hidden="true">&times;</span>
-  </button>
-</div>
+    <div class="alert alert-info alert-dismissible fade show" role="alert">
+      <strong>Place the Name!</strong> You should check in on some of those fields below!!!
+      <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+        <span aria-hidden="true">&times;</span>
+      </button>
+    </div>
     <div class="col-md-6"><br><br>
       <h3 class="text-center">Select User Type {{ lo.first_name}} {{ lo.id }}</h3>
       <hr class="bg-info col-md-8">
 
-      
-<!--
+
+      <!--
       <form method="POST"  action="{% url 'userSelection' lo.id  %}">
           {% csrf_token %}
    
@@ -71,9 +72,9 @@
     <div class="form-group">
     
     <input type="submit" class="btn btn-outline-info bg-dark" id="password" aria-describedby="emailHelp" value="Submit" >
-   <!--Add buttons to initiate auth sequence and sign out--> 
+   <!--Add buttons to initiate auth sequence and sign out-->
 
-   <!---<br>
+      <!---<br>
 
 
   </div>
@@ -86,16 +87,16 @@
 
 -->
       <form method="post">
-          {% csrf_token %}
-        
-    {{ form.as_p }}
-            <input name="" value="Submit" type="submit">
+        {% csrf_token %}
+
+        {{ form.as_p }}
+        <input name="" value="Submit" type="submit">
 
 
 
       </form>
+    </div>
   </div>
-</div>
 </div>
 
 
