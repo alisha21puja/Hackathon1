@@ -14,15 +14,15 @@ from django.contrib.auth import get_user_model
 
 class OrganiseEvent(models.Model):
     event_title = models.CharField(max_length=200)
-    event_description = models.CharField(max_length=800)
-    event_category = models.CharField(max_length=200)
-    org_name = models.CharField(max_length=200)
-    org_email = models.EmailField(max_length=100)
-    org_mobile = models.BigIntegerField()
-    org_contact_person = models.CharField(max_length=100)
-    event_poster = models.ImageField(upload_to='event_poster/')
-    event_startdate = models.DateTimeField(default=now)
-    event_enddate = models.DateTimeField()
+    event_description = models.CharField(max_length=800,blank=True)
+    event_category = models.CharField(max_length=200,blank=True)
+    org_name = models.CharField(max_length=200,blank=True)
+    org_email = models.EmailField(max_length=100,blank=True)
+    org_mobile = models.BigIntegerField(blank=True)
+    org_contact_person = models.CharField(max_length=100,blank=True)
+    event_poster = models.ImageField(upload_to='images/')
+    event_startdate = models.DateTimeField(default=now,blank=True)
+    event_enddate = models.DateTimeField(blank=True)
     us = models.ForeignKey(User, on_delete=models.CASCADE)
 
     def summary(self):

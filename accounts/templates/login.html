@@ -26,6 +26,7 @@
           }
         }
       </script>
+      
       {% include 'alerts.html' %}
       <form method="POST" action="{% url 'login' %}" name="login_form" onsubmit="return validate_login()">
         {% csrf_token %}

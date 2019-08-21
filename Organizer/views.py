@@ -104,7 +104,7 @@ def deleteeventdetails(request, id):
     return render(request, 'registered_event.html', context)
 
 
-def updateSponsorInfo(request, id):
+def updateSponsorInfo(request,d):
     submitbutton = request.POST.get('Submit')
     if submitbutton:
         sponsor = SponsorShip.objects.get(pk=id)
@@ -391,9 +391,16 @@ def evenDetailsUpdate(request, id):
         submitbutton = request.POST.get('Submit')
         if submitbutton:
             if event_detail_docs == '':
+
                 event_detail_docs = events.event_detail_docs
+                userr = User.objects.get(pk= request.user.id)
+                print("orggg id",events.org_id.id)
+                print("ehj",events.id)
+                orgid = OrganiseEvent.objects.get(id=events.org_id.id)
+                print("org id",orgid)
+
                 eventInstance = EventDetails(id=id, event=event, no_participant=no_participant, expected_participant=expected_participant, event_level=event_level,
-                                             eligibility=eligibility, prerequisite=prerequisite, facility=facility, event_detail_docs=event_detail_docs, us=request.user.id)
+                                             eligibility=eligibility, prerequisite=prerequisite, facility=facility, event_detail_docs=event_detail_docs, us=userr,org_id= orgid)
                 eventInstance.save()
                 return render(request, 'addrubrics.html', {'registered': 'Event Successfully Registered!'})
         else:
@@ -444,7 +451,8 @@ def eventUpdate(request, id):
         if submitbutton:
             eventid = OrganiseEvent.objects.get(pk=id)
             print('get the id ', eventid.id)
-            userl = User.objects.filter(username=request.user.username)
+            userl = User.objects.get(pk=request.user.id)
+            print("user id is ",userl)
             event_title = request.POST['event_title']
             event_description = request.POST['event_description']
             event_category = request.POST['event_category']
@@ -455,19 +463,19 @@ def eventUpdate(request, id):
             event_poster = request.POST['event_poster']
             event_startdate = request.POST['event_startdate']
             event_enddate = request.POST['event_enddate']
-
-            # sve=OrganiseEvent(id=eventid.id,event_title=event_title,event_category= event_category,org_name=org_name,org_email=org_email,org_mobile=org_mobile,org_contact_person=org_contact_person,event_poster=event_poster,event_startdate=event_startdate,event_enddate=event_enddate,event_description=event_description)
-            # sve.save()
-
+            
             if event_startdate == '':
-                event_startdate = eventid.event_startdate
+                event_startdate=eventid.event_startdate  
             else:
                 event_startdate = request.POST['event_startdate']
             if event_enddate == '':
-                event_enddate = eventid.event_enddate
-                return render(request, 'registered_event.html', {'error': "Please Select End Date !"})
+                event_enddate =eventid.event_enddate
             else:
                 event_enddate = request.POST['event_enddate']
+            if event_poster == '':
+                event_poster = eventid.event_poster
+            else:
+                event_poster = request.POST['event_poster']
             if event_title == '':
                 return render(request, 'registered_event.html', {'error': "Please Enter Event Title!"})
             else:
@@ -492,25 +500,24 @@ def eventUpdate(request, id):
                 return render(request, 'registered_event.html', {'error': "Please Enter Contact Person Name!"})
             else:
                 org_contact_person = request.POST['person_name']
-            if event_poster == '':
-                return render(request, 'registered_event.html', {'error': "Please Select Event Poster!"})
-            else:
-                event_poster = request.POST['event_poster']
-            if event_startdate == '':
-                return render(request, 'registered_event.html', {'error': "Please  Select Start Date!"})
-            else:
-                event_startdate = request.POST['event_startdate']
-            if event_enddate == '':
-                return render(request, 'registered_event.html', {'error': "Please Select End Date !"})
-            else:
-                event_enddate = request.POST['event_enddate']
-            sve = OrganiseEvent(id=eventid.id, event_title=event_title, event_category=event_category, org_name=org_name, org_email=org_email, org_mobile=org_mobile,
-                                org_contact_person=org_contact_person, event_poster=event_poster, event_startdate=event_startdate, event_enddate=event_enddate, us=request.user.id, event_description=event_description)
+
+            sve=OrganiseEvent(id=eventid.id,event_title=event_title,event_category= event_category,org_name=org_name,org_email=org_email,org_mobile=org_mobile,org_contact_person=org_contact_person,event_poster=event_poster,event_startdate=event_startdate,event_enddate=event_enddate,us=userl,event_description=event_description)
             sve.save()
+
+
+           
+          
+
+            # sve = OrganiseEvent(id=eventid.id, event_title=event_title, event_category=event_category, org_name=org_name, org_email=org_email, org_mobile=org_mobile,
+            #                     org_contact_person=org_contact_person, event_poster=event_poster, event_startdate=event_startdate, event_enddate=event_enddate, us=request.user.id, event_description=event_description)
+            # sve.save()
             # sve.refresh_from_db()
-            events = OrganiseEvent.objects.get(us=request.user.id)
-            context = {'events': events}
-            return render(request, 'registered_event.html', context)
+            # events = OrganiseEvent.objects.get(us=request.user.id)
+            # events = OrganiseEvent.objects.filter(us=request.user.id)
+            # loc = Event_Location.objects.filter(eventid_id=request.user.id)
+            # context = {'events': events, 'loc': loc}
+           
+            return render(request, 'registered_event.html',{'updated':'Successfully updated event '})
             # return render(request, 'registered_event.html'	)
         else:
             events = OrganiseEvent.objects.filter(us=request.user.id)
