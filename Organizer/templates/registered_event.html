@@ -12,7 +12,6 @@
   <div class="row shadow p-3 mb-5 bg-white rounded">
     <div class="col-md-12">
       <h3 class=" text-center">Events Details</h3>
-<<<<<<< HEAD
        {% if updated %}
                 <div class="alert alert-info alert-dismissible fade show" role="alert">
                   <strong> {{updated}}</strong>
@@ -21,8 +20,6 @@
                   </button>
                 </div>
                 {%endif%} 
-=======
->>>>>>> 00486efd62bd717f2eaff3e6c9f80a737c54bef9
       <hr class="bg-info col-md-10">
     </div>
                
@@ -56,37 +53,6 @@
           </div>
         </div>
 
-<<<<<<< HEAD
-=======
-    {%  for event in events.all  %}
-
-    <div class="col-md-6">
-      <div class="card border border-info ">
-        <!--style="width: 18rem;">-->
-        <div class="card-body">
-          <h5 class="card-title text-center">{{ event.event_title }}</h5>
-          <hr class="bg-info col-md-8">
-          <!-- <h6 class="card-subtitle mb-2 text-muted">Helps to organise event</h6> -->
-          <p class="card-text"> Event Category &nbsp;&nbsp;&nbsp;: {{ event.event_category}} </p>
-          <p class="card-text"> Organised By &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;: {{ event.org_name}} </p>
-          <p class="card-text"> Organiser Email &nbsp;&nbsp;: {{ event.org_email}} </p>
-          <p class="card-text"> Contact Name &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;: {{ event.org_contact_person }} </p>
-          <p class="card-text"> Contact Number &nbsp;: {{ event.org_mobile }} </p>
-          <p class="card-text"> {{ event.event_startdate }} - {{ event.event_enddate }} </p>
-          <div class="row">
-            <button class=" btn"><a href="#{% url 'eventEdit' event.id %}"
-                class="btn btn-dark btn-outline-info text-light" data-toggle="modal"
-                data-target="#exampleModal{{event.id}}">
-                Details</a></button>
-            <button class=" btn"> <a href="#{% url 'eventupdate' event.id %}"
-                class="btn btn-dark btn-outline-info text-light" data-toggle="modal" data-target="#edit{{event.id}}">
-                Edit Details</a></button>
-            <button class=" btn"> <a href="" class="btn btn-dark btn-outline-info text-light" data-toggle="modal"
-                data-target="#delete{{event.id}}">Delete Details</a></button>
-          </div>
-        </div>
-
->>>>>>> 00486efd62bd717f2eaff3e6c9f80a737c54bef9
         <div class="modal fade" id="delete{{event.id}}" tabindex="-1" role="dialog"
           aria-labelledby="exampleModalLongTitle" aria-hidden="true">
           <div class="modal-dialog" role="document">
@@ -176,12 +142,8 @@
                       <label for="exampleFormControlInput1">Event Poster</label>
                       <input type="file" class="form-control" id="exampleFormControlInput1" name="event_poster"
                         placeholder="name@example.com">
-<<<<<<< HEAD
                         <br>
                       <img src="../media/images/{{ event.event_poster }}" height="200" width="200" />
-=======
-                      <img src="{{ event.event_poster.url }}" height="200" width="200" />
->>>>>>> 00486efd62bd717f2eaff3e6c9f80a737c54bef9
                     </div>
                     <div class="form-group">
                       <label for="exampleFormControlInput1"> Event Start Date </label>
