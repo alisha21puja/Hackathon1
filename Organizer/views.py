@@ -747,6 +747,7 @@ def req_pdf(request):
     p.setLineWidth(.3)
     p.setFont('Helvetica', 12)
 
+
     p.line(80, 770, 480, 770)
     p.drawString(80, 755, 'HACKATHON USER DETAILS :')
     p.line(80, 750, 480, 750)
