@@ -104,7 +104,12 @@ def deleteeventdetails(request, id):
     return render(request, 'registered_event.html', context)
 
 
+<<<<<<< HEAD
+def updateSponsorInfo(request,id):
+    spon = SponsorShip.objects.get(pk=id)
+=======
 def updateSponsorInfo(request,d):
+>>>>>>> 312abae4e7e44b43e4885c90a8ef9014ecdc395f
     submitbutton = request.POST.get('Submit')
     if submitbutton:
         sponsor = SponsorShip.objects.get(pk=id)
@@ -119,10 +124,19 @@ def updateSponsorInfo(request,d):
         f_silver = request.POST['f_silver']
         ex_silver = request.POST['ex_silver']
 
+
+
+        userr = User.objects.get(pk= request.user.id)
+          
+        orgid = OrganiseEvent.objects.get(id=spon.org_id.id)
+
+
         sponsor_ship = SponsorShip(id=id, event_title=event_title, platinum_sponsor=platinum_sponsor, f_platinum=f_platinum, ex_platinum=ex_platinum, gold_sponsor=gold_sponsor,
-                                   f_gold=f_gold, ex_gold=ex_gold, silver_sponsor=silver_sponsor, f_silver=f_silver, ex_silver=ex_silver, us=request.user.id)
+                                   f_gold=f_gold, ex_gold=ex_gold, silver_sponsor=silver_sponsor, f_silver=f_silver, ex_silver=ex_silver, us=userr,org_id=orgid)
         sponsor_ship.save()
         sponsorShip = SponsorShip.objects.filter(us=request.user.id)
+
+
         return render(request, 'edit_sponsorship.html', {'sponsorShip': sponsorShip})
     else:
         if platinum_sponsor == '':
@@ -293,7 +307,9 @@ def editResource(request):
 
 
 def updateShareResources(request, id):
+    share = ShareResource.objects.get(pk=id)
     if request.method == 'POST':
+
         submitbutton = request.POST.get('Submit')
         if submitbutton:
             share_resource = ShareResource.objects.get(pk=id)
@@ -313,8 +329,15 @@ def updateShareResources(request, id):
                 documentFile = share_resource.documentFile
             else:
                 documentFile = request.POST['document_file']
+
+ 
+            userr = User.objects.get(pk= request.user.id)
+          
+            orgid = OrganiseEvent.objects.get(id=share.org_id.id)
+            # print("org id",orgid)
+
             share_resource = ShareResource(id=share_resource.id, event_title=event_title, subject=subject, description=description, publishedDate=publishedDate,
-                                           resourceLink=resourceLink, documentFile=documentFile, publisedBy=publisedBy, resourceImage=resourceImage, us=request.user.id)
+                                           resourceLink=resourceLink, documentFile=documentFile, publisedBy=publisedBy, resourceImage=resourceImage, us=userr,org_id=orgid )
             share_resource.save()
             share_resource.refresh_from_db()
             share_resource = ShareResource.objects.filter(
@@ -343,7 +366,7 @@ def resource(request):
         if description == '':
             return render(request, 'shareresource.html', {'error': "Event is not selected"})
         else:
-            description = request.POST['description']
+            description = request.POST['descr']
         if publishedDate == '':
             return render(request, 'shareresource.html', {'error': "Event is not selected"})
         else:
