@@ -104,8 +104,12 @@ def deleteeventdetails(request, id):
     return render(request, 'registered_event.html', context)
 
 
+<<<<<<< HEAD
 def updateSponsorInfo(request,id):
     spon = SponsorShip.objects.get(pk=id)
+=======
+def updateSponsorInfo(request,d):
+>>>>>>> 312abae4e7e44b43e4885c90a8ef9014ecdc395f
     submitbutton = request.POST.get('Submit')
     if submitbutton:
         sponsor = SponsorShip.objects.get(pk=id)
