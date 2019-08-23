@@ -52,10 +52,74 @@ def event_details(request):
 	events = OrganiseEvent.objects
 	return render(request,'event_details.html',{'events':events})
 
-def participated_event(request):
+def participated_event(request,id):
 	part_event = ParticipateEvent.objects.filter(us= request.user.id)
 	events = OrganiseEvent.objects.filter(us= request.user.id)
-	return render(request,'participated_event.html',{'part_event':part_event})
+	participated_event = ParticipateEvent(Event_id_id = id,us_id = request.user.id)
+	participated_event.save()
+	participated_event.refresh_from_db()		
+	try:
+		events = OrganiseEvent.objects.get(pk=id)
+		eventdet = EventDetails.objects.get(org_id=id)
+		print("hello",eventdet)
+
+		context ={	'events':events,
+					'eventdet':eventdet,
+				}
+
+		print("event is",events.event_title)
+		return render(request,'participated_event.html',context)
+	except EventDetails.DoesNotExist:
+		eventdet = None
+		if eventdet:
+			pass
+		else:
+			events = OrganiseEvent.objects.get(pk=id)
+			context ={	'events':events,
+						'eventdet':eventdet,
+					}
+
+			print("event is",events.event_title)
+			return render(request,'participated_event.html',context)
+		
+def enquireInfo(request,id):
+	event = OrganiseEvent.objects.get(pk=id)
+	return render(request,'part_enquire.html',{'event':event})
+
+def part_shareresources(request,id):
+	try:
+		resources = ShareResource.objects.get(org_id_id = id)
+		return render(request,'part_shareresources.html',{'resources':resources})
+	except ShareResource.DoesNotExist:
+		resources = None
+	if resources:
+		pass
+	else:
+		return render(request,'part_shareresources.html',{'error':'Resources are not published'})
+		
+
+def part_enquire(request):
+	return render(request,'part_enquire.html')
+	
+def enquireInfoMail(request):
+	if request.POST:
+		subject = request.POST['subject']
+		to = request.POST['to']
+		fromm = request.POST['from']
+		mobile = request.POST['mobile']
+		message = request.POST['message']
+		send_mail('Subject' +subject,
+			'Message'+ message + 'Will Contact your soon',
+			'sachin.thakur9614@gmail.com',
+			[to,'sachin.thakur@mca.christuniversity.in',],
+			fail_silently =False)
+		
+		return  render('Participant_index.html')
+
+
+
+def part_enquire(request):
+	return render(request,'part_enquire.html')
 
 
 def partblogsDetails(request):
