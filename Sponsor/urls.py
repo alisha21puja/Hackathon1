@@ -7,21 +7,16 @@ from Sponsor import views as views
 
 urlpatterns = [
 	path('',views.sponsor,name='sponsorIndex'),
-	path('sponsored/',views.sponsoredEvent,name='sponsoredEvent'),
-	path('upcoming/',views.sponsorUpComing,name='sponsorUpComing'),
-	path('enquiree/<int:id>/',views.enquireInfo,name='enquiree'),
+	path('profile',views.profile,name='profile'),
+	path('enquireInfoMail',views.enquireInfoMail,name='enquireInfoMail'),
+	path('sponsor',views.sponsor_event,name='sponsor'),
+	path('sponsored',views.sponsoredEvent,name='sponsoredEvent'),
 	path('enquire',views.enquire,name='enquire'),
+	path('enquire_event',views.enquire_event,name='enquire_event'),
 	path('blogSponsor',views.blogSponsor,name='blog_sponsor'),
 	path('blogSponsorWrite',views.writeBlogSponsor,name='blog_write_sponsor'),
-	path('sponsored/<int:id>',views.sponsorEventUpdate,name='sponsorEdit'),
-	path('event/<int:id>',views.sponsorEventDetails,name='sponsorEventDetails'),
-	path('sponsorDetails/<int:id>',views.sponsorEventDet,name='sponsorDetails'),
-	path('eventParticipate/<int:id>/',views.eventInfo,name='eventParticipate'),
-	path('enquireInfoMail',views.enquireInfoMail,name='enquireInfoMail'),
-	path('profile',views.profile,name='profile'),
-	path('enquire_event',views.enquire_event,name='enquire_event'),
+	path('upcoming/',views.events,name='upcoming'),
+	path('event_details/<int:id>',views.event_details,name='event_details'),
 	
-
-
 
 ]+ static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)

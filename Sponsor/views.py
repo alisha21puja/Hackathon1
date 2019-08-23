@@ -1,15 +1,20 @@
 from django.shortcuts import render,get_object_or_404
 from Blog.models import BlogsInfo
-from Organizer.models import EventDetails,SponsorShip,EventDetails,OrganiseEvent
+from Organizer.models import EventDetails,SponsorShip,OrganiseEvent,Event_Location
 from django.contrib.auth.models import User
 from django.utils import timezone
 from django.core.mail  import send_mail
 
-
+# index
 def sponsor(request):
 	return  render(request,'sponsor_index.html')
 
+# user profile
+def profile(request):
+    profile=User.objects.filter(id=request.user.id)
+    return render(request, 'profile_spnsr.html', {'profile':profile})
 
+# to contact event organisers
 def enquireInfoMail(request):
 	if request.method=='POST':
 		subject = request.POST['subject']
@@ -28,71 +33,53 @@ def enquireInfoMail(request):
 		events=OrganiseEvent.objects
 		return  render(request,'sponsor_enquire.html',{'event':events})
 
+# list out sponsership details of events to sponser
+def sponsor_event(request):
+	try:
+		sponsorship = SponsorShip.objects
+		return render(request,'sponsor_event.html',{'sponsors':sponsorship})
+	except:
+		# return  render(request,'sponsor_index.html')
+		return render(request,'sponsor_event.html')
 
-def sponsorEventDet(request,id):
-	eventdet = EventDetails.objects.filter(org_id=id)
+# list out all event info
+def events(request):
+	events=OrganiseEvent.objects
+	return render(request,'sponsor_up_coming.html',{'events':events})
 
-	sponsors = SponsorShip.objects
-	print(eventdet.event)
+#load more event info
+def event_details(request,id):
+	if(OrganiseEvent.objects.filter(id=id) is not None):
+		events=OrganiseEvent.objects.filter(id=id)
+		if(EventDetails.objects.filter(id=id) is not None):
+			info_event=EventDetails.objects.filter(id=id)
+			if(SponsorShip.objects.filter(id=id) is not None):
+				spnsr_info=SponsorShip.objects.filter(id=id)
+				if(Event_Location.objects.filter(id=id) is not None):
+					loc=Event_Location.objects.filter(id=id)
+					return render(request,'sponsor_event_details.html',{'events':events,'info':info_event,'spnsr':spnsr_info,'venue':loc})
+				else:
+					return render(request,'sponsor_event_details.html',{'events':events,'info':info_event,'spnsr':spnsr_info})
+			else:
+				return render(request,'sponsor_event_details.html',{'events':events,'info':info_event})
+		else:
+			return render(request,'sponsor_event_details.html',{'events':events})
+	else:
+		events=OrganiseEvent.objects
+		return render(request,'sponsor_up_coming.html',{'events':events})
 
-	event = EventDetails.objects
-	return render(request,'sponsor_event.html',{'sponsors':sponsors,'event':event,'eventdet':eventdet})
-
-
+# list out sponsered events
 def sponsoredEvent(request):
 	sponsors = SponsorShip.objects
-
 	event = EventDetails.objects
-	return render(request,'sponsor_event.html',{'sponsors':sponsors,'event':event})
+	return render(request,'sponsored_event.html',{'sponsors':sponsors,'event':event})
 
-def eventInfo(request,id):
-	
-	events = OrganiseEvent.objects.get(pk=id)
-	sponsor  = SponsorShip.objects.get(org_id = id)
-
-	eventdet = EventDetails.objects.get(org_id=id)
-	print("hello",eventdet)
-
-	context ={	'events':events,
-				'eventdet':eventdet,
-				'sponsor':sponsor
-			}
-
-	print("event is",events.event_title)
-	return render(request,'sponsor_event_details.html',context)
-
-
-
-
-def sponsorUpComing(request):
-	sponsors = SponsorShip.objects
-	event = OrganiseEvent.objects.all()
-	print("event is")
-	context ={	'sponsors ':sponsors,
-				'event':event,
-			}
-	return render(request,'sponsor_up_coming.html',context)
-
-
-
-def sponsorEventUpdate(request):
-	# sponsors =get_object_or_404(SponsorShip,pk=id)
-	return render(request,'sponsor_event.html')
-
-
-
-def sponsorEventDetails(request,id):
-	event = get_object_or_404(EventDetails, pk=id)
-	return render(request,'sponsor_event.html')
-
-def enquireInfo(request,id):
-	event = OrganiseEvent.objects.get(pk=id)
-	return render(request,'sponsor_enquire.html',{'event':event})
-
+# enquire load
 def enquire(request):
 	events=OrganiseEvent.objects
 	return  render(request,'sponsor_enquire.html',{'event':events})
 
+# setting to address to enquire
 def enquire_event(request):
 	if request.POST:
 		eve=request.POST['event_name']
@@ -102,19 +89,16 @@ def enquire_event(request):
 		else:
 			events=OrganiseEvent.objects
 			even=OrganiseEvent.objects.get(event_title=eve)
-			# print(even.org_email)
 			return render(request,'sponsor_enquire.html',{'event':events,'evet':even})
 	else:
 		events=OrganiseEvent.objects
 		return  render(request,'sponsor_enquire.html',{'event':events})
 
+# blog load
 def blogSponsor(request):
 	 return render(request,'blog_write_sponsor.html')
 
-def profile(request):
-    profile=User.objects.filter(id=request.user.id)
-    return render(request, 'profile_spnsr.html', {'profile':profile})
-
+# blog to database
 def writeBlogSponsor(request):
 	if request.method =='POST':
 		title = request.POST['blog_title']
