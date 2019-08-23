@@ -24,34 +24,31 @@
   </button>
   <div class="collapse navbar-collapse mr-auto" id="navbarText">
     <ul class="navbar-nav ml-auto">
-      <li class="nav-item active">
-        <a class="nav-link" href="{% url 'sponsorUpComing' %}"><button type="button"
-            class="btn btn-outline-primary">Sponsor </button><span class="sr-only">(current)</span></a>
+      <li class="nav-item fg-white">
+        <a class="nav-link text-white" href="{% url 'sponsorUpComing' %}"><button type="button"
+            class="btn btn-outline-primary">Upcomming events </button></a>
       </li>
-      <li class="nav-item  fg-white">
-        <a class="nav-link btn btn-outline-dark text-white " href="{% url 'sponsoredEvent' %}"><button type="button"
-            class="btn btn-outline-primary">Sponsor Event</button></a>
-      </li>
-
       <li class="nav-item  ">
-        <a class="nav-link text-white " href="{% url 'enquire'  %}"><button type="button"
+        <a class="nav-link text-white" href="{% url 'enquire'  %}"><button type="button"
             class="btn btn-outline-primary">Enquire </button></a>
-      </li>
-
-      <li class="nav-item  ">
-        <a class="nav-link text-white " href="{% url 'blog_sponsor'  %}"><button type="button"
-            class="btn btn-outline-primary">Blogs </button></a>
       </li>
       <li class="nav-item  fg-white">
         <a class="nav-link text-white " href="{% url 'sponsoredEvent' %}"><button type="button"
-            class="btn btn-outline-primary">Sponsered Events </button></a>
+            class="btn btn-outline-primary">Sponser Event </button></a>
       </li>
-
+      <li class="nav-item  fg-white">
+        <a class="nav-link btn btn-outline-dark text-white " href="{% url 'sponsoredEvent' %}"><button type="button"
+            class="btn btn-outline-primary">Sponsored Event</button></a>
+      </li>
+      <li class="nav-item  fg-white">
+        <a class="nav-link text-white " href="{% url 'blog_sponsor'  %}"><button type="button"
+            class="btn btn-outline-primary">Blogs </button></a>
+        </li>  
       <li class="nav-item  fg-white">
         <a class="nav-link text-white " href="{% url 'profile' %}"><button type="button"
             class="btn btn-outline-primary">{{ user.first_name }} </button></a>
       </li>
-      <li class="nav-item  ">
+      <li class="nav-item  fg-white">
         <a class="nav-link text-white " href="javascript:{document.getElementById('logout').submit()}">
           <button type="button" class="btn btn-outline-primary">LogOut</button></a>
         <form action="{% url 'logout' %}" method="POST" id="logout">
