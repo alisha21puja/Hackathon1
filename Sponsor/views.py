@@ -10,8 +10,6 @@ def sponsor(request):
 	return  render(request,'sponsor_index.html')
 
 
-
-
 def enquireInfoMail(request):
 	if request.POST:
 		subject = request.POST['subject']
@@ -26,7 +24,6 @@ def enquireInfoMail(request):
 			fail_silently =False)
 		
 		return  render(request,'sponsor_index.html')
-
 
 
 def sponsorEventDet(request,id):
@@ -89,20 +86,26 @@ def enquireInfo(request,id):
 	event = OrganiseEvent.objects.get(pk=id)
 	return render(request,'sponsor_enquire.html',{'event':event})
 
-
 def enquire(request):
-	return render(request,'sponsor_enquire.html')
+	events=OrganiseEvent.objects
+	return  render(request,'sponsor_enquire.html',{'event':events})
 
-
+def enquire_event(request):
+	if request.POST:
+		eve=request.POST['event_name']
+		events=OrganiseEvent.objects
+		even=OrganiseEvent.objects.filter(event_title=eve)
+		return render(request,'sponsor_enquire.html',{'event':even,'event_mail':events})
+	else:
+		events=OrganiseEvent.objects
+		return  render(request,'sponsor_enquire.html',{'event':events})
 
 def blogSponsor(request):
 	 return render(request,'blog_write_sponsor.html')
 
-
 def profile(request):
     profile=User.objects.filter(id=request.user.id)
     return render(request, 'profile_spnsr.html', {'profile':profile})
-
 
 def writeBlogSponsor(request):
 	if request.method =='POST':

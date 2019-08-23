@@ -19,8 +19,7 @@ urlpatterns = [
 	path('eventParticipate/<int:id>/',views.eventInfo,name='eventParticipate'),
 	path('enquireInfoMail',views.enquireInfoMail,name='enquireInfoMail'),
 	path('profile',views.profile,name='profile'),
-
-
+	path('enquire_event',views.enquire_event,name='enquire_event'),
 	
 
 
