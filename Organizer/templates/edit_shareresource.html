@@ -6,159 +6,125 @@
 {%load staticfiles %}
 
 
-<br><br><br><br><br><br>
+<br><br><br><br>
 <div class="container">
+  <h3 class="text-center"> Shared Resources </h3>
+  <hr class="bg-info col-md-10">
+  <div class="row">
+    {% for share in share_resource.all %}
+    <div class="col-md-6">
+      <div class="card border border-info ">
+        <div class="card-body">
+          <h5 class="card-title text-center">{{ share.event_title }} </h5>
+          <hr class="bg-info col-md-8">
+          <p class="card-text"> Subject &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;: {{ share.subject}} </p>
+          <p class="card-text"> Description :<br> {{ share.description }} </p>
+          <p class="card-text"> Link
+            &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;:&nbsp;&nbsp;{{share.resourceLink}}
+          </p>
+          <p class="card-text">Document &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;: &nbsp;{{ share.documentFile }} </p>
+          <p class="card-text"> Publisher &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;: {{ share.publisedBy }} </p>
+          <img src="{{ share.resourceImage.url }}" height="480" width="480">
+          <br><br>
+          <div class="row">
+            <button class=" btn"> <a href="#" class="btn btn-dark btn-outline-info" data-toggle="modal"
+                data-target="#edit{{share.id}}">
+                Edit Resources</a></button>
+            <button class=" btn"> <a href="" class="btn btn-dark btn-outline-info" data-toggle="modal"
+                data-target="#delete{{share.id}}">
+                Delete Resources</a></button>
 
-  <div class="row shadow p-3 mb-5 bg-white rounded">
-    <br><br><br>
-    <div class="col-md-12">
-
-      <table class="table table-bordered  table-info table-hover ">
-        <thead class="thead-dark text-info">
-
-          <tr class="text-info">
-            <th class="text-info text-center"> Event Title</th>
-            <th class="text-info text-center">Subject</th>
-
-            <th width=70% class="text-info text-center">Description</th>
-            <th class="text-info text-center"> Published Date</th>
-
-            <th class="text-info text-center">Github/Drive Link </th>
-            <th class="text-info text-center">Document File </th>
-            <!--		<th class="text-info text-center">Published By</th>-->
-            <th class="text-info text-center">Share Image</th>
-            <th class="text-info text-center">Edit</th>
-            <th class="text-info text-center">Delete</th>
-
-
-
-          </tr>
-
-        </thead>
-        {% for share in share_resource.all %}
-
-        <tr>
-
-          <td class="text-dark text-center">{{ share.event_title}} </td>
-          <td class="text-dark text-center">{{ share.subject}} </td>
-          <td width="70%" class="text-dark text-center"> {{ share.description }}</td>
-          <!--			<td class="text-dark text-center">{{share.publishedDate}}</td>
-		-->
-          <td class="text-dark text-center">{{share.resourceLink}} </td>
-
-          <td class="text-dark text-center">
-
-            {{ share.documentFile }}
-          </td>
-
-
-          <td class="text-dark text-center">
-
-            {{ share.publisedBy }}
-
-
-          </td>
-          <td class="text-dark text-center">
-            <img src="{{share.resourceImage.url}}" height="50" width="50">
-          </td>
-          <td class="text-dark text-center">
-
-            <a href="#" class="btn btn-dark btn-outline-info" data-toggle="modal" data-target="#edit{{share.id}}">
-              Edit Resources</a>
-
-
-          </td>
-          <td class="text-dark text-center">
-            <a href="" class="btn btn-dark btn-outline-info" data-toggle="modal" data-target="#delete{{share.id}}">
-              Delete Resources</a>
-
-          </td>
-
-        </tr>
-
-
-
-
-        <div class="modal fade" id="edit{{share.id}}" tabindex="-1" role="dialog"
-          aria-labelledby="exampleModalLongTitle" aria-hidden="true">
-          <div class="modal-dialog" role="document">
-            <div class="modal-content ">
-              <div class="modal-header bg-dark">
-                <h5 class="modal-title text-info" id="exampleModalLongTitle">{{ share.event_title}}</h5>
-                <button type="button" class="close text-info" data-dismiss="modal" aria-label="Close">
-                  <span aria-hidden="true">&times;</span>
-                </button>
+            <div class="modal fade" id="delete{{share.id}}" tabindex="-1" role="dialog"
+              aria-labelledby="exampleModalLongTitle" aria-hidden="true">
+              <div class="modal-dialog" role="document">
+                <div class="modal-content ">
+                  <div class="modal-header bg-dark">
+                    <h5 class="modal-title text-info" id="exampleModalLongTitle">{{ share.event_title }}</h5>
+                    <button type="button" class="close text-info" data-dismiss="modal" aria-label="Close">
+                      <span aria-hidden="true">&times;</span>
+                    </button>
+                  </div>
+                  <div class="modal-body text-center">
+                    {{ share.event_title }}
+                    <a href="{% url 'deleteresourcedetails' share.id %}"
+                      class="btn btn-dark btn-outline-info">delete</a>
+                    <br><br>
+                    <div class="modal-footer bg-dark">
+                      <button type="button" class="btn btn-outline-info bg-dark" data-dismiss="modal">Close</button>
+                    </div>
+                  </div>
+                </div>
               </div>
-              <div class="modal-body">
+            </div>
 
-
-
-
-
-                <center>
-
-                  <form action="{% url 'update_shareResources' share.id %}" method="POST">
-                    {% csrf_token %}
-                    <div class="form-group">
-                      <label for="exampleFormControlInput1">Event Title</label>
-                      <input type="text" class="form-control" name="event_name" value="{{ share.event_title }}"
-                        placeholder="Event Title">
-                    </div>
-                    <div class="form-group">
-                      <label for="exampleFormControlInput1">Subject</label>
-                      <input type="text" class="form-control" name="subject" value="{{ share.subject }}"
-                        placeholder="Event Title">
-                    </div>
-                    <div class="form-group">
-                      <label for="exampleFormControlInput1">Description</label>
-                      <textarea class="form-control" name="description"> {{ share.description }} </textarea>
-                    </div>
-                    <div class="form-group">
-                      <label for="exampleFormControlSelect2">Resource Link/Github/Drive/Dropbox</label>
-                      <input type="text" class="form-control" value="{{share.resourceLink}}" name="addlinks">
-                    </div>
-                    <div class="form-group">
-                      <label for="exampleFormControlTextarea1">Published By</label>
-                      <input type="text" class="form-control" id="exampleFormControlInput1" name="published_by"
-                        value="{{ share.publisedBy }}" placeholder="Organisation Emial">
-                    </div>
-                    <div class="form-group">
-                      <label for="exampleFormControlTextarea1">Resource Image/Poster</label>
-                      <input type="file" class="form-control" id="exampleFormControlInput1" name="share_image"
-                        value="{{share.resourceImage.url}}" placeholder="Organisation Emial">
-                    </div>
-                    <div class="form-group">
-                      <label for="exampleFormControlInput1"> Document File</label>
-                      <input type="file" class="form-control" id="exampleFormControlInput1" name="document_file"
-                        value="{{ share.documentFile }}" placeholder="Contact Person Name">
-                    </div>
-                    <div class="form-group">
-
-                      <input type="submit" class="btn btn-outline-info bg-dark" name="Submit" id="password"
-                        aria-describedby="emailHelp" value="Submit">
-
-                    </div>
-
-                  </form>
-                </center>
-
-
-
-              </div>
-              <div class="modal-footer bg-dark">
-                <button type="button" class="btn btn-outline-info bg-dark" data-dismiss="modal">Close</button>
-
+            <div class="modal fade" id="edit{{share.id}}" tabindex="-1" role="dialog"
+              aria-labelledby="exampleModalLongTitle" aria-hidden="true">
+              <div class="modal-dialog" role="document">
+                <div class="modal-content ">
+                  <div class="modal-header bg-dark">
+                    <h5 class="modal-title text-info" id="exampleModalLongTitle">{{ share.event_title}}</h5>
+                    <button type="button" class="close text-info" data-dismiss="modal" aria-label="Close">
+                      <span aria-hidden="true">&times;</span>
+                    </button>
+                  </div>
+                  <div class="modal-body">
+                    <center>
+                      <form action="{% url 'update_shareResources' share.id %}" method="POST">
+                        {% csrf_token %}
+                        <div class="form-group">
+                          <label for="exampleFormControlInput1">Event Title</label>
+                          <input type="text" class="form-control" name="event_name" value="{{ share.event_title }}"
+                            placeholder="Event Title">
+                        </div>
+                        <div class="form-group">
+                          <label for="exampleFormControlInput1">Subject</label>
+                          <input type="text" class="form-control" name="subject" value="{{ share.subject }}"
+                            placeholder="Event Title">
+                        </div>
+                        <div class="form-group">
+                          <label for="exampleFormControlInput1">Description</label>
+                          <textarea class="form-control" name="description"> {{ share.description }} </textarea>
+                        </div>
+                        <div class="form-group">
+                          <label for="exampleFormControlSelect2">Resource Link/Github/Drive/Dropbox</label>
+                          <input type="text" class="form-control" value="{{share.resourceLink}}" name="addlinks">
+                        </div>
+                        <div class="form-group">
+                          <label for="exampleFormControlTextarea1">Published By</label>
+                          <input type="text" class="form-control" id="exampleFormControlInput1" name="published_by"
+                            value="{{ share.publisedBy }}" placeholder="Organisation Emial">
+                        </div>
+                        <div class="form-group">
+                          <label for="exampleFormControlTextarea1">Resource Image/Poster</label>
+                          <input type="file" class="form-control" id="exampleFormControlInput1" name="share_image"
+                            value="{{share.resourceImage.url}}" placeholder="Organisation Emial">
+                        </div>
+                        <div class="form-group">
+                          <label for="exampleFormControlInput1"> Document File</label>
+                          <input type="file" class="form-control" id="exampleFormControlInput1" name="document_file"
+                            value="{{ share.documentFile }}" placeholder="Contact Person Name">
+                        </div>
+                        <div class="form-group">
+                          <input type="submit" class="btn btn-outline-info bg-dark" name="Submit" id="password"
+                            aria-describedby="emailHelp" value="Submit">
+                        </div>
+                      </form>
+                    </center>
+                  </div>
+                  <div class="modal-footer bg-dark">
+                    <button type="button" class="btn btn-outline-info bg-dark" data-dismiss="modal">Close</button>
+                  </div>
+                </div>
               </div>
             </div>
           </div>
         </div>
-
-
-        {% endfor %}
-      </table>
-
+      </div>
     </div>
+    <br>
+    {% endfor %}
   </div>
+  <hr class="bg-info col-md-10">
 </div>
 
 

@@ -103,6 +103,12 @@ def deleteeventdetails(request, id):
     context = {'events': events, 'loc': loc}
     return render(request, 'registered_event.html', context)
 
+def deleteresourcedetails(request,id):
+    resource=ShareResource.objects.get(id=id)
+    resource.delete()
+    share_resource = ShareResource.objects.filter(us=request.user.id)
+    return render(request, 'edit_shareresource.html', {'share_resource': share_resource})
+
 
 def updateSponsorInfo(request,id):
     spon = SponsorShip.objects.get(pk=id)

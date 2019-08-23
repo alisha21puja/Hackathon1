@@ -34,6 +34,7 @@ urlpatterns = [
          views.updateSponsorInfo, name='updateSponsorInfo'),
     path('deletesponsor/<int:id>', views.deletesponsor, name='deletesponsor'),
     path('deleteeventdetails/<int:id>',views.deleteeventdetails,name='deleteeventdetails'),
+    path('deleteresourcedetails/<int:id>',views.deleteresourcedetails,name='deleteresourcedetails'),
     path('EventLocation', views.EventLocation, name='EventLocation'),
     path('location_view',views.Location_view,name='view_locatiion'),
     path('load_map',views.load_map,name='load_map'),

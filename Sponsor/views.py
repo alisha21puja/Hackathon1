@@ -1,6 +1,7 @@
 from django.shortcuts import render,get_object_or_404
 from Blog.models import BlogsInfo
 from Organizer.models import EventDetails,SponsorShip,EventDetails,OrganiseEvent
+from django.contrib.auth.models import User
 from django.utils import timezone
 from django.core.mail  import send_mail
 
@@ -65,32 +66,22 @@ def eventInfo(request,id):
 
 def sponsorUpComing(request):
 	sponsors = SponsorShip.objects
-
 	event = OrganiseEvent.objects.all()
-
 	print("event is")
-	
-
 	context ={	'sponsors ':sponsors,
 				'event':event,
-			
 			}
-
-
-
 	return render(request,'sponsor_up_coming.html',context)
 
 
 
 def sponsorEventUpdate(request):
-
 	# sponsors =get_object_or_404(SponsorShip,pk=id)
 	return render(request,'sponsor_event.html')
 
 
 
 def sponsorEventDetails(request,id):
-
 	event = get_object_or_404(EventDetails, pk=id)
 	return render(request,'sponsor_event.html')
 
@@ -108,7 +99,9 @@ def blogSponsor(request):
 	 return render(request,'blog_write_sponsor.html')
 
 
-
+def profile(request):
+    profile=User.objects.filter(id=request.user.id)
+    return render(request, 'profile_spnsr.html', {'profile':profile})
 
 
 def writeBlogSponsor(request):

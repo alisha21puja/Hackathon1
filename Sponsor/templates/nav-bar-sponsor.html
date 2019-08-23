@@ -42,11 +42,14 @@
         <a class="nav-link text-white " href="{% url 'blog_sponsor'  %}"><button type="button"
             class="btn btn-outline-primary">Blogs </button></a>
       </li>
-
-
       <li class="nav-item  fg-white">
         <a class="nav-link text-white " href="{% url 'sponsoredEvent' %}"><button type="button"
-            class="btn btn-outline-primary">Welcome {{ user.first_name }}! </button></a>
+            class="btn btn-outline-primary">Sponsered Events </button></a>
+      </li>
+
+      <li class="nav-item  fg-white">
+        <a class="nav-link text-white " href="{% url 'profile' %}"><button type="button"
+            class="btn btn-outline-primary">{{ user.first_name }} </button></a>
       </li>
       <li class="nav-item  ">
         <a class="nav-link text-white " href="javascript:{document.getElementById('logout').submit()}">
@@ -62,10 +65,6 @@
 <header>
 
 </header>
-<<<<<<< HEAD
-=======
-
->>>>>>> 00486efd62bd717f2eaff3e6c9f80a737c54bef9
 <body>
 
   {% block content%}
