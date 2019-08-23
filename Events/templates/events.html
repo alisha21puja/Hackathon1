@@ -2,64 +2,46 @@
 {%block content %}
 {%load staticfiles %}
 <br><br>
-<br><br>
-<hr class="bg-info col-md-10">
-  <section id="Events">
+<br>
+<section id="Events">
   <div class="container ">
-    <div  class="text-center"><h2> UpComing Events</h2><hr class="bg-info col-md-8"></div>
-  <div class="row shadow p-3 mb-5 bg-white rounded">
-   {% for event in events %}
-    <div class="col-md-4">
-      <div class="card border-info mb-3" style="width: 18rem;">
-          <img src="../media/images/event_poster/{{ event.event_poster }}" class="card-img-top" height="140" width="100">
-            <h5 class="card-title text-info text-center">{{ event.event_title }}</h5>
-            <br>
-           
+    <div class="text-center">
+      <h2> UpComing Events</h2>
+      <hr class="bg-info col-md-8">
+    </div>
+    <div class="row shadow p-3 mb-5 bg-white rounded">
+      {% for event in events %}
+      <div class="col-md-4">
+        <div class="card border-info mb-3" style="width: 18rem;">
+          <img src="../media/images/event_poster/{{ event.event_poster }}" class="card-img-top" height="140"
+            width="100">
+          <h5 class="card-title text-info text-center">{{ event.event_title }}</h5>
+          <br>
           <div class="card-body text-info">
-
             <h5 class="card-title">{{ event.org_name }}</h5>
             <p class="card-text">{{ event.summary }} <a class=" text-info" href="{% url 'eventDetails' event.id %}">
-        Read More
-  </a></p> 
-      <button  class=" btn">
-        {% if event.event_enddate  %}
-        
-        <div  class="float-left">
-
-          
-
-      <p class="card-text text-info">Event Start: {{ event.event_startdate }}</p>
-      </div>
-
-    <div class="float-right">
-         <a class=" bg-dark btn btn-outline-info" href="{% url 'accounts' %}">Participate  </a>
-       </div>
-         {% endif %}
-      </button>
-    
-             
+                Read More
+              </a></p>
+            <button class=" btn">
+              {% if event.event_enddate  %}
+              <div class="float-left">
+                <p class="card-text text-info">Event Start: {{ event.event_startdate }}</p>
+              </div>
+              <div class="float-right">
+                <a class=" bg-dark btn btn-outline-info" href="{% url 'accounts' %}">Participate </a>
+              </div>
+              {% endif %}
+            </button>
           </div>
         </div>
+      </div>
+      {% endfor %}
     </div>
-
-{% endfor %}
-<hr class="bg-info col-md-8">    
-</div>
-
-
-
-</div>
-
- 
-
-   
-
-
-
+  </div>
 </section>
 
 <hr class="bg-info col-md-10">
- <!--
+<!--
   <section id="Last Events">
   <div class="container ">
     <div  class="text-center"><h2> Completed Events</h2><hr class="bg-info col-md-8"></div>
@@ -191,10 +173,6 @@
 </div>
 </section>
 -->
-
-
-
-
 
 
 {% endblock %}

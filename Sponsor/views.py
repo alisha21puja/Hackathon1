@@ -11,10 +11,10 @@ def sponsor(request):
 
 
 def enquireInfoMail(request):
-	if request.POST:
+	if request.method=='POST':
 		subject = request.POST['subject']
-		to = request.POST['to']
-		fromm = request.POST['from']
+		to = request.POST.get('to')
+		fromm = request.POST.get('from')
 		mobile = request.POST['mobile']
 		message = request.POST['message']
 		send_mail('Subject' +subject,
@@ -23,7 +23,10 @@ def enquireInfoMail(request):
 			[to,'sachin.thakur@mca.christuniversity.in',],
 			fail_silently =False)
 		
-		return  render(request,'sponsor_index.html')
+		return  render(request,'sponsor_enquire.html',{'send':"MAIL SEND SUCCESSFULLY !"})
+	else:
+		events=OrganiseEvent.objects
+		return  render(request,'sponsor_enquire.html',{'event':events})
 
 
 def sponsorEventDet(request,id):
@@ -93,9 +96,14 @@ def enquire(request):
 def enquire_event(request):
 	if request.POST:
 		eve=request.POST['event_name']
-		events=OrganiseEvent.objects
-		even=OrganiseEvent.objects.filter(event_title=eve)
-		return render(request,'sponsor_enquire.html',{'event':even,'event_mail':events})
+		if eve == " ":
+			events=OrganiseEvent.objects
+			return  render(request,'sponsor_enquire.html',{'event':events})
+		else:
+			events=OrganiseEvent.objects
+			even=OrganiseEvent.objects.get(event_title=eve)
+			# print(even.org_email)
+			return render(request,'sponsor_enquire.html',{'event':events,'evet':even})
 	else:
 		events=OrganiseEvent.objects
 		return  render(request,'sponsor_enquire.html',{'event':events})
