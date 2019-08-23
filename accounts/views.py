@@ -46,9 +46,6 @@ def loginn(request):
         email = request.POST['email']
         password = request.POST['password']
         user = auth.authenticate(username=email, password=password)
-        # print(user)
-
-        # print(key) #33
         if user is not None:
             key = user._get_pk_val()
             user_1 = list(UserProfile.objects.values_list(
@@ -73,54 +70,10 @@ def loginn(request):
                 messages.error(
                     request, 'invalid user type dectected contact admin')
                 return render(request, 'login.html', {'error': 'invalid user type dectected contact admin'})
-
-                # return redirect('login')
         else:
-            # messages.error(request,'invalid credentials')
             return render(request, 'login.html', {'error': 'Invalid credentials'})
     else:
         return render(request, 'login.html')
-
-    """
-	if request.method=='POST':
-		username = request.POST['email']
-		password = request.POST['password']
-		if username =='kapil.thakur9614@gmail.com' and password =='sachin123':
-			user = auth.authenticate(username =username,password=password)
-			if user is not None:
-				auth.login(request,user)
-				messages.success(request,'You are now loged in')
-				return redirect('organiserIndex')
-			else:
-				auth.login(request,user)
-				messages.success(request,'Credendtial are Wrong')
-				return  render(request,'login.html')
-				#messages.error(request,'invalidiuoiuuoi credential')
-				#return  render(request,'login.html')
-		elif username =='alwin.joseph@mca.christuniversity.in' and password =='sachin123':
-			user = auth.authenticate(username =username,password=password)
-			if user is not None:
-				auth.login(request,user)
-				messages.success(request,'You are now loged in')
-				return redirect('participantIndex')
-			else:
-				messages.error(request,'invalid credential')
-				return  render(request,'login.html')
-
-		elif username =='alisha.singh@mca.christuniversity.in' and password =='sachin123':
-			user = auth.authenticate(username =username,password=password)
-			if user is not None:
-				auth.login(request,user)
-				messages.success(request,'You are now loged in')
-				return redirect('sponsorIndex')
-			else:
-				messages.error(request,'invalid credential')
-				return  render(request,'login.html')
-		else:
-				messages.error(request,'inhiuyvalid credential')
-				return  render(request,'login.html')
-	"""
-
 
 def logout(request):
     if request.method == 'POST':
