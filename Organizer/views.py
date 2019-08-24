@@ -1,7 +1,7 @@
 from django.shortcuts import render, redirect, get_object_or_404
 from django.http import HttpResponse
 from . import forms
-from .models import OrganiseEvent, EventDetails, ShareResource, SponsorShip, SponsorShipDetails, Event_Location
+from .models import OrganiseEvent, EventDetails, ShareResource, SponsorShip, Event_Location
 from django.contrib.auth.models import User
 from accounts.models import UserProfile
 from Blog.models import BlogsInfo
