@@ -71,7 +71,6 @@ class SponsorShip(models.Model):
 
 
 class SponsorShipDetails(models.Model):
-
     event_id = models.OneToOneField(
         EventDetails, on_delete=models.CASCADE, primary_key=True)
     event_title = models.CharField(max_length=100, default=True)

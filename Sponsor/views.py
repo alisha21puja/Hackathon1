@@ -33,14 +33,29 @@ def enquireInfoMail(request):
 		events=OrganiseEvent.objects
 		return  render(request,'sponsor_enquire.html',{'event':events})
 
-# list out sponsership details of events to sponser
+# list out events to sponser
 def sponsor_event(request):
 	try:
-		sponsorship = SponsorShip.objects
-		return render(request,'sponsor_event.html',{'sponsors':sponsorship})
+		events=OrganiseEvent.objects
+		return render(request,'sponsor_event.html',{'event':events})
 	except:
-		# return  render(request,'sponsor_index.html')
 		return render(request,'sponsor_event.html')
+
+# list out sponsership details of events to sponser
+def addsponsershipinfo(request):
+	if request.method=='POST':
+		event=request.POST['event_name']
+		spnsr_det=SponsorShip.objects.filter(event_title=event)
+		events=OrganiseEvent.objects
+		return render(request,'sponsor_event.html',{'event':events,'spnsr_details':spnsr_det})
+	else:
+		events=OrganiseEvent.objects
+		return render(request,'sponsor_event.html',{'event':events})
+
+# save the sponsership info to db
+def addsponsership(request):
+	events=OrganiseEvent.objects
+	return render(request,'sponsor_event.html',{'event':events})
 
 # list out all event info
 def events(request):

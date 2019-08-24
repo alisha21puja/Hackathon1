@@ -10,7 +10,121 @@
 <br>
 <br>
 
-<h2>SPONSER FOR AN EVENT</h2>
+<div class="container">
+    <h4 class="text-center">Sponser for an event</h4>
+    <hr class="bg-primary col-md-8">
+    <div class="row" style="margin-left: 18em; margin-right: 0em;">
+        <div class="col-md-8">
+            <form name="select_event" id="select_event" method="POST" action="{% url 'addsponsershipinfo' %}">
+                {% csrf_token %}
+                <div class="form-group">
+                    <label for="event_name">Select an Event&ast; </label>
+                    <select class="form-control readonly  border border-info" name="event_name" id="event_name">
+                        <option class="form-control border border-info"> Select your Event </option>
+                        {% for eve in event.all %}
+                        <option class="form-control   border border-info"> {{ eve.event_title }} </option>
+                        {% endfor %}
+                    </select>
+                </div>
+                <div class="form-group">
+                    <div class="text-center">
+                        <input type="submit" name="select_event" value="SEARCH"
+                            class="bg-dark btn btn-outline-info text-light">
+                    </div>
+                </div>
+            </form>
+            {% if send %}
+            <div class="alert alert-success alert-dismissible fade show" role="alert">
+                <strong> {{ send }}</strong>
+                <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            {% endif %}
+        </div>
+    </div>
 
+    {% for spnsr in spnsr_details.all %}
+    <div class="row" style="margin-left: 2em; margin-right: 0em;">
+        <div class="col-md-12">
+            <hr class="bg-primary col-md-8">
+            <h4 class="text-center">{{ spnsr.event_title }}</h4>
+            <hr class="bg-primary col-md-8">
+            <h4 class="text-center">Submit an option of your choice</h4>
+            <div class="row">
+                <div class="col-md-4">
+                    <form method="POST" action="{% url 'addsponsership' %}">
+                        {% csrf_token %}
+                        <div class="form-group">
+                            <label for="from">Type :</label>
+                            <input type="text" class="form-control btn-outline-info" name="from"
+                                value="{{ spnsr.platinum_sponsor }}" id="from" aria-describedby="emailHelp"
+                                placeholder="email" disabled>
+                        </div>
+                        <div class="form-group">
+                            <label for="from">Amount :</label>
+                            <input type="text" class="form-control btn-outline-info" name="from"
+                                value="{{ spnsr.ex_platinum }}" id="from" aria-describedby="emailHelp"
+                                placeholder="email" disabled>
+                        </div>
+                        <div class="form-group">
+                            <div class="text-center">
+                                <input type="submit" class="btn btn-outline-info bg-dark text-light" id="password"
+                                    aria-describedby="emailHelp" value="SUBMIT">
+                            </div>
+                        </div>
+                    </form>
+                </div>
+                <div class="col-md-4">
+                    <form method="POST" action="{% url 'addsponsership' %}">
+                        {% csrf_token %}
+                        <div class="form-group">
+                            <label for="from">Type :</label>
+                            <input type="text" class="form-control btn-outline-info" name="from"
+                                value="{{ spnsr.gold_sponsor }}" id="from" aria-describedby="emailHelp"
+                                placeholder="email" disabled>
+                        </div>
+                        <div class="form-group">
+                            <label for="from">Amount :</label>
+                            <input type="text" class="form-control btn-outline-info" name="from"
+                                value="{{ spnsr.ex_gold }}" id="from" aria-describedby="emailHelp"
+                                placeholder="email" disabled>
+                        </div>
+                        <div class="form-group">
+                            <div class="text-center">
+                                <input type="submit" class="btn btn-outline-info bg-dark text-light" id="password"
+                                    aria-describedby="emailHelp" value="SUBMIT">
+                            </div>
+                        </div>
+                    </form>
+                </div>
+                <div class="col-md-4">
+                    <form method="POST" action="{% url 'addsponsership' %}">
+                        {% csrf_token %}
+                        <div class="form-group">
+                            <label for="from">Type :</label>
+                            <input type="text" class="form-control btn-outline-info" name="from"
+                                value="{{ spnsr.silver_sponsor }}" id="from" aria-describedby="emailHelp"
+                                placeholder="email" disabled>
+                        </div>
+                        <div class="form-group">
+                            <label for="from">Amount :</label>
+                            <input type="text" class="form-control btn-outline-info" name="from"
+                                value="{{ spnsr.ex_silver }}" id="from" aria-describedby="emailHelp"
+                                placeholder="email" disabled>
+                        </div>
+                        <div class="form-group">
+                            <div class="text-center">
+                                <input type="submit" class="btn btn-outline-info bg-dark text-light" id="password"
+                                    aria-describedby="emailHelp" value="SUBMIT">
+                            </div>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+    {% endfor %}
+</div>
 
 {% endblock %}
