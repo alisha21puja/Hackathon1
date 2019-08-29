@@ -729,9 +729,9 @@ def about(request):
     return render(request, 'pages/index.html')
 
 
-def profile(request):
+def profile_org(request):
     profile=UserProfile.objects.filter(id=request.user.id)
-    return render(request, 'profile.html', {'profile':profile})
+    return render(request, 'profile_org.html', {'profile':profile})
 
 
 def editProfile(request):
