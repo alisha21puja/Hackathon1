@@ -39,7 +39,7 @@ def part_updateProfile(request):
 			profiles=User(id=request.user.id,username=user,first_name= fname,last_name=lname,email=email)
 			profiles.save()
 			profiles.refresh_from_db()		
-			edit_profile=UserProfile.objects
+			edit_profile=UserProfile.filter(us=request.user.id)
 			return render(request,'part_profile.html',{'part_profile':edit_profile})
 
 
@@ -82,9 +82,6 @@ def participated_event(request,id):
 			print("event is",events.event_title)
 			return render(request,'participated_event.html',context)
 		
-def enquireInfo(request,id):
-	event = OrganiseEvent.objects.get(pk=id)
-	return render(request,'part_enquire.html',{'event':event})
 
 def part_shareresources(request,id):
 	try:
@@ -98,8 +95,6 @@ def part_shareresources(request,id):
 		return render(request,'part_shareresources.html',{'error':'Resources are not published'})
 		
 
-def part_enquire(request):
-	return render(request,'part_enquire.html')
 	
 def enquireInfoMail(request):
 	if request.POST:
@@ -116,11 +111,12 @@ def enquireInfoMail(request):
 		
 		return  render('Participant_index.html')
 
-
+def enquireInfo(request,id):
+	event = OrganiseEvent.objects.get(pk=id)
+	return render(request,'part_enquire.html',{'event':event})
 
 def part_enquire(request):
 	return render(request,'part_enquire.html')
-
 
 def partblogsDetails(request):
     blogsInfo = BlogsInfo.objects.filter(us=request.user.id)
@@ -172,7 +168,7 @@ def partWriteBlog(request):
 		
 		blogsInfo.save()
 		print("author name:" + authorName)
-		return render(request,'part-blog_write.html', {'error':"Event is not selected"})	
+		return render(request,'part-blog_write.html', {'error':"Blog is selected"})	
 
 
 
@@ -220,3 +216,27 @@ def req_pdf(request):
 
     return response
 
+# def part_feedback(request,id):
+# 	event = OrganiseEvent.objects.get(pk=id)
+# 	if request.method =='POST':
+# 		subject = request.POST['subject']
+# 		pubDateTime = timezone.now()
+# 		feedback = request.POST['feedback']
+# 		UserType = 'Participant'
+# 		if request.user.is_authenticated:
+# 			authorName = request.user.first_name + " " + request.user.last_name
+# 		if subject =='':
+# 			return render(request,'part_feedback.html', {'error':"Subject is not given"})	
+# 		else:
+# 			subject = request.POST['subject']		
+# 		if pubDateTime =='':			
+# 			pubDateTime = timezone.now()
+# 		if feedback=='':
+# 			return render(request,'part_feedback.html', {'error':"Feedback is not written"})	
+# 		else:
+# 		 	feedback = request.POST['feedback']		
+# 		Eventfeedback=EventFeedback(subject=subject,pubDateTime=pubDateTime,feedback=feedback,Event_id_id=id,us_id=request.user.id)
+		
+# 		Eventfeedback.save()
+# 		print("author name:" + authorName)
+# 		return render(request,'part_feedback.html', {'error':"Feedback is stored"})	
