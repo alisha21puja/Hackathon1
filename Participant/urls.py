@@ -22,7 +22,8 @@ urlpatterns = [
 	path('partblog', ve.partblog, name='partblog'),
 	path('partWriteBlog',ve.partWriteBlog,name='part-blog_write'),
 	path('partblogsDetail', ve.partblogsDetails, name='partblogsDetails'),
-	path('req_pdf',ve.req_pdf,name="req_pdf")
+	path('req_pdf',ve.req_pdf,name="req_pdf"),
+	# path('part_feedback/<int:id>',ve.part_feedback,name="part_feedback")
 	
 	
 
