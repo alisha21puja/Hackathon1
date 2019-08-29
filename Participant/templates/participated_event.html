@@ -16,9 +16,12 @@
 					{{ events.event_title }} </h3>
 						 <a class="btn-dark btn-outline-danger btn  float-right text-white"href="{%  url 'enquire' events.id %}"> Enquire</a></h3>
 						  <a class="btn-dark btn-outline-danger btn text-white"href="{%  url 'part_shareresources' events.id %}"> Share Resources</a></h3>
-						  <a class="btn-dark btn-outline-danger btn text-white"href="{%  url 'part_shareresources' events.id %}"> Event Feedback</a></h3>
+						  <a class="btn-dark btn-outline-danger btn text-white"href="{%  url 'enquire' events.id %}"> Event Feedback</a></h3>
 				</div>
 				<div class="card-body"> 
+
+					<center><h4>You are successfully participated in this event</h4></center>
+
 					<td class="text-dark text-center">Event Category  &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;: {{ events.event_category }} </td><br/>
 					<td class="text-dark text-center">Event Organizer Name     &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;: {{ events.org_name }} </td><br/>
 					<td class="text-dark text-center">Event Contact Person    &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; : {{ events.org_contact_person }} </td><br>
