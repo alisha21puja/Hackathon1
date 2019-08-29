@@ -12,8 +12,7 @@
     {% for bl in blog.all %}
     <div class="col-md-4">
       <div class="card col-md-12 border-info mb-3" style="width: 18rem;">
-        <br>
-        <img src="{{ bl.imageFirst.url }}" class="card-img-top" alt="...">
+        <img src="/media/images/blogsImages/{{bl.imageFirst}}" class="card-img-top" alt="..." style="margin-top: 1em">
         <h5 class="card-title text-info text-center">{{ bl.title }}</h5>
         <div class="card-body text-info">
           <!-- <h5 class="card-title">Info card title</h5> -->
