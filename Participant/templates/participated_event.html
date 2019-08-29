@@ -12,25 +12,35 @@
 		<div class="col-md-12 col-lg-14 col-xl-12  col-sm-12">
 			<div class="card border-danger">
 				<div class="card-header border-danger">
-					<h3 class="card-title text-center"> 
-					{{ events.event_title }} </h3>
-						 <a class="btn-dark btn-outline-danger btn  float-right text-white"href="{%  url 'enquire' events.id %}"> Enquire</a></h3>
-						  <a class="btn-dark btn-outline-danger btn text-white"href="{%  url 'part_shareresources' events.id %}"> Share Resources</a></h3>
-						  <a class="btn-dark btn-outline-danger btn text-white"href="{%  url 'enquire' events.id %}"> Event Feedback</a></h3>
+					<h3 class="card-title text-center">
+						{{ events.event_title }} </h3>
+					<a class="btn-dark btn-outline-danger btn  float-right text-white"
+						href="{%  url 'enquire' events.id %}"> Enquire</a></h3>
+					<a class="btn-dark btn-outline-danger btn text-white"
+						href="{%  url 'part_shareresources' events.id %}"> Share Resources</a></h3>
+					<a class="btn-dark btn-outline-danger btn text-white" href="{%  url 'enquire' events.id %}"> Event
+						Feedback</a></h3>
 				</div>
-				<div class="card-body"> 
+				<div class="card-body">
 
-					<center><h4>You are successfully participated in this event</h4></center>
+					<center>
+						<h4>You are successfully participated in this event</h4>
+					</center>
 
-					<td class="text-dark text-center">Event Category  &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;: {{ events.event_category }} </td><br/>
-					<td class="text-dark text-center">Event Organizer Name     &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;: {{ events.org_name }} </td><br/>
-					<td class="text-dark text-center">Event Contact Person    &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; : {{ events.org_contact_person }} </td><br>
-  					<td class="text-dark text-center">Organizer Mobile number : {{ events.org_mobile }} </td><br/>
-  					<td class="text-dark text-center">Event Organizer Email id &nbsp;&nbsp;: {{ events.org_email }} </td><br>
-					<br/>Event Description &nbsp;&nbsp;: 
-    				<p class="card-text"  align="justify" >{{ events.event_description }}</p>
-    			</div>
-		
+					<td class="text-dark text-center">Event Category
+						&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;:
+						{{ events.event_category }} </td><br />
+					<td class="text-dark text-center">Event Organizer Name &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;:
+						{{ events.org_name }} </td><br />
+					<td class="text-dark text-center">Event Contact Person &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; :
+						{{ events.org_contact_person }} </td><br>
+					<td class="text-dark text-center">Organizer Mobile number : {{ events.org_mobile }} </td><br />
+					<td class="text-dark text-center">Event Organizer Email id &nbsp;&nbsp;: {{ events.org_email }}
+					</td><br>
+					<br />Event Description &nbsp;&nbsp;:
+					<p class="card-text" align="justify">{{ events.event_description }}</p>
+				</div>
+
 				<div class="card-footer text-muted border-danger">
 					<h6 class="text-center text-danger"> {{events.event_startdate  }}--{{events.event_enddate}}</h6>
 				</div>

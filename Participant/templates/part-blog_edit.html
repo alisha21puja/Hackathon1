@@ -27,8 +27,9 @@
           <p class="card-text"> {{ blog.summary }}</p>
           <p class="card-text"> Images: </p>
           <div class="row">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-                <img src="{{ blog.imageFirst.url }}" height="200" width="200">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-                <img src="{{ blog.imageSecond.url }} " height="200" width="200">
+            <img src="{{ blog.imageFirst.url }}" height="200"
+              width="200">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+            <img src="{{ blog.imageSecond.url }} " height="200" width="200">
           </div>
           <br>
           <p class="card-text"> Refrence Link &nbsp; : {{ blog.refrenceLinks }} </p>
@@ -80,7 +81,8 @@
                     <div class="form-group">
                       <label for="exampleFormControlInput1">Blog Category</label>
                       <select name="event_category" class="form-control   border border-info">
-                        <option class="form-control border border-danger">Selected Event {{ blog.blogCategory }} </option>
+                        <option class="form-control border border-danger">Selected Event {{ blog.blogCategory }}
+                        </option>
                         <option class="form-control border border-danger">Machine Learning </option>
                         <option class="form-control border border-danger">UI/UX </option>
                         <option class="form-control border border-danger"> Python</option>

@@ -19,8 +19,8 @@
 <nav class="navbar fixed-top navbar-expand-lg navbar-dark bg-dark">
   <a class="navbar-brand" href="{% url 'home' %}"><button type="button" class="btn btn-outline-danger"
       style="color: white">Tech Event</button></a>
-       <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarText"
-    aria-controls="navbarText" aria-expanded="false" aria-label="Toggle navigation" >
+  <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarText"
+    aria-controls="navbarText" aria-expanded="false" aria-label="Toggle navigation">
 
     <span class="navbar-toggler-icon"></span>
   </button>
@@ -33,18 +33,19 @@
       <li class="nav-item  fg-white">
         <a class="nav-link btn btn-outline-dark text-white " href="{% url 'event_details' %}"><button type="button"
             class="btn btn-outline-danger" style="color: white">Upcoming Events</button></a>
-      </li><!-- 
+      </li>
+      <!-- 
       <li class="nav-item  ">
         <a class="nav-link text-white " href="{% url 'participate'  %}"><button type="button"
             class="btn btn-outline-danger" style="color: white">Participated Events</button></a>
       </li> -->
       <li class="nav-item  fg-white">
-        <a class="nav-link text-white " href="{% url 'partblog' %}"><button type="button"
-            class="btn btn-outline-danger" style="color: white">Blogs </button></a>
+        <a class="nav-link text-white " href="{% url 'partblog' %}"><button type="button" class="btn btn-outline-danger"
+            style="color: white">Blogs </button></a>
       </li>
       <li class="nav-item  fg-white">
-        <a class="nav-link text-white " href="{% url 'part_profile'%}"><button type="button" class="btn btn-outline-danger"
-            style="color: white">Welcome {{ user.first_name }} </button></a>
+        <a class="nav-link text-white " href="{% url 'part_profile'%}"><button type="button"
+            class="btn btn-outline-danger" style="color: white">Welcome {{ user.first_name }} </button></a>
       </li>
       <li class="nav-item  ">
         <a class="nav-link text-white " href="javascript:{document.getElementById('logout').submit()}">
@@ -62,7 +63,7 @@
 <body>
   {% block content%}
 
-{% endblock %}
+  {% endblock %}
 </body>
 <link href="//maxcdn.bootstrapcdn.com/font-awesome/4.1.0/css/font-awesome.min.css" rel="stylesheet">
 <footer class="footer bg-dark navbar-fixed-bottom mr-auto">
@@ -83,7 +84,7 @@
         </p>
       </div>
       <div class="col-md-5">
-              <a class="btn btn-twitter" href="" style="padding-top: 15px">
+        <a class="btn btn-twitter" href="" style="padding-top: 15px">
           <button type="button" class=" fa fa-twitter btn btn-outline-danger"></button>
         </a>
         <a class="btn  btn-linkedin" href="" style="padding-top: 15px">

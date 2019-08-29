@@ -9,32 +9,39 @@
 
 <div class="container">
   <h3 class="text-center">Upcoming Event Details</h3>
-   <hr class="bg-danger col-md-8">
+  <hr class="bg-danger col-md-8">
 
-{%  for event in events.all  %} 
+  {%  for event in events.all  %}
   <div class="row shadow p-3 mb-5 bg-white rounded">
 
     <div class="col-md-4">
-    <div class="card border border-danger " style="width: 67rem;">
-  <div class="card-body">
-    <h3 class="card-title text-center"> {{ event.event_title }} </h3>
-    <hr class="bg-danger col-md-8"> 
-  <td class="text-dark text-center">Event Category  &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;: {{ event.event_category }} </td><br/>
-  <td class="text-dark text-center">Event Organizer Name     &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;: {{ event.org_name }} </td><br/>
-  <td class="text-dark text-center">Event Contact Person    &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; : {{ event.org_contact_person }} </td><br>
-  <td class="text-dark text-center">Organizer Mobile number : {{ event.org_mobile }} </td><br/>
-  <td class="text-dark text-center">Event Organizer Email id &nbsp;&nbsp;: {{ event.org_email }} </td><br>
-  <br/>Event Description &nbsp;&nbsp;: 
-    <p class="card-text"  align="justify" >{{ event.event_description }}</p>
-    <center><h4>Click here to participate in this particular event</h4></center>
-  <center> <a href="{% url 'participated_event' event.id %}" class="btn btn-outline-danger bg-dark text-white"> participate</a></center> 
+      <div class="card border border-danger " style="width: 67rem;">
+        <div class="card-body">
+          <h3 class="card-title text-center"> {{ event.event_title }} </h3>
+          <hr class="bg-danger col-md-8">
+          <td class="text-dark text-center">Event Category
+            &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;:
+            {{ event.event_category }} </td><br />
+          <td class="text-dark text-center">Event Organizer Name &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;:
+            {{ event.org_name }} </td><br />
+          <td class="text-dark text-center">Event Contact Person &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; :
+            {{ event.org_contact_person }} </td><br>
+          <td class="text-dark text-center">Organizer Mobile number : {{ event.org_mobile }} </td><br />
+          <td class="text-dark text-center">Event Organizer Email id &nbsp;&nbsp;: {{ event.org_email }} </td><br>
+          <br />Event Description &nbsp;&nbsp;:
+          <p class="card-text" align="justify">{{ event.event_description }}</p>
+          <center>
+            <h4>Click here to participate in this particular event</h4>
+          </center>
+          <center> <a href="{% url 'participated_event' event.id %}" class="btn btn-outline-danger bg-dark text-white">
+              participate</a></center>
+        </div>
+      </div>
+    </div>
   </div>
-  </div>
-  </div>
-</div>
 
 
- {% endfor %}
+  {% endfor %}
 </div>
 
 <br><br><br><br><br><br><br><br><br><br><br>
