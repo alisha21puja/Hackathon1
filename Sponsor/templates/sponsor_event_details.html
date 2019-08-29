@@ -16,7 +16,7 @@
 
 				<p class="card-text text-center" style="margin-left: 0em;">From: {{ event.event_startdate }} , To:
 					{{ event.event_enddate }} </p>
-				<img src="{{ event.event_poster.url }}" height="300" width="300">
+				<img src="/media/images/event_poster/{{ event.event_poster }}" height="300" width="600">
 				<style>
 					p {
 						margin-left: 13em;
@@ -24,7 +24,7 @@
 					}
 
 					img {
-						margin-left: 23em;
+						margin-left: 13em;
 					}
 				</style>
 				<br><br>
