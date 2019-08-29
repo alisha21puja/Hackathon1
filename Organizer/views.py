@@ -731,7 +731,7 @@ def about(request):
 
 def profile_org(request):
     profile=UserProfile.objects.filter(id=request.user.id)
-    return render(request, 'profile_org.html', {'profile':profile})
+    return render(request, 'profile_org.html', {'profil':profile})
 
 
 def editProfile(request):
