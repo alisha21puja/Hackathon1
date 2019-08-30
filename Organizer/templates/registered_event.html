@@ -12,16 +12,16 @@
   <div class="row shadow p-3 mb-5 bg-white rounded">
     <div class="col-md-12">
       <h3 class=" text-center">Events Details</h3>
-       {% if updated %}
-                <div class="alert alert-info alert-dismissible fade show" role="alert">
-                  <strong> {{updated}}</strong>
-                  <button type="button" class="close" data-dismiss="alert" aria-label="Close">
-                    <span aria-hidden="true">&times;</span>
-                  </button>
-                </div>
-                {%endif%} 
+      {% if updated %}
+      <div class="alert alert-info alert-dismissible fade show" role="alert">
+        <strong> {{updated}}</strong>
+        <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      {%endif%}
       <hr class="bg-info col-md-10">
-    </div> 
+    </div>
 
     {%  for event in events.all  %}
 
@@ -141,7 +141,7 @@
                       <label for="exampleFormControlInput1">Event Poster</label>
                       <input type="file" class="form-control" id="exampleFormControlInput1" name="event_poster"
                         placeholder="name@example.com">
-                        <br>
+                      <br>
                       <img src="media/images/event_poster/{{event.event_poster}}" height="200" width="200" />
                     </div>
                     <div class="form-group">
@@ -173,94 +173,49 @@
 
       <div class="modal fade bd-example-modal-lg" id="exampleModal{{event.id}}" tabindex="-1" role="dialog"
         aria-labelledby="exampleModalLabel" aria-hidden="true">
-        <div class="modal-dialog modal-xl" role="document">
+        <div class="modal-dialog" role="document">
           <div class="modal-content">
             <div class="modal-header bg-dark col-md-12">
-              <center>
-                <h6 class="text-info text-center">{{ event.event_title }} </h6>
-              </center>
+              <h6 class="text-info text-center">{{ event.event_title }} </h6>
               <button type="button" class="close text-info" data-dismiss="modal" aria-label="Close">
                 <span aria-hidden="true">&times;</span>
               </button>
             </div>
             <div class="modal-body">
-              <!-- Modal -->
-            </div>
-            <div class="row center">
-              <div class="col-md-1">
+              <div class="form-group">
+                <h6>Event Category &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;: {{ event.event_category}}</h6>
               </div>
-              <div class="col-md-10">
-                <center>
-                  <div class="form-group row">
-                    <label for="staticEmail" class="col-sm-2 col-form-label">
-                      <h6>Event Title</h6>
-                    </label>
-                    <div class="col-sm-10">
-                      <h6> {{ event.event_category}}</h6>
-                    </div>
-                  </div>
-                  <hr class="bg-info col-md-12">
-                  <div class="form-group row">
-                    <label for="staticEmail" class="col-sm-2 col-form-label ">Category</label>
-                    <div class="col-sm-10">
-                      <h6> {{ event.event_category}}</h6>
-                    </div>
-                  </div>
-                  <hr class="bg-info col-md-12">
-                  <div class="form-group row">
-                    <label for="staticEmail" class="col-sm-2 col-form-label ">Organisation Name</label>
-                    <div class="col-sm-10">
-                      <h6>{{ event.org_name}}</h6>
-                    </div>
-                  </div>
-                  <div class="form-group row">
-                    <label for="staticEmail" class="col-sm-2 col-form-label ">Organisation Mobile</label>
-                    <div class="col-sm-10">
-                      <h6>{{ event.org_mobile }}</h6>
-                    </div>
-                  </div>
-                  <div class="form-group row">
-                    <label for="staticEmail" class="col-sm-2 col-form-label ">Organisation Contact Person</label>
-                    <div class="col-sm-10">
-                      <h6> {{ event.org_contact_person}}</h6>
-                    </div>
-                  </div>
-                  <div class="form-group row">
-                    <label for="exampleFormControlInput1">Event Poster</label>
-                    <div class="col-sm-10">
-                      <img src="{{event.event_poster}}" height="200" width="200" />
-                    </div>
-                  </div>
-                  <hr class="bg-info col-md-12">
-                  <div class="form-group row">
-                    <label for="staticEmail" class="col-sm-2 col-form-label ">Event Start Date</label>
-                    <div class="col-sm-10">
-                      <h6> {{ event.event_startdate}}</h6>
-                    </div>
-                  </div>
-                  <div class="form-group row">
-                    <label for="staticEmail" class="col-sm-2 col-form-label ">Event End Date</label>
-                    <div class="col-sm-10">
-                      <h6>{{ event.event_enddate }}</h6>
-                    </div>
-                  </div>
-                </center>
-                <hr class="bg-info col-md-12">
+              <div class="form-group">
+                <h6>Organisation Name &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;: {{ event.org_name}}</h6>
+              </div>
+              <div class="form-group">
+                <h6> Organisation Mobile &nbsp;&nbsp;&nbsp;&nbsp;: {{ event.org_mobile }}</h6>
+              </div>
+              <div class="form-group">
+                <h6>Contact Person&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp;: {{ event.org_contact_person}}</h6>
+              </div>
+              <div class="form-group">
+                <h6>Event Poster : </h6><br>
+                <img src="media/images/event_poster/{{event.event_poster}}" class="text-center" height="400" width="400" />
+              </div>
+              <div class="form-group">
+                <h6 class="text-center"> {{ event.event_startdate}} - {{ event.event_enddate }}</h6>
               </div>
             </div>
-            <div class="modal-footer bg-dark">
-              <button type="button" class="btn btn-dark btn-outline-info" data-dismiss="modal">Close</button>
-              <!-- <button type="button" class="btn  btn-dark btn-outline-info">Save changes</button>-->
-            </div>
+          </div>
+          <div class="modal-footer bg-dark">
+            <button type="button" class="btn btn-dark btn-outline-info" data-dismiss="modal">Close</button>
+            <!-- <button type="button" class="btn  btn-dark btn-outline-info">Save changes</button>-->
           </div>
         </div>
       </div>
-      <br>
     </div>
-    {% endfor %}
-
-    <hr class="bg-info col-md-8">
+    <br>
   </div>
+  {% endfor %}
+
+  <hr class="bg-info col-md-8">
+</div>
 </div>
 
 

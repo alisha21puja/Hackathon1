@@ -111,7 +111,7 @@
             <a href="{% url 'req_pdf' %}" class="btn btn-dark btn-outline-info text-light">Get PDF</a>
           </div>
           <div class="col-md-3">
-            <a href="{% url 'req_pdf' %}" class="btn btn-dark btn-outline-info text-light">Delete Profile</a>
+            <a href="{% url 'del_profile' request.user.id %}" class="btn btn-dark btn-outline-info text-light">Delete Profile</a>
           </div>
           <div class="col-md-1"></div>
         </div>

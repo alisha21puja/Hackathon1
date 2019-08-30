@@ -759,6 +759,11 @@ def updateProfile(request):
             edit_profile = UserProfile.objects
             return render(request, 'profile.html', {'edit_profile': edit_profile})
 
+def del_profile(request,id):
+    profile=User.objects.filter(id=id)
+    profile.delete()
+    return render(request, 'pages/index.html')
+
 
 def req_pdf(request):
     response = HttpResponse(content_type='application/pdf')
