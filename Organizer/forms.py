@@ -4,6 +4,7 @@ from django.core import validators
 
 
 def check_for_z(value):
+    i=0
     if value[i].lower() != 'z':
         raise forms.ValidationError("Erros")
 
