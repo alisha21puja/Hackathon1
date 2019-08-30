@@ -10,6 +10,10 @@ import io
 from django.http import FileResponse
 from reportlab.pdfgen import canvas
 from reportlab.lib.pagesizes import A4
+from django.http import HttpResponse,Http404
+from wsgiref.util import FileWrapper
+import os
+from django.conf import settings
 
 
 def EventLocation(request):
@@ -474,9 +478,9 @@ def eventUpdate(request, id):
         submitbutton = request.POST.get('Submit')
         if submitbutton:
             eventid = OrganiseEvent.objects.get(pk=id)
-            print('get the id ', eventid.id)
+            # print('get the id ', eventid.id)
             userl = User.objects.get(pk=request.user.id)
-            print("user id is ",userl)
+            # print("user id is ",userl)
             event_title = request.POST['event_title']
             event_description = request.POST['event_description']
             event_category = request.POST['event_category']
@@ -528,21 +532,9 @@ def eventUpdate(request, id):
             sve=OrganiseEvent(id=eventid.id,event_title=event_title,event_category= event_category,org_name=org_name,org_email=org_email,org_mobile=org_mobile,org_contact_person=org_contact_person,event_poster=event_poster,event_startdate=event_startdate,event_enddate=event_enddate,us=userl,event_description=event_description)
             sve.save()
 
-
-           
-          
-
-            # sve = OrganiseEvent(id=eventid.id, event_title=event_title, event_category=event_category, org_name=org_name, org_email=org_email, org_mobile=org_mobile,
-            #                     org_contact_person=org_contact_person, event_poster=event_poster, event_startdate=event_startdate, event_enddate=event_enddate, us=request.user.id, event_description=event_description)
-            # sve.save()
-            # sve.refresh_from_db()
-            # events = OrganiseEvent.objects.get(us=request.user.id)
-            # events = OrganiseEvent.objects.filter(us=request.user.id)
-            # loc = Event_Location.objects.filter(eventid_id=request.user.id)
-            # context = {'events': events, 'loc': loc}
-           
-            return render(request, 'registered_event.html',{'updated':'Successfully updated event '})
-            # return render(request, 'registered_event.html'	)
+            event = OrganiseEvent.objects.filter(us=request.user.id)
+            context = {'events': event,'updated':'Successfully updated event '}
+            return render(request, 'registered_event.html',context)
         else:
             events = OrganiseEvent.objects.filter(us=request.user.id)
             context = {'events': events}
