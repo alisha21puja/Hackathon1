@@ -107,6 +107,19 @@ def deleteeventdetails(request, id):
     context = {'events': events, 'loc': loc}
     return render(request, 'registered_event.html', context)
 
+def evenDetailsdelete(request,id):
+    if request.method == 'POST':
+        events = EventDetails.objects.get(pk=id)
+        events.delete()
+        eventDetails = EventDetails.objects.filter(us=request.user.id)
+        eventsOrganise = OrganiseEvent.objects.filter(us=request.user.id)
+        context = {	'eventDetails': eventDetails,
+                    'eventsOrganise': eventsOrganise,
+                    'registered': 'Event Details Removed!'
+                    }
+        return render(request, 'addrubrics.html', context)
+
+
 def deleteresourcedetails(request,id):
     resource=ShareResource.objects.get(id=id)
     resource.delete()
@@ -422,10 +435,10 @@ def evenDetailsUpdate(request, id):
 
                 event_detail_docs = events.event_detail_docs
                 userr = User.objects.get(pk= request.user.id)
-                print("orggg id",events.org_id.id)
-                print("ehj",events.id)
+                # print("orggg id",events.org_id.id)
+                # print("ehj",events.id)
                 orgid = OrganiseEvent.objects.get(id=events.org_id.id)
-                print("org id",orgid)
+                # print("org id",orgid)
 
                 eventInstance = EventDetails(id=id, event=event, no_participant=no_participant, expected_participant=expected_participant, event_level=event_level,
                                              eligibility=eligibility, prerequisite=prerequisite, facility=facility, event_detail_docs=event_detail_docs, us=userr,org_id= orgid)
