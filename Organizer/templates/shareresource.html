@@ -22,7 +22,7 @@
 			<script type="text/javascript">
 				function validate() {
 					var reg_name = /^([A-Za-z0-9_\-\.]){5,100}$/;
-					var reg_only_char = /^([A-Za-z ]){5,}$/;
+					var reg_only_char = /^([A-Za-z_\-\ \.]){5,}$/;
 					var reg_img = /(\.jpg|\.jpeg|\.png)$/i;
 					var reg_doc = /(\.pdf|\.docx|\.doc)$/i;
 					var evnt_name = document.forms["share_resource"]["event_name"].value;
