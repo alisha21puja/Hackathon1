@@ -78,11 +78,11 @@
                     <div class="text-center">
                         <a href="#" class="btn btn-dark btn-outline-info text-light" data-toggle="modal"
                             data-target="#edit{{loc.id}}">
-                            Edit Venu Details</a>
+                            Edit Venue Details</a>
 
                         <a href="#" class="btn btn-dark btn-outline-info text-light" data-toggle="modal"
                             data-target="#delete{{loc.id}}">
-                            Delete Venu Details</a>
+                            Delete Venue Details</a>
                     </div>
                     <hr class="bg-info col-md-8">
                     <!-- modal edit details -->
@@ -113,33 +113,33 @@
                                             <div class="form-group">
                                                 <label for="event_name" class="float-left">Event Name:</label>
                                                 <input type="text" class="form-control" id="event_name"
-                                                    name="event_name" value="{{ loc.event_name }}"
+                                                    name="event_name" value="{{loc.event_name}}"
                                                     placeholder="{{ loc.event_name }}" disabled>
                                             </div>
                                             <div class="form-group">
                                                 <label for="event_venue_name" class="float-left">Venue Name&ast;</label>
                                                 <input type="text" class="form-control" id="event_venue_name"
-                                                    name="event_venue_name" value="{{ loc.event_title }}"
+                                                    name="event_venue_name" value="{{loc.event_title}}"
                                                     placeholder="{{ loc.event_venue_name }}">
                                             </div>
                                             <div class="form-group">
                                                 <label for="event_venue_addr" class="float-left">Venue
                                                     address&ast;</label>
                                                 <input type="text" class="form-control" id="event_venue_addr"
-                                                    name="event_venue_addr" value="{{ loc.event_venue_addr }}"
+                                                    name="event_venue_addr" value="{{loc.event_venue_addr}}"
                                                     placeholder="{{ loc.event_venue_addr }}">
                                             </div>
                                             <div class="form-group">
                                                 <label for="event_latitude" class="float-left">Latitude&ast; </label>
                                                 <input type="text" class="form-control" id="event_latitude"
-                                                    name="event_latitude" value="{{ loc.event_latitude }}"
+                                                    name="event_latitude" value="{{loc.event_latitude}}"
                                                     placeholder="{{ loc.event_latitude }}">
                                             </div>
                                             <div class="form-group">
                                                 <label for="event_longitude" class="float-left">Longititude&ast;
                                                 </label>
                                                 <input type="text" class="form-control" id="event_longitude"
-                                                    name="event_longitude" value="{{ loc.event_longitude }}"
+                                                    name="event_longitude" value="{{loc.event_longitude}}"
                                                     placeholder="{{ loc.event_longitude }}">
                                             </div>
                                             <div class="form-group">

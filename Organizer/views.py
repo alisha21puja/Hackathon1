@@ -75,10 +75,30 @@ def load_map(request):
         event = OrganiseEvent.objects.filter(us=request.user.id)
         return render(request, 'locationinfo_view.html', {'event': event})
 
-# edit
-def locationupdate(request):
+def locationupdate(request,id):
     event = OrganiseEvent.objects.filter(us=request.user.id)
     return render(request, 'locationinfo_view.html', {'event': event})
+    # if request.method == 'POST':
+    #     evnt=Event_Location.objects.get(pk=id)
+    #     event_venue_name = request.POST['venue_name']
+    #     event_venue_addr = request.POST['venue_addr']
+    #     event_latitude = request.POST['event_latitude']
+    #     event_longitude = request.POST['event_longitude']
+    #     event_name = request.POST['event_name']
+    #     submitbutton = request.POST.get('Submit')
+    #     if submitbutton:
+    #         eid = OrganiseEvent.objects.get(event_title=event_name)
+    #         location_data = Event_Location(id=id,event_venue_name=event_venue_name, event_venue_addr=event_venue_addr,
+    #                                    event_latitude=event_latitude, event_longitude=event_longitude, eventid_id=eid.id, event_name=event_name)
+    #         location_data.save()
+    #         event = OrganiseEvent.objects.filter(us=request.user.id)
+    #         return render(request, 'locationinfo_view.html', {'event': event})
+    #     else:
+    #         event = OrganiseEvent.objects.filter(us=request.user.id)
+    #         return render(request, 'locationinfo_view.html', {'event': event})
+    # else:
+    #     event = OrganiseEvent.objects.filter(us=request.user.id)
+    #     return render(request, 'locationinfo_view.html', {'event': event})
 
 # edit
 def locationdelete(request):
@@ -142,20 +162,12 @@ def updateSponsorInfo(request,id):
         silver_sponsor = request.POST['silver_sponsor']
         f_silver = request.POST['f_silver']
         ex_silver = request.POST['ex_silver']
-
-
-
-        userr = User.objects.get(pk= request.user.id)
-          
+        userr = User.objects.get(pk= request.user.id)      
         orgid = OrganiseEvent.objects.get(id=spon.org_id.id)
-
-
         sponsor_ship = SponsorShip(id=id, event_title=event_title, platinum_sponsor=platinum_sponsor, f_platinum=f_platinum, ex_platinum=ex_platinum, gold_sponsor=gold_sponsor,
                                    f_gold=f_gold, ex_gold=ex_gold, silver_sponsor=silver_sponsor, f_silver=f_silver, ex_silver=ex_silver, us=userr,org_id=orgid)
         sponsor_ship.save()
         sponsorShip = SponsorShip.objects.filter(us=request.user.id)
-
-
         return render(request, 'edit_sponsorship.html', {'sponsorShip': sponsorShip})
     else:
         if platinum_sponsor == '':
