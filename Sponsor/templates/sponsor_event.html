@@ -13,7 +13,7 @@
 <div class="container">
     <h4 class="text-center">Sponser for an event</h4>
     <hr class="bg-primary col-md-8">
-    <div class="row" style="margin-left: 18em; margin-right: 0em;">
+    <div class="row " style="margin-left: 18em; margin-right: 0em;">
         <div class="col-md-8">
             <form name="select_event" id="select_event" method="POST" action="{% url 'addsponsershipinfo' %}">
                 {% csrf_token %}
@@ -45,13 +45,13 @@
     </div>
 
     {% for spnsr in spnsr_details.all %}
-    <div class="row" style="margin-left: 2em; margin-right: 0em;">
+    <div class="row shadow p-3 mb-5 bg-white rounded" style="margin-left: 2em; margin-right: 0em;">
         <div class="col-md-12">
             <hr class="bg-primary col-md-8">
             <h4 class="text-center">{{ spnsr.event_title }}</h4>
             <hr class="bg-primary col-md-8">
             <h4 class="text-center">Submit an option of your choice</h4>
-            <div class="row">
+            <div class="row shadow p-3 mb-5 bg-white rounded">
                 <div class="col-md-4">
                     <form method="POST" action="{% url 'addsponsership' %}">
                         {% csrf_token %}

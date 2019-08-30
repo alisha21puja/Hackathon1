@@ -774,7 +774,7 @@ def req_pdf(request):
 
 
     p.line(80, 770, 480, 770)
-    p.drawString(80, 755, 'HACKATHON USER DETAILS :')
+    p.drawString(80, 755, 'TECHEVENT USER DETAILS :')
     p.line(80, 750, 480, 750)
     # Start writing the PDF here
     p.drawString(80, 725, 'Email ')
