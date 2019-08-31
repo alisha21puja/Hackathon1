@@ -107,47 +107,46 @@
                                         </button>
                                     </div>
                                     {%endif%}
-                                    <center>
-                                        <form action="{% url 'locationupdate' loc.id %}" method="POST">
-                                            {% csrf_token %}
-                                            <div class="form-group">
-                                                <label for="event_name" class="float-left">Event Name:</label>
-                                                <input type="text" class="form-control" id="event_name"
-                                                    name="event_name" value="{{loc.event_name}}"
-                                                    placeholder="{{ loc.event_name }}" disabled>
-                                            </div>
-                                            <div class="form-group">
-                                                <label for="event_venue_name" class="float-left">Venue Name&ast;</label>
-                                                <input type="text" class="form-control" id="event_venue_name"
-                                                    name="event_venue_name" value="{{loc.event_title}}"
-                                                    placeholder="{{ loc.event_venue_name }}">
-                                            </div>
-                                            <div class="form-group">
-                                                <label for="event_venue_addr" class="float-left">Venue
-                                                    address&ast;</label>
-                                                <input type="text" class="form-control" id="event_venue_addr"
-                                                    name="event_venue_addr" value="{{loc.event_venue_addr}}"
-                                                    placeholder="{{ loc.event_venue_addr }}">
-                                            </div>
-                                            <div class="form-group">
-                                                <label for="event_latitude" class="float-left">Latitude&ast; </label>
-                                                <input type="text" class="form-control" id="event_latitude"
-                                                    name="event_latitude" value="{{loc.event_latitude}}"
-                                                    placeholder="{{ loc.event_latitude }}">
-                                            </div>
-                                            <div class="form-group">
-                                                <label for="event_longitude" class="float-left">Longititude&ast;
-                                                </label>
-                                                <input type="text" class="form-control" id="event_longitude"
-                                                    name="event_longitude" value="{{loc.event_longitude}}"
-                                                    placeholder="{{ loc.event_longitude }}">
-                                            </div>
-                                            <div class="form-group">
-                                                <input type="submit" class="btn btn-outline-info bg-dark" name="Submit"
-                                                    id="password" aria-describedby="emailHelp" value="Submit">
-                                            </div>
-                                        </form>
-                                    </center>
+                                    <form action="{% url 'locationupdate' loc.id %}" method="POST">
+                                        {% csrf_token %}
+                                        <div class="form-group">
+                                            <label for="evt_name" class="float-left">Event Name:</label>
+                                            <input type="text" class="form-control" id="evt_name" name="evt_name"
+                                                value="{{loc.event_name}}" placeholder="" disabled>
+                                                <input type="text" class="form-control" id="event_name" name="event_name"
+                                                value="{{loc.event_name}}" placeholder="" hidden>
+                                        </div>
+                                        <div class="form-group">
+                                            <label for="event_venue_name" class="float-left">Venue Name&ast;</label>
+                                            <input type="text" class="form-control" id="event_venue_name"
+                                                name="event_venue_name" value="{{loc.event_venue_name}}"
+                                                placeholder="" required>
+                                        </div>
+                                        <div class="form-group">
+                                            <label for="event_venue_addr" class="float-left">Venue
+                                                address&ast;</label>
+                                            <input type="text" class="form-control" id="event_venue_addr"
+                                                name="event_venue_addr" value="{{loc.event_venue_addr}}"
+                                                placeholder="" required>
+                                        </div>
+                                        <div class="form-group">
+                                            <label for="event_latitude" class="float-left">Latitude&ast; </label>
+                                            <input type="text" class="form-control" id="event_latitude"
+                                                name="event_latitude" value="{{loc.event_latitude}}"
+                                                placeholder="" required>
+                                        </div>
+                                        <div class="form-group">
+                                            <label for="event_longitude" class="float-left">Longititude&ast;
+                                            </label>
+                                            <input type="text" class="form-control" id="event_longitude"
+                                                name="event_longitude" value="{{loc.event_longitude}}"
+                                                placeholder="" required>
+                                        </div>
+                                        <div class="form-group  text-center">
+                                            <input type="submit" class="btn btn-outline-info bg-dark" name="Submit"
+                                                id="password" aria-describedby="emailHelp" value="Submit">
+                                        </div>
+                                    </form>
                                 </div>
                                 <div class="modal-footer bg-dark">
                                     <button type="button" class="btn btn-dark btn-outline-info"

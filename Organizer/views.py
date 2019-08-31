@@ -76,34 +76,35 @@ def load_map(request):
         return render(request, 'locationinfo_view.html', {'event': event})
 
 def locationupdate(request,id):
-    event = OrganiseEvent.objects.filter(us=request.user.id)
-    return render(request, 'locationinfo_view.html', {'event': event})
-    # if request.method == 'POST':
-    #     evnt=Event_Location.objects.get(pk=id)
-    #     event_venue_name = request.POST['venue_name']
-    #     event_venue_addr = request.POST['venue_addr']
-    #     event_latitude = request.POST['event_latitude']
-    #     event_longitude = request.POST['event_longitude']
-    #     event_name = request.POST['event_name']
-    #     submitbutton = request.POST.get('Submit')
-    #     if submitbutton:
-    #         eid = OrganiseEvent.objects.get(event_title=event_name)
-    #         location_data = Event_Location(id=id,event_venue_name=event_venue_name, event_venue_addr=event_venue_addr,
-    #                                    event_latitude=event_latitude, event_longitude=event_longitude, eventid_id=eid.id, event_name=event_name)
-    #         location_data.save()
-    #         event = OrganiseEvent.objects.filter(us=request.user.id)
-    #         return render(request, 'locationinfo_view.html', {'event': event})
-    #     else:
-    #         event = OrganiseEvent.objects.filter(us=request.user.id)
-    #         return render(request, 'locationinfo_view.html', {'event': event})
-    # else:
-    #     event = OrganiseEvent.objects.filter(us=request.user.id)
-    #     return render(request, 'locationinfo_view.html', {'event': event})
+    # event = OrganiseEvent.objects.filter(us=request.user.id)
+    # return render(request, 'locationinfo_view.html', {'event': event})
+    if request.method == 'POST':
+        evnt=Event_Location.objects.get(pk=id)
+        event_venue_name = request.POST['event_venue_name']
+        event_venue_addr = request.POST['event_venue_addr']
+        event_latitude = request.POST['event_latitude']
+        event_longitude = request.POST['event_longitude']
+        event_name = request.POST['event_name']
+        submitbutton = request.POST.get('Submit')
+        if submitbutton:
+            eid = OrganiseEvent.objects.get(event_title=event_name)
+            location_data = Event_Location(id=id,event_venue_name=event_venue_name, event_venue_addr=event_venue_addr,
+                                       event_latitude=event_latitude, event_longitude=event_longitude, eventid_id=eid.id, event_name=event_name)
+            location_data.save()
+            event = OrganiseEvent.objects.filter(us=request.user.id)
+            return render(request, 'locationinfo_view.html', {'event': event,'error': "Successfully edited the details"})
+        else:
+            event = OrganiseEvent.objects.filter(us=request.user.id)
+            return render(request, 'locationinfo_view.html', {'event': event})
+    else:
+        event = OrganiseEvent.objects.filter(us=request.user.id)
+        return render(request, 'locationinfo_view.html', {'event': event})
 
-# edit
-def locationdelete(request):
+def locationdelete(request,id):
+    event = Event_Location.objects.get(pk=id)
+    event.delete()
     event = OrganiseEvent.objects.filter(us=request.user.id)
-    return render(request, 'locationinfo_view.html', {'event': event})
+    return render(request, 'locationinfo_view.html', {'event': event,'error': "Successfully removed the details"})
 
 def editSponsorShip(request):
     sponsorShip = SponsorShip.objects.filter(us=request.user.id)
@@ -779,7 +780,7 @@ def updateProfile(request):
 def del_profile(request,id):
     profile=User.objects.filter(id=id)
     profile.delete()
-    return render(request, 'pages/index.html')
+    return render(request, 'login.html',{'error':"CREATE A NEW PROFILE NOW"})
 
 
 def req_pdf(request):
