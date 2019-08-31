@@ -1,36 +1,35 @@
 {% if messages %}
-	{% for message in messages %}
-	<div id="message" class="container">
+{% for message in messages %}
+<div id="message" class="container">
 
 
 
-		<div class="alert alert-info  alert-dismissible fade show "  role="alert">
-				{% if messages.level == DEFAULT_MESSAGE_LEVELS.ERROR %}
-				
-					Error
+	<div class="alert alert-info  alert-dismissible fade show " role="alert">
+		{% if messages.level == DEFAULT_MESSAGE_LEVELS.ERROR %}
 
-					{% else %}
+		Error
 
-					{{ message.tags|title }}
+		{% else %}
 
-					{% endif %}
-				
+		{{ message.tags|title }}
 
-					{{ message }}
-					<button class="close" style="height: 10%;"  data-dismiss="alert" >
-				<span aria-hidden="true" >&times;</span>
-				
-				
-		
-			</button>
-			
+		{% endif %}
 
-		</div>
+
+		{{ message }}
+		<button class="close" style="height: 10%;" data-dismiss="alert">
+			<span aria-hidden="true">&times;</span>
+
+
+
+		</button>
+
+
 	</div>
-	{% endfor %}
+</div>
+{% endfor %}
 
 
 
 
 {% endif%}
-
