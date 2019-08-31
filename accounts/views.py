@@ -52,7 +52,7 @@ def logout(request):
     if request.method == 'POST':
         auth.logout(request)
         messages.success(request, ' You are now loged out')
-        return redirect('home')
+        return render(request, 'login.html')
 
 def signup(request):
     if request.method == 'POST':
