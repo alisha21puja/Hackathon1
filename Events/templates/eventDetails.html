@@ -2,55 +2,34 @@
 {%block content %}
 {%load staticfiles %}
 
-
-
-
-
-
-
-
-	event_category,org_name,org_email,	org_mobile,org_contact_person,	event_poster ,	event_startdate ,	event_enddate
-<br><br><br><br><br>
-<br>
+<br><br><br>
 <div class="container">
-<div class="row shadow p-3 mb-5 bg-white rounded">
-	<div class="col-md-12">
-		<br>
-		 {% for event in events.all %}
-
-		<div class="card border-info">
-		  <div class="card-header border-info">
-		  	<h3 class="text-center text-info">
-		{{ event.event_title }}</h3>
-		  </div>
-			  <div class="card-body">
-			  	<div class="float-right">
-			  		 <img src="../media/images/event_poster/{{event.event_poster }}" class="border-info" height="300" width="300">
-			  	</div>
-			    <h5 class="card-title  text-info text-justify">Organised by:{{ event.org_name }}</h5> 
-			    <h6 class="card-text"> {{ event.event_description }}	</h6>
-			    <h6 class="card-text text-info">Organiser Email: {{event.org_email}}</h6>
-			    <h6 class="card-text text-info">Event: {{event.event_category}}</h6>
-			    <br>
-
-
-
-			   <a  href="{% url 'accounts'%} " class=" btn btn-outline-info">Participate</a>
-			  
-			   
-
-			    </div>
-		  <div class="card-footer text-muted border-info">
-
-   					 <h6 class="text-center text-info"> {{event.event_startdate  }}--{{event.event_enddate}}</h6>
-  		</div>
+	<div class="row shadow p-3 mb-5 bg-white rounded">
+		<div class="col-md-12">
+			{% for event in events.all %}
+			<div class="card border-info">
+				<div class="card-header border-info">
+					<h3 class="text-center text-info">
+						{{ event.event_title }}</h3>
+				</div>
+				<div class="card-body">
+					<div class="float-right">
+						<img src="/media/images/event_poster/{{event.event_poster }}" class="border-info" height="300"
+							width="300">
+					</div>
+					<h5 class="card-title  text-info text-justify">Organised by:{{ event.org_name }}</h5>
+					<h6 class="card-text"> {{ event.event_description }} </h6>
+					<h6 class="card-text text-info">Organiser Email: {{event.org_email}}</h6>
+					<h6 class="card-text text-info">Event: {{event.event_category}}</h6>
+					<br>
+					<a href="{% url 'accounts'%} " class=" btn btn-outline-info">Participate</a>
+				</div>
+				<div class="card-footer text-muted border-info">
+					<h6 class="text-center text-info"> {{event.event_startdate  }}--{{event.event_enddate}}</h6>
+				</div>
+			</div>
+			{% endfor %}
+		</div>
 	</div>
-
-		
-
-{% endfor %}
-	</div>
-
-</div>
 </div>
 {% endblock %}
