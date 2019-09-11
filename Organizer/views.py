@@ -14,7 +14,20 @@ from django.http import HttpResponse,Http404
 from wsgiref.util import FileWrapper
 import os
 from django.conf import settings
+from Participant.models import ParticipateEvent
 
+def participants_event(request,id):
+    event = OrganiseEvent.objects.get(pk=id)
+    try:
+        participants = ParticipateEvent.objects.get(Event_id_id=id)
+        # print(participants)
+        usr = User.objects.get(pk=participants.us_id)
+        # print(usr.first_name)
+        otherdetails_usr = UserProfile.objects.get(id=participants.us_id)
+        # print(otherdetails_usr)
+        return render(request, 'participants_event.html', {'event': event, 'part': participants, 'usr': usr, 'otherdetails_usr': otherdetails_usr})
+    except:
+        return render(request, 'participants_event.html', {'event': event})
 
 def EventLocation(request):
     if request.method == 'POST':

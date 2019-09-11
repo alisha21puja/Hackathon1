@@ -31,7 +31,7 @@
         <div class="card-body">
           <h5 class="card-title text-center">{{ event.event_title }}</h5>
           <hr class="bg-info col-md-8">
-          <img src="/media/images/event_poster/{{event.event_poster}}" height="200" width="100%;">
+          <img src="/media/images/event_poster/{{event.event_poster}}" height="35%" width="50%;">
           <!-- <h6 class="card-subtitle mb-2 text-muted">Helps to organise event</h6> -->
           <p class="card-text"> Event Category &nbsp;&nbsp;&nbsp;: {{ event.event_category}} </p>
           <p class="card-text"> Organised By &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;: {{ event.org_name}} </p>
@@ -52,54 +52,8 @@
                 data-target="#delete{{event.id}}">Delete Details</a></button>
           </div>
           <div class="row mx-auto">
-            <button class=" btn"> <a href="" class="btn btn-dark btn-outline-info text-light" data-toggle="modal"
-                data-target="#participants{{event.id}}">VIew Participants</a></button>
-                  <button class=" btn"> <a href="" class="btn btn-dark btn-outline-info text-light" data-toggle="modal"
-                data-target="#sponsers{{event.id}}">View Sponsers</a></button>
-          </div>
-        </div>
-
-  <div class="modal fade" id="participants{{event.id}}" tabindex="-1" role="dialog"
-          aria-labelledby="exampleModalLongTitle" aria-hidden="true">
-          <div class="modal-dialog" role="document">
-            <div class="modal-content ">
-              <div class="modal-header bg-dark">
-                <h5 class="modal-title text-info" id="exampleModalLongTitle"> PARTICIPANTS : {{ event.event_title }}</h5>
-                <button type="button" class="close text-info" data-dismiss="modal" aria-label="Close">
-                  <span aria-hidden="true">&times;</span>
-                </button>
-              </div>
-              <div class="modal-body text-center">
-               {{ event.event_title }}
-                <a href="{% url 'deleteeventdetails' event.id %}" class="btn btn-dark btn-outline-info">delete</a>
-                <br><br>
-                <div class="modal-footer bg-dark">
-                  <button type="button" class="btn btn-outline-info bg-dark" data-dismiss="modal">Close</button>
-                </div>
-              </div>
-            </div>
-          </div>
-        </div>
-
-          <div class="modal fade" id="sponsers{{event.id}}" tabindex="-1" role="dialog"
-          aria-labelledby="exampleModalLongTitle" aria-hidden="true">
-          <div class="modal-dialog" role="document">
-            <div class="modal-content ">
-              <div class="modal-header bg-dark">
-                <h5 class="modal-title text-info" id="exampleModalLongTitle"> SPONSERS : {{ event.event_title }}</h5>
-                <button type="button" class="close text-info" data-dismiss="modal" aria-label="Close">
-                  <span aria-hidden="true">&times;</span>
-                </button>
-              </div>
-              <div class="modal-body text-center">
-              {{ event.event_title }}
-                <a href="{% url 'deleteeventdetails' event.id %}" class="btn btn-dark btn-outline-info">delete</a>
-                <br><br>
-                <div class="modal-footer bg-dark">
-                  <button type="button" class="btn btn-outline-info bg-dark" data-dismiss="modal">Close</button>
-                </div>
-              </div>
-            </div>
+            <button class=" btn"> <a href="{% url 'participants_event' event.id %}" class="btn btn-dark btn-outline-info text-light">VIew Participants</a></button>
+                  <button class=" btn"> <a href="" class="btn btn-dark btn-outline-info text-light">View Sponsers</a></button>
           </div>
         </div>
 

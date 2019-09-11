@@ -47,6 +47,7 @@ urlpatterns = [
 	path('req_pdf',views.req_pdf,name="req_pdf"),
     path('updateProfile', views.updateProfile, name='update_profile'),
      path('del_profile/<int:id>',views.del_profile,name='del_profile'),
+     path('participants_event/<int:id>/',views.participants_event,name='participants_event'),
 
 
 ] + static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)

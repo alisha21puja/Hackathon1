@@ -1,0 +1,43 @@
+{% extends 'navbar.html' %}
+
+{% block content %}
+
+{% load staticfiles %}
+<br><br><br><br>
+<div class="container">
+        {% if event %}
+          <div class="row">
+        <div class="col-md-10">
+            <h3 class="text-center">PARTICIPANTS FOR EVENT : {{ event.event_title }}</h3>
+            <hr class="bg-info col-md-8">
+        </div>
+    </div>
+        {% endif %}
+    <div class="row shadow p-3 mb-5 bg-white rounded">
+<div class="col-md-12">
+<table class="table table-hover table-dark">
+  <thead>
+    <tr>
+      <th scope="col">First Name</th>
+      <th scope="col">Last Name</th>
+      <th scope="col">Email</th>
+      <th scope="col">Phone</th>
+      {% comment %} <th scope="col">Contact</th> {% endcomment %}
+    </tr>
+  </thead>
+  <tbody>
+    {% if usr %}
+    <tr>
+      <td>{{ usr.first_name }}</td>
+      <td>{{usr.last_name}}</td>
+      <td>{{usr.email}}</td>
+      <td>{{ otherdetails_usr.phone }}</td>
+    </tr>
+    {% endif %}
+  </tbody>
+</table>
+</div>
+    </div>
+</div>
+
+{% endblock %}
