@@ -1,0 +1,124 @@
+{% extends 'nav-bar-sponsor.html' %}
+
+{% block content %}
+
+
+{% load staticfiles %}
+
+
+<br><br><br><br><br><br>
+
+<div class="container">
+  <!-- <h2 class="text-center">Profile</h2> -->
+  <hr class="bg-primary col-md-8">
+
+  <!-- <div class="alert alert-warning alert-dismissible fade show" role="alert">
+    <strong>Profile is Created Successfully!</strong>
+    <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+      <span aria-hidden="true">&times;</span>
+    </button>
+  </div> -->
+  <style>
+  p{
+    padding-top: 10px;
+  }
+  </style>
+  <div class="container col-md-10">
+    <div class="card border border-primary ">
+      <!--style="width: 18rem;">-->
+      <div class="card-body">
+        <h2 class="card-title text-center">Profile</h2>
+        <hr class="bg-primary col-md-10">
+        <!-- <h6 class="card-subtitle mb-2 text-muted">Helps to organise event</h6> -->
+        <div class="row">
+          <div class="col-md-9">
+        <div class="row">
+          <div class="col-md-1">
+          </div>
+          <div class="col-md-3">
+            <p class="card-text">
+              User Name
+            </p>
+          </div>
+          <div class="col-md-8">
+            <p class="card-text">
+              : {{ user }}
+            </p>
+          </div>
+          <div class="col-md-4">
+            
+          </div>
+        </div>
+        <div class="row">
+          <div class="col-md-1">
+          </div>
+          <div class="col-md-3">
+            <p class="card-text">
+              First Name
+            </p>
+          </div>
+          <div class="col-md-8">
+            <p class="card-text">
+              : {{ user.first_name }}
+            </p>
+          </div>
+        </div>
+        <div class="row">
+          <div class="col-md-1">
+          </div>
+          <div class="col-md-3">
+            <p class="card-text">
+              Last Name
+            </p>
+          </div>
+          <div class="col-md-8">
+            <p class="card-text">
+              : {{ user.last_name }}
+            </p>
+          </div>
+        </div>
+        <div class="row">
+          <div class="col-md-1">
+          </div>
+          <div class="col-md-3">
+            <p class="card-text">
+              Email
+            </p>
+          </div>
+          <div class="col-md-8">
+            <p class="card-text">
+              : {{ user.email }}
+            </p>
+          </div>
+      
+        </div>
+        </div> 
+
+        {% for pro in profiles.all %}
+        <div class="col-md-3">
+          <img src="{{ pro.profile_img.url }}" height="143px">
+        </div>
+        {% endfor %}
+
+        <hr class="bg-primary col-md-10">
+      </div>
+        <div class="row">
+          <div class="col-md-2"></div>
+          <div class="col-md-3">
+            <a href="{% url 'editProfile' %}" class="btn btn-dark btn-outline-primary text-light">Edit Profile</a>
+          </div>
+          <div class="col-md-3">
+            <a href="{% url 'req_pdf' %}" class="btn btn-dark btn-outline-primary text-light">Get PDF</a>
+          </div>
+          <div class="col-md-3">
+            <a href="{% url 'req_pdf' %}" class="btn btn-dark btn-outline-primary text-light">Delete Profile</a>
+          </div>
+          <div class="col-md-1"></div>
+        </div>
+      </div>
+    </div>
+  </div>
+  <hr class="bg-primary col-md-8">
+</div>
+<br><br>
+{% endblock %}

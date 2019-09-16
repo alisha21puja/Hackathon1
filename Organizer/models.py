@@ -20,7 +20,7 @@ class OrganiseEvent(models.Model):
     org_email = models.EmailField(max_length=100)
     org_mobile = models.BigIntegerField()
     org_contact_person = models.CharField(max_length=100)
-    event_poster = models.ImageField(upload_to='images/event_poster/')
+    event_poster = models.ImageField(upload_to='images/event_poster/',default="images/noimage.png")
     event_startdate = models.DateTimeField(default=now)
     event_enddate = models.DateTimeField()
     us = models.ForeignKey(User, on_delete=models.CASCADE)
@@ -67,24 +67,6 @@ class SponsorShip(models.Model):
     f_silver = models.TextField(max_length=1500)
     ex_silver = models.IntegerField()
     us = models.ForeignKey(User, on_delete=models.CASCADE)
-    org_id = models.ForeignKey(OrganiseEvent, on_delete=models.CASCADE)
-
-
-class SponsorShipDetails(models.Model):
-
-    event_id = models.OneToOneField(
-        EventDetails, on_delete=models.CASCADE, primary_key=True)
-    event_title = models.CharField(max_length=100, default=True)
-    platinum_sponsor = models.CharField(max_length=100)
-    f_platinum = models.TextField(max_length=1500)
-    ex_platinum = models.IntegerField()
-    gold_sponsor = models.CharField(max_length=100)
-    f_gold = models.TextField(max_length=1500)
-    ex_gold = models.IntegerField()
-    silver_sponsor = models.CharField(max_length=100)
-    f_silver = models.TextField(max_length=1500)
-    ex_silver = models.IntegerField()
-    us = models.ForeignKey(User,  on_delete=models.CASCADE)
     org_id = models.ForeignKey(OrganiseEvent, on_delete=models.CASCADE)
 
 class Event_Location(models.Model):

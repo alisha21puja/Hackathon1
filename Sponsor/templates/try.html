@@ -1,0 +1,50 @@
+def eventInfo(request,id):
+	try: 
+		events = OrganiseEvent.objects.get(pk= id)
+		sponsor  = SponsorShip.objects.get(org_id = id)
+		eventdet = EventDetails.objects.get(org_id=id)
+		print("hello",eventdet)
+
+		context ={	'events':events,
+					'eventdet':eventdet,
+					'sponsor':sponsor
+			}
+
+		print("event is",events.event_title)
+		
+	except EventDetails.DoesNotExist:
+		eventdet = None
+		if eventdet:
+			context ={	
+						'errorr':'EventDetails have not added by organiser'
+						}
+		
+			
+		else:
+			events = OrganiseEvent.objects.get(pk=id)
+			context ={	'events':events,
+						'eventdet':eventdet,
+						'errorr':'EventDetails have not added by organiser'
+
+						
+
+					}
+			
+	except SponsorShip.DoesNotExist:
+		sponsor = None
+		if sponsor:
+			context ={	
+						'errorr':'EventDetails have not added by organiser'
+						}
+		
+		
+		else:
+			events = OrganiseEvent.objects.get(pk=id)
+			context ={	'events':events,
+						
+						'sponsor':sponsor,
+						'error':'Sponsor have not added by organiser'
+
+					}
+
+	return render(request,'sponsor_event_details.html',context)

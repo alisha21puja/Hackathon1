@@ -1,7 +1,7 @@
 from django.shortcuts import render, redirect, get_object_or_404
 from django.http import HttpResponse
 from . import forms
-from .models import OrganiseEvent, EventDetails, ShareResource, SponsorShip, SponsorShipDetails, Event_Location
+from .models import OrganiseEvent, EventDetails, ShareResource, SponsorShip, Event_Location
 from django.contrib.auth.models import User
 from accounts.models import UserProfile
 from Blog.models import BlogsInfo
@@ -103,13 +103,15 @@ def deleteeventdetails(request, id):
     context = {'events': events, 'loc': loc}
     return render(request, 'registered_event.html', context)
 
+def deleteresourcedetails(request,id):
+    resource=ShareResource.objects.get(id=id)
+    resource.delete()
+    share_resource = ShareResource.objects.filter(us=request.user.id)
+    return render(request, 'edit_shareresource.html', {'share_resource': share_resource})
 
-<<<<<<< HEAD
+
 def updateSponsorInfo(request,id):
     spon = SponsorShip.objects.get(pk=id)
-=======
-def updateSponsorInfo(request,d):
->>>>>>> 312abae4e7e44b43e4885c90a8ef9014ecdc395f
     submitbutton = request.POST.get('Submit')
     if submitbutton:
         sponsor = SponsorShip.objects.get(pk=id)
@@ -727,9 +729,9 @@ def about(request):
     return render(request, 'pages/index.html')
 
 
-def profile(request):
+def profile_org(request):
     profile=UserProfile.objects.filter(id=request.user.id)
-    return render(request, 'profile.html', {'profile':profile})
+    return render(request, 'profile_org.html', {'profil':profile})
 
 
 def editProfile(request):
@@ -769,6 +771,7 @@ def req_pdf(request):
     p = canvas.Canvas(buffer)
     p.setLineWidth(.3)
     p.setFont('Helvetica', 12)
+
 
     p.line(80, 770, 480, 770)
     p.drawString(80, 755, 'HACKATHON USER DETAILS :')

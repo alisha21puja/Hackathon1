@@ -39,7 +39,7 @@ def part_updateProfile(request):
 			profiles=User(id=request.user.id,username=user,first_name= fname,last_name=lname,email=email)
 			profiles.save()
 			profiles.refresh_from_db()		
-			edit_profile=UserProfile.objects
+			edit_profile=UserProfile.filter(us=request.user.id)
 			return render(request,'part_profile.html',{'part_profile':edit_profile})
 
 
@@ -52,11 +52,71 @@ def event_details(request):
 	events = OrganiseEvent.objects
 	return render(request,'event_details.html',{'events':events})
 
-def participated_event(request):
+def participated_event(request,id):
 	part_event = ParticipateEvent.objects.filter(us= request.user.id)
 	events = OrganiseEvent.objects.filter(us= request.user.id)
-	return render(request,'participated_event.html',{'part_event':part_event})
+	participated_event = ParticipateEvent(Event_id_id = id,us_id = request.user.id)
+	participated_event.save()
+	participated_event.refresh_from_db()		
+	try:
+		events = OrganiseEvent.objects.get(pk=id)
+		eventdet = EventDetails.objects.get(org_id=id)
+		print("hello",eventdet)
 
+		context ={	'events':events,
+					'eventdet':eventdet,
+				}
+
+		print("event is",events.event_title)
+		return render(request,'participated_event.html',context)
+	except EventDetails.DoesNotExist:
+		eventdet = None
+		if eventdet:
+			pass
+		else:
+			events = OrganiseEvent.objects.get(pk=id)
+			context ={	'events':events,
+						'eventdet':eventdet,
+					}
+
+			print("event is",events.event_title)
+			return render(request,'participated_event.html',context)
+		
+
+def part_shareresources(request,id):
+	try:
+		resources = ShareResource.objects.get(org_id_id = id)
+		return render(request,'part_shareresources.html',{'resources':resources})
+	except ShareResource.DoesNotExist:
+		resources = None
+	if resources:
+		pass
+	else:
+		return render(request,'part_shareresources.html',{'error':'Resources are not published'})
+		
+
+	
+def enquireInfoMail(request):
+	if request.POST:
+		subject = request.POST['subject']
+		to = request.POST['to']
+		fromm = request.POST['from']
+		mobile = request.POST['mobile']
+		message = request.POST['message']
+		send_mail('Subject' +subject,
+			'Message'+ message + 'Will Contact your soon',
+			'sachin.thakur9614@gmail.com',
+			[to,'sachin.thakur@mca.christuniversity.in',],
+			fail_silently =False)
+		
+		return  render('Participant_index.html')
+
+def enquireInfo(request,id):
+	event = OrganiseEvent.objects.get(pk=id)
+	return render(request,'part_enquire.html',{'event':event})
+
+def part_enquire(request):
+	return render(request,'part_enquire.html')
 
 def partblogsDetails(request):
     blogsInfo = BlogsInfo.objects.filter(us=request.user.id)
@@ -108,7 +168,7 @@ def partWriteBlog(request):
 		
 		blogsInfo.save()
 		print("author name:" + authorName)
-		return render(request,'part-blog_write.html', {'error':"Event is not selected"})	
+		return render(request,'part-blog_write.html', {'error':"Blog is selected"})	
 
 
 
@@ -156,3 +216,27 @@ def req_pdf(request):
 
     return response
 
+# def part_feedback(request,id):
+# 	event = OrganiseEvent.objects.get(pk=id)
+# 	if request.method =='POST':
+# 		subject = request.POST['subject']
+# 		pubDateTime = timezone.now()
+# 		feedback = request.POST['feedback']
+# 		UserType = 'Participant'
+# 		if request.user.is_authenticated:
+# 			authorName = request.user.first_name + " " + request.user.last_name
+# 		if subject =='':
+# 			return render(request,'part_feedback.html', {'error':"Subject is not given"})	
+# 		else:
+# 			subject = request.POST['subject']		
+# 		if pubDateTime =='':			
+# 			pubDateTime = timezone.now()
+# 		if feedback=='':
+# 			return render(request,'part_feedback.html', {'error':"Feedback is not written"})	
+# 		else:
+# 		 	feedback = request.POST['feedback']		
+# 		Eventfeedback=EventFeedback(subject=subject,pubDateTime=pubDateTime,feedback=feedback,Event_id_id=id,us_id=request.user.id)
+		
+# 		Eventfeedback.save()
+# 		print("author name:" + authorName)
+# 		return render(request,'part_feedback.html', {'error':"Feedback is stored"})	

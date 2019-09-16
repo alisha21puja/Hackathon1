@@ -1,0 +1,105 @@
+{% extends 'nav-bar_participant.html' %}
+
+{%block content %}
+
+
+{%load staticfiles %}
+
+
+<br><br><br><br><br><br>
+
+<div class="container">
+  <!-- <h2 class="text-center">Profile</h2> -->
+  <hr class="bg-danger col-md-8">
+
+  <style>
+  p{
+    padding-top: 10px;
+  }
+  </style>
+  <div class="container col-md-10">
+    <div class="card border border-danger ">
+      <!--style="width: 18rem;">-->
+      <div class="card-body">
+        <h2 class="card-title text-center">Share Resources</h2>
+        <hr class="bg-danger col-md-8">
+        <!-- <h6 class="card-subtitle mb-2 text-muted">Helps to organise event</h6> -->
+        <div class="row">
+          <div class="col-md-2">
+          </div>
+          <div class="col-md-2">
+            <p class="card-text">
+              Event Title
+            </p>
+          </div>
+          <div class="col-md-8">
+            <p class="card-text">
+              : {{ resources.event_title }}
+            </p>
+          </div>
+        </div>
+        <div class="row">
+          <div class="col-md-2">
+          </div>
+          <div class="col-md-2">
+            <p class="card-text">
+              Subject
+            </p>
+          </div>
+          <div class="col-md-8">
+            <p class="card-text">
+              : {{ resources.subject }}
+            </p>
+          </div>
+        </div>
+        <div class="row">
+          <div class="col-md-2">
+          </div>
+          <div class="col-md-2">
+            <p class="card-text">
+              Description
+            </p>
+          </div>
+          <div class="col-md-8">
+            <p class="card-text">
+              : {{ resources.description }}
+            </p>
+          </div>
+        </div>
+        <div class="row">
+          <div class="col-md-2">
+          </div>
+          <div class="col-md-2">
+            <p class="card-text">
+              Resource Link
+            </p>
+          </div>
+          <div class="col-md-8">
+            <p class="card-text">
+              : {{ resources.resourceLink }}
+            </p>
+          </div>
+        </div>
+        <div class="row">
+          <div class="col-md-2">
+          </div>
+          <div class="col-md-2">
+            <p class="card-text">
+              Document File
+            </p>
+          </div>
+          <div class="col-md-8">
+            <p class="card-text">
+              : {{ resources.documentFile }}
+            </p>
+          </div>
+      </div>
+  <div class="col-md-1"></div>
+        </div>
+      </div>
+    </div>
+  </div>
+  <hr class="bg-danger col-md-8">
+</div>
+<br><br>
+{% endblock %}

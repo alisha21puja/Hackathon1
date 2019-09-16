@@ -7,31 +7,48 @@
 <br><br><br><br>
 
 <div class="container">
-		<h3 class="text-center"> Sponsor Events</h3>
+	<h3 class="text-center"> Upcomming Events</h3>
+	<hr class="bg-primary col-md-8">
+
+	
+	<div class="row">
+{%  for event in events.all  %}
+	
+		<div class="col-md-5">
+			<div class="card border border-primary ">
+				<!--style="width: 18rem;">-->
+				<div class="card-body ">
+					<h5 class="card-title text-center">{{ event.event_title }}</h5>
+					<hr class="bg-primary col-md-8">
+					<p class="card-text text-center"> {{ event.event_startdate }} - {{ event.event_enddate }} </p>
+					<img src="{{ event.event_poster.url }}" height="200" width="100%;">
+					<br>
+					<br>
+					<!-- <h6 class="card-subtitle mb-2 text-muted">Helps to organise event</h6> -->
+					<p class="card-text"> Event Category &nbsp;&nbsp;&nbsp;: {{ event.event_category}} </p>
+					<p class="card-text"> Organised By &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;: {{ event.org_name}} </p>
+					<p class="card-text"> Organiser Email &nbsp;&nbsp;: {{ event.org_email}} </p>
+					<p class="card-text"> Contact Name &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;: {{ event.org_contact_person }}
+					</p>
+					<p class="card-text"> Contact Number &nbsp;: {{ event.org_mobile }} </p>
+					<p class="card-text">Description : <br>{{ event.summary }} </p>
+
+					<button class=" btn"><a href="{% url 'event_details' event.id %}"
+							class="bg-dark btn btn-outline-primary">More Event Details</a></button>
+
+
+				</div>
+			
+			</div>
+		</div>
+		<br>
+{% endfor %}
 		
-		<hr class="bg-primary col-md-8">
-	<div class="row"> {% for event in event.all %}
-		<div class="col-md-4">
-			<!-- {{ event.event }} -->
-			<!--  <p class="card-text">{{ event.summary }} <a class=" text-info" href="{% url 'eventDetails' event.id %}">
-		        Read More
-		  </a></p>  -->
-			<div class="card" style="width: 18rem;">
-				<img src="{{ event.event_poster.url }}" class="card-img-top" alt="">
-				<div class="card-body">
-					<h5 class="card-title">{{event.event_title}}</h5>
-					<p class="card-text">{{ event.summary }} <a class=" text-info"
-							href="{% url 'eventParticipate' event.id %}">
-							Read More
-						</a></p>
-				</div>
-				<div class="card-body">
-					<a href="#" class="card-link btn btn-outline-primary btn-dark">Card link</a>
-					<a href="#" class="card-link">Another link</a>
-				</div>
-			</div><br>
-		</div> {% endfor %}
 	</div>
+<hr class="bg-primary col-md-8">
+		
+
+	<hr class="bg-primary col-md-8">
 </div>
 
 {% endblock %}

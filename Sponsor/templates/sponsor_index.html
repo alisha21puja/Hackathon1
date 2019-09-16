@@ -15,70 +15,72 @@
     <div class="col-md-4">
       <div class="card border border-primary " style="width: 18rem;">
         <div class="card-body">
-          <h5 class="card-title text-center">Sponsered Event</h5>
+          <h5 class="card-title text-center">Profile</h5>
           <hr class="bg-primary col-md-8">
-          <h6 class="card-subtitle mb-2 text-muted">Write up</h6>
-          <p class="card-text"> Count </p>
-          <button class=" btn"> <a href="{% url 'sponsoredEvent' %}" class="bg-dark btn btn-outline-primary">Card
-              link</a>
+          <h6 class="card-subtitle mb-2 text-muted">See Your Profile</h6>
+          <p class="card-text"> Manage your basic information </p>
+          <br>
+          <br>
+          <button class=" btn"> <a href="{% url 'profile' %}" class="bg-dark btn btn-outline-primary">Profile</a>
           </button>
-          <a href="#" class="card-link">Another link</a>
         </div>
       </div>
     </div>
+    <br>
     <div class="col-md-4">
       <div class="card border border-primary" style="width: 18rem;">
         <div class="card-body">
-          <h5 class="card-title text-center">Enquires</h5>
+          <h5 class="card-title text-center">Sponser an event</h5>
           <hr class="bg-primary col-md-8">
-          <h6 class="card-subtitle mb-2 text-muted">Card subtitle</h6>
-          <p class="card-text">Some quick example text to build on the card title and make up the bulk of the card's
-            content.</p>
+          <h6 class="card-subtitle mb-2 text-muted">Support events</h6>
+          <p class="card-text">Help events to be organised, sponser your events.</p>
+          <br>
           <button class=" btn"> <a href="{% url 'enquire' %}"
-              class="bg-dark btn btn-outline-primary">Enquires</a></button>
+              class="bg-dark btn btn-outline-primary">Sponser</a></button>
           <!-- <a href="#" class="card-link">Another link</a>-->
         </div>
       </div>
     </div>
+    <br>
     <div class="col-md-4">
       <div class="card border border-primary" style="width: 18rem;">
         <div class="card-body">
-          <h5 class="card-title text-center">Blog</h5>
+          <h5 class="card-title text-center">Share your thoughts</h5>
           <hr class="bg-primary col-md-8">
-          <h6 class="card-subtitle mb-2 text-muted">Card subtitle</h6>
-          <p class="card-text">Some quick example text to build on the card title and make up the bulk of the card's
-            content.</p>
+          <h6 class="card-subtitle mb-2 text-muted">Share your views</h6>
+          <p class="card-text">Share your views in different areas.</p>
+          <br><br>
           <button class=" btn"> <a href="{% url 'blog' %}" class="bg-dark btn btn-outline-primary">Blogs</a></button>
           <!--<a href="#" class="card-link">Another link</a>-->
         </div>
       </div>
     </div>
   </div>
-  <hr class="bg-primary col-md-8">
+    <!-- <hr class="bg-primary col-md-8"> -->
   <div class="row shadow p-3 mb-5 bg-white rounded">
     <div class="col-md-4">
       <div class="card border border-primary" style="width: 18rem;">
         <div class="card-body">
-          <h5 class="card-title text-center">Expectations</h5>
+          <h5 class="card-title text-center">Sponsed events</h5>
           <hr class="bg-primary col-md-8">
-          <h6 class="card-subtitle mb-2 text-muted">Card subtitle</h6>
-          <p class="card-text">Some quick example text to build on the card title and make up the bulk of the card's
-            content.</p>
+          <h6 class="card-subtitle mb-2 text-muted">Sponsed events</h6>
+          <p class="card-text">View the information of the events that you have sponsered.</p>
+          <br>
           <button class=" btn"> <a href=" {% url 'shareResource' %}"
               class="bg-dark btn btn-outline-primary">Expectations</a></button>
           <!--<a href="#" class="card-link">Another link</a>-->
         </div>
       </div>
     </div>
+    <br>
     <div class="col-md-4">
       <div class="card border border-primary" style="width: 18rem;">
         <div class="card-body">
-          <h5 class="card-title text-center">Organiser Events</h5>
+          <h5 class="card-title text-center">Enquire on a event</h5>
           <hr class="bg-primary col-md-8">
-          <h6 class="card-subtitle mb-2 text-muted">Card subtitle</h6>
-          <p class="card-text">Some quick example text to build on the card title and make up the bulk of the card's
-            content.</p>
-          <button class=" btn"><a href="{% url 'sponsorShip' %}" class="bg-dark btn btn-outline-primary">Organiser
+          <h6 class="card-subtitle mb-2 text-muted">Enquire on a even</h6>
+          <p class="card-text">Enquire on the events that you are intrested in to find the more details.</p>
+          <button class=" btn"><a href="{% url 'enquire' %}" class="bg-dark btn btn-outline-primary">Organiser
               Events</a></button>
           <!--<a href="#" class="card-link">Another link</a>-->
         </div>
@@ -87,11 +89,12 @@
     <div class="col-md-4">
       <div class="card border border-primary" style="width: 18rem;">
         <div class="card-body">
-          <h5 class="card-title text-center">Profile</h5>
+          <h5 class="card-title text-center">Event Venue</h5>
           <hr class="bg-primary col-md-8">
-          <h6 class="card-subtitle mb-2 text-muted">Card subtitle</h6>
-          <p class="card-text">Some quick example text to build on the card title and make up the bulk of the card's
-            content.</p>
+          <h6 class="card-subtitle mb-2 text-muted">See the event venue</h6>
+          <p class="card-text">Find the location of the events.</p>
+          <br>
+          <br>
           <button class=" btn"><a href="{% url 'sponsorShip' %}"
               class="bg-dark btn btn-outline-primary">Profile</a></button>
           <!-- <a href="#" class="card-link">Another link</a>-->
@@ -99,7 +102,6 @@
       </div>
     </div>
   </div>
-  
   <hr class="bg-primary col-md-8">
 </div>
 
