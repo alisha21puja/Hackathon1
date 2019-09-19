@@ -78,9 +78,78 @@
       </div>
       {%endif%}
       <!-- Alerts -->
-      <script type="text/javascript">
+    
+      {% include 'alerts.html' %}
+      <form action=" {% url 'signup' %}" method="POST" name="reg_form" onsubmit="return validate_registration(this);">
+        {% csrf_token %}
+        <div class="alert alert-info  alert-dismissible fade show" role="alert" id="error_reg_div"
+          style="visibility: hidden">
+          <p id="error_reg_para"></p>
+          <button type="button" class="close" data-dismiss="alert">
+            <span aria-hidden="true">&times;</span>
+          </button>
+        </div>
+        <div class="form-group">
+          <label for="firstname">First Name&ast; </label>
+          <input type="text" class="form-control border border-info" required name="firstname" id="firstname"
+            aria-describedby="emailHelp" placeholder="First Name">
+        </div>
+        <div class="form-group">
+          <label for="lastname">Last Name&ast; </label>
+          <input type="text" class="form-control border border-info" required name="lastname" id="lastname"
+            aria-describedby="emailHelp" placeholder="Last Name">
+
+        </div>
+        <div class="form-group">
+          <label for="city">User name&ast; </label>
+          <input type="text" class="form-control border border-info" required name="username" id="username"
+            aria-describedby="emailHelp" placeholder="User Name ">
+        </div>
+        <div class="form-group">
+          <label for="email">Email&ast; </label>
+          <input type="text" class="form-control border border-info" required name="email" id="email"
+            aria-describedby="emailHelp" placeholder="Email ">
+
+        </div>
+        <div class="form-group">
+          <label for="Password">Password&ast; </label>
+          <input type="Password" class="form-control border border-info" required name="password" id="password"
+            placeholder="Password">
+
+        </div>
+        <div class="form-group">
+          <label for="Password">Confirm Password&ast; </label>
+          <input type="Password" class="form-control border border-info" required name="confirmpassword"
+            id="confirmpassword" placeholder=" Comfirm Password">
+
+        </div>
+        <div class="form-group">
+          <label for="phone">Mobile Number&ast; </label>
+          <input type="text" class="form-control border border-info" required name="phone" id="phone"
+            placeholder="Mobile Number">
+        </div>
+        <div class="form-group">
+          <label for="type_usr"> User Role&ast; </label>
+          <select name="type_usr" id="type_usr" class="form-control border border-info">
+            <option>Select Your Role</option>
+            <option value='100'>Participant</option>
+            <option value='200'>Sponser</option>
+            <option value='300'>Organiser</option>
+          </select>
+        </div>
+        <div class="form-group">
+          <label for="profile_img">Profile Picture&ast;</label>
+          <input type="file" name="profile_img" id="profile_img" class="form-control border border-info">
+        </div>
+        <div class="form-group">
+          <input type="submit" class="btn btn-outline-info bg-dark" id="password" aria-describedby="emailHelp"
+            value="Submit">
+        </div>
+      </form>
+        <script type="text/javascript">
         //validation
-        function validate_registration() {
+        function validate_registration(e) {
+          
           var reg_email = /^([A-Za-z0-9_\-\.]){1,}\@([A-Za-z0-9_\-\.]){1,}\.([A-Za-z]{2,4})$/;
           var reg_only_char = /^([A-Za-z ]){5,}$/;
           var reg_only_num = /^([0-9]){10}$/;
@@ -91,13 +160,13 @@
           var email = document.forms["reg_form"]["email"].value;
           var password_1 = document.forms["reg_form"]["password"].value;
           var password_2 = document.forms["reg_form"]["confirmpassword"].value;
-          var mob = document.forms["reg_form"]["mobile"].value;
+          var mob = document.forms["reg_form"]["phone"].value;
           var type = document.forms["reg_form"]["type_usr"].value;
           var src=document.forms["reg_form"]["profile_img"].value;
           var str = "Select";
           // error_reg_div/error_reg_para
 
-          if (reg_only_char.test(f_name) == false) {
+          if (reg_only_char.test(f_name)==false) {
             var msg = "INVALID NAME. PLEASE ENTER A VALID FIRST NAME";
             document.getElementById("error_reg_div").style.visibility = 'visible';
             document.getElementById("error_reg_para").innerHTML = msg;
@@ -132,12 +201,12 @@
             document.forms["reg_form"]["email"].focus();
             return false;
           }
-
+          
           if (password_1 != password_2) {
             var msg = "PASSWORD DESNOT MATCH";
             document.getElementById("error_reg_div").style.visibility = 'visible';
             document.getElementById("error_reg_para").innerHTML = msg;
-            document.forms["reg_form"]["confirmpassword"].focus();
+            //document.forms["reg_form"]["confirmpassword"].focus();
             return false;
           }
 
@@ -167,74 +236,10 @@
             document.forms["reg_form"]["profile_img"].focus();
             return false;
         }
+        
+
+        }
       </script>
-      {% include 'alerts.html' %}
-      <form action=" {% url 'signup' %}" method="POST" name="reg_form" onsubmit="return validate_registration()">
-        {% csrf_token %}
-        <div class="alert alert-info  alert-dismissible fade show" role="alert" id="error_reg_div"
-          style="visibility: hidden">
-          <p id="error_reg_para"></p>
-          <button type="button" class="close" data-dismiss="alert">
-            <span aria-hidden="true">&times;</span>
-          </button>
-        </div>
-        <div class="form-group">
-          <label for="firstname">First Name&ast; </label>
-          <input type="text" class="form-control border border-info" required name="firstname" id="firstname"
-            aria-describedby="emailHelp" placeholder="First Name">
-        </div>
-        <div class="form-group">
-          <label for="lastname">Last Name&ast; </label>
-          <input type="text" class="form-control border border-info" required name="lastname" id="lastname"
-            aria-describedby="emailHelp" placeholder="Last Name">
-
-        </div>
-        <div class="form-group">
-          <label for="city">User name&ast; </label>
-          <input type="text" class="form-control border border-info" required name="username" id="username"
-            aria-describedby="emailHelp" placeholder="User Name ">
-        </div>
-        <div class="form-group">
-          <label for="email">Email&ast; </label>
-          <input type="email" class="form-control border border-info" required name="email" id="email"
-            aria-describedby="emailHelp" placeholder="Email ">
-
-        </div>
-        <div class="form-group">
-          <label for="Password">Password&ast; </label>
-          <input type="Password" class="form-control border border-info" required name="password" id="password"
-            placeholder="Password">
-
-        </div>
-        <div class="form-group">
-          <label for="Password">Confirm Password&ast; </label>
-          <input type="Password" class="form-control border border-info" required name="confirmpassword"
-            id="confirmpassword" placeholder=" Comfirm Password">
-
-        </div>
-        <div class="form-group">
-          <label for="phone">Mobile Number&ast; </label>
-          <input type="text" class="form-control border border-info" required name="phone" id="phone"
-            placeholder="Mobile Number">
-        </div>
-        <div class="form-group">
-          <label for="type_usr"> User Role&ast; </label>
-          <select name="type_usr" id="type_usr" required class="form-control border border-info">
-            <option>Select Your Role</option>
-            <option value='100'>Participant</option>
-            <option value='200'>Sponser</option>
-            <option value='300'>Organiser</option>
-          </select>
-        </div>
-        <div class="form-group">
-          <label for="profile_img">Profile Picture&ast;</label>
-          <input type="file" name="profile_img" id="profile_img" required class="form-control border border-info">
-        </div>
-        <div class="form-group">
-          <input type="submit" class="btn btn-outline-info bg-dark" id="password" aria-describedby="emailHelp"
-            value="Submit">
-        </div>
-      </form>
     </div>
   </div>
 </div>
@@ -347,7 +352,7 @@
         appendPre('No Labels found.');
       }
     });
-  }}
+  }
 
 </script>
 

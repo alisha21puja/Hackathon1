@@ -71,12 +71,6 @@ class SponsorShip(models.Model):
     org_id = models.ForeignKey(OrganiseEvent, on_delete=models.CASCADE)
 
 
-<< << << < HEAD
-
-== == == =
->>>>>> > 52430f5edc223682322e7515f1525111cae5cf23
-
-
 class Event_Location(models.Model):
     event_venue_name = models.CharField(max_length=200)
     event_venue_addr = models.CharField(max_length=300)

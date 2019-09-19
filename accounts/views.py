@@ -9,10 +9,11 @@ from django.http import HttpResponseRedirect, HttpResponse
 from django.urls import reverse
 from django.contrib.auth.decorators import login_required
 from .models import Article, UserProfile
-from django.core.mail  import send_mail
+from django.core.mail import send_mail
 from django.contrib import messages
 from django.views.generic import TemplateView
 from .forms import ArticleForm
+
 
 def loginn(request):
     if request.method == 'POST':
@@ -48,11 +49,13 @@ def loginn(request):
     else:
         return render(request, 'login.html')
 
+
 def logout(request):
     if request.method == 'POST':
         auth.logout(request)
         messages.success(request, ' You are now loged out')
         return render(request, 'login.html')
+
 
 def signup(request):
     if request.method == 'POST':
@@ -64,7 +67,7 @@ def signup(request):
         password2 = request.POST['confirmpassword']
         phone = request.POST['phone']
         type_usr = request.POST['type_usr']
-        src=request.POST['profile_img']
+        src = request.POST['profile_img']
         #mobile  = request.POST['mobile']
         #userType = request.POST['usertype']
         if password == password2:
@@ -84,21 +87,25 @@ def signup(request):
                     #messages.success(request,'You are now Loged in')
                     user.save()
                     key = user._get_pk_val()
-                    var = UserProfile(id=key, type_usr=type_usr, phone=phone,profile_img=src)
+                    var = UserProfile(id=key, type_usr=type_usr,
+                                      phone=phone, profile_img=src)
                     var.save()
-                    message=""
+                    message = ""
                     if type_usr == 100:
-                        message="User Name :"+email +" PASSWORD :" +password+" EMAIL : "+email+" PHONE : "+phone+" Role : PARTICIPANT"
+                        message = "User Name :"+email + " PASSWORD :" + password + \
+                            " EMAIL : "+email+" PHONE : "+phone+" Role : PARTICIPANT"
                     elif type_usr == 200:
-                        message="User Name :"+email +" PASSWORD :" +password+" EMAIL : "+email+" PHONE : "+phone+" Role : SPONSER"
+                        message = "User Name :"+email + " PASSWORD :" + password + \
+                            " EMAIL : "+email+" PHONE : "+phone+" Role : SPONSER"
                     elif type_usr == 300:
-                         message="User Name :"+email +" PASSWORD :" +password+" EMAIL : "+email+" PHONE : "+phone+" Role : ORGANISER"
+                        message = "User Name :"+email + " PASSWORD :" + password + \
+                            " EMAIL : "+email+" PHONE : "+phone+" Role : ORGANISER"
 
-                    send_mail('Subject' +"YOU HAVE NOW REGISTERED TO TECH EVENT",
-			        'Message'+ message + 'Will Contact your soon',
-			        'sachin.thakur9614@gmail.com',
-			        [email,'sachin.thakur@mca.christuniversity.in',],
-			        fail_silently =True)
+                    send_mail('Subject' + "YOU HAVE NOW REGISTERED TO TECH EVENT",
+                              'Message' + message + 'Will Contact your soon',
+                              'sachin.thakur9614@gmail.com',
+                              [email, 'sachin.thakur@mca.christuniversity.in', ],
+                              fail_silently=True)
                     messages.success(request, 'You are now registered in')
                     return redirect('accounts')
         elif first_name == '':
@@ -119,5 +126,6 @@ def signup(request):
     else:
         return render(request, 'base.html')
 
+
 def indx(request):
-    return render(request,'login.html')
+    return render(request, 'login.html')
