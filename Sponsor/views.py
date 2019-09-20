@@ -207,6 +207,10 @@ def enquire_event(request):
 def blogSponsor(request):
 	 return render(request,'blog_write_sponsor.html')
 
+def blogDetailSponsor(request):
+	blogsInfo = BlogsInfo.objects.filter(us=request.user.id)
+	return render(request,'blog_edit-sponsor.html',{'blogsInfo': blogsInfo});
+
 # blog to database
 def writeBlogSponsor(request):
 	if request.method =='POST':
@@ -247,8 +251,8 @@ def writeBlogSponsor(request):
 		else:
 			refrenceLinks = request.POST['refrence_link']
 		blogsInfo=BlogsInfo(title=title,pubDateTime=pubDateTime,description=description,imageSecond=imageSecond,imageFirst=imageFirst,
-			UserType=UserType,authorName=authorName,blogCategory=blogCategory,refrenceLinks=refrenceLinks)
+			UserType=UserType,authorName=authorName,blogCategory=blogCategory,refrenceLinks=refrenceLinks,us_id=request.user.id)
 		blogsInfo.save()
 		print("author name:" + authorName)
-		return render(request,'blog_write_sponsor.html', {'error':"Event is not selected"})	
+		return render(request,'blog_write_sponsor.html', {'error':title+ "Blog is written"})	
 

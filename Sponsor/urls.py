@@ -17,6 +17,7 @@ urlpatterns = [
 	path('enquire_event',views.enquire_event,name='enquire_event'),
 	path('blogSponsor',views.blogSponsor,name='blog_sponsor'),
 	path('blogSponsorWrite',views.writeBlogSponsor,name='blog_write_sponsor'),
+	path('blogDetailsSpnsorship',views.blogDetailSponsor,name="blog_Sponsor"),
 	path('upcoming/',views.events,name='upcoming'),
 	path('event_details/<int:id>',views.event_details,name='event_details'),
 	path('handlerequest/',views.handleRequest,name='handlerequest'),
