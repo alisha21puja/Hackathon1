@@ -44,7 +44,7 @@
 				<div class="form-group">
 					<label for="mobile no">Blog Category &ast; </label>
 					<input type="text" class="form-control border border-primary" name="blog_category" id="password"
-						placeholder="Mobile No">
+						placeholder="Blog Category">
 
 				</div>
 				<div class="form-group">
@@ -57,6 +57,83 @@
 						aria-describedby="emailHelp" value="Submit">
 				</div>
 			</form>
+		</div>
+
+			<div class="col-md-6">
+			<br> <br>
+			<br>
+			<div class="row">
+				<table class="table table-bordered  table-light table-hover ">
+					<tr class="text-dark">
+						<td class="text-dark text-center">
+							<a href="{% url 'blog_Sponsor' %}" class="btn btn-dark btn-outline-info text-light">
+								Edit Blog(s)</a>
+						</td>
+					</tr>
+					<tr class="text-dark">
+						<td class="text-dark text-center">
+							<a href="{% url 'blog_Sponsor' %}" class="btn btn-dark btn-outline-info text-light">
+								Delete Blog(s)</a>
+						</td>
+					</tr>
+				</table>
+			</div>
+			<div class="modal fade bd-example-modal-lg" id="edit{{event.id}}" tabindex="-1" role="dialog"
+				aria-labelledby="exampleModalLabel" aria-hidden="true">
+				<div class="modal-dialog  modal-xl " role="document">
+					<div class="modal-content">
+						<div class="modal-header bg-dark">
+							<h5 class="modal-title text-info" id="exampleModalLabel">Blogs Written</h5>
+							<button type="button" class="close" data-dismiss="modal" aria-label="Close">
+								<span aria-hidden="true">&times;</span>
+							</button>
+						</div>
+						<div class="modal-body shadow-sm p-3 mb-5 bg-white rounded">
+							{% if error %}
+							<div class="alert alert-info alert-dismissible fade show" role="alert">
+								<strong> {{error}}</strong>
+								<button type="button" class="close" data-dismiss="alert" aria-label="Close">
+									<span aria-hidden="true">&times;</span>
+								</button>
+							</div>
+							{%endif%}
+							<table class="table table-bordered  table-info table-hover ">
+								<thead class="thead-dark text-info">
+									<tr class="text-info">
+										<th class="text-info text-center"> Blog Title</th>
+										<th class="text-info text-center">Description</th>
+										<th class="text-info text-center"> First Image</th>
+										<th class="text-info text-center">Second Image </th>
+										<th class="text-info text-center">Blog Category </th>
+										<th class="text-info text-center">Refrence Link</th>
+									</tr>
+								</thead>
+								{% for blog in blogsInfo.all %}
+								<tr>
+									<td class="text-dark text-center">{{ blog.title }} </td>
+									<td class="text-dark text-center"> {{ blog.summary }}</td>
+									<td class="text-dark text-center"><img src="../../media/images/{{ blog.imageFirst.url }}" height="100"
+											width="100s"></td>
+									<td class="text-dark text-center"><img src="../../media/images/{{ blog.imageSecond.url }} "
+											height="100" width="100s"> </td>
+									<td class="text-dark text-center">
+										{{ blog.blogCategory }}
+									</td>
+									<td class="text-dark text-center">
+										{{ blog.refrenceLinks }}
+									</td>
+								</tr>
+								{% endfor %}
+							</table>
+						</div>
+						<div class="modal-footer bg-dark">
+							<button type="button" class="btn btn-dark btn-outline-info"
+								data-dismiss="modal">Close</button>
+							<!-- <button type="button" class="btn  btn-dark btn-outline-info">Save changes</button>-->
+						</div>
+					</div>
+				</div>
+			</div>
 		</div>
 	</div>
 </div>

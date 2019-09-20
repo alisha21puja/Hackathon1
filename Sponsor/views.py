@@ -137,7 +137,57 @@ def enquire_event(request):
 def blogSponsor(request):
     return render(request, 'blog_write_sponsor.html')
 
+
+def blogDetailSponsor(request):
+    blogsInfo = BlogsInfo.objects.filter(us=request.user.id)
+    return render(request, 'blog_edit-sponsor.html', {'blogsInfo': blogsInfo})
+
 # blog to database
+
+
+def writeBlogSponsor(request):
+    if request.method == 'POST':
+        title = request.POST['blog_title']
+        pubDateTime = timezone.now()
+        description = request.POST['description']
+        imageSecond = request.POST['image_second']
+        imageFirst = request.POST['image_first']
+        blogCategory = request.POST['blog_category']
+        refrenceLinks = request.POST['refrence_link']
+        UserType = 'Sponsor'
+        if request.user.is_authenticated:
+            authorName = request.user.first_name + " " + request.user.last_name
+        if title == '':
+            return render(request, 'blog_write_sponsor.html', {'error': "Title is not given"})
+        else:
+            title = request.POST['blog_title']
+        if pubDateTime == '':
+            pubDateTime = timezone.now()
+        if description == '':
+            return render(request, 'blog_write_sponsor.html', {'error': "Description is not written"})
+        else:
+            description = request.POST['description']
+        if imageFirst == '':
+            return render(request, 'blog_write_sponsor.html', {'error': "Image first is not given"})
+        else:
+            imageFirst = request.POST['image_first']
+        if imageSecond == '':
+            return render(request, 'blog_write_sponsor.html', {'error': "Image Two is not given"})
+        else:
+            imageSecond = request.POST['image_second']
+        if blogCategory == '':
+            return render(request, 'blog_write_sponsor.html', {'error': "Blog Category is not selected"})
+        else:
+            blogCategory = request.POST['blog_category']
+        if refrenceLinks == '':
+            return render(request, 'blog_write_sponsor.html', {'error': "Refrence links not given"})
+        else:
+            refrenceLinks = request.POST['refrence_link']
+        blogsInfo = BlogsInfo(title=title, pubDateTime=pubDateTime, description=description, imageSecond=imageSecond, imageFirst=imageFirst,
+                              UserType=UserType, authorName=authorName, blogCategory=blogCategory, refrenceLinks=refrenceLinks, us_id=request.user.id)
+        blogsInfo.save()
+        print("author name:" + authorName)
+        return render(request, 'blog_write_sponsor.html', {'error': title + "Blog is written"})
 
 
 def writeBlogSponsor(request):
