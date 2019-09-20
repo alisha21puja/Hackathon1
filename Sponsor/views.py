@@ -5,6 +5,11 @@ from django.contrib.auth.models import User
 from django.utils import timezone
 from django.core.mail import send_mail
 
+from django.views.decorators.csrf import csrf_exempt
+from media.paytm import Checksum
+
+MERCHANT_KEY = 'P7HtuKq8&zpmzxZE'
+
 # index
 
 
@@ -18,9 +23,79 @@ def profile(request):
     profile = User.objects.filter(id=request.user.id)
     return render(request, 'profile_spnsr.html', {'profile': profile})
 
+
+@csrf_exempt
+def handleRequest(request):
+    form = request.POST
+    response_dict = {}
+    for i in form.keys():
+        response_dict[i] = form[i]
+        if i == 'CHECKSUMHASH':
+            checksum = form[i]
+    verify = Checksum.verify_checksum(response_dict, MERCHANT_KEY, checksum)
+    if verify:
+        if response_dict['RESPCODE'] == '01':
+            print("successful")
+            return render(request, 'paymentstatus.html', {'respon': response_dict})
+
+        else:
+            print('not successful'+response_dict['RESPMSG'])
+            return render(request, 'paymentstatus.html', {'response': response_dict})
+
+
+@csrf_exempt
+def payAmount(request):
+    # amount=10
+    if request.method == 'POST':
+
+        idd = request.POST.get('sp', False)
+
+        # idd = request.POST['sp']
+        print("id is", idd)
+
+        spnr = SponsorShip.objects.get(pk=idd)
+
+        print("SponsorShip", spnr.ex_platinum)
+
+    param_dict = {
+        "MID": "bClJNU50572288826034",
+        "ORDER_ID": str(7),
+        "CUST_ID": str(7),
+        "TXN_AMOUNT": str(spnr.ex_platinum),
+        "CHANNEL_ID": "WEB",
+        "INDUSTRY_TYPE_ID": "Retail",
+        "WEBSITE": "WEBSTAGING",
+        'CALLBACK_URL': 'http://127.0.0.1:8000/Sponsor/amount/' + str(spnr.id)}
+
+    param_dict['CHECKSUMHASH'] = Checksum.generate_checksum(
+        param_dict, MERCHANT_KEY)
+
+    return render(request, 'payment_paytm.html', {'param_dict': param_dict})
+
+
+@csrf_exempt
+def amount(request, id):
+
+    return render(request, 'payment_paytm.html')
+
+
+def payment(request):
+
+    param_dict = {
+        "MID": "bClJNU50572288826034",
+        "ORDER_ID": str(request.user.id),
+        "CUST_ID": str(3),
+        "TXN_AMOUNT": str(amt),
+        "CHANNEL_ID": "WEB",
+        "INDUSTRY_TYPE_ID": "Retail",
+        "WEBSITE": "WEBSTAGING",
+        'CALLBACK_URL': 'http://127.0.0.1:8000/Sponsor/payAmount/'}
+
+    param_dict['CHECKSUMHASH'] = Checksum.generate_checksum(
+        param_dict, MERCHANT_KEY)
+
+
 # to contact event organisers
-
-
 def enquireInfoMail(request):
     if request.method == 'POST':
         subject = request.POST['subject']
@@ -50,6 +125,7 @@ def sponsor_event(request):
         return render(request, 'sponsor_event.html')
 
 # list out sponsership details of events to sponser
+# @csrf_exempt
 
 
 def addsponsershipinfo(request):
@@ -188,48 +264,3 @@ def writeBlogSponsor(request):
         blogsInfo.save()
         print("author name:" + authorName)
         return render(request, 'blog_write_sponsor.html', {'error': title + "Blog is written"})
-
-
-def writeBlogSponsor(request):
-    if request.method == 'POST':
-        title = request.POST['blog_title']
-        pubDateTime = timezone.now()
-        description = request.POST['description']
-        imageSecond = request.POST['image_second']
-        imageFirst = request.POST['image_first']
-        blogCategory = request.POST['blog_category']
-        refrenceLinks = request.POST['refrence_link']
-        UserType = 'Sponsor'
-        if request.user.is_authenticated:
-            authorName = request.user.first_name + " " + request.user.last_name
-        if title == '':
-            return render(request, 'blog_write_sponsor.html', {'error': "Title is not given"})
-        else:
-            title = request.POST['blog_title']
-        if pubDateTime == '':
-            pubDateTime = timezone.now()
-        if description == '':
-            return render(request, 'blog_write_sponsor.html', {'error': "Description is not written"})
-        else:
-            description = request.POST['description']
-        if imageFirst == '':
-            return render(request, 'blog_write_sponsor.html', {'error': "Image first is not given"})
-        else:
-            imageFirst = request.POST['image_first']
-        if imageSecond == '':
-            return render(request, 'blog_write_sponsor.html', {'error': "Image Two is not given"})
-        else:
-            imageSecond = request.POST['image_second']
-        if blogCategory == '':
-            return render(request, 'blog_write_sponsor.html', {'error': "Blog Category is not selected"})
-        else:
-            blogCategory = request.POST['blog_category']
-        if refrenceLinks == '':
-            return render(request, 'blog_write_sponsor.html', {'error': "Refrence links not given"})
-        else:
-            refrenceLinks = request.POST['refrence_link']
-        blogsInfo = BlogsInfo(title=title, pubDateTime=pubDateTime, description=description, imageSecond=imageSecond, imageFirst=imageFirst,
-                              UserType=UserType, authorName=authorName, blogCategory=blogCategory, refrenceLinks=refrenceLinks)
-        blogsInfo.save()
-        print("author name:" + authorName)
-        return render(request, 'blog_write_sponsor.html', {'error': "Event is not selected"})

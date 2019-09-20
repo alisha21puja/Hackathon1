@@ -16,9 +16,9 @@ urlpatterns = [
     path('Blog/', include('Blog.urls'), name='Blog'),
     path('Events/', include('Events.urls'), name='Events'),
     path('Organizer/', include('Organizer.urls'), name='Organizer'),
-    path('Participant/', include('Participant.urls')),
-    path('Report/', include('Report.urls'),),
-    path('Sponsor/', include('Sponsor.urls')),
+    path('Participant/', include('Participant.urls'), name='Participant'),
+    path('Report/', include('Report.urls'), name='Report'),
+    path('Sponsor/', include('Sponsor.urls'), name='Sponsor'),
 
 
 
