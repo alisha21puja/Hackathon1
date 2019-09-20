@@ -8,18 +8,18 @@ from django.conf.urls.static import static
 
 urlpatterns = [
 
-	path('',include('home.urls'),name='home'),
-	path('aboutus/',include('aboutus.urls'),name='aboutus'),
-    path('accounts/',include('accounts.urls'),name='accounts'),
+    path('', include('home.urls'), name='home'),
+    path('aboutus/', include('aboutus.urls'), name='aboutus'),
+    path('accounts/', include('accounts.urls'), name='accounts'),
     path('admin/', admin.site.urls),
-    
-    path('Blog/',include('Blog.urls'),name='Blog'),
-    path('Events/',include('Events.urls'),name='Events'),
-	path('Organizer/',include('Organizer.urls'),name='Organizer'),
-    path('Participant/',include('Participant.urls')),
-    path('Report/',include('Report.urls'),),
-    path('Sponsor/',include('Sponsor.urls')),
-    
+
+    path('Blog/', include('Blog.urls'), name='Blog'),
+    path('Events/', include('Events.urls'), name='Events'),
+    path('Organizer/', include('Organizer.urls'), name='Organizer'),
+    path('Participant/', include('Participant.urls')),
+    path('Report/', include('Report.urls'),),
+    path('Sponsor/', include('Sponsor.urls')),
 
 
-   ] + static(settings.MEDIA_URL,document_root=settings.MEDIA_ROOT)
+
+] + static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)
