@@ -53,7 +53,7 @@
           </div>
           <div class="row mx-auto">
             <button class=" btn"> <a href="{% url 'participants_event' event.id %}" class="btn btn-dark btn-outline-info text-light">VIew Participants</a></button>
-                  <button class=" btn"> <a href="" class="btn btn-dark btn-outline-info text-light">View Sponsers</a></button>
+                  <button class=" btn"> <a href="{% url 'sponser_for_event' event.id %}" class="btn btn-dark btn-outline-info text-light">View Sponsers</a></button>
           </div>
         </div>
 
