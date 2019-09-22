@@ -304,6 +304,11 @@ def blog(request):
     return render(request, 'blog_write.html', {'blogsInfo': blogsInfo})
 
 
+def view_org_blog(request):
+    blogsInfo = BlogsInfo.objects.filter(us=request.user.id)
+    return render(request, 'view_org_blog.html', {'blogsInfo': blogsInfo})
+
+
 def writeBlogs(request):
     if request.method == 'POST':
         title = request.POST['blog_title']
@@ -848,3 +853,4 @@ def req_pdf(request):
     response.write(pdf)
 
     return response
+

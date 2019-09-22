@@ -54,5 +54,6 @@ urlpatterns = [
          views.participants_event, name='participants_event'),
     path('sponsors_for_event/<int:id>/',
          views.sponser_for_event, name='sponser_for_event'),
+    path('view_org_blog', views.view_org_blog, name='view_org_blog')
 
 ] + static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)
