@@ -10,7 +10,6 @@ from django.contrib.auth import get_user_model
 # Create your models here.
 # from .models import OrganiseEvent
 
-
 class OrganiseEvent(models.Model):
     event_title = models.CharField(max_length=200)
     event_description = models.CharField(max_length=800)

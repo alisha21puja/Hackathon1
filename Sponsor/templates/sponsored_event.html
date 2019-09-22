@@ -5,10 +5,46 @@
 
 {%load staticfiles %}
 
-<br><br><br>
-<br><br><br><br><br><br>
+<br><br>
 
 
-<h1>Sponsored events</h1>
+
+
+
+<br><br><br><br>
+<div class="container">
+     
+
+<center><h1> Sponsored Events</h1></center>
+
+
+      <div class="row">
+
+      	<div class="col-md-12">
+<table class="table table-hover table-dark">
+  <thead>
+    <tr>
+      <th scope="col">Event Name</th>
+      <th scope="col">Organiser</th>
+      <th scope="col">Email</th>
+      <th scope="col">Organiser Head</th>
+       <th scope="col">Organiser Head Person</th>
+      {% comment %} <th scope="col">Contact</th> {% endcomment %}
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td>{{ event.event_title }}</td>
+      <td>{{event.org_name}}</td>
+      <td>{{event.org_email}}</td>
+      <td>{{ event.org_contact_person}}</td>
+      <td>{{ event.org_mobile}}</td>
+    </tr>
+  
+  </tbody>
+</table>
+</div>
+      	
+</div>
 
 {% endblock %}

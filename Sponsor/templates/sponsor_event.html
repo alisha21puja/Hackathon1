@@ -40,6 +40,17 @@
                 </button>
             </div>
             {% endif %}
+            {% if error %}
+            <div class="alert alert-success alert-dismissible fade show" role="alert">
+                <strong> {{error }}</strong>
+                <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            {% endif %}
+
+
+
         </div>
     </div>
 
@@ -52,7 +63,7 @@
             <h4 class="text-center">Submit an option of your choice</h4>
             <div class="row shadow p-3 mb-5 bg-white rounded">
                 <div class="col-md-4">
-                    <form method="POST" action="{% url 'addsponsership' %}">
+                    <form method="POST" action="{% url 'handlerequest' %}">
                         {% csrf_token %}
                         <div class="form-group">
                             <label for="from">Type :</label>
@@ -75,17 +86,17 @@
                     </form>
                 </div>
                 <div class="col-md-4">
-                    <form method="POST" action="{% url 'addsponsership' %}">
+                    <form method="POST" action="{% url 'transaction' spnsr.id %}">
                         {% csrf_token %}
                         <div class="form-group">
                             <label for="from">Type :</label>
-                            <input type="text" class="form-control btn-outline-info" name="from"
+                            <input type="text" class="form-control btn-outline-info" name="sponsertype"
                                 value="{{ spnsr.gold_sponsor }}" id="from" aria-describedby="emailHelp"
                                 placeholder="email" disabled>
                         </div>
                         <div class="form-group">
                             <label for="from">Amount :</label>
-                            <input type="text" class="form-control btn-outline-info" name="from"
+                            <input type="text" class="form-control btn-outline-info" name="amount"
                                 value="{{ spnsr.ex_gold }}" id="from" aria-describedby="emailHelp"
                                 placeholder="email" disabled>
                         </div>
@@ -95,10 +106,16 @@
                                     aria-describedby="emailHelp" value="SUBMIT">
                             </div>
                         </div>
+                          <div class="form-group">
+                            <div class="text-center">
+                                <input type="hidden" class="btn btn-outline-info bg-dark text-light" name="spnsrtype"  value="2" id="password"
+                                    aria-describedby="emailHelp" value="SUBMIT">
+                            </div>
+                        </div>
                     </form>
                 </div>
                 <div class="col-md-4">
-                    <form method="POST" action="{% url 'addsponsership' %}">
+                    <form method="POST" action="{% url 'transaction'  spnsr.id %}">
                         {% csrf_token %}
                         <div class="form-group">
                             <label for="from">Type :</label>

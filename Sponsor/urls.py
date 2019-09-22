@@ -23,6 +23,7 @@ urlpatterns = [
     path('handlerequest/', views.handleRequest, name='handlerequest'),
     path('payAmount/', views.payAmount, name='payAmount'),
     path('amount/<int:id>', views.amount, name='amount'),
+    path('transaction/<int:id>/',views.transaction,name='transaction'),
 
 
 ] + static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)
