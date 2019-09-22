@@ -18,48 +18,66 @@
 
 
   <div class="row shadow p-3 mb-5 bg-white rounded">
-
+  <div class="col-md-4">
+      <div class="card border border-danger " style="width: 18rem;">
+        <div class="card-body">
+          <h5 class="card-title text-center">Upcoming Event</h5>
+          <hr class="bg-danger col-md-8">
+          <h6 class="card-subtitle mb-2 text-muted">View the Upcoming Events</h6>
+          <p class="card-text">Events information will be shown</p>
+          <button class=" btn"> <a href="{% url 'event_details' %}" class="bg-dark btn btn-outline-danger text-light">Upcoming Events</a>
+          </button>
+        </div>
+      </div>
+    </div>
+    <br>
     <div class="col-md-4">
-    <div class="card border border-danger " style="width: 18rem;">
-  <div class="card-body">
-    <h5 class="card-title text-center">Upcoming Event</h5>
-    <hr class="bg-danger col-md-8">
-
-    <h6 class="card-subtitle mb-2 text-muted">Card subtitle</h6>
-    <p class="card-text">Some quick example text to build on the card title and make up the bulk of the card's content.</p>
-   <button  class=" btn"> <a href="{% url 'event_details' %}" class="bg-dark btn btn-outline-danger text-white">Show Events</a></button>
-  </div>
-</div>
-  </div>
+      <div class="card border border-danger " style="width: 18rem;">
+        <div class="card-body">
+          <h5 class="card-title text-center">Blog</h5>
+          <hr class="bg-danger col-md-8">
+          <h6 class="card-subtitle mb-2 text-muted">Blogs for participant</h6>
+          <p class="card-text"> write Blog as a participant</p>
+          <button class=" btn"> <a href="{% url 'partblog' %}" class="bg-dark btn btn-outline-danger text-light">Blog</a>
+          </button>
+        </div>
+      </div>
+    </div>
+    <br>
     <div class="col-md-4">
-    <div class="card border border-danger" style="width: 18rem;">
-  <div class="card-body">
-    <h5 class="card-title text-center">Blog</h5>
-    <hr class="bg-danger col-md-8">
-
-    <h6 class="card-subtitle mb-2 text-muted">Card subtitle</h6>
-    <p class="card-text">Some quick example text to build on the card title and make up the bulk of the card's content.</p>
-     <button  class=" btn"> <a href="{% url 'partblog' %}" class="bg-dark btn btn-outline-danger text-white">Blogs</a></button>
-    <!--<a href="#" class="card-link">Another link</a>-->
+      <div class="card border border-danger " style="width: 18rem;">
+        <div class="card-body">
+          <h5 class="card-title text-center">Profile</h5>
+          <hr class="bg-danger col-md-8">
+          <h6 class="card-subtitle mb-2 text-muted">Profile of the participant</h6>
+          <p class="card-text"> Profile information of participant </p>
+          <button class=" btn"> <a href="{% url 'part_profile' %}" class="bg-dark btn btn-outline-danger text-light">Profile</a>
+          </button>
+        </div>
+      </div>
+    </div>
+    <br>
   </div>
-</div>
-</div>
+    <div class="row shadow p-3 mb-5 bg-white rounded">
     <div class="col-md-4">
-    <div class="card border border-danger" style="width: 18rem;">
-  <div class="card-body">
-    <h5 class="card-title text-center">Profile</h5>
-    <hr class="bg-danger col-md-8">
-
-    <h6 class="card-subtitle mb-2 text-muted">Card subtitle</h6>
-    <p class="card-text">Some quick example text to build on the card title and make up the bulk of the card's content.</p>
-     <button  class=" btn"><a href="{% url 'part_profile' %}" class="bg-dark btn btn-outline-danger text-white">Profile</a></button>
-   <!-- <a href="#" class="card-link">Another link</a>-->
-  </div>
+      <div class="card border border-danger " style="width: 18rem;">
+        <div class="card-body">
+          <h5 class="card-title text-center">Feedback</h5>
+          <hr class="bg-danger col-md-8">
+          <h6 class="card-subtitle mb-2 text-muted">Blogs for participant</h6>
+          <p class="card-text"> write Blog as a participant</p>
+          <button class=" btn"> <a href="{% url 'part_feedback' %}" class="bg-dark btn btn-outline-danger text-light">Feedback</a>
+          </button>
+        </div>
+      </div>
+    </div>
+    </div>
+  
 </div>
-  </div>
 </div>
-
-
+</div>
+</div>
+</div>
 
 
 </div>
