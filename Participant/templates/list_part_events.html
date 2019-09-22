@@ -1,0 +1,46 @@
+{% extends 'nav-bar_participant.html' %}
+
+{% block content %}
+
+{% load staticfiles %}
+<br><br><br><br>
+<div class="container">
+          <div class="row">
+       <div class="col-md-12">
+        <div class="col-md-12">
+            <h3 class="text-center">YOU HAVE PARTICIPATED FOR THE FLLOWING EVENTS</h3>
+            <hr class="bg-info col-md-8">
+        </div>
+    </div>
+    <div class="row shadow p-3 mb-5 bg-white rounded">
+<div class="col-md-12">
+<table class="table table-hover table-dark">
+  <thead>
+    <tr>
+      <th scope="col">Event Name</th>
+      <th scope="col">Organiser Name</th>
+      <th scope="col">Email</th>
+      <th scope="col">Phone</th>
+      <th scope="col">Dates</th>
+      <th scope="col">Details</th>
+      {% comment %} <th scope="col">Contact</th> {% endcomment %}
+    </tr>
+  </thead>
+  <tbody>
+    {% for events in events.all %}
+    <tr>
+      <td>{{ events.event_title }}</td>
+      <td>{{events.org_name}}</td>
+      <td>{{events.org_email}}</td>
+      <td>{{events.org_mobile}}</td>
+      <td>{{events.event_startdate}} - {{events.event_enddate}}</td>
+      <td><a href="{% url 'participatein_event' events.id %}" class="btn btn-outline-danger bg-dark text-white"> Event Details</a></td>
+    </tr>
+    {% endfor %}
+  </tbody>
+</table>
+</div>
+    </div>
+</div>
+</div>
+{% endblock %}

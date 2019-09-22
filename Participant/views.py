@@ -58,7 +58,13 @@ def event_details(request):
     return render(request, 'event_details.html', {'events': events})
 
 
-def participated_event(request, id):
+def part_for(request):
+    part_event = ParticipateEvent.objects.get(us=request.user.id)
+    events = OrganiseEvent.objects.filter(id=part_event.Event_id_id)
+    return render(request, 'list_part_events.html', {'events': events})
+
+
+def participatein_event(request, id):
     part_event = ParticipateEvent.objects.filter(us=request.user.id)
     events = OrganiseEvent.objects.filter(us=request.user.id)
     part_early = ParticipateEvent.objects.filter(
@@ -262,6 +268,14 @@ def part_feedback(request):
     usr = User.objects.get(pk=request.user.id)
     usr_det = UserProfile.objects.get(pk=request.user.id)
     return render(request, 'part_feedback.html', {'usr': usr, ' usr_det': usr_det, 'event': event})
+
+
+def feedback_load(request):
+    event_id = ParticipateEvent.objects.get(us=request.user.id)
+    event = OrganiseEvent.objects.filter(pk=event_id.Event_id_id)
+    usr = User.objects.get(pk=request.user.id)
+    usr_det = UserProfile.objects.get(pk=request.user.id)
+    return render(request, 'part_feedback.html', {'usr': usr, ' usr_det': usr_det, 'event': event, 'event_part': event})
 
 
 def feedback(request):

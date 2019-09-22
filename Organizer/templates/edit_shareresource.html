@@ -23,6 +23,10 @@
             &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;:&nbsp;&nbsp;{{share.resourceLink}}
           </p>
           <p class="card-text">Document &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;: &nbsp;{{ share.documentFile }} </p>
+            <button class=" btn">
+              <a href="/media/images/shared_resources_docs/{{share.documentFile}}"
+                class="btn btn-dark btn-outline-info" download>Download Document</a>
+            </button>
           <p class="card-text"> Publisher &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;: {{ share.publisedBy }} </p>
           <img src="media/images/shared_resources/{{share.resourceImage}}" height="480" width="480">
           <br><br>
@@ -103,7 +107,7 @@
                         <div class="form-group">
                           <label for="exampleFormControlInput1"> Document File</label>
                           <input type="file" class="form-control" id="exampleFormControlInput1" name="document_file"
-                            value="{{ share.documentFile }}" placeholder="Contact Person Name">
+                            value="{{ share.documentFile }}" placeholder="">
                         </div>
                         <div class="form-group">
                           <input type="submit" class="btn btn-outline-info bg-dark" name="Submit" id="password"

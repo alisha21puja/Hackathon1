@@ -9,7 +9,7 @@
 <br><br><br><br><br><br>
 
 <div class="container">
-  <!-- <h2 class="text-center">Profile</h2> -->
+  <h2 class="text-center">Shared Resources</h2> 
   <hr class="bg-danger col-md-8">
 
   <style>
@@ -21,7 +21,7 @@
     <div class="card border border-danger ">
       <!--style="width: 18rem;">-->
       <div class="card-body">
-        <h2 class="card-title text-center">Share Resources</h2>
+        <h2 class="card-title text-center">Shared Resources : {{ resources.event_title }}</h2>
         <hr class="bg-danger col-md-8">
         <!-- <h6 class="card-subtitle mb-2 text-muted">Helps to organise event</h6> -->
         <div class="row">
@@ -76,7 +76,7 @@
           </div>
           <div class="col-md-8">
             <p class="card-text">
-              : {{ resources.resourceLink }}
+              :<a href="{{ resources.resourceLink }}"> {{ resources.resourceLink }}</a>
             </p>
           </div>
         </div>
@@ -89,8 +89,13 @@
             </p>
           </div>
           <div class="col-md-8">
-            <p class="card-text">
+          <p>
               : {{ resources.documentFile }}
+              
+             <button class=" btn">
+              <a href="/media/images/shared_resources_docs/{{resources.documentFile}}"
+                class="btn btn-dark btn-outline-info" download>Download Document</a>
+            </button>
             </p>
           </div>
         </div>

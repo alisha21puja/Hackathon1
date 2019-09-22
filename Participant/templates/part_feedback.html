@@ -21,7 +21,7 @@
         <div class="col-md-6">
             <div class="card border border-danger " style="width: 35rem; ">
                 <div class="card-body">
-                    <form name="feedback" id="feedback" method="POST" action="{% url 'feedback' %}">
+                    <form name="feedback_load" id="feedback" method="POST" action="{% url 'feedback_load' %}">
                         {% csrf_token %}
                         <div class="form-group">
                             <label for="event_name">Select an Event &ast; </label>
@@ -43,17 +43,20 @@
                   </div>
                 </div>
               </div>
+              {% for event_part in event_part.all %}
  <div class="col-md-6">
   <h3 class="text-center">Event Feedback</h3>
   <hr class="bg-danger col-md-8">
   <div class="row">
-    <div class="col-md-6">
+  <div class="col-md-1">
+  </div>
+    <div class="col-md-11">
 
       <form action=" {% url 'feedback' %}" method="POST" >
         {% csrf_token %}
         <div class="form-group" >
           <label for="event_name">Name of the Event </label>
-          <input type="text" class="form-control btn-outline-danger" name="from" value="{{event.event_title}}">
+          <input type="text" class="form-control btn-outline-danger" name="from" value="{{event_part.event_title}}" disabled>
         </div>
          <div class="form-group">
           <label for="email">Subject: </label>
@@ -74,7 +77,7 @@
     </div>
   </div>
 </div>
-
+{% endfor %}
 
 </div>
 </div>
