@@ -253,27 +253,30 @@ def req_pdf(request):
 
     return response
 
-# def part_feedback(request,id):
-# 	event = OrganiseEvent.objects.get(pk=id)
-# 	if request.method =='POST':
-# 		subject = request.POST['subject']
-# 		pubDateTime = timezone.now()
-# 		feedback = request.POST['feedback']
-# 		UserType = 'Participant'
-# 		if request.user.is_authenticated:
-# 			authorName = request.user.first_name + " " + request.user.last_name
-# 		if subject =='':
-# 			return render(request,'part_feedback.html', {'error':"Subject is not given"})
-# 		else:
-# 			subject = request.POST['subject']
-# 		if pubDateTime =='':
-# 			pubDateTime = timezone.now()
-# 		if feedback=='':
-# 			return render(request,'part_feedback.html', {'error':"Feedback is not written"})
-# 		else:
-# 		 	feedback = request.POST['feedback']
-# 		Eventfeedback=EventFeedback(subject=subject,pubDateTime=pubDateTime,feedback=feedback,Event_id_id=id,us_id=request.user.id)
+def part_feedback(request):
+	event = OrganiseEvent.objects.filter(us=request.user.id)
+	return render(request,'part_feedback.html', {'event': event})	
 
-# 		Eventfeedback.save()
-# 		print("author name:" + authorName)
-# 		return render(request,'part_feedback.html', {'error':"Feedback is stored"})
+def feedback(request):	
+	if request.method =='POST':
+		event = OrganiseEvent.objects.filter(us=request.user.id)
+		subject = request.POST['subject']
+		pubDateTime = timezone.now()
+		feedback = request.POST['feedback']
+		UserType = 'Participant'
+		if subject =='':
+			return render(request,'part_feedback.html', {'error':"Subject is not given"})	
+		else:
+			subject = request.POST['subject']		
+		if pubDateTime =='':			
+			pubDateTime = timezone.now()
+		if feedback=='':
+			return render(request,'part_feedback.html', {'error':"Feedback is not written"})	
+		else:
+		 	feedback = request.POST['feedback']		
+		eventFeeback = EventFeeback(subject=subject,feedback=feedback,pubDateTime=pubDateTime,Event_id_id=event,us_id=request.user.id)
+		
+		eventFeeback.save()
+		eventFeeback.refresh_from_db()
+		print("author name:" + authorName)
+		return render(request,'part_feedback.html', {'error':"Feedback is stored"})	
