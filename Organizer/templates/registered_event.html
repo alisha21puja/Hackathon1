@@ -31,7 +31,10 @@
         <div class="card-body">
           <h5 class="card-title text-center">{{ event.event_title }}</h5>
           <hr class="bg-info col-md-8">
-          <img src="/media/images/event_poster/{{event.event_poster}}" height="35%" width="50%;">
+          <center>
+          <img src="/media/images/event_poster/{{event.event_poster}}" height="30%" width="50%;">
+          </center>
+            <hr class="bg-info col-md-8">
           <!-- <h6 class="card-subtitle mb-2 text-muted">Helps to organise event</h6> -->
           <p class="card-text"> Event Category &nbsp;&nbsp;&nbsp;: {{ event.event_category}} </p>
           <p class="card-text"> Organised By &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;: {{ event.org_name}} </p>
@@ -39,8 +42,9 @@
           <p class="card-text"> Contact Name &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;: {{ event.org_contact_person }} </p>
           <p class="card-text"> Contact Number &nbsp;: {{ event.org_mobile }} </p>
           <p class="card-text"> {{ event.event_startdate }} - {{ event.event_enddate }} </p>
-         
-          <div class="row mx-auto">
+           <hr class="bg-info col-md-8">
+          <div class="card-body">
+          <center>
             <button class=" btn"><a href="#{% url 'eventEdit' event.id %}"
                 class="btn btn-dark btn-outline-info text-light" data-toggle="modal"
                 data-target="#exampleModal{{event.id}}">
@@ -50,10 +54,11 @@
                 Edit Details</a></button>
             <button class=" btn"> <a href="" class="btn btn-dark btn-outline-info text-light" data-toggle="modal"
                 data-target="#delete{{event.id}}">Delete Details</a></button>
-          </div>
-          <div class="row mx-auto">
-            <button class=" btn"> <a href="{% url 'participants_event' event.id %}" class="btn btn-dark btn-outline-info text-light">VIew Participants</a></button>
-                  <button class=" btn"> <a href="{% url 'sponser_for_event' event.id %}" class="btn btn-dark btn-outline-info text-light">View Sponsers</a></button>
+        
+            <button class=" btn"> <a href="{% url 'participants_event' event.id %}" class="btn btn-dark btn-outline-info text-light">Vew Participants</a></button>
+            <button class=" btn"> <a href="{% url 'sponser_for_event' event.id %}" class="btn btn-dark btn-outline-info text-light">View Sponsers</a></button>
+            <button class=" btn"> <a href="{% url 'sponser_for_event' event.id %}" class="btn btn-dark btn-outline-info text-light">View Feedback</a></button>
+            </center>
           </div>
         </div>
 
