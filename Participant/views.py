@@ -1,6 +1,6 @@
 from django.shortcuts import render, redirect, get_object_or_404
 from Organizer.models import OrganiseEvent, EventDetails, ShareResource
-from Participant.models import ParticipateEvent
+from Participant.models import ParticipateEvent, EventFeeback
 from accounts.models import UserProfile
 from django.contrib.auth.models import User
 from django.utils import timezone
