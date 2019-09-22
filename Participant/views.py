@@ -257,8 +257,11 @@ def req_pdf(request):
 
 
 def part_feedback(request):
-    event = OrganiseEvent.objects.filter(us=request.user.id)
-    return render(request, 'part_feedback.html', {'event': event})
+    event_id = ParticipateEvent.objects.get(us=request.user.id)
+    event = OrganiseEvent.objects.filter(pk=event_id.Event_id_id)
+    usr = User.objects.get(pk=request.user.id)
+    usr_det = UserProfile.objects.get(pk=request.user.id)
+    return render(request, 'part_feedback.html', {'usr': usr, ' usr_det': usr_det, 'event': event})
 
 
 def feedback(request):
