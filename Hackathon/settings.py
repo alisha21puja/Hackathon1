@@ -34,7 +34,7 @@ ALLOWED_HOSTS = []
 
 INSTALLED_APPS = [
 
-    
+
     'aboutus.apps.AboutusConfig',
     'accounts.apps.AccountsConfig',
     'Blog.apps.BlogConfig',
@@ -67,7 +67,7 @@ ROOT_URLCONF = 'Hackathon.urls'
 TEMPLATES = [
     {
         'BACKEND': 'django.template.backends.django.DjangoTemplates',
-        'DIRS': [os.path.join(BASE_DIR,'templates')],
+        'DIRS': [os.path.join(BASE_DIR, 'templates')],
         'APP_DIRS': True,
         'OPTIONS': {
             'context_processors': [
@@ -88,12 +88,12 @@ WSGI_APPLICATION = 'Hackathon.wsgi.application'
 
 DATABASES = {
     'default': {
-    'ENGINE': 'django.db.backends.postgresql',
+        'ENGINE': 'django.db.backends.postgresql',
         'NAME': 'Hackathon',
-        'USER':'postgres',
-        'PASSWORD':'sachinthakur@1496',
-        'HOST':'localhost',
-        'PORT':'5432',
+        'USER': 'postgres',
+        'PASSWORD': '10875',
+        'HOST': 'localhost',
+        'PORT': '5432',
     }
 }
 
@@ -135,28 +135,28 @@ USE_TZ = True
 # https://docs.djangoproject.com/en/2.1/howto/static-files/
 
 
-STATICFILES_DIRS=[
-        os.path.join(BASE_DIR,'Hackathon/static'),
+STATICFILES_DIRS = [
+    os.path.join(BASE_DIR, 'Hackathon/static'),
 ]
 
 
-STATIC_ROOT =os.path.join(BASE_DIR,'static')
+STATIC_ROOT = os.path.join(BASE_DIR, 'static')
 STATIC_URL = '/static/'
 
-MEDIA_ROOT=os.path.join(BASE_DIR, 'media')
-MEDIA_URL='/media/'
+MEDIA_ROOT = os.path.join(BASE_DIR, 'media')
+MEDIA_URL = '/media/'
 
- #Message
-MESSAGE_TAGS ={
+# Message
+MESSAGE_TAGS = {
 
-    messages.ERROR:'danger'
+    messages.ERROR: 'danger'
 
-  }
+}
 
-EMAIL_HOST ='smtp.gmail.com'
-EMAIL_PORT =25
-EMAIL_HOST_USER='sachin.thakur9614@gmail.com'
-EMAIL_HOST_PASSWORD ='hjbgycwcbqwadtra'
-EMAIL_USE_TLS=True
-AUTHENTICATION= 'plain'
-OPENSSL_VERIFY_MODE='none'
+EMAIL_HOST = 'smtp.gmail.com'
+EMAIL_PORT = 25
+EMAIL_HOST_USER = 'sachin.thakur9614@gmail.com'
+EMAIL_HOST_PASSWORD = 'hjbgycwcbqwadtra'
+EMAIL_USE_TLS = True
+AUTHENTICATION = 'plain'
+OPENSSL_VERIFY_MODE = 'none'
