@@ -15,7 +15,7 @@
 			{% csrf_token %}
 			<div class="form-group">
 				<label for="event_name">Name of the Event </label>
-				<input type="text" class="form-control btn-outline-danger" name="from" value="{{event.event_title}}">
+				<input type="text" class="form-control btn-outline-danger" name="from" value="{{event.event_title}}" disabled>
 			</div>
 			{% if send %}
 			<div class="alert alert-success alert-dismissible fade show" role="alert">
@@ -45,11 +45,14 @@
 					<input type="text" class="form-control btn-outline-danger" id="subject" name="subject"
 						aria-describedby="emailHelp" placeholder="Subject">
 				</div>
+				{% if event %}
 				<div class="form-group">
 					<label for="Password">Mobile Number:</label>
-					<input type="text" class="form-control btn-outline-danger" name='mobile' id="mobile"
-						aria-describedby="emailHelp" placeholder="Mobile Number">
+					<input type="text" class="form-control btn-outline-danger" name='mobile' id="mobile" value="{{ usr_det.phone }}"
+						aria-describedby="emailHelp" disabled>
 				</div>
+				
+				{% endif %}
 				<div class="form-group">
 					<label for="Password">Message: </label>
 					<textarea name="message" class="form-control border-danger">

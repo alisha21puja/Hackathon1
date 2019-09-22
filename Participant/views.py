@@ -147,11 +147,13 @@ def enquireInfoMail(request):
 
 def enquireInfo(request, id):
     event = OrganiseEvent.objects.get(pk=id)
-    return render(request, 'part_enquire.html', {'event': event})
+    usr_det = UserProfile.objects.get(pk=request.user.id)
+    return render(request, 'part_enquire.html', {'usr_det': usr_det, 'event': event})
 
 
 def part_enquire(request):
-    return render(request, 'part_enquire.html')
+    usr_det = UserProfile.objects.get(pk=request.user.id)
+    return render(request, 'part_enquire.html', {'usr_det': usr_det})
 
 
 def partblogsDetails(request):
@@ -253,30 +255,33 @@ def req_pdf(request):
 
     return response
 
-def part_feedback(request):
-	event = OrganiseEvent.objects.filter(us=request.user.id)
-	return render(request,'part_feedback.html', {'event': event})	
 
-def feedback(request):	
-	if request.method =='POST':
-		event = OrganiseEvent.objects.filter(us=request.user.id)
-		subject = request.POST['subject']
-		pubDateTime = timezone.now()
-		feedback = request.POST['feedback']
-		UserType = 'Participant'
-		if subject =='':
-			return render(request,'part_feedback.html', {'error':"Subject is not given"})	
-		else:
-			subject = request.POST['subject']		
-		if pubDateTime =='':			
-			pubDateTime = timezone.now()
-		if feedback=='':
-			return render(request,'part_feedback.html', {'error':"Feedback is not written"})	
-		else:
-		 	feedback = request.POST['feedback']		
-		eventFeeback = EventFeeback(subject=subject,feedback=feedback,pubDateTime=pubDateTime,Event_id_id=event,us_id=request.user.id)
-		
-		eventFeeback.save()
-		eventFeeback.refresh_from_db()
-		print("author name:" + authorName)
-		return render(request,'part_feedback.html', {'error':"Feedback is stored"})	
+def part_feedback(request):
+    event = OrganiseEvent.objects.filter(us=request.user.id)
+    return render(request, 'part_feedback.html', {'event': event})
+
+
+def feedback(request):
+    if request.method == 'POST':
+        event = OrganiseEvent.objects.filter(us=request.user.id)
+        subject = request.POST['subject']
+        pubDateTime = timezone.now()
+        feedback = request.POST['feedback']
+        UserType = 'Participant'
+        if subject == '':
+            return render(request, 'part_feedback.html', {'error': "Subject is not given"})
+        else:
+            subject = request.POST['subject']
+        if pubDateTime == '':
+            pubDateTime = timezone.now()
+        if feedback == '':
+            return render(request, 'part_feedback.html', {'error': "Feedback is not written"})
+        else:
+            feedback = request.POST['feedback']
+        eventFeeback = EventFeeback(subject=subject, feedback=feedback,
+                                    pubDateTime=pubDateTime, Event_id_id=event, us_id=request.user.id)
+
+        eventFeeback.save()
+        eventFeeback.refresh_from_db()
+        print("author name:" + authorName)
+        return render(request, 'part_feedback.html', {'error': "Feedback is stored"})
