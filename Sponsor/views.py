@@ -12,24 +12,19 @@ from .models import SponsorTransaction
 
 MERCHANT_KEY = 'P7HtuKq8&zpmzxZE'
 
-# index
-
-
-
 
 def sponsoredEvent(request):
-    sponsor = SponsorTransaction.objects.get(us= request.user.id);
-    event = OrganiseEvent.objects.get(pk =sponsor.org_id.id)
-    return render(request, 'sponsored_event.html', {'sponsor': sponsor,'event':event})
+    sponsor = SponsorTransaction.objects.get(us=request.user.id)
+    event = OrganiseEvent.objects.get(pk=sponsor.org_id.id)
+    return render(request, 'sponsored_event.html', {'sponsor': sponsor, 'event': event})
 
 
-
-def transaction(request,id):
-    spnsr = SponsorShip.objects.get(pk=id);
-    print("Spnsor id is", spnsr.org_id.id);
+def transaction(request, id):
+    spnsr = SponsorShip.objects.get(pk=id)
+    print("Spnsor id is", spnsr.org_id.id)
     userid = User.objects.get(pk=request.user.id)
     orgid = OrganiseEvent.objects.get(pk=spnsr.org_id.id)
-    if request.method=='POST':
+    if request.method == 'POST':
         try:
             spnsrtype = 'sponsertype' in request.POST and request.POST['sponsertype']
             amount = 'amount' in request.POST and request.POST['amount']
@@ -38,26 +33,26 @@ def transaction(request,id):
             # spnsrtype = request.POST['sponsertype']
             # amount = request.POST['amount']
             try:
-                spn = SponsorTransaction.objects.get(org_id = orgid)
+                spn = SponsorTransaction.objects.get(org_id=orgid)
                 events = OrganiseEvent.objects
-                return render(request,'sponsor_event.html',{'error':'Already Sponsored ',})
+                return render(request, 'sponsor_event.html', {'error': 'Already Sponsored ', })
             except SponsorTransaction.DoesNotExist:
-                spn =None
+                spn = None
                 if spn is None:
-                    transaction=SponsorTransaction(spnsortype=spnsrtype,amount=amount,org_id=orgid,us= userid)
+                    transaction = SponsorTransaction(
+                        spnsortype=spnsrtype, amount=amount, org_id=orgid, us=userid)
                     transaction.save()
-                    return render(request,'sponsored_event.html')
+                    return render(request, 'sponsored_event.html')
                 else:
                     events = OrganiseEvent.objects
-                    return render(request,'sponsor_event.html',{'error':'Already sponsored'})
-        except MultiValueDictKeyError:     
-            spnsrtype =False
+                    return render(request, 'sponsor_event.html', {'error': 'Already sponsored'})
+        except MultiValueDictKeyError:
+            spnsrtype = False
             amount = False
 
-            return render(request,'sponsored_event.html')
+            return render(request, 'sponsored_event.html')
 
 
-    
 def sponsor(request):
     return render(request, 'sponsor_index.html')
 

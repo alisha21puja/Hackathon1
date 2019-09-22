@@ -23,18 +23,23 @@
       <th scope="col">Email</th>
       <th scope="col">Organiser Head</th>
        <th scope="col">Organiser Head Person</th>
+       <th scope="col">Type</th>
+       <th scope="col">Amount</th>
       {% comment %} <th scope="col">Contact</th> {% endcomment %}
     </tr>
   </thead>
   <tbody>
+  {% for event in event.all %}
     <tr>
       <td>{{ event.event_title }}</td>
       <td>{{event.org_name}}</td>
       <td>{{event.org_email}}</td>
       <td>{{ event.org_contact_person}}</td>
       <td>{{ event.org_mobile}}</td>
+      <td>{{ event.org_mobile}}</td>
+      <td>{{ event.org_mobile}}</td>
     </tr>
-  
+  {% endfor %}
   </tbody>
 </table>
 </div>
