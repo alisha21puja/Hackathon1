@@ -18,25 +18,23 @@
 <table class="table table-hover table-dark">
   <thead>
     <tr>
-      <th scope="col">Sponsor Name</th>
+      <th scope="col">Event Name</th>
+      <th scope="col">Sponser Name</th>
       <th scope="col">Email</th>
-      <th scope="col">Phone</th>
-      <th scope="col">Type</th>
-      <th scope="col">Amount</th>
+      <th scope="col">Mobile</th>
       {% comment %} <th scope="col">Contact</th> {% endcomment %}
     </tr>
   </thead>
   <tbody>
-    {% if usr %}
     <tr>
-      <td>{{ usr.first_name }}</td>
-      <td>{{usr.last_name}}</td>
-      <td>{{usr.email}}</td>
-      <td>{{ otherdetails_usr.phone }}</td>
+      <td>{{ event.event_title }}</td>
+      <td>{{sponsor.first_name}} {{sponsor.last_name}}</td>
+      <td>{{sponsor.email}}</td>
+      <td>{{otherdetails_usr.phone}}</td>
     </tr>
-    {% endif %}
   </tbody>
 </table>
+
 </div>
     </div>
 </div>

@@ -15,16 +15,14 @@ from wsgiref.util import FileWrapper
 import os
 from django.conf import settings
 from Participant.models import ParticipateEvent
+from Sponsor.models import SponsorTransaction
 
 def participants_event(request,id):
     event = OrganiseEvent.objects.get(pk=id)
     try:
         participants = ParticipateEvent.objects.get(Event_id_id=id)
-        # print(participants)
         usr = User.objects.get(pk=participants.us_id)
-        # print(usr.first_name)
         otherdetails_usr = UserProfile.objects.get(id=participants.us_id)
-        # print(otherdetails_usr)
         return render(request, 'participants_event.html', {'event': event, 'part': participants, 'usr': usr, 'otherdetails_usr': otherdetails_usr})
     except:
         return render(request, 'participants_event.html', {'event': event})
@@ -32,8 +30,11 @@ def participants_event(request,id):
 
 def sponser_for_event(request, id):
     event = OrganiseEvent.objects.get(pk=id)
+    sponsor_id = SponsorTransaction.objects.get(org_id_id=id)
+    sponsor = User.objects.get(pk=sponsor_id.us_id)
+    otherdetails_usr = UserProfile.objects.get(id=sponsor_id.us_id)
     try:
-        return render(request, 'sponsor_for_event.html',{'event': event})
+        return render(request, 'sponsor_for_event.html', {'otherdetails_usr': otherdetails_usr,'sponsor': sponsor, 'event': event})
     except:
         return render(request, 'sponsor_for_event.html',{'event': event})
 
@@ -231,7 +232,7 @@ def updateSponsorInfo(request,id):
 
 def sponsorShip(request):
     event = OrganiseEvent.objects.filter(us_id=request.user.id)
-    return render(request, 'sponsorShip.html', {'event': event})
+    return render(request, 'sponsorShip.html', { 'event': event})
 
 
 def sponsorShipDetails(request):
