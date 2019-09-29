@@ -7,7 +7,7 @@ from django.core.mail import send_mail
 from django.utils.datastructures import MultiValueDictKeyError
 from django.views.decorators.csrf import csrf_exempt
 from media.paytm import Checksum
-
+from accounts.models import UserProfile
 from .models import SponsorTransaction
 
 MERCHANT_KEY = 'P7HtuKq8&zpmzxZE'
@@ -60,7 +60,7 @@ def sponsor(request):
 
 
 def profile(request):
-    profile = User.objects.filter(id=request.user.id)
+    profile = UserProfile.objects.filter(id=request.user.id)
     return render(request, 'profile_spnsr.html', {'profile': profile})
 
 

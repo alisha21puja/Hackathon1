@@ -50,7 +50,7 @@
           <h6 class="card-subtitle mb-2 text-muted">Share your views</h6>
           <p class="card-text">Share your views in different areas.</p>
           <br><br>
-          <button class=" btn"> <a href="{% url 'blog' %}" class="bg-dark btn btn-outline-primary">Blogs</a></button>
+          <button class=" btn"> <a href="{% url 'blog_sponsor' %}" class="bg-dark btn btn-outline-primary">Blogs</a></button>
           <!--<a href="#" class="card-link">Another link</a>-->
         </div>
       </div>
@@ -66,8 +66,8 @@
           <h6 class="card-subtitle mb-2 text-muted">Sponsed events</h6>
           <p class="card-text">View the information of the events that you have sponsered.</p>
           <br>
-          <button class=" btn"> <a href=" {% url 'shareResource' %}"
-              class="bg-dark btn btn-outline-primary">Expectations</a></button>
+          <button class=" btn"> <a href=" {% url 'sponsoredEvent' %}"
+              class="bg-dark btn btn-outline-primary">Sponsered Events</a></button>
           <!--<a href="#" class="card-link">Another link</a>-->
         </div>
       </div>
@@ -80,7 +80,7 @@
           <hr class="bg-primary col-md-8">
           <h6 class="card-subtitle mb-2 text-muted">Enquire on a even</h6>
           <p class="card-text">Enquire on the events that you are intrested in to find the more details.</p>
-          <button class=" btn"><a href="{% url 'enquire' %}" class="bg-dark btn btn-outline-primary">Organiser
+          <button class=" btn"><a href="{% url 'enquire' %}" class="bg-dark btn btn-outline-primary">Enquire on
               Events</a></button>
           <!--<a href="#" class="card-link">Another link</a>-->
         </div>
@@ -95,8 +95,8 @@
           <p class="card-text">Find the location of the events.</p>
           <br>
           <br>
-          <button class=" btn"><a href="{% url 'sponsorShip' %}"
-              class="bg-dark btn btn-outline-primary">Profile</a></button>
+          <button class=" btn"><a href="{% url 'upcoming' %}"
+              class="bg-dark btn btn-outline-primary">Event Details</a></button>
           <!-- <a href="#" class="card-link">Another link</a>-->
         </div>
       </div>
