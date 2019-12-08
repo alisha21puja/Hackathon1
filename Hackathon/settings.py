@@ -155,8 +155,8 @@ MESSAGE_TAGS = {
 
 EMAIL_HOST = 'smtp.gmail.com'
 EMAIL_PORT = 25
-EMAIL_HOST_USER = 'sachin.thakur9614@gmail.com'
-EMAIL_HOST_PASSWORD = 'hjbgycwcbqwadtra'
+EMAIL_HOST_USER = 'sachin@gmail.com'
+EMAIL_HOST_PASSWORD = ''
 EMAIL_USE_TLS = True
 AUTHENTICATION = 'plain'
 OPENSSL_VERIFY_MODE = 'none'
