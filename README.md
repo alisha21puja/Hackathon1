@@ -1,10 +1,4 @@
 # Hackathon [techevent]
-3MCA RDBMS PROJECT
-- SACHIN THAKUR
-- ALISHA SINGH
-- ALWIN JOSEPH
-
-
 Abstract
 The objective is to develop a web platform, where in the colleges and schools , who are organizing different events like hackathons, workshops, or fests can register their events. This web platform gives the complete details of all the upcoming events registered in. The people who are interested can easily find appropriate events to take part in and to register for the event.
 Existing system
